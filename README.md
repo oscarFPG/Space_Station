@@ -147,3 +147,6 @@ Los enemigos pueden ser: estáticos, móviles, de rango, cuerpo a cuerpo y suppo
 ### Dinamicas: 
 
 ⦁   
+
+### Core Loop:
+![](https://github.com/oscarFPG/Space_Station/Docs/CoreLoop.png)
