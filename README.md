@@ -1,10 +1,10 @@
-# Plantilla para juegos en Phaser
+# 0. Plantilla para juegos en Phaser
 
-## Instalación
+## 0.1 Instalación
 
 El repositorio está publicado como plantilla, de forma que se puede crear un nuevo proyecto propio en GitHub simplemente pulsando el botón `Use this template` (arriba a la derecha). Después, solo hay que clonar el repositorio propio y trabajar sobre él.
 
-## Clonar
+## 0.2 Clonar
 
 También se puede clonar el repositorio:
 
@@ -20,7 +20,7 @@ Para iniciar el proyecto (sólo 1 vez) instalamos las dependencias automáticame
 npm install
 ```
 
-## Uso
+## 0.3 Uso
 
 Cada vez que queramos usarlo, tenemos que arrancar el servidor de desarrollo que monitorizará los cambios, procesará el contenido y cambiará la página. Usa [Vite](https://es.vitejs.dev/).
 
@@ -32,7 +32,7 @@ npm start
 
 Con esto, solo tenemos que programar y guardar los archivos, Vite se encargará del resto.
 
-## Distribución
+## 0.4 Distribución
 
 El repositorio tiene una acción de GitHub (*GitHub Action*) que genera una versión de *release* y la publica en GitHub Pages. De este modo, cada vez que se hace `push`, se construye y publica en la página pública.
 
@@ -48,16 +48,14 @@ npm run build
 
 <!-- Está todo configurado para que se active "GitHub Pages", y se use, en la rama principal (se suele llamar `main`), la carpeta `docs/`. Simplemente hay que activarlo en "Settings" → "Pages" → "Build and deployment". -->
 
-## VSCode
+## 0.5 VSCode
 
 En la carpeta `.vscode/` hay una configuración para usar Visual Studio Code, tanto para construir el *release* (`npm run build`) como para ejecutar y depurar. Simplemente hay que ejecutar "Run" → "Start debugging..." (or presionar `F5`).
 
-## TypeScript
+## 0.6 TypeScript
 
 TypeScript está automáticamente habilitado (gracias a Vite). Para usarlo, simplemente hay que crear archivos con extensión `.ts`.
 
-
-# Última Actualización: 06/02/2025
 # GDD: (nombre provisional) Escape Station
 
 ## 1. Equipo de desarrollo:
