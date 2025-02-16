@@ -10,8 +10,8 @@ export default class Boot extends Phaser.Scene {
 
     preload(){
         this.load.image('front-page', FRONT);
-    }
 
+    }
     create(){
         
         // Background image
@@ -24,6 +24,9 @@ export default class Boot extends Phaser.Scene {
             stroke: '#fff',
             strokeThickness: 1.2
         });
+
+
+
 
         // Custom event for ENTER key
         this.enter_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);

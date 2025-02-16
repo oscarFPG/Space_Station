@@ -1,6 +1,6 @@
 import Boot from './scenes/boot.js'
 import Tutorial from './scenes/tutorial.js'
-import Phaser from 'phaser'
+import Phaser, { Physics } from 'phaser'
 
 const config = {
     type: Phaser.AUTO,
@@ -12,7 +12,14 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ Boot, Tutorial ]
+    scene: [ Boot, Tutorial ],
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: {y: 0},
+            debug: false
+        }
+    }
 };
 
 new Phaser.Game(config);
