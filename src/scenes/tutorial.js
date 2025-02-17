@@ -14,19 +14,24 @@ export default class Tutorial extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image("tiles", TilemapImage)
-        this.load.image("weapon", WeaponDefault);
-        this.load.tilemapTiledJSON("map", Map);
+
+        // Map resources
+        this.load.image('tiles', TilemapImage)
+        this.load.tilemapTiledJSON('map', Map);
+
+        // Player resources
         this.load.spritesheet('playerIdle', CharacterIdle, {frameWidth: 185 , frameHeight: 180});
         this.load.spritesheet('playerRunning', CharacterRunning, {frameWidth: 185 , frameHeight: 180});
+        this.load.image('weapon', WeaponDefault);
     }
 
     create(){
+
         //this.add.text(400, 400, "Escena del tutorial");
-        var map = this.make.tilemap({key: "map", tileWidth: 185, tileHeight: 185});
-        var tileset = map.addTilesetImage("Tilemap", "tiles");   
-        var layer = map.createLayer("topLayer", tileset, 0, 0);
-        const player = new Player(this, 200, 200, 'playerIdle', 'playerRunning', 'weapon');
+        var map = this.make.tilemap({key: 'map', tileWidth: 185, tileHeight: 185});
+        var tileset = map.addTilesetImage('Tilemap', 'tiles');   
+        var layer = map.createLayer('topLayer', tileset, 0, 0);
+        const player = new Player(this, 200, 200);
 
            // Asegurar que el jugador no salga de los límites del mundo
            // Ajustar los límites del mundo al tamaño del mapa
@@ -38,8 +43,9 @@ export default class Tutorial extends Phaser.Scene {
         
         // Hacer que la cámara siga al jugador
         this.cameras.main.startFollow(player);
-        this.cameras.main.setZoom(0.6);
+        this.cameras.main.setZoom(0.45);
     }
+
     update(){
 
     }
