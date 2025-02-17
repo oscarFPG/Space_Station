@@ -10,8 +10,8 @@ export default class Boot extends Phaser.Scene {
 
     preload(){
         this.load.image('front-page', FRONT);
-
     }
+    
     create(){
         
         // Background image
@@ -25,9 +25,6 @@ export default class Boot extends Phaser.Scene {
             strokeThickness: 1.2
         });
 
-
-
-
         // Custom event for ENTER key
         this.enter_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
@@ -38,8 +35,7 @@ export default class Boot extends Phaser.Scene {
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
             this.scene.start('tutorial')
-        }
-        
+        }   
     }
 
 }
