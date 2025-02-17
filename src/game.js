@@ -13,8 +13,8 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ GeneratorMapTest ],
-    //scene: [ Boot, Tutorial ],
+    //scene: [ GeneratorMapTest ],
+    scene: [ Boot, Tutorial ],
     physics: {
         default: 'arcade',
         arcade: {
