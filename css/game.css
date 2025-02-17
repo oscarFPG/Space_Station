@@ -1,5 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+
 h1 {
-  text-align: center;
+  font-family: 'Orbitron', sans-serif; /* Fuente estilo 7 segmentos */
+  color: #0055aa; /* Azul más oscuro */
+  text-align: center; /* Centrar el título */
+  font-size: 3rem; /* Tamaño grande para destacar */
+  text-shadow: 0 0 4px rgba(0, 85, 170, 0.8), 0 0 8px rgba(0, 85, 170, 0.6); /* Efecto neón azul más profundo */
+  margin-top: 20px;
+  animation: blink 1s infinite alternate; /* Animación de parpadeo */
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+  0% {
+      opacity: 1;
+      text-shadow: 0 0 4px rgba(0, 85, 170, 0.8), 0 0 8px rgba(0, 85, 170, 0.6);
+  }
+  50% {
+      opacity: 0.6;
+      text-shadow: 0 0 2px rgba(0, 85, 170, 0.5), 0 0 4px rgba(0, 85, 170, 0.3);
+  }
+  100% {
+      opacity: 1;
+      text-shadow: 0 0 4px rgba(0, 85, 170, 0.8), 0 0 8px rgba(0, 85, 170, 0.6);
+  }
 }
 body {
   background-image: url('background.jpg'); /* Ruta de la imagen */
