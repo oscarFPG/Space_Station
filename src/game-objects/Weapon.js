@@ -1,7 +1,11 @@
 import Phaser from "phaser";
 
-export default class Weapon extends Phaser.GameObjects.Image { 
+export default class Weapon extends Phaser.GameObjects.Image {
+
+    static BASE_WEAPON = 0;
+
     constructor(scene, x, y, speed, munition, damage, weaponID) {
+
         const weaponTextures = ['weapon1', 'weapon2', 'weapon3', 'weapon4'];
         const weaponTexture = weaponTextures[weaponID] || 'weapon1';
 
@@ -14,10 +18,10 @@ export default class Weapon extends Phaser.GameObjects.Image {
         this.scene.add.existing(this);
         this.setOrigin(0.5, 0.5);
         this.setDepth(2);
-
     }
 
     fire(x, y, angle, time) {
+        
         if (time > this.lastFired && this.munition > 0) {
             //const bullet = this.scene.add.image(x, y, 'bullet');
             bullet.setRotation(angle);
