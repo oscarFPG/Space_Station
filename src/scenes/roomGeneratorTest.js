@@ -1,10 +1,10 @@
+import Phaser from 'phaser'
 import InitialRoom from '../mapGenerator/initialRoom.js';
 import CommonRoom from '../mapGenerator/room.js'
 import ShopRoom from '../mapGenerator/shopRoom.js';
-import Phaser from 'phaser'
+import Entity from '../base-game-objects/Entity.js'
 
 export default class RoomGeneratorScene extends Phaser.Scene {
-
 
     // Restricciones del algoritmo
     static MIN_SIZE = 12;
@@ -14,7 +14,7 @@ export default class RoomGeneratorScene extends Phaser.Scene {
 
 
     // Atributos de la clase
-    _mapa = [MAX_LEVEL_DIM][MAX_LEVEL_DIM]; // Matriz que representa la colocacion de las salas
+    _mapa = [RoomGeneratorScene.MAX_LEVEL_DIM]; // Matriz que representa la colocacion de las salas
     _listaSalas = [];
 
     constructor(){
@@ -28,7 +28,7 @@ export default class RoomGeneratorScene extends Phaser.Scene {
     create(){
         console.log('Executing room generator algorithm');
         
-
+        const entity1 = new Entity(this, 200, 200, 0);
         this.#generate_initial_room();
         this.#generate_commonRoom();
         this.#generate_shop_room();
@@ -39,7 +39,7 @@ export default class RoomGeneratorScene extends Phaser.Scene {
     }
 
     update(){
-
+        
     }
 
     #generate_initial_room(){
