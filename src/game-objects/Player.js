@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Weapon from './Weapon';
 
-export default class Player extends Phaser.Physics.Arcade.Sprite {
+export default class Player extends Phaser.GameObjects.Container {
 	
 	// Player animation names
 	static IDLE_ANIMATION = 'playerIdle';
@@ -12,7 +12,6 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 		super(scene, x, y);
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
-		this.setCollideWorldBounds(true);
 
 		// Player attributes
 		this._health = 100;						// PS(Puntos de Salud) del jugador
