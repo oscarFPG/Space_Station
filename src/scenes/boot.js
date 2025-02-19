@@ -1,6 +1,5 @@
-
-import FRONT from '../../assets/images/portada.png'
 import Phaser from 'phaser'
+import FRONT from '../../assets/images/portada.png'
 
 export default class Boot extends Phaser.Scene {
 
