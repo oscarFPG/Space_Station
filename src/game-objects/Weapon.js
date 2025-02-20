@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-export default class Weapon extends Phaser.GameObjects.Image {
+export default class Weapon extends Phaser.Physics.Arcade.Sprite {
 
     static BASE_WEAPON = 0;
 
