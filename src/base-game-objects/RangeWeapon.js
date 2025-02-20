@@ -24,4 +24,8 @@ export default class RangeWeapon extends Weapon {
         this.scene.add.existing(this);
     }
 
+    shot() {
+        
+    }
+
 }

@@ -4,6 +4,7 @@ import Weapon1 from '../../assets/weapons/weapon1.png'
 import Weapon2 from '../../assets/weapons/weapon2.png'
 import Weapon3 from '../../assets/weapons/weapon3.png'
 import Weapon4 from '../../assets/weapons/weapon4.png'
+import Bullet1 from '../../assets/bullets/bullet1.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map1.json'
 import Player from '../game-objects/Player.js'
@@ -22,6 +23,7 @@ export default class Tutorial extends Phaser.Scene {
         this.load.image('weapon2', Weapon2);
         this.load.image('weapon3', Weapon3);
         this.load.image('weapon4', Weapon4);
+        this.load.image('bullet1', Bullet1);
         this.load.tilemapTiledJSON('map', Map);
         this.load.spritesheet('playerIdle', CharacterIdle, {frameWidth: 185 , frameHeight: 180});
         this.load.spritesheet('playerRunning', CharacterRunning, {frameWidth: 185 , frameHeight: 180});
