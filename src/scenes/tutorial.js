@@ -6,7 +6,10 @@ import Weapon3 from '../../assets/weapons/weapon3.png'
 import Weapon4 from '../../assets/weapons/weapon4.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map1.json'
-import Player from '../game-objects/Player'
+import Player from '../game-objects/Player.js'
+import Enemy from '../base-game-objects/Enemy.js'
+import Object from '../base-game-objects/Object.js'
+import Block from '../base-game-objects/Block.js'
 import Phaser from 'phaser'
 
 

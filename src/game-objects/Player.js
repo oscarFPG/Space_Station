@@ -2,11 +2,16 @@ import Phaser from "phaser";
 import Weapon from './Weapon';
 
 export default class Player extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, spriteIdleName, spriteRunningName, weaponID) {
-    super(scene, x, y);
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
-    this.body.setCollideWorldBounds(true);
+	
+	// Player animation names
+	static IDLE_ANIMATION = 'playerIdle';
+	static RUNNING_ANIMATION = 'playerRunning';
+
+	constructor(scene, x, y) {
+
+		super(scene, x, y);
+		this.scene.add.existing(this);
+		this.scene.physics.add.existing(this);
 
     this.player = scene.add.sprite(0, 0, spriteIdleName).setOrigin(0.5, 0.5);
 

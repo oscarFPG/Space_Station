@@ -1,4 +1,3 @@
-import GeneratorMapTest from './scenes/roomGeneratorTest.js'
 import Boot from './scenes/boot.js'
 import Tutorial from './scenes/tutorial.js'
 import Phaser, { Physics } from 'phaser'
@@ -13,7 +12,6 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    //scene: [ GeneratorMapTest ],
     scene: [ Boot, Tutorial ],
     physics: {
         default: 'arcade',
