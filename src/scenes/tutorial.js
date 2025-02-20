@@ -7,9 +7,6 @@ import Weapon4 from '../../assets/weapons/weapon4.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map1.json'
 import Player from '../game-objects/Player.js'
-import Enemy from '../base-game-objects/Enemy.js'
-import Object from '../base-game-objects/Object.js'
-import Block from '../base-game-objects/Block.js'
 import Phaser from 'phaser'
 
 
@@ -37,11 +34,12 @@ export default class Tutorial extends Phaser.Scene {
         var layer = map.createLayer("topLayer", tileset, 0, 0);
         const player = new Player(this, 200, 200, 'playerIdle', 'playerRunning', 1);
 
-           // Asegurar que el jugador no salga de los límites del mundo
-           // Ajustar los límites del mundo al tamaño del mapa
+        // Asegurar que el jugador no salga de los límites del mundo
+        // Ajustar los límites del mundo al tamaño del mapa
         this.physics.add.collider(player, layer);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         player.body.setCollideWorldBounds(true);
+
         // Ajustar límites de la cámara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         
@@ -49,6 +47,8 @@ export default class Tutorial extends Phaser.Scene {
         this.cameras.main.startFollow(player);
         this.cameras.main.setZoom(0.6);
     }
+
     update(){
     }
+    
 }
