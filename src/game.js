@@ -1,4 +1,5 @@
 import Boot from './scenes/boot.js'
+import Store from './scenes/store.js';
 import Tutorial from './scenes/tutorial.js'
 import Phaser, { Physics } from 'phaser'
 
@@ -12,7 +13,7 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ Boot, Tutorial ],
+    scene: [ Boot, Tutorial, Store ],
     physics: {
         default: 'arcade',
         arcade: {
