@@ -8,6 +8,8 @@ import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map1.json'
 import Player from '../game-objects/Player.js'
 import Enemy from '../base-game-objects/Enemy.js'
+import Object from '../base-game-objects/Object.js'
+import Block from '../base-game-objects/Block.js'
 import Phaser from 'phaser'
 
 
@@ -34,8 +36,7 @@ export default class Tutorial extends Phaser.Scene {
         var tileset = map.addTilesetImage('Tilemap', 'tiles');   
         var layer = map.createLayer('topLayer', tileset, 0, 0);
 
-        const enemy = new Enemy(this, 200, 200);
-        /*const player = new Player(this, 200, 200);
+        const player = new Player(this, 200, 200);
 
         // Asegurar que el jugador no salga de los límites del mundo
         // Ajustar los límites del mundo al tamaño del mapa
@@ -47,7 +48,7 @@ export default class Tutorial extends Phaser.Scene {
         
         // Hacer que la cámara siga al jugador
         this.cameras.main.startFollow(player);
-        */
+        
         this.cameras.main.setZoom(0.5);
     }
 

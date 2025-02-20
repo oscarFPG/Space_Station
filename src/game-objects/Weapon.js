@@ -1,13 +1,10 @@
-import Phaser from "phaser";
+import Phaser from 'phaser';
 
 export default class Weapon extends Phaser.GameObjects.Image {
 
     static BASE_WEAPON = 0;
 
     constructor(scene, x, y, speed, munition, damage, weaponID) {
-
-        const weaponTextures = ['weapon1', 'weapon2', 'weapon3', 'weapon4'];
-        const weaponTexture = weaponTextures[weaponID] || 'weapon1';
 
         super(scene, x, y, weaponTexture);
         this.speed = speed;
