@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import Weapon from './Weapon';
+import BasePistol from "./weapons/BasePistol";	
 
 export default class Player extends Phaser.GameObjects.Container {
 	
@@ -12,10 +12,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		super(scene, x, y);
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
-
-		this.player = scene.add.sprite(0, 0, spriteIdleName).setOrigin(0.5, 0.5);
-
-		this.add(this.player);
+		this.player = scene.add.sprite(0, 0, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
 
 		// Controles
 		this.cursors = this.scene.input.keyboard.createCursorKeys();
@@ -27,27 +24,27 @@ export default class Player extends Phaser.GameObjects.Container {
 		});
 		this.weaponOffset = { x: 15, y: 32 };
 
-		// Crear el arma (tipo Image, no Sprite con física)
-		this.weapon = new Weapon(scene, this.weaponOffset.x, this.weaponOffset.y, 20, 10, 2, weaponID);
+		// Crear el arma	
+		this.weapon = new BasePistol(scene, this.weaponOffset.x, this.weaponOffset.y);
 
-		// Definir el offset del arma respecto al jugador
+		// Añadir al containter
+		this.add(this.player);
 		this.add(this.weapon);
 
 		// Crear animaciones
 		this.scene.anims.create({
 			key: 'idle',
-			frames: this.scene.anims.generateFrameNumbers(spriteIdleName, { start: 0, end: 2 }),
+			frames: this.scene.anims.generateFrameNumbers(Player.IDLE_ANIMATION, { start: 0, end: 2 }),
 			frameRate: 6,
 			repeat: -1
 		});
 		
 		this.scene.anims.create({
 			key: 'running',
-			frames: this.scene.anims.generateFrameNumbers(spriteRunningName, { start: 0, end: 3 }),
+			frames: this.scene.anims.generateFrameNumbers(Player.RUNNING_ANIMATION, { start: 0, end: 3 }),
 			frameRate: 10,
 			repeat: -1
 		});
-
 		this.player.play('idle');
 
 		// Registra el método update para que se llame en cada frame
@@ -58,6 +55,7 @@ export default class Player extends Phaser.GameObjects.Container {
 	}
 
 	update(time, delta) {
+
 		this.setPosition(this.body.x, this.body.y);
 		this.body.setVelocity(0);
 
@@ -103,9 +101,10 @@ export default class Player extends Phaser.GameObjects.Container {
 	}
 
 	updateWeapon() {
-		const pointer = this.scene.input.activePointer;
 
+		const pointer = this.scene.input.activePointer;
 		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+
 		// Calcular el ángulo desde el centro del container hacia el puntero
 		let angle = Phaser.Math.Angle.Between(this.x, this.y, worldPoint.x, worldPoint.y);
 		this.weapon.setRotation(angle);   

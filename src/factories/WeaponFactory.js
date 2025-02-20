@@ -13,7 +13,7 @@ export default class WeaponFactory {
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');
     }
 
-    createWeapon(weapon){
+    static createWeapon(weapon){
 
         switch(weapon){
         case WeaponFactory.BASE_WEAPON:
