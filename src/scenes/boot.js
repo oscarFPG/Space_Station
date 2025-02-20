@@ -33,7 +33,7 @@ export default class Boot extends Phaser.Scene {
 
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
-            this.scene.start('tutorial')
+            this.scene.switch('tutorial', 'boot')
         }   
     }
 

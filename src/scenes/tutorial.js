@@ -84,9 +84,18 @@ export default class Tutorial extends Phaser.Scene {
 
         this.input.on.();
         
+
+        //Temporal!!!
+        // Custom event for ENTER key
+        this.p_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     }
 
     update(){
+
+        // Cambiar escena store
+        if(Phaser.Input.Keyboard.JustDown(this.p_key)){
+            this.scene.switch('store', 'tutorial');
+        } 
     }
 
 }
