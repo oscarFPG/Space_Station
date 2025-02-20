@@ -48,53 +48,57 @@ export default class Player extends Phaser.GameObjects.Container {
     this.scene.events.on('postupdate', this.updateWeapon, this);
   }
 
-  update() {
-
+  update(time, delta) {
     this.setPosition(this.body.x, this.body.y);
-    // Reiniciar la velocidad del cuerpo del container
     this.body.setVelocity(0);
-    let moving = false;
+
+    const speed = 400;
+    let velocityX = 0;
+    let velocityY = 0;
 
     if (this.cursors.up.isDown || this.keys.up.isDown) {
-      this.body.setVelocityY(-650);
-      moving = true;
+        velocityY = -1;
     }
     if (this.cursors.down.isDown || this.keys.down.isDown) {
-      this.body.setVelocityY(650);
-      moving = true;
+        velocityY = 1;
     }
     if (this.cursors.left.isDown || this.keys.left.isDown) {
-      this.body.setVelocityX(-650);
-      this.player.setFlipX(true);
-      moving = true;
+        velocityX = -1;
+        this.player.setFlipX(true);
     }
     if (this.cursors.right.isDown || this.keys.right.isDown) {
-      this.body.setVelocityX(650);
-      this.player.setFlipX(false);
-      moving = true;
+        velocityX = 1;
+        this.player.setFlipX(false);
     }
+
+    // Normalizar la velocidad para que no sea mayor en diagonal
+    if (velocityX !== 0 || velocityY !== 0) {
+        const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+        velocityX /= length;
+        velocityY /= length;
+    }
+
+    this.body.setVelocityX(velocityX * speed);
+    this.body.setVelocityY(velocityY * speed);
 
     // Actualizar animación según movimiento
-    if (moving) {
-      if (this.player.anims.currentAnim.key !== "running") {
-        this.player.play("running");
-      }
+    if (velocityX !== 0 || velocityY !== 0) {
+        if (this.player.anims.currentAnim.key !== "running") {
+            this.player.play("running");
+        }
     } else {
-      if (this.player.anims.currentAnim.key !== "idle") {
-        this.player.play("idle");
-      }
+        if (this.player.anims.currentAnim.key !== "idle") {
+            this.player.play("idle");
+        }
     }
-    
-  }
-
-
+}
   updateWeapon() {
     const pointer = this.scene.input.activePointer;
     
+    const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
     // Calcular el ángulo desde el centro del container hacia el puntero
-    let angle = Phaser.Math.Angle.Between(this.x, this.y, pointer.worldX, pointer.worldY);
+    let angle = Phaser.Math.Angle.Between(this.x, this.y, worldPoint.x, worldPoint.y);
     this.weapon.setRotation(angle);   
-    // (Opcional) Voltear verticalmente el arma si el puntero está a la izquierda del jugador
-    this.weapon.setFlipY(pointer.worldX < this.x);
+    this.weapon.setFlipY(worldPoint.x < this.x);
   }
 }
