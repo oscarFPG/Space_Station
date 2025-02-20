@@ -17,7 +17,7 @@ export default class Tutorial extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image('tiles', TilemapImage)
+        this.load.image('tiles', TilemapImage);
         this.load.image('weapon1', Weapon1);
         this.load.image('weapon2', Weapon2);
         this.load.image('weapon3', Weapon3);
@@ -46,9 +46,18 @@ export default class Tutorial extends Phaser.Scene {
         // Hacer que la cámara siga al jugador
         this.cameras.main.startFollow(player);
         this.cameras.main.setZoom(0.6);
+
+        //Temporal!!!
+        // Custom event for ENTER key
+        this.p_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     }
 
     update(){
+
+        // Cambiar escena store
+        if(Phaser.Input.Keyboard.JustDown(this.p_key)){
+            this.scene.switch('store', 'tutorial');
+        } 
     }
     
 }
