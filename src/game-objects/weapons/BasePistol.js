@@ -8,8 +8,6 @@ export default class BasePistol extends RangeWeapon {
 
     constructor(scene, x, y){
         super(scene, x, y, BasePistol.BASE_PISTOL_TEXTURE , BasePistol.BASE_PISTOL_DAMAGE);
-        //se crea un grupo de balas previo
-        this.bullets = this.scene.physics.add.group();
     }
 
     shot(targetX, targetY) {
@@ -20,16 +18,14 @@ export default class BasePistol extends RangeWeapon {
             // Calcular el ángulo de disparo
         const angle = Phaser.Math.Angle.Between(weaponX, weaponY, targetX, targetY);
 
-        const offset = 40; // Distancia desde el centro hasta la punta del arma
+        const offset = 70; // Distancia desde el centro hasta la punta del arma
         const bulletX = weaponX + Math.cos(angle) * offset;
         const bulletY = weaponY + Math.sin(angle) * offset;
         // Crear la bala en la posición del arma
         const bullet = new BasePistolBullet(this.scene, bulletX, bulletY);
         this.scene.add.existing(bullet);
-        this.bullets.add(bullet);
-        const speed = 1000;
-
-        // Disparar la bala
+        this.scene.bullets.add(bullet);
+        const speed = 970;
         bullet.fire(bulletX, bulletY, angle, speed);
     }
 }

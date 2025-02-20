@@ -5,6 +5,7 @@ import Weapon2 from '../../assets/weapons/weapon2.png'
 import Weapon3 from '../../assets/weapons/weapon3.png'
 import Weapon4 from '../../assets/weapons/weapon4.png'
 import Bullet1 from '../../assets/bullets/bullet1.png'
+import Explode from '../../assets/effects/explode.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Crosshair from '../../assets/pointer/crosshair.png'
 import Map from '../../assets/maps/map1.json'
@@ -32,6 +33,7 @@ export default class Tutorial extends Phaser.Scene {
         // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, {frameWidth: 185 , frameHeight: 180});
         this.load.spritesheet('playerRunning', CharacterRunning, {frameWidth: 185 , frameHeight: 180});
+        this.load.spritesheet('explode', Explode, {frameWidth: 285 , frameHeight: 285});
     }
 
     create(){
@@ -39,21 +41,46 @@ export default class Tutorial extends Phaser.Scene {
         var map = this.make.tilemap({key: 'map', tileWidth: 185, tileHeight: 185});
         var tileset = map.addTilesetImage('Tilemap', 'tiles');   
         var layer = map.createLayer('topLayer', tileset, 0, 0);
+        var layerWall = map.createLayer('Wall', tileset, 0, 0);
         const player = new Player(this, 200, 200);
 
         // Asegurar que el jugador no salga de los límites del mundo
         // Ajustar los límites del mundo al tamaño del mapa
         this.physics.add.collider(player, layer);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
         player.body.setCollideWorldBounds(true);
+        //layerWall.body.setCollideWorldBounds(true);
+        layerWall.setCollisionByExclusion([-1]);
 
         // Ajustar límites de la cámara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        
+        // Crear colisiones entre el jugador y las paredes
+        this.physics.add.collider(player, layerWall);
+
         // Hacer que la cámara siga al jugador
         this.cameras.main.startFollow(player);
         this.cameras.main.setZoom(0.5);
+
+        // Crear el grupo global de balas
+        this.bullets = this.physics.add.group();
+
+        this.physics.add.collider(this.bullets, layerWall, (bullet, wall) => {
+            bullet.createSpark(bullet.x, bullet.y);
+            bullet.destroy();
+        });
+
+        // Crear la animación de la chispa (si no existe)
+        if (!this.anims.exists('spark')) {
+            this.anims.create({
+                key: 'spark',
+                frames: this.anims.generateFrameNumbers('explode', { start: 0, end: 7 }),
+                frameRate: 20,
+                repeat: 0
+            });
+        }
         
+        /*
         // Crear puntero de jugador
         this._crosshair = this.add.sprite(0, 0, Crosshair);
         this._crosshair.setVisible(false);
@@ -64,6 +91,7 @@ export default class Tutorial extends Phaser.Scene {
             - Invisible cuando el jugador pulsa Escape
             - Cuando es visible: mouse locked y mover el sprite 'crosshair' segun el input del raton
         */
+       /*
         this.input.on('pointerdown', function (pointer)
         {
             this.input.mouse.requestPointerLock();
@@ -81,14 +109,15 @@ export default class Tutorial extends Phaser.Scene {
             }
         }, this);
 
-        this.input.on.();
+        //this.input.on.();
         
 
         //Temporal!!!
         // Custom event for ENTER key
         this.p_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        */
     }
-
+    /*
     update(){
 
         // Cambiar escena store
@@ -96,5 +125,5 @@ export default class Tutorial extends Phaser.Scene {
             this.scene.switch('store', 'tutorial');
         } 
     }
-
+    */
 }
