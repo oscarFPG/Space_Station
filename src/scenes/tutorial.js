@@ -5,6 +5,7 @@ import Weapon2 from '../../assets/weapons/weapon2.png'
 import Weapon3 from '../../assets/weapons/weapon3.png'
 import Weapon4 from '../../assets/weapons/weapon4.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
+import Crosshair from '../../assets/pointer/crosshair.png'
 import Map from '../../assets/maps/map1.json'
 import Player from '../game-objects/Player.js'
 import Phaser from 'phaser'
@@ -17,12 +18,19 @@ export default class Tutorial extends Phaser.Scene {
     }
 
     preload(){
+
+        // Images
         this.load.image('tiles', TilemapImage)
         this.load.image('weapon1', Weapon1);
         this.load.image('weapon2', Weapon2);
         this.load.image('weapon3', Weapon3);
         this.load.image('weapon4', Weapon4);
+        this.load.image('crosshair', Crosshair);
+
+        // JSONS
         this.load.tilemapTiledJSON('map', Map);
+        
+        // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, {frameWidth: 185 , frameHeight: 180});
         this.load.spritesheet('playerRunning', CharacterRunning, {frameWidth: 185 , frameHeight: 180});
     }
@@ -45,10 +53,40 @@ export default class Tutorial extends Phaser.Scene {
         
         // Hacer que la cámara siga al jugador
         this.cameras.main.startFollow(player);
-        this.cameras.main.setZoom(0.6);
+        this.cameras.main.setZoom(0.5);
+        
+        // Crear puntero de jugador
+        this._crosshair = this.add.sprite(0, 0, Crosshair);
+        this._crosshair.setVisible(false);
+
+
+        /* Configuracion puntero:
+            - Visible solo cuando el jugador hace click
+            - Invisible cuando el jugador pulsa Escape
+            - Cuando es visible: mouse locked y mover el sprite 'crosshair' segun el input del raton
+        */
+        this.input.on('pointerdown', function (pointer)
+        {
+            this.input.mouse.requestPointerLock();
+            this._crosshair.x = pointer.x;
+            this._crosshair.y = pointer.y;  
+            this._crosshair.setPosition(pointer.x, pointer.y);
+            this._crosshair.setVisible(true);
+        }, this);
+
+        this.input.on('pointermove', function(pointer)
+        {   
+            if(this.input.mouse.locked){
+                this._crosshair.x += pointer.movementX;
+                this._crosshair.y += pointer.movementY;
+            }
+        }, this);
+
+        this.input.on.();
+        
     }
 
     update(){
     }
-    
+
 }
