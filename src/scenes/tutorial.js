@@ -79,6 +79,8 @@ export default class Tutorial extends Phaser.Scene {
                 repeat: 0
             });
         }
+            // --- CARGAR COLISIONADORES DESDE LA CAPA DE OBJETOS "BUTANO" ---
+        // Obtenemos la capa de objetos que creaste en Tiled
         
         /*
         // Crear puntero de jugador

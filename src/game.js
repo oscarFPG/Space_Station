@@ -13,7 +13,7 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ Boot, Tutorial, Store ],
+    scene: [ Tutorial, Store ],
     physics: {
         default: 'arcade',
         arcade: {

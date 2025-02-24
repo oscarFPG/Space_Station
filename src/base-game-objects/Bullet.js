@@ -50,6 +50,9 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
         }
         // Usamos this.myScene en lugar de this.scene
         const spark = this.myScene.add.sprite(x, y, 'explode');
+        spark.setOrigin(0.5, 0.5);
+        // Asignar la rotación de la bala (o la que desees) al spark
+        spark.setRotation(this.rotation);
         spark.play('spark');
         spark.on('animationcomplete', () => {
             spark.destroy();

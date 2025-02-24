@@ -12,9 +12,10 @@ export default class Player extends Phaser.GameObjects.Container {
 		super(scene, x, y);
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
-		this.player = scene.add.sprite(0, 0, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+		this.player = scene.add.sprite(32, 54, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
 
-		// Controles
+		this.body.setSize(100,130);
+		// Controlesds
 		this.cursors = this.scene.input.keyboard.createCursorKeys();
 		this.keys = scene.input.keyboard.addKeys({
 			up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -22,12 +23,12 @@ export default class Player extends Phaser.GameObjects.Container {
 			left: Phaser.Input.Keyboard.KeyCodes.A,
 			right: Phaser.Input.Keyboard.KeyCodes.D
 		});
-		this.weaponOffset = { x: 15, y: 32 };
+		this.weaponOffset = { x: 65, y: 80 };
 
 		// Crear el arma	
 		this.weapon = new BasePistol(scene, this.weaponOffset.x, this.weaponOffset.y);
-
-		// Añadir al containter
+		this.weapon.setOrigin(0.5, 0.5); 
+		// Añadir al container
 		this.add(this.player);
 		this.add(this.weapon);
 
@@ -78,12 +79,12 @@ export default class Player extends Phaser.GameObjects.Container {
 		if (this.cursors.left.isDown || this.keys.left.isDown) {
 			velocityX = -1;
 			this.player.setFlipX(true);
+			this.player.setX(50);
 		}
 		if (this.cursors.right.isDown || this.keys.right.isDown) {
 			velocityX = 1;
 			this.player.setFlipX(false);
 		}
-
 		// Normalizar la velocidad para que no sea mayor en diagonal
 		if (velocityX !== 0 || velocityY !== 0) {
 			const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
@@ -111,9 +112,12 @@ export default class Player extends Phaser.GameObjects.Container {
 		const pointer = this.scene.input.activePointer;
 		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
+		// Obtener la posición mundial real del arma:
+		const weaponWorldX = this.x + this.weapon.x;
+		const weaponWorldY = this.y + this.weapon.y;
 		// Calcular el ángulo desde el centro del container hacia el puntero
-		let angle = Phaser.Math.Angle.Between(this.x, this.y, worldPoint.x, worldPoint.y);
+		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
 		this.weapon.setRotation(angle);   
-		this.weapon.setFlipY(worldPoint.x < this.x);
+		this.weapon.setFlipY(worldPoint.x < weaponWorldX);
 	}
 }
