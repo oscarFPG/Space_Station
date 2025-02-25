@@ -5,15 +5,15 @@ import Phaser, { Physics } from 'phaser'
 
 const config = {
     type: Phaser.AUTO,
-    width: 1000,
-    height: 778,
+    width: 1600,
+    height: 800,
     parent: 'juego',
     scale: {
         //mode: Phaser.Scale.FIT,  
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ Tutorial, Store ],
+    scene: [ Boot, Tutorial, Store ],
     physics: {
         default: 'arcade',
         arcade: {

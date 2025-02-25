@@ -1,31 +1,25 @@
 import RangeWeapon from "../../base-game-objects/RangeWeapon";
-import BasePistolBullet from "../bullets/BasePistolBullet";
 
 export default class BasePistol extends RangeWeapon {
     
     static BASE_PISTOL_DAMAGE = 2;
-    static BASE_PISTOL_TEXTURE = 'weapon1'; 
+    static BASE_PISTOL_TEXTURE = 'baseWeapon'; 
 
     constructor(scene, x, y){
         super(scene, x, y, BasePistol.BASE_PISTOL_TEXTURE , BasePistol.BASE_PISTOL_DAMAGE);
-    }
 
-    shot(targetX, targetY) {
-        // Obtener la posición mundial del arma
-        const weaponX = this.x + this.parentContainer.x;
-        const weaponY = this.y + this.parentContainer.y;
-
-            // Calcular el ángulo de disparo
-        const angle = Phaser.Math.Angle.Between(weaponX, weaponY, targetX, targetY);
-
-        const offset = 70; // Distancia desde el centro hasta la punta del arma
-        const bulletX = weaponX + Math.cos(angle) * offset;
-        const bulletY = weaponY + Math.sin(angle) * offset;
-        // Crear la bala en la posición del arma
-        const bullet = new BasePistolBullet(this.scene, bulletX, bulletY);
-        this.scene.add.existing(bullet);
-        this.scene.bullets.add(bullet);
-        const speed = 970;
-        bullet.fire(bulletX, bulletY, angle, speed);
+        // Gun config
+        this._specs.bulletSpeed = 1000;
+        this._specs.muzzleOffset = 70;
+        this._specs.canBounce = false;
+        this._specs.canDrill = false;
+        this._specs.fireRate = 2;
+        this._specs.reloadTime = 2;
+        this._specs.sprite = BasePistol.BASE_PISTOL_TEXTURE;
+        this._specs.weight = 1;
+        
+        this._ammo.clipSize = 15;
+        this._ammo.currentClipAmmo = this._ammo.clipSize;
+        this._ammo.numClips = -1;
     }
 }

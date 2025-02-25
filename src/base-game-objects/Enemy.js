@@ -3,10 +3,13 @@ import Phaser from 'phaser'
 
 export default class Enemy extends Phaser.GameObjects.Container {
 
-    constructor(scene, x, y){
+    constructor(scene, x, y, weapon){
         super(scene, x, y);
         this._sprite = this.scene.add.sprite(x, y, '', '');
-        this.add(this._sprite);
+
+        if(weapon)
+            this.add(this._sprite);
+        
         this.scene.add.existing(this);
         this.addToUpdateList(); // Allow updating
     }

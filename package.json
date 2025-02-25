@@ -1,5 +1,5 @@
 {
-    "name": "plantillaphaser",
+    "name": "SpaceStation",
     "version": "1.0.0",
     "main": "./main.js",
     "description": "Plantilla para juegos con Phaser",

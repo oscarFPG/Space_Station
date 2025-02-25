@@ -48,11 +48,10 @@ export default class Player extends Phaser.GameObjects.Container {
 		});
 		this.player.play('idle');
 
-		//DISPARO CON CLICK
-
-		this.scene.input.on('pointerdown', (pointer) => {
+		// DISPARO CON CLICK
+		this.scene.input.on('pointerdown', (pointer) =>{
 			this.weapon.shot(pointer.worldX, pointer.worldY);
-		});
+        }, this);
 
 		// Registra el método update para que se llame en cada frame
 		this.scene.events.on('update', this.update, this);

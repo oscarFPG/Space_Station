@@ -38,16 +38,19 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire(x, y, angle, speed) {
+
         this.setPosition(x, y);
         this.setRotation(angle);
         this.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
     }
 
     createSpark(x, y) {
+
         // Verificar que myScene sigue existiendo
         if (!this.myScene) {
             return;
         }
+
         // Usamos this.myScene en lugar de this.scene
         const spark = this.myScene.add.sprite(x, y, 'explode');
         spark.setOrigin(0.5, 0.5);
