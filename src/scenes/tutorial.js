@@ -10,6 +10,7 @@ import Explode from '../../assets/effects/explode.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map2.json'
 import Player from '../game-objects/Player.js'
+import DungeonGenerator from '../dungeon/dungeonGenerator.js'
 import Phaser from 'phaser'
 
 
@@ -53,6 +54,8 @@ export default class Tutorial extends Phaser.Scene {
         this.lights.enable();
         this.lights.setAmbientColor(0x222222); // Ajusta el color ambiental a tu gusto
 
+
+        this.testDungeon();
 
         // Asegurar que el jugador no salga de los límites del mundo
         // Ajustar los límites del mundo al tamaño del mapa
@@ -126,6 +129,12 @@ export default class Tutorial extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.p_key)){
             this.scene.switch('store', 'tutorial');
         } 
+    }
+
+    testDungeon(){
+        
+        var dungeon = DungeonGenerator.createDungeon();
+        console.log(dungeon);
     }
 
 }
