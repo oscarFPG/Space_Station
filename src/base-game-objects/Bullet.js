@@ -14,8 +14,9 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
         this.myScene.physics.add.existing(this);
         this.setCollideWorldBounds(true);
         this.body.onWorldBounds = true;
+        this.light = this.scene.lights.addLight(this.x, this.y, 600, 0x87CEFA, 1.5);
 
-        // Crear la animación "spark" (usando la textura 'explode' ya cargada)
+        // Crear la animación "spark" (usando la textura 'explode' ya cdsargada)
         if (!scene.anims.exists('spark')) {
             scene.anims.create({
                 key: 'spark',
@@ -43,6 +44,14 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
         this.setRotation(angle);
         this.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
     }
+    // Sobrescribimos preUpdate para actualizar la posición de la luz
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+        if (this.light) {
+            this.light.x = this.x;
+            this.light.y = this.y;
+        }
+    }
 
     createSpark(x, y) {
 
@@ -60,5 +69,17 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
         spark.on('animationcomplete', () => {
             spark.destroy();
         });
+    }
+    // Sobrescribimos destroy para eliminar la luz y el listener
+    destroy(fromScene) {
+        // Eliminar el listener de worldbounds para evitar fugas de memoria
+        if (this.body && this.body.world && this.worldBoundsCallback) {
+            this.body.world.off('worldbounds', this.worldBoundsCallback);
+        }
+        if (this.light) {
+            this.myScene.lights.removeLight(this.light);
+            this.light = null;
+        }
+        super.destroy(fromScene);
     }
 }

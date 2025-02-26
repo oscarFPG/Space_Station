@@ -28,9 +28,17 @@ export default class Player extends Phaser.GameObjects.Container {
 		// Crear el arma	
 		this.weapon = new BasePistol(scene, this.weaponOffset.x, this.weaponOffset.y);
 		this.weapon.setOrigin(0.5, 0.5); 
-		// Añadir al container
+
+				// Después de crear this.player y this.weapon:
+		this.player.setPipeline('Light2D');
+		this.weapon.setPipeline('Light2D');
+		// Crear la luz que seguirá al jugador
+		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
+		
+		// Añadir al containeradsd
 		this.add(this.player);
 		this.add(this.weapon);
+
 
 		// Crear animaciones
 		this.scene.anims.create({
@@ -104,6 +112,12 @@ export default class Player extends Phaser.GameObjects.Container {
 				this.player.play("idle");
 			}
 		}
+		let offsetX = 75; // Valor por defecto para cuando no está volteado
+		if (this.player.flipX) {
+			offsetX = -15; // Si está volteado, la luz se mueve al otro lado
+		}
+		// Actualizar la posición de la luz con el offset correspondiente
+		this.light.setPosition(this.x + offsetX, this.y);
 	}
 
 	updateWeapon() {
