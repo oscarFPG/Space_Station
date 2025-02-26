@@ -1,76 +1,29 @@
-# 0. Plantilla para juegos en Phaser
 
-## 0.1 Instalación
+# Indice
+- [Equipo de desarollo](#1-equipo-de-desarrollo)
+- [Introducción](#2-introducion)
+- [Gameplay](#3-gameplay)
+- [Características principales](#4-características-principales)
 
-El repositorio está publicado como plantilla, de forma que se puede crear un nuevo proyecto propio en GitHub simplemente pulsando el botón `Use this template` (arriba a la derecha). Después, solo hay que clonar el repositorio propio y trabajar sobre él.
-
-## 0.2 Clonar
-
-También se puede clonar el repositorio:
-
-```
-git clone https://github.com/cleongh/plantillaphaser
-```
-
-Podemos modificar el archivo `package.json` para configurar nuestro proyecto (nombre, autor...)
-
-Para iniciar el proyecto (sólo 1 vez) instalamos las dependencias automáticamente (`vite`, `phaser`):
-
-```
-npm install
-```
-
-## 0.3 Uso
-
-Cada vez que queramos usarlo, tenemos que arrancar el servidor de desarrollo que monitorizará los cambios, procesará el contenido y cambiará la página. Usa [Vite](https://es.vitejs.dev/).
-
-Para arrancar el servidor de desarrollo:
-
-```
-npm start
-```
-
-Con esto, solo tenemos que programar y guardar los archivos, Vite se encargará del resto.
-
-## 0.4 Distribución
-
-El repositorio tiene una acción de GitHub (*GitHub Action*) que genera una versión de *release* y la publica en GitHub Pages. De este modo, cada vez que se hace `push`, se construye y publica en la página pública.
-
-Se publica el contenido de la rama *main*.
-
-Si no se está usando GitHub, o se quiere publicar a mano, podemos crear una *build* de *release*. Vite optimizará los archivos y, con la configuración que hay en `package.json`, generará en la carpeta `docs/` una versión "pública" de nuestro proyecto.
-
-```sh
-npm run build
-```
-
-<!-- ### En GitHub -->
-
-<!-- Está todo configurado para que se active "GitHub Pages", y se use, en la rama principal (se suele llamar `main`), la carpeta `docs/`. Simplemente hay que activarlo en "Settings" → "Pages" → "Build and deployment". -->
-
-## 0.5 VSCode
-
-En la carpeta `.vscode/` hay una configuración para usar Visual Studio Code, tanto para construir el *release* (`npm run build`) como para ejecutar y depurar. Simplemente hay que ejecutar "Run" → "Start debugging..." (or presionar `F5`).
-
-## 0.6 TypeScript
-
-TypeScript está automáticamente habilitado (gracias a Vite). Para usarlo, simplemente hay que crear archivos con extensión `.ts`.
 
 # GDD: (nombre provisional) Escape Station
 
 ## 1. Equipo de desarrollo:
-### Programación: 
-Ignacio Lumbano Vivar, Daniel Lafuente Bazo, Óscar Fabián Pineda Germán, James Morocho Calero.
-### Arte: 
+### 1.2 Programación: 
+⦁   Ignacio Lumbano Vivar
+⦁   Daniel Lafuente Bazo
+⦁   Óscar Fabián Pineda Germán
+⦁   James Morocho Calero.
+### 1.3 Arte: 
 #### Diseño personajes
-Daniel Lafuente Bazo, Ignacio Lumbano Vivar
+⦁   Daniel Lafuente Bazo
+⦁   Ignacio Lumbano Vivar
 #### Diseño Musical
-Óscar Fabián Pineda Germán, James Morocho Calero
-
+⦁   Óscar Fabián Pineda Germán
+⦁   James Morocho Calero
 
 
 ## 2. Introducion
-
 ### 2.1 Gráficos:	
 Estilo pixelart, Vista Top-Down
 
@@ -100,60 +53,35 @@ El juego termina cuando derrotas al boss final del último nivel.
 ## 4. Características principales:
 
 ⦁   Mueve a “V300” usando su arma para abrirte paso rompiendo muros o eliminando enemigos.
-
-⦁   Generador de niveles de forma procedural. (`por capas`).
-
+⦁   ~~Generador de niveles de forma procedural. (`por capas`).~~
 ⦁   Analiza de forma minuciosa cada rincón para captar los láseres que se interponen en tu camino.
-
 ⦁   Esquiva y usa las cajas para abrir puertas y cubrirte de las torretas.
-
 ⦁   Revisa las reservas de munición o vidas que brinda el mapa.
-
 ⦁   Recoge notas que son clave para pasar las cámaras.
 
 ### 4.1 Tipos de Sala:
 Las salas está conectadas por un pasillo, puede estar abiertas siempre o pueden tener puertas que requieren de activación de un boton, llave,.... Estas sala se abrira por un corto periodo de tiempo y se volverá a cerrar la puerta. No podrás salir hasta que cumplas una condición (`matar enemigos, matar boss,...`).
 
 ⦁   Tienda.
-
 ⦁   Sala común con enemigos.
-
 ⦁   Sala de Puzzle.
-
 ⦁   Sala  de Salida.
-
 ⦁   Sala de Entrada.
-
 ⦁   Sala del Boss Final.
-
 ⦁   Sala mini-boss (`opcional`).
-
 ⦁   Sala de cierre automático (`sala del panico`).
-
 
 ### 4.2 Tipos de Enemigos:
 Los enemigos pueden ser: estáticos, móviles, de rango, cuerpo a cuerpo y support. Moviles de patrones, perseguidores o aleatorios.
 
 ⦁   Torretas (`estático`)(`rango`).
-
 ⦁   Estandarte (`estático`)(`support`).
-
 ⦁   Robot (`móvil`)(`rango`).
-
 ⦁   Robot (`móvil`)(`cuerpo a cuerpo`).
-
 ⦁   Boss o Mini-Boss (`depende`).
-
 ⦁   Laser (`estático`)(`cuerpo a cuerpo`).
 
 ### 4.3 Mecanicas:
-#### 4.3.1 Del personaje:
-
-⦁   Movimiento del personaje: Utilizando el Teclado: teclas W / S / D / A.
-
-⦁   Movimiento del arma: Utilizando elCursor / Raton: moverlo en cualqquier direción.
-
-
-### 4.4 Dinamicas: 
-
-⦁   
+#### Del personaje:
+⦁   Movimiento del personaje: Utilizando el el teclado con W / A / S / D
+⦁   Movimiento del arma: Utilizando el ratón en cualquier dirección como puntero
