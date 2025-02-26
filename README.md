@@ -11,21 +11,28 @@
 ## 1. Equipo de desarrollo:
 ### 1.2 Programación: 
 ⦁   Ignacio Lumbano Vivar
+
 ⦁   Daniel Lafuente Bazo
+
 ⦁   Óscar Fabián Pineda Germán
+
 ⦁   James Morocho Calero.
+
 ### 1.3 Arte: 
 #### Diseño personajes
 ⦁   Daniel Lafuente Bazo
+
 ⦁   Ignacio Lumbano Vivar
+
 #### Diseño Musical
 ⦁   Óscar Fabián Pineda Germán
+
 ⦁   James Morocho Calero
 
 
 ## 2. Introducion
 ### 2.1 Gráficos:	
-Estilo pixelart, Vista Top-Down
+Estilo pixelart y vista Top-Down
 
 ### 2.2 Género
 Videojuego 2D roguelike, de acción y puzzles en el espacio.
@@ -53,35 +60,56 @@ El juego termina cuando derrotas al boss final del último nivel.
 ## 4. Características principales:
 
 ⦁   Mueve a “V300” usando su arma para abrirte paso rompiendo muros o eliminando enemigos.
+
 ⦁   ~~Generador de niveles de forma procedural. (`por capas`).~~
+
 ⦁   Analiza de forma minuciosa cada rincón para captar los láseres que se interponen en tu camino.
+
 ⦁   Esquiva y usa las cajas para abrir puertas y cubrirte de las torretas.
+
 ⦁   Revisa las reservas de munición o vidas que brinda el mapa.
+
 ⦁   Recoge notas que son clave para pasar las cámaras.
+
 
 ### 4.1 Tipos de Sala:
 Las salas está conectadas por un pasillo, puede estar abiertas siempre o pueden tener puertas que requieren de activación de un boton, llave,.... Estas sala se abrira por un corto periodo de tiempo y se volverá a cerrar la puerta. No podrás salir hasta que cumplas una condición (`matar enemigos, matar boss,...`).
 
 ⦁   Tienda.
+
 ⦁   Sala común con enemigos.
+
 ⦁   Sala de Puzzle.
+
 ⦁   Sala  de Salida.
+
 ⦁   Sala de Entrada.
+
 ⦁   Sala del Boss Final.
+
 ⦁   Sala mini-boss (`opcional`).
+
 ⦁   Sala de cierre automático (`sala del panico`).
+
 
 ### 4.2 Tipos de Enemigos:
 Los enemigos pueden ser: estáticos, móviles, de rango, cuerpo a cuerpo y support. Moviles de patrones, perseguidores o aleatorios.
 
 ⦁   Torretas (`estático`)(`rango`).
+
 ⦁   Estandarte (`estático`)(`support`).
+
 ⦁   Robot (`móvil`)(`rango`).
+
 ⦁   Robot (`móvil`)(`cuerpo a cuerpo`).
+
 ⦁   Boss o Mini-Boss (`depende`).
+
 ⦁   Laser (`estático`)(`cuerpo a cuerpo`).
+
 
 ### 4.3 Mecanicas:
 #### Del personaje:
 ⦁   Movimiento del personaje: Utilizando el el teclado con W / A / S / D
+
 ⦁   Movimiento del arma: Utilizando el ratón en cualquier dirección como puntero
