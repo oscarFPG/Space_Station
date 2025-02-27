@@ -13,53 +13,17 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
 		this.player = scene.add.sprite(32, 54, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+		this.body.setSize(100, 130);
 
-		this.body.setSize(100,130);
-		// Controlesds
-		this.cursors = this.scene.input.keyboard.createCursorKeys();
-		this.keys = scene.input.keyboard.addKeys({
-			up: Phaser.Input.Keyboard.KeyCodes.W,
-			down: Phaser.Input.Keyboard.KeyCodes.S,
-			left: Phaser.Input.Keyboard.KeyCodes.A,
-			right: Phaser.Input.Keyboard.KeyCodes.D
-		});
-		this.weaponOffset = { x: 65, y: 80 };
-
-		// Crear el arma	
-		this.weapon = new BasePistol(scene, this.weaponOffset.x, this.weaponOffset.y);
-		this.weapon.setOrigin(0.5, 0.5); 
-
-				// Después de crear this.player y this.weapon:
-		this.player.setPipeline('Light2D');
-		this.weapon.setPipeline('Light2D');
-		// Crear la luz que seguirá al jugador
-		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
+		// Configuracion de controles, animaciones, iluminacion y del arma
+		this.#config_controles();
+		this.#config_arma();
+		this.#config_animaciones();
+		this.#config_iluminacion();
 		
-		// Añadir al containeradsd
+		// Añadir al container
 		this.add(this.player);
 		this.add(this.weapon);
-
-
-		// Crear animaciones
-		this.scene.anims.create({
-			key: 'idle',
-			frames: this.scene.anims.generateFrameNumbers(Player.IDLE_ANIMATION, { start: 0, end: 2 }),
-			frameRate: 6,
-			repeat: -1
-		});
-		
-		this.scene.anims.create({
-			key: 'running',
-			frames: this.scene.anims.generateFrameNumbers(Player.RUNNING_ANIMATION, { start: 0, end: 3 }),
-			frameRate: 10,
-			repeat: -1
-		});
-		this.player.play('idle');
-
-		// DISPARO CON CLICK
-		this.scene.input.on('pointerdown', (pointer) =>{
-			this.weapon.shot(pointer.worldX, pointer.worldY);
-        }, this);
 
 		// Registra el método update para que se llame en cada frame
 		this.scene.events.on('update', this.update, this);
@@ -120,6 +84,58 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.light.setPosition(this.x + offsetX, this.y);
 	}
 
+	#config_controles(){
+
+		// Controles de teclado
+		this.cursors = this.scene.input.keyboard.createCursorKeys();
+		this.keys = this.scene.input.keyboard.addKeys({
+			up: Phaser.Input.Keyboard.KeyCodes.W,
+			down: Phaser.Input.Keyboard.KeyCodes.S,
+			left: Phaser.Input.Keyboard.KeyCodes.A,
+			right: Phaser.Input.Keyboard.KeyCodes.D
+		});
+
+		// Controles de raton
+		this.scene.input.on('pointerdown', (pointer) =>{
+			this.weapon.shot(pointer.worldX, pointer.worldY);
+        }, this);
+	}
+
+	#config_arma(){
+
+		this.weaponOffset = { x: 65, y: 80 };
+		this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
+		this.weapon.setOrigin(0.5, 0.5); 
+	}
+
+	#config_animaciones(){
+
+		this.scene.anims.create({
+			key: 'idle',
+			frames: this.scene.anims.generateFrameNumbers(Player.IDLE_ANIMATION, { start: 0, end: 2 }),
+			frameRate: 6,
+			repeat: -1
+		});
+		
+		this.scene.anims.create({
+			key: 'running',
+			frames: this.scene.anims.generateFrameNumbers(Player.RUNNING_ANIMATION, { start: 0, end: 3 }),
+			frameRate: 10,
+			repeat: -1
+		});
+
+		// Animacion base
+		this.player.play('idle');
+	}
+
+	#config_iluminacion(){
+
+		// Crear la luz que seguirá al jugador
+		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
+		this.player.setPipeline('Light2D');
+		this.weapon.setPipeline('Light2D');
+	}
+
 	updateWeapon() {
 
 		const pointer = this.scene.input.activePointer;
@@ -133,4 +149,5 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.weapon.setRotation(angle);   
 		this.weapon.setFlipY(worldPoint.x < weaponWorldX);
 	}
+	
 }

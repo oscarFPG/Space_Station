@@ -10,7 +10,6 @@ import Explode from '../../assets/effects/explode.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map2.json'
 import Player from '../game-objects/Player.js'
-import DungeonGenerator from '../dungeon/dungeonGenerator.js'
 import Phaser from 'phaser'
 
 
@@ -40,41 +39,45 @@ export default class Tutorial extends Phaser.Scene {
 
     create(){
 
+        // Creacion assets
         var map = this.make.tilemap({key: 'map', tileWidth: 185, tileHeight: 185});
         var tileset = map.addTilesetImage('Tilemap', 'tiles');   
-        var layer = map.createLayer('Ground', tileset, 0, 0);
+        var layerFloor = map.createLayer('Ground', tileset, 0, 0);
         var layerWall = map.createLayer('Wall', tileset, 0, 0);
         var layerButano = map.createLayer('Butanos', tileset, 0, 0);
         
-        this.player = new Player(this, 1000, 1000);
-                // Dentro del método create() de la escena
-        layer.setPipeline('Light2D');
+        // Configurar iluminación
+        layerFloor.setPipeline('Light2D');
         layerWall.setPipeline('Light2D');
         layerButano.setPipeline('Light2D');
         this.lights.enable();
-        this.lights.setAmbientColor(0x222222); // Ajusta el color ambiental a tu gusto
+        this.lights.setAmbientColor(0x888888);
 
+        // Crear cursor personalizado
+        this.input.setDefaultCursor('crosshair')
 
-        this.testDungeon();
+        // Configurar camara
+        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.startFollow(this.player);
 
-        // Asegurar que el jugador no salga de los límites del mundo
-        // Ajustar los límites del mundo al tamaño del mapa
-        this.physics.add.collider(this.player, layer);
+        // Creacion personaje
+        this.player = new Player(this, 1000, 1000);
+
+        // Configurar colisiones
+        this.physics.add.collider(this.player, layerFloor);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-        this.player.body.setCollideWorldBounds(true);
+        this.player.body.setCollideWorldBounds(true);   // Asegurar que el jugador no salga de los límites del mundo
         layerWall.setCollisionByExclusion([-1]);
         layerButano.setCollisionByExclusion([-1]); // Activa colisiones en la capa
-        //this.physics.add.collider(this.player, layerButano);
-        //  Ajustar el tamaño de los colliders
         this.butanoColliders = this.physics.add.staticGroup();
+
         layerButano.forEachTile(tile => {
             if (tile.index !== -1) {
-                // Obtener el centro del tile
+
                 const baseX = tile.getCenterX();
                 const baseY = tile.getCenterY();
-                // Definir el offset deseado
-                const offsetX = 10;  // Ejemplo: desplazar 10 px a la derecha
-                const offsetY = -5;  // Ejemplo: 5 px arriba
+                const offsetX = 10;
+                const offsetY = -5;
 
                 // Crear el collider en la posición ajustada
                 const collider = this.physics.add.staticImage(baseX + offsetX, baseY + offsetY, null);
@@ -84,16 +87,9 @@ export default class Tutorial extends Phaser.Scene {
             }
         });
         this.physics.add.collider(this.player, this.butanoColliders);
-        
-        // Ajustar límites de la cámara
-        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
         // Crear colisiones entre el jugador y las paredes
         this.physics.add.collider(this.player, layerWall);
-
-        // Hacer que la cámara siga al jugador
-        this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(1);
 
         // Crear el grupo global de balas
         this.bullets = this.physics.add.group();
@@ -114,10 +110,6 @@ export default class Tutorial extends Phaser.Scene {
             });
         }
 
-        // Crear cursor personalizado
-        this.input.setDefaultCursor('crosshair')
-        
-
         // Temporal!!!
         // Custom event for ENTER key
         this.p_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
@@ -129,12 +121,6 @@ export default class Tutorial extends Phaser.Scene {
         if(Phaser.Input.Keyboard.JustDown(this.p_key)){
             this.scene.switch('store', 'tutorial');
         } 
-    }
-
-    testDungeon(){
-        
-        var dungeon = DungeonGenerator.createDungeon();
-        console.log(dungeon);
     }
 
 }
