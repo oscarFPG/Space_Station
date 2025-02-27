@@ -73,7 +73,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.setPosition(this.body.x, this.body.y);
 		this.body.setVelocity(0);
 
-		const speed = 400;
+		const speed = 300;
 		let velocityX = 0;
 		let velocityY = 0;
 

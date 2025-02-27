@@ -93,7 +93,7 @@ export default class Tutorial extends Phaser.Scene {
 
         // Hacer que la cámara siga al jugador
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(0.6);
+        this.cameras.main.setZoom(1);
 
         // Crear el grupo global de balas
         this.bullets = this.physics.add.group();
