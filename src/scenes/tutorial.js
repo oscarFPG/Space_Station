@@ -56,12 +56,12 @@ export default class Tutorial extends Phaser.Scene {
         // Crear cursor personalizado
         this.input.setDefaultCursor('crosshair')
 
+        // Creacion personaje
+        this.player = new Player(this, 1000, 1000);
+        
         // Configurar camara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
-
-        // Creacion personaje
-        this.player = new Player(this, 1000, 1000);
 
         // Configurar colisiones
         this.physics.add.collider(this.player, layerFloor);
