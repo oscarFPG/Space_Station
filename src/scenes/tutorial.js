@@ -23,6 +23,7 @@ import Bullet from '../base-game-objects/Bullet.js'
 import Enemy from '../base-game-objects/Enemy.js'
 
 // Interfaces
+import PlayerHealth from '../../assets/ui/HealthBar.png'
 import PlayerUI from '../UI/PlayerUI.js'
 import Phaser from 'phaser'
 
@@ -44,6 +45,7 @@ export default class Tutorial extends Phaser.Scene {
         this.load.image('weapon3', Weapon3);
         this.load.image('weapon4', Weapon4);
         this.load.image('bullet1', Bullet1);
+        this.load.image('playerUI', PlayerHealth);
         this.load.tilemapTiledJSON('map', Map);
         
         // Spritesheets
@@ -51,10 +53,6 @@ export default class Tutorial extends Phaser.Scene {
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 185 , frameHeight: 180 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 185 , frameHeight: 180 });
-
-        // UI
-        this.scene.add('playerUI', PlayerUI, true);
-
     }
 
     create(){
@@ -76,16 +74,15 @@ export default class Tutorial extends Phaser.Scene {
         // Crear cursor personalizado
         this.input.setDefaultCursor('crosshair')
 
-        // Creacion personaje
+        // Personajes del juego
         this.player = new Player(this, 450, 450);
-        // Crear enemigo en (1500, 1500)
         this.enemy = new Enemy(this, 1500, 1500);
 
-        
         // Configurar camara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(0.6);
+        this.cameras.main.setZoom(1);
+        this._playerUI = new PlayerUI(this, 30, 20);
 
         // Configurar colisiones
         this.physics.add.collider(this.player, layerFloor);
@@ -113,6 +110,7 @@ export default class Tutorial extends Phaser.Scene {
         });
         this.physics.add.collider(this.player, this.butanoColliders);
         this.physics.add.collider(this.enemy, this.butanoColliders);
+
         // Crear colisiones entre el jugador y las paredes
         this.physics.add.collider(this.player, layerWall);
         this.physics.add.collider(this.enemy, layerWall);

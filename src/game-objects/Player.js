@@ -1,5 +1,6 @@
-import Phaser from "phaser";
-import BasePistol from "./weapons/BasePistol";	
+import Phaser from 'phaser';
+import BasePistol from './weapons/BasePistol';
+
 
 export default class Player extends Phaser.GameObjects.Container {
 	
