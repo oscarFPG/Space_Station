@@ -5,8 +5,8 @@ import Phaser, { Physics } from 'phaser'
 
 const config = {
     type: Phaser.AUTO,
-    width: 1600,
-    height: 800,
+    width: 1400,
+    height: 750,
     parent: 'juego',
     scale: {
         //mode: Phaser.Scale.FIT,  

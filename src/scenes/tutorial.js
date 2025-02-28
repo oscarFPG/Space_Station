@@ -41,7 +41,6 @@ export default class Tutorial extends Phaser.Scene {
         this.load.image('weapon4', Weapon4);
         this.load.image('bullet1', Bullet1);
         this.load.tilemapTiledJSON('map', Map);
-        this.load.image('laser', LASER)
         
         // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 185 , frameHeight: 180 });
