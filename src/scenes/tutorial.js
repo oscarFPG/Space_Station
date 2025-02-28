@@ -1,5 +1,9 @@
+
+// Animaciones
 import CharacterIdle from '../../assets/sprites/idle.png'
 import CharacterRunning from '../../assets/sprites/running.png'
+
+// Armas / Objetos
 import OldColt from '../../assets/weapons/OldColt.png'
 import Weapon1 from '../../assets/weapons/weapon1.png'
 import Weapon2 from '../../assets/weapons/weapon2.png'
@@ -7,9 +11,16 @@ import Weapon3 from '../../assets/weapons/weapon3.png'
 import Weapon4 from '../../assets/weapons/weapon4.png'
 import Bullet1 from '../../assets/bullets/bullet1.png'
 import Explode from '../../assets/effects/explode.png'
+
+// Mapas
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map2.json'
+
+// Jugador
 import Player from '../game-objects/Player.js'
+
+// Interfaces
+import PlayerUI from '../UI/PlayerUI.js'
 import Phaser from 'phaser'
 
 
@@ -30,11 +41,16 @@ export default class Tutorial extends Phaser.Scene {
         this.load.image('weapon4', Weapon4);
         this.load.image('bullet1', Bullet1);
         this.load.tilemapTiledJSON('map', Map);
+        this.load.image('laser', LASER)
         
         // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 185 , frameHeight: 180 });
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 185 , frameHeight: 180 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });
+
+        // UI
+        this.scene.add('playerUI', PlayerUI, true);
+
     }
 
     create(){
@@ -57,7 +73,7 @@ export default class Tutorial extends Phaser.Scene {
         this.input.setDefaultCursor('crosshair')
 
         // Creacion personaje
-        this.player = new Player(this, 1000, 1000);
+        this.player = new Player(this, 450, 450);
         
         // Configurar camara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -109,6 +125,8 @@ export default class Tutorial extends Phaser.Scene {
                 repeat: 0
             });
         }
+
+        this.scene.launch('')
 
         // Temporal!!!
         // Custom event for ENTER key
