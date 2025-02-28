@@ -1,5 +1,6 @@
 import CharacterIdle from '../../assets/sprites/idle.png'
 import CharacterRunning from '../../assets/sprites/running.png'
+import EnemyIdle from '../../assets/sprites/idle_enemy.png'
 import OldColt from '../../assets/weapons/OldColt.png'
 import Weapon1 from '../../assets/weapons/weapon1.png'
 import Weapon2 from '../../assets/weapons/weapon2.png'
@@ -10,7 +11,10 @@ import Explode from '../../assets/effects/explode.png'
 import TilemapImage from '../../assets/blocks/Tilemap.png'
 import Map from '../../assets/maps/map2.json'
 import Player from '../game-objects/Player.js'
+import Bullet from '../base-game-objects/Bullet.js'
+import Enemy from '../base-game-objects/Enemy.js'
 import Phaser from 'phaser'
+
 
 
 export default class Tutorial extends Phaser.Scene {
@@ -35,6 +39,7 @@ export default class Tutorial extends Phaser.Scene {
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 185 , frameHeight: 180 });
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 185 , frameHeight: 180 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });
+        this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 185 , frameHeight: 180 });
     }
 
     create(){
@@ -58,15 +63,20 @@ export default class Tutorial extends Phaser.Scene {
 
         // Creacion personaje
         this.player = new Player(this, 1000, 1000);
+        // Crear enemigo en (1500, 1500)
+        this.enemy = new Enemy(this, 1500, 1500);
+
         
         // Configurar camara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
+        this.cameras.main.setZoom(0.6);
 
         // Configurar colisiones
         this.physics.add.collider(this.player, layerFloor);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.player.body.setCollideWorldBounds(true);   // Asegurar que el jugador no salga de los límites del mundo
+        this.enemy.body.setCollideWorldBounds(true);
         layerWall.setCollisionByExclusion([-1]);
         layerButano.setCollisionByExclusion([-1]); // Activa colisiones en la capa
         this.butanoColliders = this.physics.add.staticGroup();
@@ -87,18 +97,30 @@ export default class Tutorial extends Phaser.Scene {
             }
         });
         this.physics.add.collider(this.player, this.butanoColliders);
-
+        this.physics.add.collider(this.enemy, this.butanoColliders);
         // Crear colisiones entre el jugador y las paredes
         this.physics.add.collider(this.player, layerWall);
+        this.physics.add.collider(this.enemy, layerWall);
 
         // Crear el grupo global de balas
         this.bullets = this.physics.add.group();
-        const onBulletCollision = (bullet, collider) => {
-            bullet.createSpark(bullet.x, bullet.y);
-            bullet.destroy();
+        const onBulletCollision = (obj1, obj2) => {
+            let bullet = null;
+            if (obj1 instanceof Bullet) {
+                bullet = obj1;
+            } else if (obj2 instanceof Bullet) {
+                bullet = obj2;
+            }
+            if (bullet && typeof bullet.createSpark === 'function') {
+                bullet.createSpark(bullet.x, bullet.y);
+                bullet.destroy();
+            }
         };
         this.physics.add.collider(this.bullets, layerWall, onBulletCollision);
+        this.physics.add.collider(this.bullets, this.player, onBulletCollision);
+        this.physics.add.collider(this.bullets, this.enemy, onBulletCollision);
         this.physics.add.collider(this.bullets, this.butanoColliders, onBulletCollision);
+
 
         // Crear la animación de la chispa (si no existe)
         if (!this.anims.exists('spark')) {

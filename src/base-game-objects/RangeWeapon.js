@@ -4,21 +4,23 @@ import BasePistolBullet from '../game-objects/bullets/BasePistolBullet';
 export default class RangeWeapon extends Weapon {
 
     _specs = {
-        bulletSpeed: undefined, // Velocidad del proyectil
-        fireRate: undefined,    // Tiempo transcurrido entre bala y bala
-        reloadTime: undefined,  // Tiempo de recarga
-        weight: undefined,      // Peso del arma -> Afecta a la velocidad de movimiento del personaje
-        sprite: undefined,      // Modelo
-        canBounce: undefined,   // Indica si la bala puede rebotar o no con una pared
-        canDrill: undefined,    // Indica si la bala puede atravesar enemigos
-        muzzleOffset: undefined // Distancia desde el centro del modelo hasta el cañon
+        bulletSpeed: undefined,
+        fireRate: undefined,    
+        reloadTime: undefined, 
+        weight: undefined,
+        sprite: undefined,
+        canBounce: undefined,  
+        canDrill: undefined,   
+        muzzleOffset: undefined 
     };
 
     _ammo = {
-        clipSize: undefined,        // Numero de balas de un cargador
-        currentClipAmmo: undefined, // Balas actuales del cargador
-        numClips: undefined         // Numero de cargadores actuales(Sin contar el actual) -> -1 indica infinitos
+        clipSize: undefined,        
+        currentClipAmmo: undefined, 
+        numClips: undefined        
     };
+
+    _lastShotTime = 0; // Guarda el tiempo del último disparo
 
     constructor(scene, x, y, texture, damage){
         super(scene, x, y, texture, damage)
@@ -26,22 +28,28 @@ export default class RangeWeapon extends Weapon {
     }
 
     shot(targetX, targetY) {
+        const now = this.scene.time.now; // Obtener tiempo actual
+        
+        if (now - this._lastShotTime >= this._specs.fireRate * 1000) { // Comprobación del cooldown
+            if (this._ammo.currentClipAmmo > 0) {
+                this._lastShotTime = now; // Actualizar el último tiempo de disparo
+                this._ammo.currentClipAmmo--; // Restar una bala
 
-        // Obtener la posición mundial del arma
-        const weaponX = this.parentContainer.x + this.x;
-        const weaponY = this.parentContainer.y + this.y;
+                // Obtener la posición mundial del arma
+                const weaponX = this.parentContainer.x + this.x;
+                const weaponY = this.parentContainer.y + this.y;
 
-        // Calcular el ángulo de disparo
-        const angle = Phaser.Math.Angle.Between(weaponX, weaponY, targetX, targetY);
+                // Calcular el ángulo de disparo
+                const angle = Phaser.Math.Angle.Between(weaponX, weaponY, targetX, targetY);
+                const bulletX = weaponX + Math.cos(angle) * this._specs.muzzleOffset;
+                const bulletY = weaponY + Math.sin(angle) * this._specs.muzzleOffset;
 
-        const bulletX = weaponX + Math.cos(angle) * this._specs.muzzleOffset;
-        const bulletY = weaponY + Math.sin(angle) * this._specs.muzzleOffset;
-
-        // Crear la bala en la posición del arma
-        const bullet = new BasePistolBullet(this.scene, bulletX, bulletY);
-        this.scene.add.existing(bullet);
-        this.scene.bullets.add(bullet);
-        bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed);
+                // Crear la bala en la posición del arma
+                const bullet = new BasePistolBullet(this.scene, bulletX, bulletY);
+                this.scene.add.existing(bullet);
+                this.scene.bullets.add(bullet);
+                bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed);
+            }
+        }
     }
-
 }
