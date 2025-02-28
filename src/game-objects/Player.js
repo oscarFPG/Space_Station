@@ -12,8 +12,8 @@ export default class Player extends Phaser.GameObjects.Container {
 		super(scene, x, y);
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
-		this.player = scene.add.sprite(32, 54, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
-		this.body.setSize(100, 130);
+		this.player = scene.add.sprite(28, 32, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+		this.body.setSize(66, 78);
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
 		this.#config_controles();
@@ -37,7 +37,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.setPosition(this.body.x, this.body.y);
 		this.body.setVelocity(0);
 
-		const speed = 300;
+		const speed = 180;
 		let velocityX = 0;
 		let velocityY = 0;
 
@@ -50,7 +50,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		if (this.cursors.left.isDown || this.keys.left.isDown) {
 			velocityX = -1;
 			this.player.setFlipX(true);
-			this.player.setX(50);
+			this.player.setX(34);
 		}
 		if (this.cursors.right.isDown || this.keys.right.isDown) {
 			velocityX = 1;
@@ -103,7 +103,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
 	#config_arma(){
 
-		this.weaponOffset = { x: 65, y: 80 };
+		this.weaponOffset = { x: 39, y: 54};
 		this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
 		this.weapon.setOrigin(0.5, 0.5); 
 	}

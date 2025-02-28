@@ -11,29 +11,29 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.scene.physics.add.existing(this);
 
         // Crear el sprite del enemigo
-        this.enemySprite = scene.add.sprite(32, 54, Enemy.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+        this.enemySprite = scene.add.sprite(28, 32, Enemy.IDLE_ANIMATION).setOrigin(0.5, 0.5);
         this.add(this.enemySprite);
 
         // Configurar física
-        this.body.setSize(100, 130);
+        this.body.setSize(66, 78);
         this.body.setCollideWorldBounds(true);
 
         // Configurar el arma del enemigo
-        this.weaponOffset = { x: 65, y: 80 };
+        this.weaponOffset = { x: 39, y: 54};
         this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
         this.weapon.setOrigin(0.5, 0.5); 
         this.add(this.weapon);
 
         // Propiedades de movimiento y disparo
-        this.speed = 250;
+        this.speed = 150;
         this.fireRate = 1000; 
         this.lastShotTime = 0;
 
         // Propiedades de la IA
         this.state = 'patrol';          
-        this.detectionRange = 1200;      
-        this.shootingRange = 850;       
-        this.minDistance = 250;        
+        this.detectionRange = 540;      
+        this.shootingRange = 468;       
+        this.minDistance = 150;        
         this.patrolDirection = new Phaser.Math.Vector2(1, 0); 
 
         // Propiedades para el dodge
@@ -100,6 +100,7 @@ export default class Enemy extends Phaser.GameObjects.Container {
             } else {
                 this.enemySprite.setFlipX(true);
                 this.weapon.setFlipY(true); 
+                this.enemySprite.setX(34);
             }
 
         } else if (this.state === 'patrullar') {
@@ -116,6 +117,7 @@ export default class Enemy extends Phaser.GameObjects.Container {
             if (this.patrolDirection.x < 0) {
                 this.enemySprite.setFlipX(true);
                 this.weapon.setFlipY(true);
+                this.enemySprite.setX(34);
             } else if (this.patrolDirection.x > 0) {
                 this.enemySprite.setFlipX(false);
                 this.weapon.setFlipY(false);
