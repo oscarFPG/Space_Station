@@ -1,8 +1,8 @@
 
 // Animaciones
-import CharacterIdle from '../../assets/sprites/idle.png'
-import CharacterRunning from '../../assets/sprites/running.png'
-import EnemyIdle from '../../assets/sprites/idle_enemy.png'
+import CharacterIdle from '../../assets/sprites/idle_new.png'
+import CharacterRunning from '../../assets/sprites/running_new.png'
+import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
 
 // Armas / Objetos
 import OldColt from '../../assets/weapons/OldColt.png'
@@ -15,7 +15,7 @@ import Explode from '../../assets/effects/explode.png'
 
 // Mapas
 import TilemapImage from '../../assets/blocks/Tilemap.png'
-import Map from '../../assets/maps/map2.json'
+import Map from '../../assets/maps/map1.json'
 
 // Jugador
 import Player from '../game-objects/Player.js'
@@ -47,22 +47,25 @@ export default class Tutorial extends Phaser.Scene {
         this.load.image('bullet1', Bullet1);
         this.load.image('playerUI', PlayerHealth);
         this.load.tilemapTiledJSON('map', Map);
+        //this.load.image('laser', LASER)
         
         // Spritesheets
-        this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 185 , frameHeight: 180 });
-        this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 185 , frameHeight: 180 });
+        this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });
+        this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });
-        this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 185 , frameHeight: 180 });
+        this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 });
+
+        // UI
+        //this.scene.add('playerUI', PlayerUI, true);
     }
 
     create(){
-
         // Creacion assets
-        var map = this.make.tilemap({key: 'map', tileWidth: 185, tileHeight: 185});
-        var tileset = map.addTilesetImage('Tilemap', 'tiles');   
-        var layerFloor = map.createLayer('Ground', tileset, 0, 0);
-        var layerWall = map.createLayer('Wall', tileset, 0, 0);
-        var layerButano = map.createLayer('Butanos', tileset, 0, 0);
+        var map = this.make.tilemap({key: 'map', tileWidth: 111, tileHeight: 111});
+        var tileset = map.addTilesetImage('tilemap', 'tiles');   
+        var layerFloor = map.createLayer('floor', tileset, 0, 0);
+        var layerWall = map.createLayer('wall', tileset, 0, 0);
+        var layerButano = map.createLayer('butano', tileset, 0, 0);
         
         // Configurar iluminación
         layerFloor.setPipeline('Light2D');
@@ -81,9 +84,6 @@ export default class Tutorial extends Phaser.Scene {
         // Configurar camara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
-        this.cameras.main.setZoom(1);
-        this._playerUI = new PlayerUI(this, 30, 20);
-
         // Configurar colisiones
         this.physics.add.collider(this.player, layerFloor);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -98,12 +98,12 @@ export default class Tutorial extends Phaser.Scene {
 
                 const baseX = tile.getCenterX();
                 const baseY = tile.getCenterY();
-                const offsetX = 10;
-                const offsetY = -5;
+                const offsetX = 4;
+                const offsetY = -1;
 
                 // Crear el collider en la posición ajustada
                 const collider = this.physics.add.staticImage(baseX + offsetX, baseY + offsetY, null);
-                collider.body.setSize(90, 150);
+                collider.body.setSize(54, 90);
                 collider.setVisible(false);
                 this.butanoColliders.add(collider);
             }
@@ -119,11 +119,24 @@ export default class Tutorial extends Phaser.Scene {
         this.bullets = this.physics.add.group();
         const onBulletCollision = (obj1, obj2) => {
             let bullet = null;
+            let target = null;
             if (obj1 instanceof Bullet) {
                 bullet = obj1;
+                target = obj2;
             } else if (obj2 instanceof Bullet) {
                 bullet = obj2;
+                target = obj1;
             }
+            
+            // Si el target es el jugador, se activa la animación de impacto
+            if (target === this.player) {
+                this.player.hitByBullet();
+            }
+
+            if (target === this.enemy) {
+                this.enemy.hitByBullet();
+            }
+
             if (bullet && typeof bullet.createSpark === 'function') {
                 bullet.createSpark(bullet.x, bullet.y);
                 bullet.destroy();
@@ -140,7 +153,7 @@ export default class Tutorial extends Phaser.Scene {
             this.anims.create({
                 key: 'spark',
                 frames: this.anims.generateFrameNumbers('explode', { start: 0, end: 7 }),
-                frameRate: 20,
+                frameRate: 30,
                 repeat: 0
             });
         }

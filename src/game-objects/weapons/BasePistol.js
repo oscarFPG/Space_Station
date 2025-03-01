@@ -9,8 +9,8 @@ export default class BasePistol extends RangeWeapon {
         super(scene, x, y, BasePistol.BASE_PISTOL_TEXTURE , BasePistol.BASE_PISTOL_DAMAGE);
 
         // Gun config
-        this._specs.bulletSpeed = 1000;
-        this._specs.muzzleOffset = 70;
+        this._specs.bulletSpeed = 666;
+        this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;
         this._specs.fireRate = 1;
