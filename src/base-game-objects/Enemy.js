@@ -42,6 +42,17 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.dodgeSwitchInterval = 1500; 
         this.dodgeDirection = 1;        
     }
+    hitByBullet() {
+		if (this.isImpact) return; 
+		this.isImpact = true;
+		
+		this.enemySprite.setTintFill(0xffffff);
+		
+		this.scene.time.delayedCall(80, () => {
+			this.enemySprite.clearTint();
+			this.isImpact = false;
+		});
+	}
 
     preUpdate(time, delta) {
         if (!this.scene.player) return; 

@@ -85,6 +85,19 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.light.setPosition(this.x + offsetX, this.y);
 	}
 
+	hitByBullet() {
+		if (this.isImpact) return; 
+		this.isImpact = true;
+		
+		this.player.setTintFill(0xffffff);
+		
+		this.scene.time.delayedCall(80, () => {
+			this.player.clearTint();
+			this.isImpact = false;
+		});
+	}
+	
+
 	#config_controles(){
 
 		// Controles de teclado

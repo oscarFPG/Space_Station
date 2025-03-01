@@ -56,12 +56,10 @@ export default class Tutorial extends Phaser.Scene {
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 });
 
         // UI
-        this.scene.add('playerUI', PlayerUI, true);
-
+        //this.scene.add('playerUI', PlayerUI, true);
     }
 
     create(){
-
         // Creacion assets
         var map = this.make.tilemap({key: 'map', tileWidth: 111, tileHeight: 111});
         var tileset = map.addTilesetImage('tilemap', 'tiles');   
@@ -121,11 +119,24 @@ export default class Tutorial extends Phaser.Scene {
         this.bullets = this.physics.add.group();
         const onBulletCollision = (obj1, obj2) => {
             let bullet = null;
+            let target = null;
             if (obj1 instanceof Bullet) {
                 bullet = obj1;
+                target = obj2;
             } else if (obj2 instanceof Bullet) {
                 bullet = obj2;
+                target = obj1;
             }
+            
+            // Si el target es el jugador, se activa la animación de impacto
+            if (target === this.player) {
+                this.player.hitByBullet();
+            }
+
+            if (target === this.enemy) {
+                this.enemy.hitByBullet();
+            }
+
             if (bullet && typeof bullet.createSpark === 'function') {
                 bullet.createSpark(bullet.x, bullet.y);
                 bullet.destroy();
