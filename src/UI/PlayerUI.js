@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import Player from '../game-objects/Player';
 
 export default class PlayerUI extends Phaser.GameObjects.Container {
 
@@ -20,7 +19,6 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
     static COLOR_BARRA_ESCUDO = 0x00007a;
     static COLOR_BARRA_VACIA = 0xffffff;
 
-    static MAX_NUM_RECTANGLES = 50;
 
     constructor(scene, maxHealth, maxEscudo){
 
@@ -29,7 +27,6 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         this._MAX_VIDA = maxHealth;
         this._MAX_ESCUDO = maxEscudo;
-        this._vidaActual = maxHealth;
         this._barraVida = new Phaser.GameObjects.Sprite(scene, 0, 0, 'playerUI')
         this._barraVida.setScale(2)
         this._barraVida.setOrigin(0)
@@ -74,20 +71,24 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return rectangle;
     }
 
-    aumentar_vida(cantidad){
-
+    aumentar_vida(vidaActual){
+        const porcentaje = vidaActual / this._MAX_VIDA
+        this._puntosDeVida.scaleX = porcentaje
     }
 
-    disminuir_vida(cantidad){
-
+    disminuir_vida(vidaActual){
+        const porcentaje = vidaActual / this._MAX_VIDA
+        this._puntosDeVida.scaleX = porcentaje
     }
 
-    aumentar_escudo(cantidad){
-        
+    aumentar_escudo(escudoActual){
+        const porcentaje = escudoActual / this._MAX_ESCUDO
+        this._puntosDeEscudo.scaleX = porcentaje
     }
 
-    disminuir_escudo(cantidad){
-
+    disminuir_escudo(escudoActual){
+        const porcentaje = escudoActual / this._MAX_ESCUDO
+        this._puntosDeEscudo.scaleX = porcentaje
     }
     
 }
