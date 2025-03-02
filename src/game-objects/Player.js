@@ -103,25 +103,33 @@ export default class Player extends Phaser.GameObjects.Container {
 	}
   }
   
-
-	hitByBullet(damage) {
+	receiveDamage(damage) {
 
 		if (this.isImpact)
 			return;
-		
 		this.isImpact = true;
 		this._player.setTintFill(0xffffff);
-		this.scene.time.delayedCall(80, () => {
-			this._player.clearTint();
-			this.isImpact = false;
-		});
-
 		if(this._escudo > 0)
 			this.quitar_escudo(damage)
 		else
 			this.quitar_vida(damage)
+		if(this._vida > 0) {
+			this.scene.time.delayedCall(80, () => {
+				this._player.clearTint();
+				this.isImpact = false;
+			});
+			} 
+		else {
+			this.scene.tweens.add({
+				targets: this._player,
+				alpha: 0,
+				duration: 500,
+				onComplete: () => {
+				this.scene.scene.restart();
+				}
+			});
+		}
 	}
-	
 	#config_controles(){
 
 		// Controles de teclado
@@ -196,13 +204,6 @@ export default class Player extends Phaser.GameObjects.Container {
 		this._vida -= damage;
 		this._playerUI.disminuir_vida(this._vida);
 	}
-  #config_iluminacion() {
-    // Agregar la luz que seguirá al jugador
-    this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
-    this.player.setPipeline('Light2D');
-    this.weapon.setPipeline('Light2D');
-    this.player.setDepth(1);
-  }
 
   updateWeapon() {
 	// Si this.scene o this.scene.input no existen, no hacer nada.

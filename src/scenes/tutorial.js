@@ -147,11 +147,11 @@ export default class Tutorial extends Phaser.Scene {
             
             // Si el target es el jugador, se activa la animación de impacto
             if (target === this.player) {
-                this.player.hitByBullet(5)
+                this.player.receiveDamage(5);
             }
 
             if (target === this.enemy) {
-                this.enemy.hitByBullet(5)
+                this.enemy.receiveDamage(5);
             }
 
             if (bullet && typeof bullet.createSpark === 'function') {
@@ -163,7 +163,6 @@ export default class Tutorial extends Phaser.Scene {
         this.physics.add.collider(this.bullets, this.player, onBulletCollision);
         this.physics.add.collider(this.bullets, this.enemy, onBulletCollision);
         this.physics.add.collider(this.bullets, this.butanoColliders, onBulletCollision);
-
 
         // Crear la animación de la chispa (si no existe)
         if (!this.anims.exists('spark')) {
@@ -181,6 +180,7 @@ export default class Tutorial extends Phaser.Scene {
         // Custom event for ENTER key
         this.p_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
         this.createMushroom(map);
+        
     }
     createMushroom(map) 
     { 
@@ -193,6 +193,13 @@ export default class Tutorial extends Phaser.Scene {
         this.consolesOff.forEach(console => {
             console.configure(this.player, this.lasers);
         });
+        this.lasers.forEach(laser => {
+            this.physics.add.overlap(this.player, laser, this.onLaserHit, null, this);
+        });
+        
+    }
+    onLaserHit(player, laser) {
+        player.receiveDamage(200);
     }
     update(){
         // Cambiar escena store

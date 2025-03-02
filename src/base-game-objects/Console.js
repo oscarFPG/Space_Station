@@ -166,7 +166,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
       .on('pointerdown', () => {
         if (enteredPassword === correctPassword) {
           // Contraseña correcta: Desactivar los láseres y ocultar la consola
-          this.lasers.forEach(laser => laser.toggleActive(false));
+          this.lasers.forEach(laser => laser.desactivateLaser());
           this.setVisible(false);
           this.interactionText.setVisible(false);
           this.closeConsoleWindow();

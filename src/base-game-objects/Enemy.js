@@ -11,7 +11,7 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.scene.physics.add.existing(this);
 
         // Atributos
-        this._vida = 100;
+        this._vida = 50;
 
         // Crear el sprite del enemigo
         this.enemySprite = scene.add.sprite(28, 32, Enemy.IDLE_ANIMATION).setOrigin(0.5, 0.5);
@@ -48,17 +48,27 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.dodgeSwitchInterval = 1500; 
         this.dodgeDirection = 1;        
     }
-    hitByBullet(damage) {
+    receiveDamage(damage) {
 		if (this.isImpact) return; 
 		this.isImpact = true;
-		
 		this.enemySprite.setTintFill(0xffffff);
-		
-		this.scene.time.delayedCall(80, () => {
-			this.enemySprite.clearTint();
-			this.isImpact = false;
-		});
-        
+        this._vida -= damage;
+        if(this._vida > 0) {
+			this.scene.time.delayedCall(80, () => {
+				this.enemySprite.clearTint();
+				this.isImpact = false;
+			});
+			} 
+		else {
+			this.scene.tweens.add({
+				targets: this.enemySprite,
+				alpha: 0,
+				duration: 500,
+				onComplete: () => {
+				    this.destroy();
+				}
+			});
+		}
 	}
 
     preUpdate(time, delta) {
