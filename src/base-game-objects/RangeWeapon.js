@@ -32,10 +32,10 @@ export default class RangeWeapon extends Weapon {
         const now = this.scene.time.now;
 
         // Comprobar si puede volver a disparar(cadencia de disparo) y si tiene municion
-        if(now - this._lastShotTime < this._specs.fireRate * 1000 || this._ammo.currentClipAmmo <= 0)
+        if(now - this._lastShotTime < (1 / this._specs.fireRate) * 1000 || this._ammo.currentClipAmmo <= 0)
             return;
 
-        
+        console.log(now - this._lastShotTime)
         this._lastShotTime = now;
         this._ammo.currentClipAmmo--;
  
