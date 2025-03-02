@@ -1,4 +1,3 @@
-
 // Animaciones
 import CharacterIdle from '../../assets/sprites/idle_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
@@ -14,18 +13,28 @@ import Bullet1 from '../../assets/bullets/bullet1.png'
 import Explode from '../../assets/effects/explode.png'
 
 // Mapas
-import TilemapImage from '../../assets/blocks/Tilemap.png'
+import TilemapImage from '../../assets/blocks/tilemap.png'
 import Map from '../../assets/maps/map1.json'
+
+//Objetos 
+import Paper from '../../assets/blocks/paper.png'
+import ConsoleBlocked from '../../assets/blocks/panel_off.png'
+import laserUp from '../../assets/blocks/laser_2.png'
+import laserDown from '../../assets/blocks/laser_1.png'
 
 // Jugador
 import Player from '../game-objects/Player.js'
 import Bullet from '../base-game-objects/Bullet.js'
 import Enemy from '../base-game-objects/Enemy.js'
+import Note from '../base-game-objects/Note.js';
+import Console from '../base-game-objects/Console.js';
+import Laser from '../base-game-objects/Laser.js';
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
 import PlayerUI from '../UI/PlayerUI.js'
 import Phaser from 'phaser'
+
 
 
 
@@ -40,6 +49,10 @@ export default class Tutorial extends Phaser.Scene {
         // Images
         this.load.image('tiles', TilemapImage);
         this.load.image('baseWeapon', OldColt);
+        this.load.image('note', Paper);
+        this.load.image('laser2', laserUp);
+        this.load.image('laser1', laserDown);
+        this.load.image('consoleBlocked', ConsoleBlocked);
         this.load.image('weapon1', Weapon1);
         this.load.image('weapon2', Weapon2);
         this.load.image('weapon3', Weapon3);
@@ -47,7 +60,6 @@ export default class Tutorial extends Phaser.Scene {
         this.load.image('bullet1', Bullet1);
         this.load.image('playerUI', PlayerHealth);
         this.load.tilemapTiledJSON('map', Map);
-        //this.load.image('laser', LASER)
         
         // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });
@@ -66,6 +78,9 @@ export default class Tutorial extends Phaser.Scene {
         var layerFloor = map.createLayer('floor', tileset, 0, 0);
         var layerWall = map.createLayer('wall', tileset, 0, 0);
         var layerButano = map.createLayer('butano', tileset, 0, 0);
+        var layerExtra = map.createLayer('extra', tileset, 0, 0);
+        //Obtencion de objetos desde el mapa
+        const objectsLayer = map.getObjectLayer('objects');
         
         // Configurar iluminación
         layerFloor.setPipeline('Light2D');
@@ -77,8 +92,10 @@ export default class Tutorial extends Phaser.Scene {
         // Crear cursor personalizado
         this.input.setDefaultCursor('crosshair')
 
+        //Creacion variable para que no haya clicks mientras estas en consola
+        this.consoleActive = false; // Indica que la consola no está abierta al inicio
         // Personajes del juego
-        this.player = new Player(this, 450, 450);
+        this.player = new Player(this, 1000, 1000);
         this.enemy = new Enemy(this, 1500, 1500);
 
         // Configurar camara
@@ -92,7 +109,8 @@ export default class Tutorial extends Phaser.Scene {
         layerWall.setCollisionByExclusion([-1]);
         layerButano.setCollisionByExclusion([-1]); // Activa colisiones en la capa
         this.butanoColliders = this.physics.add.staticGroup();
-
+        //Instancias de objetos sacados del mapa: 
+          
         layerButano.forEachTile(tile => {
             if (tile.index !== -1) {
 
@@ -163,11 +181,28 @@ export default class Tutorial extends Phaser.Scene {
         // Temporal!!!
         // Custom event for ENTER key
         this.p_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        this.createMushroom(map);
     }
-    
+    createMushroom(map) 
+    { 
+        this.notes = map.createFromObjects('objects', { gid: 11, classType: Note, key: 'note'});
+        this.lasers = map.createFromObjects('objects', { gid: 40, classType: Laser, key: 'laser2'});
+        this.consolesOff = map.createFromObjects('objects', { gid: 42, classType: Console, key: 'consoleBlocked'});
+        this.notes.forEach(note => {
+            note.configure(this.player);
+          });
+        this.consolesOff.forEach(console => {
+            console.configure(this.player, this.lasers);
+        });
+    }
     update(){
-
         // Cambiar escena store
+        this.notes.forEach(note => {
+            note.update();
+          });
+        this.consolesOff.forEach(console => {
+            console.update();
+        });
         if(Phaser.Input.Keyboard.JustDown(this.p_key)){
             this.scene.switch('store', 'tutorial');
         } 

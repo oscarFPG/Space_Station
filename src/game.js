@@ -20,7 +20,7 @@ const config = {
             fps: 120,
             timeStep: 1/120,
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     }
 };
