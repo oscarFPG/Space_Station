@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import PlayerUI from '../UI/PlayerUI.js'
 import BasePistol from './weapons/BasePistol';
 
 export default class Player extends Phaser.GameObjects.Container {
@@ -7,25 +8,26 @@ export default class Player extends Phaser.GameObjects.Container {
   static IDLE_ANIMATION = 'playerIdle';
   static RUNNING_ANIMATION = 'playerRunning';
 
-  constructor(scene, x, y) {
-    super(scene, x, y);
-    this.scene.add.existing(this);
-    this.scene.physics.add.existing(this);
+	static VIDA_INICIAL = 50;
+	static ESCUDO_INICIAL = 50;
 
-    // Inicializamos el sprite del jugador y sus vidas
-    this.player = scene.add.sprite(28, 32, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
-    this.body.setSize(66, 78);
-    this.lives = 3; // Inicia con 3 vidas
+	constructor(scene, x, y) {
 
-    // Configuración de controles, arma, animaciones e iluminación
-    this.#config_controles();
-    this.#config_arma();
-    this.#config_animaciones();
-    this.#config_iluminacion();
-    
-    // Añadimos al container
-    this.add(this.player);
-    this.add(this.weapon);
+		super(scene, x, y);
+		this.scene.add.existing(this);
+		this.scene.physics.add.existing(this);
+		this._player = scene.add.sprite(28, 32, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+		this.body.setSize(66, 78);
+
+		// Atributos del jugador
+		this._vida = Player.VIDA_INICIAL;
+		this._escudo = Player.ESCUDO_INICIAL;
+
+		// Configuracion de controles, animaciones, iluminacion y del arma
+		this.#config_controles();
+		this.#config_arma();
+		this.#config_animaciones();
+		this.#config_iluminacion();
 
     // Registrar los métodos update y postupdate
     this.scene.events.on('update', this.update, this);
@@ -33,6 +35,13 @@ export default class Player extends Phaser.GameObjects.Container {
 
     // Bandera para evitar impactos múltiples simultáneos
     this.isImpact = false;
+
+		// Interfaz del personaje
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL);
+
+		// Añadir al container
+		this.add(this._player);
+		this.add(this.weapon);
   }
 
   update(time, delta) {
@@ -57,12 +66,12 @@ export default class Player extends Phaser.GameObjects.Container {
 	}
 	if (this.cursors.left.isDown || this.keys.left.isDown) {
 	  velocityX = -1;
-	  this.player.setFlipX(true);
-	  this.player.setX(34);
+	  this._player.setFlipX(true);
+	  this._player.setX(34);
 	}
 	if (this.cursors.right.isDown || this.keys.right.isDown) {
 	  velocityX = 1;
-	  this.player.setFlipX(false);
+	  this._player.setFlipX(false);
 	}
 	// Normalizar para que la velocidad no sea mayor en diagonal
 	if (velocityX !== 0 || velocityY !== 0) {
@@ -76,17 +85,17 @@ export default class Player extends Phaser.GameObjects.Container {
   
 	// Actualizar animación según el movimiento
 	if (velocityX !== 0 || velocityY !== 0) {
-	  if (this.player.anims.currentAnim.key !== "running") {
-		this.player.play("running");
+	  if (this._player.anims.currentAnim.key !== "running") {
+		this._player.play("running");
 	  }
 	} else {
-	  if (this.player.anims.currentAnim.key !== "idle") {
-		this.player.play("idle");
+	  if (this._player.anims.currentAnim.key !== "idle") {
+		this._player.play("idle");
 	  }
 	}
   
 	let offsetX = 75; // Valor por defecto para cuando no está volteado
-	if (this.player.flipX) {
+	if (this._player.flipX) {
 	  offsetX = -15;
 	}
 	if (this.light) {
@@ -95,42 +104,34 @@ export default class Player extends Phaser.GameObjects.Container {
   }
   
 
-  hitByBullet() {
-    if (this.isImpact) return; 
-    this.isImpact = true;
-    
-    // Decrementar una vida
-    this.lives--;
-    this.player.setTintFill(0xffffff);
-    
-    // Si aún tiene vidas, se quita el tinte en 80ms y se permite recibir nuevos impactos
-    if(this.lives > 0) {
-      this.scene.time.delayedCall(80, () => {
-        this.player.clearTint();
-        this.isImpact = false;
-      });
-    } else {
-      // Si ya no tiene vidas, se crea un tween que desvanece el sprite durante 0.5 segundos y luego reinicia la escena
-      this.scene.tweens.add({
-        targets: this.player,
-        alpha: 0,
-        duration: 500,
-        onComplete: () => {
-          this.scene.scene.restart();
-        }
-      });
-    }
-  }
+	hitByBullet(damage) {
 
-  #config_controles() {
-    // Configuración de las teclas
-    this.cursors = this.scene.input.keyboard.createCursorKeys();
-    this.keys = this.scene.input.keyboard.addKeys({
-      up: Phaser.Input.Keyboard.KeyCodes.W,
-      down: Phaser.Input.Keyboard.KeyCodes.S,
-      left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D
-    });
+		if (this.isImpact)
+			return;
+		
+		this.isImpact = true;
+		this._player.setTintFill(0xffffff);
+		this.scene.time.delayedCall(80, () => {
+			this._player.clearTint();
+			this.isImpact = false;
+		});
+
+		if(this._escudo > 0)
+			this.quitar_escudo(damage)
+		else
+			this.quitar_vida(damage)
+	}
+	
+	#config_controles(){
+
+		// Controles de teclado
+		this.cursors = this.scene.input.keyboard.createCursorKeys();
+		this.keys = this.scene.input.keyboard.addKeys({
+			up: Phaser.Input.Keyboard.KeyCodes.W,
+			down: Phaser.Input.Keyboard.KeyCodes.S,
+			left: Phaser.Input.Keyboard.KeyCodes.A,
+			right: Phaser.Input.Keyboard.KeyCodes.D
+		});
 
     // Disparo mediante ratón (si la consola no está activa)
     this.scene.input.on('pointerdown', (pointer) => {
@@ -166,10 +167,35 @@ export default class Player extends Phaser.GameObjects.Container {
       });
     }
 
-    // Iniciar con la animación idle
-    this.player.play('idle');
-  }
+		// Animacion base
+		this._player.play('idle');
+	}
 
+	#config_iluminacion(){
+
+		// Crear la luz que seguirá al jugador
+		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
+		this._player.setPipeline('Light2D');
+		this.weapon.setPipeline('Light2D');
+	}
+
+	quitar_escudo(damage){
+
+		if(this._escudo <= 0)
+			return;
+
+		this._escudo -= damage;
+		this._playerUI.disminuir_escudo(this._escudo);
+	}
+
+	quitar_vida(damage){
+
+		if(this._vida <= 0)
+			return;
+
+		this._vida -= damage;
+		this._playerUI.disminuir_vida(this._vida);
+	}
   #config_iluminacion() {
     // Agregar la luz que seguirá al jugador
     this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);

@@ -32,7 +32,6 @@ import Laser from '../base-game-objects/Laser.js';
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
-import PlayerUI from '../UI/PlayerUI.js'
 import Phaser from 'phaser'
 
 
@@ -66,12 +65,10 @@ export default class Tutorial extends Phaser.Scene {
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 });
-
-        // UI
-        //this.scene.add('playerUI', PlayerUI, true);
     }
 
     create(){
+
         // Creacion assets
         var map = this.make.tilemap({key: 'map', tileWidth: 111, tileHeight: 111});
         var tileset = map.addTilesetImage('tilemap', 'tiles');   
@@ -101,6 +98,7 @@ export default class Tutorial extends Phaser.Scene {
         // Configurar camara
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
+
         // Configurar colisiones
         this.physics.add.collider(this.player, layerFloor);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -136,6 +134,7 @@ export default class Tutorial extends Phaser.Scene {
         // Crear el grupo global de balas
         this.bullets = this.physics.add.group();
         const onBulletCollision = (obj1, obj2) => {
+
             let bullet = null;
             let target = null;
             if (obj1 instanceof Bullet) {
@@ -148,11 +147,11 @@ export default class Tutorial extends Phaser.Scene {
             
             // Si el target es el jugador, se activa la animación de impacto
             if (target === this.player) {
-                this.player.hitByBullet();
+                this.player.hitByBullet(5)
             }
 
             if (target === this.enemy) {
-                this.enemy.hitByBullet();
+                this.enemy.hitByBullet(5)
             }
 
             if (bullet && typeof bullet.createSpark === 'function') {

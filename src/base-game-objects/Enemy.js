@@ -2,13 +2,16 @@ import Phaser from 'phaser';
 import BasePistol from '../game-objects/weapons/BasePistol';
 
 export default class Enemy extends Phaser.GameObjects.Container {
+    
     static IDLE_ANIMATION = 'enemyIdle';
     
     constructor(scene, x, y) {
         super(scene, x, y);
-        this.scene = scene;
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
+
+        // Atributos
+        this._vida = 100;
 
         // Crear el sprite del enemigo
         this.enemySprite = scene.add.sprite(28, 32, Enemy.IDLE_ANIMATION).setOrigin(0.5, 0.5);
@@ -45,36 +48,23 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.dodgeSwitchInterval = 1500; 
         this.dodgeDirection = 1;        
     }
-    hitByBullet() {
-        if (this.isImpact) return; 
-    
-        this.lives--;
-        this.enemySprite.setTintFill(0xffffff);
-    
-        if (this.lives > 0) {
-            // Si aún tiene vidas, quitar el tint y permitir futuros impactos
-            this.scene.time.delayedCall(80, () => {
-                this.enemySprite.clearTint();
-            });
-        } else {
-            // Marcar como muerto para evitar recibir más impactos
-            this.isImpact = true;
-    
-            // Crear animación de desvanecimiento
-            this.scene.tweens.add({
-                targets: this,
-                alpha: 0,
-                duration: 500,
-                onComplete: () => {
-                    this.destroy(); // Elimina completamente al enemigo
-                }
-            });
-        }
-    }
-    
+    hitByBullet(damage) {
+		if (this.isImpact) return; 
+		this.isImpact = true;
+		
+		this.enemySprite.setTintFill(0xffffff);
+		
+		this.scene.time.delayedCall(80, () => {
+			this.enemySprite.clearTint();
+			this.isImpact = false;
+		});
+        
+	}
 
     preUpdate(time, delta) {
-        if (!this.scene.player) return; 
+
+        if (!this.scene.player)
+            return; 
         
         const playerX = this.scene.player.x;
         const playerY = this.scene.player.y;
