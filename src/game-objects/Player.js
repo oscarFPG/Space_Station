@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import PlayerUI from '../UI/PlayerUI.js'
 import BasePistol from './weapons/BasePistol';
 
 
@@ -8,29 +9,39 @@ export default class Player extends Phaser.GameObjects.Container {
 	static IDLE_ANIMATION = 'playerIdle';
 	static RUNNING_ANIMATION = 'playerRunning';
 
+	static VIDA_INICIAL = 50;
+	static ESCUDO_INICIAL = 50;
+
 	constructor(scene, x, y) {
 
 		super(scene, x, y);
 		this.scene.add.existing(this);
 		this.scene.physics.add.existing(this);
-		this.player = scene.add.sprite(28, 32, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+		this._player = scene.add.sprite(28, 32, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
 		this.body.setSize(66, 78);
+
+		// Atributos del jugador
+		this._vida = Player.VIDA_INICIAL;
+		this._escudo = Player.ESCUDO_INICIAL;
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
 		this.#config_controles();
 		this.#config_arma();
 		this.#config_animaciones();
 		this.#config_iluminacion();
-		
-		// Añadir al container
-		this.add(this.player);
-		this.add(this.weapon);
 
 		// Registra el método update para que se llame en cada frame
 		this.scene.events.on('update', this.update, this);
 
 		// Usar el evento 'postupdate' para actualizar el arma después de los cambios de física y render
 		this.scene.events.on('postupdate', this.updateWeapon, this);
+
+		// Interfaz del personaje
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL);
+
+		// Añadir al container
+		this.add(this._player);
+		this.add(this.weapon);
 	}
 
 	update(time, delta) {
@@ -50,12 +61,12 @@ export default class Player extends Phaser.GameObjects.Container {
 		}
 		if (this.cursors.left.isDown || this.keys.left.isDown) {
 			velocityX = -1;
-			this.player.setFlipX(true);
-			this.player.setX(34);
+			this._player.setFlipX(true);
+			this._player.setX(34);
 		}
 		if (this.cursors.right.isDown || this.keys.right.isDown) {
 			velocityX = 1;
-			this.player.setFlipX(false);
+			this._player.setFlipX(false);
 		}
 		// Normalizar la velocidad para que no sea mayor en diagonal
 		if (velocityX !== 0 || velocityY !== 0) {
@@ -69,35 +80,40 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		// Actualizar animación según movimiento
 		if (velocityX !== 0 || velocityY !== 0) {
-			if (this.player.anims.currentAnim.key !== "running") {
-				this.player.play("running");
+			if (this._player.anims.currentAnim.key !== "running") {
+				this._player.play("running");
 			}
 		} else {
-			if (this.player.anims.currentAnim.key !== "idle") {
-				this.player.play("idle");
+			if (this._player.anims.currentAnim.key !== "idle") {
+				this._player.play("idle");
 			}
 		}
 		let offsetX = 75; // Valor por defecto para cuando no está volteado
-		if (this.player.flipX) {
+		if (this._player.flipX) {
 			offsetX = -15; // Si está volteado, la luz se mueve al otro lado
 		}
 		// Actualizar la posición de la luz con el offset correspondiente
 		this.light.setPosition(this.x + offsetX, this.y);
 	}
 
-	hitByBullet() {
-		if (this.isImpact) return; 
+	hitByBullet(damage) {
+
+		if (this.isImpact)
+			return;
+		
 		this.isImpact = true;
-		
-		this.player.setTintFill(0xffffff);
-		
+		this._player.setTintFill(0xffffff);
 		this.scene.time.delayedCall(80, () => {
-			this.player.clearTint();
+			this._player.clearTint();
 			this.isImpact = false;
 		});
+
+		if(this._escudo <= 0)
+			this.quitar_escudo(damage)
+		else
+			this.quitar_vida(damage)
 	}
 	
-
 	#config_controles(){
 
 		// Controles de teclado
@@ -119,7 +135,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		this.weaponOffset = { x: 39, y: 54};
 		this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
-		this.weapon.setOrigin(0.5, 0.5); 
+		this.weapon.setOrigin(0.5, 0.5);
 	}
 
 	#config_animaciones(){
@@ -139,15 +155,33 @@ export default class Player extends Phaser.GameObjects.Container {
 		});
 
 		// Animacion base
-		this.player.play('idle');
+		this._player.play('idle');
 	}
 
 	#config_iluminacion(){
 
 		// Crear la luz que seguirá al jugador
 		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
-		this.player.setPipeline('Light2D');
+		this._player.setPipeline('Light2D');
 		this.weapon.setPipeline('Light2D');
+	}
+
+	quitar_escudo(damage){
+
+		if(this._vida <= 0)
+			return;
+
+		this._escudo -= damage;
+		this._playerUI.disminuir_escudo(damage);
+	}
+
+	quitar_vida(damage){
+
+		if(this._vida <= 0)
+			return;
+
+		this._vida -= damage;
+		this._playerUI.disminuir_vida(damage);
 	}
 
 	updateWeapon() {

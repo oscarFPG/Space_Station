@@ -53,7 +53,6 @@ export default class RangeWeapon extends Weapon {
         this.scene.add.existing(bullet);
         this.scene.bullets.add(bullet);
         bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed);
-
     }
 
 
