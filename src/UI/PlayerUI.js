@@ -71,23 +71,13 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return rectangle;
     }
 
-    aumentar_vida(vidaActual){
-        const porcentaje = vidaActual / this._MAX_VIDA
+    actualizar_vida(vidaActual){
+        const porcentaje =  Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1);
         this._puntosDeVida.scaleX = porcentaje
     }
 
-    disminuir_vida(vidaActual){
-        const porcentaje = vidaActual / this._MAX_VIDA
-        this._puntosDeVida.scaleX = porcentaje
-    }
-
-    aumentar_escudo(escudoActual){
-        const porcentaje = escudoActual / this._MAX_ESCUDO
-        this._puntosDeEscudo.scaleX = porcentaje
-    }
-
-    disminuir_escudo(escudoActual){
-        const porcentaje = escudoActual / this._MAX_ESCUDO
+    actualizar_escudo(escudoActual){
+        const porcentaje = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
         this._puntosDeEscudo.scaleX = porcentaje
     }
     

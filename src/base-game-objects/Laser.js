@@ -6,8 +6,8 @@ export default class Laser extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
         this.setPipeline('Light2D');
-        this.body.setSize(40, 100);
-        this.body.setOffset(40,0);
+        this.body.setSize(30, 100);
+        this.body.setOffset(38,0);
     }
     desactivateLaser() {
         this.destroy();

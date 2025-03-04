@@ -191,9 +191,8 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		if(this._escudo <= 0)
 			return;
-
 		this._escudo -= damage;
-		this._playerUI.disminuir_escudo(this._escudo);
+		this._playerUI.actualizar_escudo(this._escudo);
 	}
 
 	quitar_vida(damage){
@@ -202,7 +201,7 @@ export default class Player extends Phaser.GameObjects.Container {
 			return;
 
 		this._vida -= damage;
-		this._playerUI.disminuir_vida(this._vida);
+		this._playerUI.actualizar_vida(this._vida);
 	}
 
   updateWeapon() {
