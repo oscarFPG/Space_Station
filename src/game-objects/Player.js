@@ -4,9 +4,9 @@ import BasePistol from './weapons/BasePistol';
 
 export default class Player extends Phaser.GameObjects.Container {
   
-  // Player animation names
-  static IDLE_ANIMATION = 'playerIdle';
-  static RUNNING_ANIMATION = 'playerRunning';
+	// Player animation names
+	static IDLE_ANIMATION = 'playerIdle';
+	static RUNNING_ANIMATION = 'playerRunning';
 
 	static VIDA_INICIAL = 50;
 	static ESCUDO_INICIAL = 50;
@@ -29,12 +29,12 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.#config_animaciones();
 		this.#config_iluminacion();
 
-    // Registrar los métodos update y postupdate
-    this.scene.events.on('update', this.update, this);
-    this.scene.events.on('postupdate', this.updateWeapon, this);
+		// Registrar los métodos update y postupdate
+		this.scene.events.on('update', this.update, this);
+		this.scene.events.on('postupdate', this.updateWeapon, this);
 
-    // Bandera para evitar impactos múltiples simultáneos
-    this.isImpact = false;
+		// Bandera para evitar impactos múltiples simultáneos
+		this.isImpact = false;
 
 		// Interfaz del personaje
 		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL);
@@ -42,66 +42,66 @@ export default class Player extends Phaser.GameObjects.Container {
 		// Añadir al container
 		this.add(this._player);
 		this.add(this.weapon);
-  }
+	}
 
-  update(time, delta) {
-	// Verificar que el body existe antes de acceder a él
-	if (!this.body) {
-	  return;
+	update(time, delta) {
+		// Verificar que el body existe antes de acceder a él
+		if (!this.body) {
+			return;
+		}
+
+		// Actualiza la posición del container usando la posición del body
+		this.setPosition(this.body.x, this.body.y);
+		this.body.setVelocity(0);
+
+		const speed = 180;
+		let velocityX = 0;
+		let velocityY = 0;
+
+		if (this.cursors.up.isDown || this.keys.up.isDown) {
+			velocityY = -1;
+		}
+		if (this.cursors.down.isDown || this.keys.down.isDown) {
+			velocityY = 1;
+		}
+		if (this.cursors.left.isDown || this.keys.left.isDown) {
+			velocityX = -1;
+			this._player.setFlipX(true);
+			this._player.setX(34);
+		}
+		if (this.cursors.right.isDown || this.keys.right.isDown) {
+			velocityX = 1;
+			this._player.setFlipX(false);
+		}
+		// Normalizar para que la velocidad no sea mayor en diagonal
+		if (velocityX !== 0 || velocityY !== 0) {
+			const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+			velocityX /= length;
+			velocityY /= length;
+		}
+
+		this.body.setVelocityX(velocityX * speed);
+		this.body.setVelocityY(velocityY * speed);
+
+		// Actualizar animación según el movimiento
+		if (velocityX !== 0 || velocityY !== 0) {
+			if (this._player.anims.currentAnim.key !== "running") {
+			this._player.play("running");
+			}
+		} else {
+			if (this._player.anims.currentAnim.key !== "idle") {
+			this._player.play("idle");
+			}
+		}
+
+		let offsetX = 75; // Valor por defecto para cuando no está volteado
+		if (this._player.flipX) {
+			offsetX = -15;
+		}
+		if (this.light) {
+			this.light.setPosition(this.x + offsetX, this.y);
+		}
 	}
-	
-	// Actualiza la posición del container usando la posición del body
-	this.setPosition(this.body.x, this.body.y);
-	this.body.setVelocity(0);
-  
-	const speed = 180;
-	let velocityX = 0;
-	let velocityY = 0;
-  
-	if (this.cursors.up.isDown || this.keys.up.isDown) {
-	  velocityY = -1;
-	}
-	if (this.cursors.down.isDown || this.keys.down.isDown) {
-	  velocityY = 1;
-	}
-	if (this.cursors.left.isDown || this.keys.left.isDown) {
-	  velocityX = -1;
-	  this._player.setFlipX(true);
-	  this._player.setX(34);
-	}
-	if (this.cursors.right.isDown || this.keys.right.isDown) {
-	  velocityX = 1;
-	  this._player.setFlipX(false);
-	}
-	// Normalizar para que la velocidad no sea mayor en diagonal
-	if (velocityX !== 0 || velocityY !== 0) {
-	  const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
-	  velocityX /= length;
-	  velocityY /= length;
-	}
-  
-	this.body.setVelocityX(velocityX * speed);
-	this.body.setVelocityY(velocityY * speed);
-  
-	// Actualizar animación según el movimiento
-	if (velocityX !== 0 || velocityY !== 0) {
-	  if (this._player.anims.currentAnim.key !== "running") {
-		this._player.play("running");
-	  }
-	} else {
-	  if (this._player.anims.currentAnim.key !== "idle") {
-		this._player.play("idle");
-	  }
-	}
-  
-	let offsetX = 75; // Valor por defecto para cuando no está volteado
-	if (this._player.flipX) {
-	  offsetX = -15;
-	}
-	if (this.light) {
-	  this.light.setPosition(this.x + offsetX, this.y);
-	}
-  }
   
 	receiveDamage(damage) {
 

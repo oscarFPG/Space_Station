@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Laser extends Phaser.GameObjects.Sprite {
+
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
         scene.add.existing(this);
@@ -9,6 +10,7 @@ export default class Laser extends Phaser.GameObjects.Sprite {
         this.body.setSize(30, 100);
         this.body.setOffset(38,0);
     }
+    
     desactivateLaser() {
         this.destroy();
     }
