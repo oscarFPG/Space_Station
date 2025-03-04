@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
 export default class Console extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, properties) {
-    super(scene, x, y, 'consoleLockedSprite'); 
+  constructor(scene, x, y, sprite) {
+    super(scene, x, y, sprite); 
     scene.add.existing(this);
     scene.physics.add.existing(this);
 
@@ -175,8 +175,10 @@ export default class Console extends Phaser.GameObjects.Sprite {
           passwordDisplay.setText('Contraseña incorrecta');
           enteredPassword = "";
           this.scene.time.delayedCall(1000, () => {
-            passwordDisplay.setText('');
-          });
+            if (passwordDisplay && passwordDisplay.active) {
+              passwordDisplay.setText('');
+            }
+          });          
         }
       });
     elements.push(enterBtn);
