@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import FRONT from '../../assets/images/portada.png'
+import MAINMENU_MUSIC from '../../assets/assets/musica/pruba1Space_Station.mp3'
 
 export default class Boot extends Phaser.Scene {
 
@@ -8,7 +9,9 @@ export default class Boot extends Phaser.Scene {
     }
 
     preload(){
+
         this.load.image('front-page', FRONT);
+        this.load.audio('mainMenuMusic', MAINMENU_MUSIC);
     }
     
     create(){
@@ -28,6 +31,15 @@ export default class Boot extends Phaser.Scene {
         // Custom event for ENTER key
         this.enter_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
+        // Music
+        this._mainmenu_music = this.sound.add('mainMenuMusic')
+        this._mainmenu_music.setVolume(0.2)
+        this._mainmenu_music.play()
+
+        // Pausar musica al pasar de escena
+        this.events.on('sleep', (sys) => {
+            this._mainmenu_music.pause()
+        }, this)
     }
 
     update(){
