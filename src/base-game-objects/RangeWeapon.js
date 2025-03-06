@@ -35,7 +35,6 @@ export default class RangeWeapon extends Weapon {
         if(now - this._lastShotTime < (1 / this._specs.fireRate) * 1000 || this._ammo.currentClipAmmo <= 0)
             return;
 
-        console.log(now - this._lastShotTime)
         this._lastShotTime = now;
         this._ammo.currentClipAmmo--;
  
