@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import Player from '../game-objects/Player.js'
+import Player from '../game-objects/characters/Player.js'
 import Bullet from '../base-game-objects/Bullet.js'
 import Enemy from '../base-game-objects/Enemy.js'
 import Note from '../base-game-objects/Note.js';

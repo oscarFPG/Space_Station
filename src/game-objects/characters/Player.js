@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import PlayerUI from '../UI/PlayerUI.js'
-import BasePistol from './weapons/BasePistol';
+import PlayerUI from '../../UI/PlayerUI.js'
+import BasePistol from '../weapons/BasePistol.js';
 
 export default class Player extends Phaser.GameObjects.Container {
   
