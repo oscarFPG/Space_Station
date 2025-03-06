@@ -1,15 +1,16 @@
 import Phaser from 'phaser'
+import BaseScene from './base-scene'
 
-export default class Store extends Phaser.Scene {
+export default class Store extends BaseScene {
 
     constructor(){
-        super({ key: 'store' });
+        super('store');
     }
     
     create(){
         
         // Background image
-        this.add.image(800, 1000, 'store-page').setOrigin(0, 0);
+        this.add.image(800, 1000, 'store-page')
         
         // Footer text
         this.add.text(300, 600, 'Press ESC to go back to the game...', {
