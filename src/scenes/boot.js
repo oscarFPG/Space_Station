@@ -33,6 +33,7 @@ import STORE from '../../assets/store/example.png'
 
 // Musica
 import MAINMENU_MUSIC from '../../audio/music/SpaceStation-Menu.mp3'
+import SECRET_CODE from '../../audio/music/RealSecretCode.mp3'
 
 
 export default class Boot extends Phaser.Scene {
@@ -70,7 +71,7 @@ export default class Boot extends Phaser.Scene {
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC);
-
+        this.load.audio('secret_code',SECRET_CODE);//boton del codigo secreto
     }
     
     create(){

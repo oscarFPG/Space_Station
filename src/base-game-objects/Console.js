@@ -169,6 +169,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setInteractive()
 			.setDepth(1)
 			.on('pointerdown', () => {
+			/*this._secret_sound = this.sound.add('secret_code');
+			this._secret_sound.setVolume(0,2);
+			this._secret_sound.play();*/
 			if (enteredPassword === correctPassword) {
 				// Contraseña correcta: Desactivar los láseres y ocultar la consola
 				this.lasers.forEach(laser => laser.desactivateLaser());
