@@ -48,7 +48,9 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.dodgeSwitchInterval = 1500; 
         this.dodgeDirection = 1;        
     }
+
     receiveDamage(damage) {
+        
 		if (this.isImpact) return; 
 		this.isImpact = true;
 		this.enemySprite.setTintFill(0xffffff);
@@ -89,6 +91,7 @@ export default class Enemy extends Phaser.GameObjects.Container {
         }
 
         if (this.state === 'perseguir') {
+
             const chaseAngle = Phaser.Math.Angle.Between(this.x, this.y, playerX, playerY);
 
             if (time > this.lastDodgeSwitch + this.dodgeSwitchInterval) {
@@ -99,9 +102,12 @@ export default class Enemy extends Phaser.GameObjects.Container {
             // Determinar velocidad base según la distancia:
             let baseVX = 0, baseVY = 0;
             if (distanceToPlayer > this.shootingRange) {
+
                 baseVX = Math.cos(chaseAngle) * this.speed;
                 baseVY = Math.sin(chaseAngle) * this.speed;
-            } else if (distanceToPlayer < this.minDistance) {
+            }
+            else if (distanceToPlayer < this.minDistance) {
+
                 const retreatAngle = Phaser.Math.Angle.Between(playerX, playerY, this.x, this.y);
                 baseVX = Math.cos(retreatAngle) * this.speed;
                 baseVY = Math.sin(retreatAngle) * this.speed;
@@ -133,7 +139,8 @@ export default class Enemy extends Phaser.GameObjects.Container {
                 this.enemySprite.setX(34);
             }
 
-        } else if (this.state === 'patrullar') {
+        }
+        else if (this.state === 'patrullar') {
             if (this.body.blocked.left || this.body.blocked.right || this.body.blocked.up || this.body.blocked.down) {
                 this.patrolDirection = Phaser.Math.RandomXY(new Phaser.Math.Vector2(), 1);
             }

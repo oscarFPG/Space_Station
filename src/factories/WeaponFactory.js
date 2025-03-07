@@ -1,5 +1,4 @@
 
-
 export default class WeaponFactory {
 
     //  Identificadores para evitar 'numeros magicos'
