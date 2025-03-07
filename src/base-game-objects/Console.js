@@ -135,6 +135,10 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setInteractive()
 			.setDepth(1)
 			.on('pointerdown', () => {
+				//poner la musica
+			this._secret_sound = this.sound.add('secret_code');
+			this._secret_sound.setVolume(0,2);
+			this._secret_sound.play();
 				enteredPassword += key.label;
 				passwordDisplay.setText(enteredPassword);
 			});
