@@ -33,7 +33,6 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.scene.events.on('update', this.update, this);
 		this.scene.events.on('postupdate', this.updateWeapon, this);
 
-
 		// Bandera para evitar impactos múltiples simultáneos
 		this.isImpact = false;
 

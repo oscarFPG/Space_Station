@@ -34,7 +34,7 @@ import STORE from '../../assets/store/example.png'
 
 // Musica
 import MAINMENU_MUSIC from '../../audio/music/SpaceStation-Menu.mp3'
-import SECRET_CODE from '../../audio/music/RealSecretCode.mp3'
+import SECRET_CODE from '../../audio/effects/RealSecretCode.mp3'
 
 
 export default class Boot extends BaseScene {
@@ -72,7 +72,7 @@ export default class Boot extends BaseScene {
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC);
-        this.load.audio('secret_code',SECRET_CODE);//boton del codigo secreto
+        this.load.audio('secret_code', SECRET_CODE);
     }
     
     create(){

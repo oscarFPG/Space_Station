@@ -29,10 +29,7 @@ export default class BasedEnemy extends Phaser.GameObjects.Container {
         // this.add(this.weapon);
     }
 
-    
-    
 
-    //Recivir Danio
     receiveDamage(damage) {
             
         if (this.isImpact) return; 
@@ -44,7 +41,7 @@ export default class BasedEnemy extends Phaser.GameObjects.Container {
                 this.enemySprite.clearTint();
                 this.isImpact = false;
             });
-            } 
+        }
         else {
             this.scene.tweens.add({
                 targets: this.enemySprite,
