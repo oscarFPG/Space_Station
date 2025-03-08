@@ -12,8 +12,8 @@ export default class Tutorial extends BaseScene {
     }
 
     create(){
-        
-        // Creacion assets
+
+        // Creacion mapa
         var map = this.make.tilemap({ key: 'map', tileWidth: 111, tileHeight: 111 });
         var tileset = map.addTilesetImage('tilemap', 'tiles');   
         var layerFloor = map.createLayer('floor', tileset, 0, 0);

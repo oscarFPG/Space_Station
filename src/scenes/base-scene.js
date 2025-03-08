@@ -14,32 +14,39 @@ export default class BaseScene extends Phaser.Scene {
     // NO cambiar el orden
     create(){
 
-        this.config_cursor()
+        this._mapa = this.config_mapa()
+        this._jugador = this.config_jugador()
+        this._enemigos = this.config_enemigos()
+        this._camara = this.config_camara()
+        this.config_iluminacion()
+        this.config_eventos()
+    }
 
-        var map = this.createMap()
-        var player = this.createPlayer(200, 200)
+    config_mapa(){
 
     }
 
-    createMap(){
+    config_jugador(){
 
-        var map = this.make.tilemap({ key: 'map', tileWidth: 111, tileHeight: 111 })
-        var tileset = map.addTilesetImage('tilemap', 'tiles')
-        var layerFloor = map.createLayer('floor', tileset, 0, 0)
-        var layerWall = map.createLayer('wall', tileset, 0, 0)
-        var layerButano = map.createLayer('butano', tileset, 0, 0)
-        var layerExtra = map.createLayer('extra', tileset, 0, 0)
-        var objectsLayer = map.getObjectLayer('objects')
-        
-        return map
     }
 
+    config_enemigos(){
 
-    createPlayer(x, y){
-        return new Player(this, x, y)
+        enemigos = []
+
+        return enemigos
     }
 
-    config_cursor(){
-        this.input.setDefaultCursor('crosshair')
+    config_camara(){
+
     }
+
+    config_iluminacion(){
+
+    }
+
+    config_eventos(){
+
+    }
+
 }
