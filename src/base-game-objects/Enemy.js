@@ -73,10 +73,7 @@ export default class Enemy extends Phaser.GameObjects.Container {
 		}
 	}
 
-    preUpdate(time, delta) {
-
-        if (!this.scene.player)
-            return; 
+    preUpdate(time, delta) {  
         
         const playerX = this.scene.player.x;
         const playerY = this.scene.player.y;

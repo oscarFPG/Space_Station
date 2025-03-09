@@ -88,11 +88,11 @@ export default class Player extends Phaser.GameObjects.Container {
 		// Actualizar animación según el movimiento
 		if (velocityX !== 0 || velocityY !== 0) {
 			if (this._player.anims.currentAnim.key !== "running") {
-			this._player.play("running");
+				this._player.play("running");
 			}
 		} else {
 			if (this._player.anims.currentAnim.key !== "idle") {
-			this._player.play("idle");
+				this._player.play("idle");
 			}
 		}
 
@@ -109,6 +109,11 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		if (this.isImpact)
 			return;
+
+		if(this._escudo > 0)
+			this.quitar_escudo(damage)
+		else
+			this.quitar_vida(damage)
 
 		this.isImpact = true;
 		this._player.setTintFill(0xffffff);
@@ -165,7 +170,11 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
 		this.weapon.setRotation(angle);
-		this.weapon.setFlipY(worldPoint.x < weaponWorldX);
+
+		// Arma y modelo siempre mirando al mismo lado
+		let shouldFlip = worldPoint.x < weaponWorldX
+		this.weapon.setFlipY(shouldFlip)
+		this._player.setFlipX(shouldFlip)
 	}
 
 	#config_controles(){
@@ -188,32 +197,33 @@ export default class Player extends Phaser.GameObjects.Container {
 	}
 
 	#config_arma() {
-    this.weaponOffset = { x: 39, y: 54 };
-    this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
-    this.weapon.setOrigin(0.5, 0.5); 
+
+		this.weaponOffset = { x: 39, y: 54 };
+		this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
+		this.weapon.setOrigin(0.5, 0.5); 
 	}
 
 	#config_animaciones() {
 
-	// Crear animación "idle" solo si no existe
-	if (!this.scene.anims.exists('idle')) {
-		this.scene.anims.create({
-			key: 'idle',
-			frames: this.scene.anims.generateFrameNumbers(Player.IDLE_ANIMATION, { start: 0, end: 2 }),
-			frameRate: 6,
-			repeat: -1
-		});
-    }
-    
-    // Crear animación "running" solo si no existe
-    if (!this.scene.anims.exists('running')) {
-		this.scene.anims.create({
-			key: 'running',
-			frames: this.scene.anims.generateFrameNumbers(Player.RUNNING_ANIMATION, { start: 0, end: 3 }),
-			frameRate: 10,
-			repeat: -1
-		});
-    }
+		// Crear animación "idle" solo si no existe
+		if (!this.scene.anims.exists('idle')) {
+			this.scene.anims.create({
+				key: 'idle',
+				frames: this.scene.anims.generateFrameNumbers(Player.IDLE_ANIMATION, { start: 0, end: 2 }),
+				frameRate: 6,
+				repeat: -1
+			});
+		}
+		
+		// Crear animación "running" solo si no existe
+		if (!this.scene.anims.exists('running')) {
+			this.scene.anims.create({
+				key: 'running',
+				frames: this.scene.anims.generateFrameNumbers(Player.RUNNING_ANIMATION, { start: 0, end: 3 }),
+				frameRate: 10,
+				repeat: -1
+			});
+    	}
 
 		// Animacion base
 		this._player.play('idle');

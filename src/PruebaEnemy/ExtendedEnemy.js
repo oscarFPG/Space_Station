@@ -1,5 +1,7 @@
 import BasedEnemy from './BasedEnemy'
-export default class ExtendedEnemy extends  BasedEnemy{
+
+
+export default class ExtendedEnemy extends BasedEnemy{
 
     // static BASE_ENEMY_HP = 50;
     static BASE_ENEMY_TEXTURE = 'enemyIdle'; 
@@ -11,7 +13,6 @@ export default class ExtendedEnemy extends  BasedEnemy{
         this._atributos.speed = 300
         this._atributos.vida = 50
         // this._atributos.visionRange = 
-
 
     }
 
