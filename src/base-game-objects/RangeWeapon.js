@@ -1,9 +1,11 @@
 import Weapon from './Weapon'
 import BasePistolBullet from '../game-objects/bullets/BasePistolBullet';
+import Bullet from './Bullet';
 
 export default class RangeWeapon extends Weapon {
 
     _specs = {
+        damage: undefined,
         bulletSpeed: undefined,
         fireRate: undefined,    
         reloadTime: undefined, 
@@ -17,13 +19,14 @@ export default class RangeWeapon extends Weapon {
     _ammo = {
         clipSize: undefined,        
         currentClipAmmo: undefined, 
-        numClips: undefined        
+        numClips: undefined,
+        texture: undefined    
     };
 
     _lastShotTime = 0; // Guarda el tiempo del último disparo
 
-    constructor(scene, x, y, texture, damage){
-        super(scene, x, y, texture, damage)
+    constructor(scene, x, y, texture){
+        super(scene, x, y, texture)
         this.scene.add.existing(this);
     }
 
@@ -48,7 +51,7 @@ export default class RangeWeapon extends Weapon {
         const bulletY = weaponY + Math.sin(angle) * this._specs.muzzleOffset;
 
         // Crear la bala en la posición del arma
-        const bullet = new BasePistolBullet(this.scene, bulletX, bulletY);
+        const bullet = new Bullet(this.scene, bulletX, bulletY, this._ammo.texture, this._specs.damage);
         this.scene.add.existing(bullet);
         this.scene.bullets.add(bullet);
         bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed);

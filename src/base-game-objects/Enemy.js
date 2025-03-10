@@ -75,8 +75,8 @@ export default class Enemy extends Phaser.GameObjects.Container {
 
     preUpdate(time, delta) {  
         
-        const playerX = this.scene.player.x;
-        const playerY = this.scene.player.y;
+        const playerX = this.scene._player.x;
+        const playerY = this.scene._player.y;
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, playerX, playerY);
 
         // Determinar estado según la distancia del jugador

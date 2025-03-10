@@ -44,7 +44,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			return;
 		}
 
-		if (Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) > 100) {
+		if (Phaser.Math.Distance.Between(this.x, this.y, this.scene._player.x, this.scene._player.y) > 100) {
 			this.interactionText.setVisible(false);
 		}
 		else if (this.interactionText.visible && Phaser.Input.Keyboard.JustDown(this.eKey)) {
@@ -136,9 +136,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setDepth(1)
 			.on('pointerdown', () => {
 				//poner la musica
-			this._secret_sound = this.sound.add('secret_code');
-			this._secret_sound.setVolume(0,2);
-			this._secret_sound.play();
+				this._secret_sound = this.scene.sound.add('secret_code');
+				this._secret_sound.setVolume(0,2);
+				this._secret_sound.play();
 				enteredPassword += key.label;
 				passwordDisplay.setText(enteredPassword);
 			});
@@ -156,8 +156,8 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setInteractive()
 			.setDepth(1)
 			.on('pointerdown', () => {
-			enteredPassword = "";
-			passwordDisplay.setText('');
+				enteredPassword = "";
+				passwordDisplay.setText('');
 			});
 		elements.push(clearBtn);
 
@@ -173,25 +173,25 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setInteractive()
 			.setDepth(1)
 			.on('pointerdown', () => {
-			/*this._secret_sound = this.sound.add('secret_code');
-			this._secret_sound.setVolume(0,2);
-			this._secret_sound.play();*/
-			if (enteredPassword === correctPassword) {
-				// Contraseña correcta: Desactivar los láseres y ocultar la consola
-				this.lasers.forEach(laser => laser.desactivateLaser());
-				this.setVisible(false);
-				this.interactionText.setVisible(false);
-				this.closeConsoleWindow();
-			} else {
-				// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
-				passwordDisplay.setText('Contraseña incorrecta');
-				enteredPassword = "";
-				this.scene.time.delayedCall(1000, () => {
-				if (passwordDisplay && passwordDisplay.active) {
-					passwordDisplay.setText('');
+				/*this._secret_sound = this.sound.add('secret_code');
+				this._secret_sound.setVolume(0,2);
+				this._secret_sound.play();*/
+				if (enteredPassword === correctPassword) {
+					// Contraseña correcta: Desactivar los láseres y ocultar la consola
+					this.lasers.forEach(laser => laser.desactivateLaser());
+					this.setVisible(false);
+					this.interactionText.setVisible(false);
+					this.closeConsoleWindow();
+				} else {
+					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
+					passwordDisplay.setText('Contraseña incorrecta');
+					enteredPassword = "";
+					this.scene.time.delayedCall(1000, () => {
+					if (passwordDisplay && passwordDisplay.active) {
+						passwordDisplay.setText('');
+					}
+					});          
 				}
-				});          
-			}
 			});
 		elements.push(enterBtn);
 

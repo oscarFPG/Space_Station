@@ -26,7 +26,7 @@ export default class Note extends Phaser.GameObjects.Sprite {
   }
   
   configure(player) {
-    this.player = player;
+    this._player = player;
     this.interactionText.setPosition(this.x, this.y - 50);
     this.scene.physics.add.overlap(player, this, this.showInteraction, null, this);
     this.body.allowGravity = false;
@@ -39,7 +39,7 @@ export default class Note extends Phaser.GameObjects.Sprite {
   
   update() {
     // Ocultar el texto de interacción si el jugador se aleja
-    if (Phaser.Math.Distance.Between(this.x, this.y, this.scene.player.x, this.scene.player.y) > 100) {
+    if (Phaser.Math.Distance.Between(this.x, this.y, this.scene._player.x, this.scene._player.y) > 100) {
       this.interactionText.setVisible(false);
     }
     // Al pulsar E, alterna la ventana

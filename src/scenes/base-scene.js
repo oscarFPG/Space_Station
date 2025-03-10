@@ -13,9 +13,6 @@ export default class BaseScene extends Phaser.Scene {
     static LAYER_PERSONAJE = 'Personaje'
     static LAYER_UI = 'UI'
 
-    /*
-        TODO ¿¿CREAR UN GRUPO POR CAPA PARA AÑADIR OBJETOS A ESTA Y CONFIGURAR COLISIONES DE MANERA ESTATICA ENTRE GRUPOS??    
-    */
 
     constructor(sceneKey){
         super({ key: sceneKey })
@@ -28,34 +25,38 @@ export default class BaseScene extends Phaser.Scene {
     create(map, tileset){
 
         // Capas de todos los niveles
-        var layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
-        var layerPared = map.createLayer(BaseScene.LAYER_PARED, tileset, 0, 0)
-        var layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
-        var layerPersonaje = map.createLayer(BaseScene.LAYER_PERSONAJE, tileset, 0, 0)
-        var layerUI = map.createLayer(BaseScene.LAYER_UI, tileset, 0, 0)
+        this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
+        this._layerPared = map.createLayer(BaseScene.LAYER_PARED, tileset, 0, 0)
+        this._layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
+        this._layerPersonaje = map.createLayer(BaseScene.LAYER_PERSONAJE, tileset, 0, 0)
+        this._layerUI = map.createLayer(BaseScene.LAYER_UI, tileset, 0, 0)
 
-        // Colisiones
+        // Limites del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
-        // Crear personajes y colisiones
-        this.player = this.config_jugador()
+        // Crear personajes
+        this._player = this.config_jugador(1000, 1000)
         var enemigos = this.config_enemigos()
         
         // Configuraciones generales
-        this.config_iluminacion([layerSuelo, layerPared, layerObjeto])
-        this.config_camara(this.player)
+        this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
+        this.config_camara(this._player)
         this.config_cursor()
 
         // Configurar colisiones
-        layerPared.setCollisionByExclusion([-1])
-        layerObjeto.setCollisionByExclusion([-1])
-        this.physics.add.collider(this.player, layerPared)
-        this.physics.add.collider(this.player, layerSuelo)
-        this.physics.add.collider(enemigos[0], layerPared)
-        this.physics.add.collider(enemigos[0], layerSuelo)
-        this.butanoColliders = this.physics.add.staticGroup();
-        layerObjeto.forEachTile(tile => {
+        this._layerPared.setCollisionByExclusion([-1])
+        this._layerObjeto.setCollisionByExclusion([-1])
+        this.crearColliderConSuelo(this._player)
+        this.crearColliderConPared(this._player)
+
+        enemigos.forEach(enemigo => {   // Para todos los enemigos de la escena
+            this.crearColliderConSuelo(enemigo)
+            this.crearColliderConPared(enemigo)
+        })
+        
+        this._butanoColliders = this.physics.add.staticGroup();
+        this._layerObjeto.forEachTile(tile => {
             if (tile.index !== -1) {
 
                 const baseX = tile.getCenterX();
@@ -67,44 +68,36 @@ export default class BaseScene extends Phaser.Scene {
                 const collider = this.physics.add.staticImage(baseX + offsetX, baseY + offsetY, null);
                 collider.body.setSize(54, 90);
                 collider.setVisible(false);
-                this.butanoColliders.add(collider);
+                this._butanoColliders.add(collider);
             }
         });
-        this.physics.add.collider(this.player, this.butanoColliders);
-        this.physics.add.collider(enemigos[0], this.butanoColliders);
+        this.physics.add.collider(this._player, this._butanoColliders);
+        enemigos.forEach(enemigo => {
+            this.physics.add.collider(enemigo, this._butanoColliders);
+        })
 
         // Crear el grupo global de balas
         this.bullets = this.physics.add.group();
         const onBulletCollision = (obj1, obj2) => {
 
-            let bullet = null;
-            let target = null;
-            if (obj1 instanceof Bullet) {
-                bullet = obj1;
-                target = obj2;
-            } else if (obj2 instanceof Bullet) {
-                bullet = obj2;
-                target = obj1;
-            }
+            let bullet = obj1 instanceof Bullet ? obj1 : obj2;
+            let target = bullet === obj1 ? obj2 : obj1;
             
-            // Si el target es el jugador, se activa la animación de impacto
-            if (target === this.player) {
-                this.player.receiveDamage(5);
-            }
-
-            if (target === enemigos[0]) {
-                enemigos[0].receiveDamage(5);
-            }
+            // Si es un objeto que recibe daño -> Aplicar daño de la bala
+            if(target.receiveDamage)
+                target.receiveDamage(bullet._damage)
 
             if (bullet && typeof bullet.createSpark === 'function') {
                 bullet.createSpark(bullet.x, bullet.y);
                 bullet.destroy();
             }
         };
-        this.physics.add.collider(this.bullets, layerPared, onBulletCollision);
-        this.physics.add.collider(this.bullets, this.player, onBulletCollision);
-        this.physics.add.collider(this.bullets, enemigos[0], onBulletCollision);
-        this.physics.add.collider(this.bullets, this.butanoColliders, onBulletCollision);
+        this.physics.add.collider(this.bullets, this._layerPared, onBulletCollision);
+        this.physics.add.collider(this.bullets, this._player, onBulletCollision);
+        this.physics.add.collider(this.bullets, this._butanoColliders, onBulletCollision);
+        enemigos.forEach(enemigo => {
+            this.physics.add.collider(this.bullets, enemigo, onBulletCollision);
+        })
 
         // Crear la animación de la chispa (si no existe)
         if (!this.anims.exists('spark')) {
@@ -120,9 +113,9 @@ export default class BaseScene extends Phaser.Scene {
     }
 
 
-    config_jugador(){
+    config_jugador(x, y){
 
-        var player = new Player(this, 1000, 1000)
+        var player = new Player(this, x, y)
         player.body.setCollideWorldBounds(true)
         player.body.setImmovable(true)
 
@@ -156,6 +149,18 @@ export default class BaseScene extends Phaser.Scene {
 
     config_camara(player){
         this.cameras.main.startFollow(player);
+    }
+
+    crearColliderConSuelo(gameobject){
+        this.physics.add.collider(gameobject, this._layerSuelo)
+    }
+
+    crearColliderConPared(gameobject){
+        this.physics.add.collider(gameobject, this._layerPared)
+    }
+
+    crearColliderConObjetos(gameobject){
+        this.physics.add.collider(gameobject, this._layerObjeto)
     }
 
 }

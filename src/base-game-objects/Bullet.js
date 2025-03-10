@@ -4,9 +4,10 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     static EXPLODE_ANIMATION = 'explode'; // Nombre de la animación
 
-    constructor(scene, x, y, texture) {
+    constructor(scene, x, y, texture, damage) {
         super(scene, x, y, texture);
-        
+        this._damage = damage;
+
         // Almacenar la referencia a la escena
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
