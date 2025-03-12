@@ -28,7 +28,7 @@
          "name":"floor",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":30,
          "x":0,
          "y":0
@@ -59,7 +59,7 @@
          "name":"wall",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":30,
          "x":0,
          "y":0
@@ -121,7 +121,7 @@
          "name":"butano",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":30,
          "x":0,
          "y":0
@@ -152,7 +152,7 @@
          "name":"Capa de patrones 4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":30,
          "x":0,
          "y":0
@@ -260,15 +260,87 @@
                  "width":111,
                  "x":778,
                  "y":661.375
+                }, 
+                {
+                 "gid":20,
+                 "height":111,
+                 "id":11,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"HealthKit",
+                 "visible":true,
+                 "width":111,
+                 "x":1219.5,
+                 "y":1442
+                }, 
+                {
+                 "gid":19,
+                 "height":111,
+                 "id":12,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":10
+                        }],
+                 "rotation":0,
+                 "type":"Coin",
+                 "visible":true,
+                 "width":111,
+                 "x":1220,
+                 "y":1218
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":13,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":1443,
+                 "y":1331.5
+                }, 
+                {
+                 "gid":20,
+                 "height":111,
+                 "id":14,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"HealthKit",
+                 "visible":true,
+                 "width":111,
+                 "x":777,
+                 "y":1665.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
  "nextlayerid":9,
- "nextobjectid":11,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

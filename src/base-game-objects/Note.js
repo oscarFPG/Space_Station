@@ -1,19 +1,9 @@
 import Phaser from 'phaser';
+import InteractiveObject from './InteractiveObject';
 
-export default class Note extends Phaser.GameObjects.Sprite {
+export default class Note extends InteractiveObject {
   constructor(scene, x, y, sprite) {
     super(scene, x, y, sprite);
-    scene.add.existing(this);
-    scene.physics.add.existing(this);
-  
-    // Texto de interacción para mayor legibilidad
-    this.interactionText = scene.add.text(x, y - 50, 'Interactuar [E]', { 
-      fontSize: '16px', 
-      fill: '#fff',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    });
-    this.interactionText.setPipeline('Light2D');
-    this.interactionText.setVisible(false);
     this.body.setSize(86, 101);
     this.body.setOffset(17, 10);
     

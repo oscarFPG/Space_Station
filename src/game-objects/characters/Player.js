@@ -10,6 +10,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
 	static VIDA_INICIAL = 50;
 	static ESCUDO_INICIAL = 50;
+	static DINERO_INICIAL = 50;
 
 	constructor(scene, x, y) {
 
@@ -22,6 +23,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		// Atributos del jugador
 		this._vida = Player.VIDA_INICIAL;
 		this._escudo = Player.ESCUDO_INICIAL;
+		this._money = Player.DINERO_INICIAL;
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
 		this.#config_controles()
@@ -109,7 +111,6 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		if (this.isImpact)
 			return;
-
 		if(this._escudo > 0)
 			this.quitar_escudo(damage)
 		else
@@ -137,12 +138,42 @@ export default class Player extends Phaser.GameObjects.Container {
 
 	}
 
+	healthBoost(health) {
+		if (this._vida == this.VIDA_INICIAL) {
+			return;
+		}
+		if (this._vida + health >= this.VIDA_INICIAL) {
+			this._vida = this.VIDA_INICIAL;
+		}
+		else {
+			this._vida += health;
+		}
+		this._playerUI.actualizar_vida(this._vida);
+	}
+	shieldBoost(shield) {
+		//if (this._escudo == this.VIDA_INICIAL) {
+		//	return;
+		//}
+		if (this._escudo + shield >= this.ESCUDO_INICIAL) {
+			this._escudo = this.ESCUDO_INICIAL;
+		}
+		else {
+			this._escudo += shield;
+		}
+		this._playerUI.actualizar_escudo(this._escudo);
+	}
+	moneyBoost(value) {
+		this._money += value;
+		//this._playerUI.actualizar_dinero(this._money);
+	}
 	quitar_escudo(damage){
 
 		if(this._escudo <= 0)
 			return;
-
-		this._escudo -= damage;
+		if((this._escudo - damage) <= 0) 
+			this._escudo = 0;
+		else 
+			this._escudo -= damage;
 		this._playerUI.actualizar_escudo(this._escudo);
 	}
 

@@ -20,10 +20,15 @@ import TilemapImage from '../../assets/blocks/tilemap.png'
 import Map from '../../assets/maps/map1.json'
 
 //Objetos 
-import Paper from '../../assets/blocks/paper.png'
-import ConsoleBlocked from '../../assets/blocks/panel_off.png'
-import laserUp from '../../assets/blocks/laser_2.png'
-import laserDown from '../../assets/blocks/laser_1.png'
+import Paper from '../../assets/objects/paper.png'
+import ConsoleBlocked from '../../assets/objects/panel_off.png'
+import laserUp from '../../assets/objects/laser_2.png'
+import laserDown from '../../assets/objects/laser_1.png'
+
+import shieldItem from '../../assets/objects/shield_item.png'
+import healthItem from '../../assets/objects/health_item.png'
+import coinItem from '../../assets/objects/coin_item.png'
+
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
@@ -51,6 +56,11 @@ export default class Boot extends BaseScene {
         this.load.image('note', Paper);
         this.load.image('laser2', laserUp);
         this.load.image('laser1', laserDown);
+
+        this.load.image('shield', shieldItem);
+        this.load.image('health', healthItem);
+        this.load.image('coin', coinItem);
+
         this.load.image('consoleBlocked', ConsoleBlocked);
         this.load.image('weapon1', Weapon1);
         this.load.image('weapon2', Weapon2);

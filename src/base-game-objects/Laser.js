@@ -12,6 +12,6 @@ export default class Laser extends Phaser.GameObjects.Sprite {
     }
     
     desactivateLaser() {
-        this.destroy();
+        this.destroy(true);
     }
 }

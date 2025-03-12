@@ -111,7 +111,16 @@ export default class BaseScene extends Phaser.Scene {
 
         this.scene.launch('')
     }
-
+    //Métodos de adquisicion de PLAYER:
+    receiveHealthPlayer(health) {
+        this._player.healthBoost(health);
+    }
+    receiveShieldPlayer(shield) {
+        this._player.shieldBoost(shield);
+    }
+    receiveMoneyPlayer(value) {
+        this._player.moneyBoost(value);
+    }
 
     config_jugador(x, y){
 
