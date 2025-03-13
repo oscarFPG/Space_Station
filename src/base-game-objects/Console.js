@@ -31,6 +31,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		this.scene.physics.add.overlap(player, this, this.showInteraction, null, this);
 		this.body.allowGravity = false;
 		this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+		
 	}
 
 	showInteraction() {
@@ -51,6 +52,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			if (this.windowOpen) {
 				this.closeConsoleWindow();
 			} else {
+				const consoleSound= this.scene.sound.add('console_sound');
+        		consoleSound.setVolume(2);  // Ajusta el volumen del sonido
+        		consoleSound.play();
 				this.openConsoleWindow();
 			}
 		}
@@ -136,9 +140,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setDepth(1)
 			.on('pointerdown', () => {
 				//poner la musica
-				this._secret_sound = this.scene.sound.add('secret_code');
-				this._secret_sound.setVolume(0,2);
-				this._secret_sound.play();
+				const ClickSOund = this.scene.sound.add('ClickSOund');
+				ClickSOund.setVolume(4);  // Ajusta el volumen del sonido
+				ClickSOund.play();
 				enteredPassword += key.label;
 				passwordDisplay.setText(enteredPassword);
 			});

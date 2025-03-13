@@ -223,6 +223,10 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.scene.input.on('pointerdown', (pointer) => {
 			if (this.scene.consoleActive) 
 				return;
+
+			/*const gunSound = this.scene.sound.add('gun_sound');
+			gunSound.setVolume(2);  // Ajusta el volumen del sonido
+			gunSound.play();*/
 			this.weapon.shot(pointer.worldX, pointer.worldY);
 		}, this);
 	}

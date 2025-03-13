@@ -39,7 +39,9 @@ import STORE from '../../assets/store/example.png'
 
 // Musica
 import MAINMENU_MUSIC from '../../audio/music/SpaceStation-Menu.mp3'
-import SECRET_CODE from '../../audio/effects/RealSecretCode.mp3'
+import ClickSOund from '../../audio/effects/posibleClickSound.mp3'
+import GUN_SOUND from '../../audio/effects/gunSound.mp3'
+import CONSOLE_SOUND from '../../audio/effects/consoleSoundmp3.mp3'
 
 
 export default class Boot extends BaseScene {
@@ -82,7 +84,9 @@ export default class Boot extends BaseScene {
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC);
-        this.load.audio('secret_code', SECRET_CODE);
+        this.load.audio('ClickSOund', ClickSOund);
+        this.load.audio('gun_sound',GUN_SOUND);
+        this.load.audio('console_sound', CONSOLE_SOUND);
     }
     
     create(){
