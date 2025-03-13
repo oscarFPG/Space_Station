@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import Player from '../game-objects/characters/Player';
 
 export default class PlayerUI extends Phaser.GameObjects.Container {
 
@@ -14,16 +15,21 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
     static POS_X_ESCUDO = 34;
     static POS_Y_VIDA = 46;
     static POS_Y_ESCUDO = 14;
+    static POS_X_MONEDAS = 30;
+    static POS_Y_MONEDAS = 75;
+    static POS_X_BALAS = 30;
+    static POS_Y_BALAS = 700;
 
     static COLOR_BARRA_VIDA = 0xff0000;
     static COLOR_BARRA_ESCUDO = 0x00007a;
     static COLOR_BARRA_VACIA = 0xffffff;
 
 
-    constructor(scene, maxHealth, maxEscudo){
+    constructor(scene, maxHealth, maxEscudo, dineroInicial){
 
         super(scene, 0, 0)
         this.scene.add.existing(this);
+        this.setPosition(PlayerUI.UI_MARGIN_X, PlayerUI.UI_MARGIN_Y)
 
         this._MAX_VIDA = maxHealth;
         this._MAX_ESCUDO = maxEscudo;
@@ -31,14 +37,18 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._barraVida.setScale(2)
         this._barraVida.setOrigin(0)
         this._barraVida.setScrollFactor(0)
-        this.setPosition(PlayerUI.UI_MARGIN_X, PlayerUI.UI_MARGIN_Y)
 
         this._puntosDeVida = this.crear_barra_vida()
         this._puntosDeEscudo = this.crear_barra_escudo()
+        this._contadorMonedas = this.crear_contador_monedas(dineroInicial)
+        this._contadorBalas = this.crear_contador_balas()
 
+        console.log(this._contadorBalas)
         this.add(this._barraVida)
         this.add(this._puntosDeVida)
         this.add(this._puntosDeEscudo)
+        this.add(this._contadorMonedas)
+        this.add(this._contadorBalas)
     }
 
     crear_barra_vida(){
@@ -71,6 +81,42 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return rectangle;
     }
 
+    crear_contador_monedas(dineroInicial){
+
+        const offsetX = 40
+        const offsetY = 10
+
+        const monedas = this.scene.add.container(PlayerUI.POS_X_MONEDAS, PlayerUI.POS_Y_MONEDAS)
+        const cantidad = this.scene.add.text(0, 0, dineroInicial)
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'dineroUI') // Hacer y meter al boot    
+
+        monedas.setScrollFactor(0)
+        monedas.add(cantidad)
+        monedas.add(sprite)
+
+        return monedas
+    }
+
+    crear_contador_balas(){
+
+        const balas = this.scene.add.container(PlayerUI.POS_X_BALAS, PlayerUI.POS_Y_BALAS)
+        const cargador = this.scene.add.text(0, 0, "30")
+        cargador.setOrigin(1, 0.5)  // Importante -> crece el texto hacia la izquierda, no a la derecha
+
+        const separador = this.scene.add.text(cargador.x + 10, 0, "/")
+        separador.setOrigin(1, 0.5)
+
+        const reserva = this.scene.add.text(separador.x + 2, 0, "200")
+        reserva.setOrigin(0, 0.5)
+
+        balas.setScrollFactor(0)
+        balas.add(cargador)
+        balas.add(separador)
+        balas.add(reserva)
+
+        return balas
+    }
+
     actualizar_vida(vidaActual){
         const porcentaje =  Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1);
         this._puntosDeVida.scaleX = porcentaje
@@ -80,5 +126,6 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         const porcentaje = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
         this._puntosDeEscudo.scaleX = porcentaje
     }
-    
+
+
 }

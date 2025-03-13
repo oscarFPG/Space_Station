@@ -23,7 +23,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		// Atributos del jugador
 		this._vida = Player.VIDA_INICIAL;
 		this._escudo = Player.ESCUDO_INICIAL;
-		this._money = Player.DINERO_INICIAL;
+		this._dinero = Player.DINERO_INICIAL;
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
 		this.#config_controles()
@@ -39,7 +39,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.isImpact = false;
 
 		// Interfaz del personaje
-		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL);
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL);
 
 		// Añadir al container
 		this.add(this._player);
@@ -111,13 +111,14 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		if (this.isImpact)
 			return;
+
 		if(this._escudo > 0)
 			this.quitar_escudo(damage)
 		else
 			this.quitar_vida(damage)
 
+		this.actualizar_color_efecto(this._vida / Player.VIDA_INICIAL)
 		this.isImpact = true;
-		this._player.setTintFill(0xffffff);
 
 		if(this._vida > 0) {
 			this.scene.time.delayedCall(80, () => {
@@ -131,14 +132,28 @@ export default class Player extends Phaser.GameObjects.Container {
 				alpha: 0,
 				duration: 500,
 				onComplete: () => {
-				this.scene.scene.restart();
+					this.scene.scene.restart();
 				}
 			});
 		}
 
 	}
 
+	actualizar_color_efecto(porcentaje){
+
+        if(0.5 <= porcentaje){
+			this._player.setTintFill(0xffffff)	// Blanco
+        }
+        else if(0.25 < porcentaje && porcentaje < 0.5){
+			this._player.setTintFill(0xffe715)	// Amarillo
+        }
+        else{
+			this._player.setTintFill(0xff2020)	// Rojo
+        }
+    }
+
 	healthBoost(health) {
+
 		if (this._vida == this.VIDA_INICIAL) {
 			return;
 		}
@@ -150,6 +165,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		}
 		this._playerUI.actualizar_vida(this._vida);
 	}
+
 	shieldBoost(shield) {
 		//if (this._escudo == this.VIDA_INICIAL) {
 		//	return;
@@ -162,10 +178,12 @@ export default class Player extends Phaser.GameObjects.Container {
 		}
 		this._playerUI.actualizar_escudo(this._escudo);
 	}
+
 	moneyBoost(value) {
-		this._money += value;
-		//this._playerUI.actualizar_dinero(this._money);
+
+		this._dinero += value;
 	}
+
 	quitar_escudo(damage){
 
 		if(this._escudo <= 0)
@@ -221,6 +239,7 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		// Disparo mediante ratón (si la consola no está activa)
 		this.scene.input.on('pointerdown', (pointer) => {
+
 			if (this.scene.consoleActive) 
 				return;
 
