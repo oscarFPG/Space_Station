@@ -1,9 +1,10 @@
+import BasePistol from '../game-objects/weapons/BasePistol';
 
 export default class WeaponFactory {
 
     //  Identificadores para evitar 'numeros magicos'
     // Arma base
-    static BASE_WEAPON = 0;
+    static BASE_WEAPON = 'weapon1';
 
     // Otras armas melee/fuego...
 
@@ -12,11 +13,12 @@ export default class WeaponFactory {
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');
     }
 
-    static createWeapon(weapon){
+    static createWeapon(weaponName, scene, weaponOffset){
 
-        switch(weapon){
+        console.log(weaponName)
+        switch(weaponName){
         case WeaponFactory.BASE_WEAPON:
-            return WeaponFactory.BASE_WEAPON;   // Aqui habria que hacer algo tipo { return new BasePistol() }
+            return new BasePistol(scene, weaponOffset.x, weaponOffset.y);   // Aqui habria que hacer algo tipo { return new BasePistol() }
             
         // De la misma forma con todas las armas del juego...
         

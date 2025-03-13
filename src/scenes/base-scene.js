@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
-import Enemy from '../base-game-objects/Enemy.js'
+//import Enemy from '../base-game-objects/Enemy.js'
 import Bullet from '../base-game-objects/Bullet.js'
+import ExtendedEnemy from '../PruebaEnemy/ExtendedEnemy.js'
 
 export default class BaseScene extends Phaser.Scene {
 
@@ -134,7 +135,7 @@ export default class BaseScene extends Phaser.Scene {
     config_enemigos(){
 
         var enemigos = []
-        var unEnemigo = new Enemy(this, 1500, 1500)
+        var unEnemigo = new ExtendedEnemy(this, 1500, 1500)
         unEnemigo.body.setCollideWorldBounds(true)
         unEnemigo.body.setImmovable(true)
 

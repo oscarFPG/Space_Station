@@ -27,9 +27,6 @@ export default class Enemy extends Phaser.GameObjects.Container {
         this.weapon.setOrigin(0.5, 0.5); 
         this.add(this.weapon);
 
-        //vida
-        this.lives = 6;
-
         // Propiedades de movimiento y disparo
         this.speed = 175;
         this.fireRate = 1000; 
