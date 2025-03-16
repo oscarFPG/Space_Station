@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 import PlayerUI from '../../UI/PlayerUI.js'
 import BasePistol from '../weapons/BasePistol.js';
+import BaseActor from '../../base-game-objects/BaseActor.js';
 
-export default class Player extends Phaser.GameObjects.Container {
+export default class Player extends BaseActor {
   
 	// Player animation names
 	static IDLE_ANIMATION = 'playerIdle';
@@ -11,38 +12,34 @@ export default class Player extends Phaser.GameObjects.Container {
 	static VIDA_INICIAL = 50;
 	static ESCUDO_INICIAL = 50;
 	static DINERO_INICIAL = 50;
+	static SPEED = 180;
 
 	constructor(scene, x, y) {
 
-		super(scene, x, y);
-		this.scene.add.existing(this);
-		this.scene.physics.add.existing(this);
-		this._player = scene.add.sprite(28, 32, Player.IDLE_ANIMATION).setOrigin(0.5, 0.5);
+		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
+
 		this.body.setSize(66, 78);
 
 		// Atributos del jugador
-		this._vida = Player.VIDA_INICIAL;
 		this._escudo = Player.ESCUDO_INICIAL;
 		this._dinero = Player.DINERO_INICIAL;
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
 		this.#config_controles()
 		this.#config_arma()
-		this.#config_animaciones()
 		this.#config_iluminacion()
-
+		this.config_animacion('player_idle', Player.IDLE_ANIMATION, 0, 2, 6)
+		this.config_animacion('player_running', Player.RUNNING_ANIMATION, 0, 3, 10)
+		this._sprite.play('player_idle')
+		
 		// Registrar los métodos update y postupdate
 		this.scene.events.on('update', this.update, this);
 		this.scene.events.on('postupdate', this.updateWeapon, this);
-
-		// Bandera para evitar impactos múltiples simultáneos
-		this.isImpact = false;
 
 		// Interfaz del personaje
 		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL);
 
 		// Añadir al container
-		this.add(this._player);
 		this.add(this.weapon);
 	}
 
@@ -50,15 +47,14 @@ export default class Player extends Phaser.GameObjects.Container {
 	update(time, delta) {
 
 		// Verificar que el body existe antes de acceder a él
-		if (!this.body) {
+		if (!this.body)
 			return;
-		}
 
 		// Actualiza la posición del container usando la posición del body
 		this.setPosition(this.body.x, this.body.y);
 		this.body.setVelocity(0);
 
-		const speed = 180;
+		const speed = Player.SPEED;
 		let velocityX = 0;
 		let velocityY = 0;
 
@@ -70,12 +66,12 @@ export default class Player extends Phaser.GameObjects.Container {
 		}
 		if (this.cursors.left.isDown || this.keys.left.isDown) {
 			velocityX = -1;
-			this._player.setFlipX(true);
-			this._player.setX(34);
+			this._sprite.setFlipX(true);
+			this._sprite.setX(34);
 		}
 		if (this.cursors.right.isDown || this.keys.right.isDown) {
 			velocityX = 1;
-			this._player.setFlipX(false);
+			this._sprite.setFlipX(false);
 		}
 		// Normalizar para que la velocidad no sea mayor en diagonal
 		if (velocityX !== 0 || velocityY !== 0) {
@@ -89,67 +85,34 @@ export default class Player extends Phaser.GameObjects.Container {
 
 		// Actualizar animación según el movimiento
 		if (velocityX !== 0 || velocityY !== 0) {
-			if (this._player.anims.currentAnim.key !== "running") {
-				this._player.play("running");
+			if (this._sprite.anims.currentAnim.key !== 'player_running') {
+				this._sprite.play('player_running');
 			}
 		} else {
-			if (this._player.anims.currentAnim.key !== "idle") {
-				this._player.play("idle");
+			if (this._sprite.anims.currentAnim.key !== 'player_idle') {
+				this._sprite.play('player_idle');
 			}
 		}
 
 		let offsetX = 75; // Valor por defecto para cuando no está volteado
-		if (this._player.flipX) {
+		if (this._sprite.flipX) {
 			offsetX = -15;
 		}
 		if (this.light) {
 			this.light.setPosition(this.x + offsetX, this.y);
 		}
 	}
-  
-	receiveDamage(damage) {
 
-		if (this.isImpact)
-			return;
 
-		if(this._escudo > 0)
-			this.quitar_escudo(damage)
+	quitarVida(cantidad){
+
+        if(this._escudo > 0)
+			this._escudo -= cantidad
 		else
-			this.quitar_vida(damage)
+			this._atributos.vida -= cantidad
 
-		this.actualizar_color_efecto(this._vida / Player.VIDA_INICIAL)
-		this.isImpact = true;
-
-		if(this._vida > 0) {
-			this.scene.time.delayedCall(80, () => {
-				this._player.clearTint();
-				this.isImpact = false;
-			});
-		} 
-		else {
-			this.scene.tweens.add({
-				targets: this._player,
-				alpha: 0,
-				duration: 500,
-				onComplete: () => {
-					this.scene.scene.restart();
-				}
-			});
-		}
-
-	}
-
-	actualizar_color_efecto(porcentaje){
-
-        if(0.5 <= porcentaje){
-			this._player.setTintFill(0xffffff)	// Blanco
-        }
-        else if(0.25 < porcentaje && porcentaje < 0.5){
-			this._player.setTintFill(0xffe715)	// Amarillo
-        }
-        else{
-			this._player.setTintFill(0xff2020)	// Rojo
-        }
+        this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
+		this._playerUI.actualizar_UI(this._atributos.vida, this._escudo)
     }
 
 	healthBoost(health) {
@@ -180,37 +143,18 @@ export default class Player extends Phaser.GameObjects.Container {
 	}
 
 	moneyBoost(value) {
-
 		this._dinero += value;
-	}
-
-	quitar_escudo(damage){
-
-		if(this._escudo <= 0)
-			return;
-		if((this._escudo - damage) <= 0) 
-			this._escudo = 0;
-		else 
-			this._escudo -= damage;
-		this._playerUI.actualizar_escudo(this._escudo);
-	}
-
-	quitar_vida(damage){
-
-		if(this._vida <= 0)
-			return;
-
-		this._vida -= damage;
-		this._playerUI.actualizar_vida(this._vida);
 	}
 
 	updateWeapon() {
 
 		// Si this.scene o this.scene.input no existen, no hacer nada.
-		if (!this.scene || !this.scene.input) return;
+		if (!this.scene || !this.scene.input) 
+			return;
 
 		const pointer = this.scene.input.activePointer;
-		if (!pointer) return; // Seguridad extra, en caso de que no exista el puntero.
+		if (!pointer) 
+			return; // Seguridad extra, en caso de que no exista el puntero.
 
 		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
@@ -223,7 +167,7 @@ export default class Player extends Phaser.GameObjects.Container {
 		// Arma y modelo siempre mirando al mismo lado
 		let shouldFlip = worldPoint.x < weaponWorldX
 		this.weapon.setFlipY(shouldFlip)
-		this._player.setFlipX(shouldFlip)
+		this._sprite.setFlipX(shouldFlip)
 	}
 
 	#config_controles(){
@@ -257,37 +201,11 @@ export default class Player extends Phaser.GameObjects.Container {
 		this.weapon.setOrigin(0.5, 0.5); 
 	}
 
-	#config_animaciones() {
-
-		// Crear animación "idle" solo si no existe
-		if (!this.scene.anims.exists('idle')) {
-			this.scene.anims.create({
-				key: 'idle',
-				frames: this.scene.anims.generateFrameNumbers(Player.IDLE_ANIMATION, { start: 0, end: 2 }),
-				frameRate: 6,
-				repeat: -1
-			});
-		}
-		
-		// Crear animación "running" solo si no existe
-		if (!this.scene.anims.exists('running')) {
-			this.scene.anims.create({
-				key: 'running',
-				frames: this.scene.anims.generateFrameNumbers(Player.RUNNING_ANIMATION, { start: 0, end: 3 }),
-				frameRate: 10,
-				repeat: -1
-			});
-    	}
-
-		// Animacion base
-		this._player.play('idle');
-	}
-
 	#config_iluminacion(){
 
 		// Crear la luz que seguirá al jugador
 		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
-		this._player.setPipeline('Light2D');
+		this._sprite.setPipeline('Light2D');
 		this.weapon.setPipeline('Light2D');
 	}
   

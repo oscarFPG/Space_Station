@@ -1,8 +1,7 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
-//import Enemy from '../base-game-objects/Enemy.js'
 import Bullet from '../base-game-objects/Bullet.js'
-import ExtendedEnemy from '../PruebaEnemy/ExtendedEnemy.js'
+import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
 
 export default class BaseScene extends Phaser.Scene {
 
@@ -85,8 +84,8 @@ export default class BaseScene extends Phaser.Scene {
             let target = bullet === obj1 ? obj2 : obj1;
             
             // Si es un objeto que recibe daño -> Aplicar daño de la bala
-            if(target.receiveDamage)
-                target.receiveDamage(bullet._damage)
+            if(target.quitarVida)
+                target.quitarVida(bullet._damage)
 
             if (bullet && typeof bullet.createSpark === 'function') {
                 bullet.createSpark(bullet.x, bullet.y);
@@ -112,6 +111,7 @@ export default class BaseScene extends Phaser.Scene {
 
         this.scene.launch('')
     }
+    
     //Métodos de adquisicion de PLAYER:
     receiveHealthPlayer(health) {
         this._player.healthBoost(health);

@@ -42,8 +42,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._puntosDeEscudo = this.crear_barra_escudo()
         this._contadorMonedas = this.crear_contador_monedas(dineroInicial)
         this._contadorBalas = this.crear_contador_balas()
-
-        console.log(this._contadorBalas)
+        
         this.add(this._barraVida)
         this.add(this._puntosDeVida)
         this.add(this._puntosDeEscudo)
@@ -117,15 +116,11 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return balas
     }
 
-    actualizar_vida(vidaActual){
-        const porcentaje =  Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1);
-        this._puntosDeVida.scaleX = porcentaje
+    actualizar_UI(vidaActual, escudoActual){
+        const porcentajeVida = Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1);
+        const porcentajeEscudo = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
+        this._puntosDeVida.scaleX = porcentajeVida
+        this._puntosDeEscudo.scaleX = porcentajeEscudo
     }
-
-    actualizar_escudo(escudoActual){
-        const porcentaje = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
-        this._puntosDeEscudo.scaleX = porcentaje
-    }
-
 
 }
