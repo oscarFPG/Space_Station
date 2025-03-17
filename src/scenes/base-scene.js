@@ -11,7 +11,6 @@ export default class BaseScene extends Phaser.Scene {
     static LAYER_PARED = 'wall'
     static LAYER_OBJETO = 'butano'
     static LAYER_PERSONAJE = 'Personaje'
-    static LAYER_UI = 'UI'
 
 
     constructor(sceneKey){
@@ -29,7 +28,6 @@ export default class BaseScene extends Phaser.Scene {
         this._layerPared = map.createLayer(BaseScene.LAYER_PARED, tileset, 0, 0)
         this._layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
         this._layerPersonaje = map.createLayer(BaseScene.LAYER_PERSONAJE, tileset, 0, 0)
-        this._layerUI = map.createLayer(BaseScene.LAYER_UI, tileset, 0, 0)
 
         // Limites del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);

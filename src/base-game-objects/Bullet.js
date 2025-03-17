@@ -39,8 +39,9 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     }
 
     fire(x, y, angle, speed) {
+
         const gunSound = this.scene.sound.add('gun_sound');
-        gunSound.setVolume(2);  // Ajusta el volumen del sonido
+        gunSound.setVolume(0.1);
         gunSound.play();
 
         this.setPosition(x, y);

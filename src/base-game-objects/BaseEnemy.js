@@ -35,32 +35,6 @@ export default class BaseEnemy extends BaseActor {
         this.dodgeDirection = 1; 
     }
 
-    receiveDamage(damage) {
-        
-		if (this.isImpact)
-            return;
-
-		this.isImpact = true;
-		this._sprite.setTintFill(0xffffff);
-        this._atributosIA.health -= damage;
-        if(this._atributosIA.health > 0) {
-			this.scene.time.delayedCall(80, () => {
-				this._sprite.clearTint();
-				this.isImpact = false;
-			});
-		} 
-		else {
-			this.scene.tweens.add({
-				targets: this._sprite,
-				alpha: 0,
-				duration: 500,
-				onComplete: () => {
-				    this.destroy();
-				}
-			});
-		}
-	}
-
     add_weapon(weaponName, offset){
         this._weapon = WeaponFactory.createWeapon(weaponName, this.scene, offset)
         this.add(this._weapon)

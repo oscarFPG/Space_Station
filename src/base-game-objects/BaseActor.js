@@ -28,7 +28,10 @@ export default class BaseActor extends Phaser.GameObjects.Container {
 
     quitarVida(cantidad){
         this._atributos.vida -= cantidad
-        this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
+        this.actualizar_color_efecto(this._atributos.vida / BaseActor.MAX_VIDA)
+
+        if(this._atributos.vida <= 0)
+            this.destroy(true)
     }
 
     actualizar_color_efecto(porcentaje){

@@ -27,6 +27,7 @@ import laserDown from '../../assets/objects/laser_1.png'
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
+import COIN_ICON from '../../assets/objects/Coin.png'
 
 // Imagenes
 import FRONT from '../../assets/images/portada.png'
@@ -53,16 +54,18 @@ export default class Boot extends BaseScene {
         this.load.image('note', Paper);
         this.load.image('laser2', laserUp);
         this.load.image('laser1', laserDown);
-
         this.load.image('consoleBlocked', ConsoleBlocked);
         this.load.image('weapon1', Weapon1);
         this.load.image('weapon2', Weapon2);
         this.load.image('weapon3', Weapon3);
         this.load.image('weapon4', Weapon4);
         this.load.image('bullet1', Bullet1);
-        this.load.image('playerUI', PlayerHealth);
         this.load.image('front-page', FRONT);
         this.load.image('store-page', STORE);
+
+        // UI
+        this.load.image('playerUI', PlayerHealth);
+        this.load.image('coinIcon', COIN_ICON)
         
         // Mapas
         this.load.tilemapTiledJSON('map', Map);

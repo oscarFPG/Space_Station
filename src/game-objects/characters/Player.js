@@ -18,7 +18,7 @@ export default class Player extends BaseActor {
 
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
 
-		this.body.setSize(66, 78);
+		this.body.setSize(66, 73);	
 
 		// Atributos del jugador
 		this._escudo = Player.ESCUDO_INICIAL;
@@ -112,7 +112,9 @@ export default class Player extends BaseActor {
 			this._atributos.vida -= cantidad
 
         this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
-		this._playerUI.actualizar_UI(this._atributos.vida, this._escudo)
+		this._playerUI.actualizar_UI(this._atributos.vida, this._escudo, this._dinero)
+		if(this._atributos.vida <= 0)
+            this.destroy(true)
     }
 
 	healthBoost(health) {

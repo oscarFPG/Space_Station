@@ -82,16 +82,16 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
     crear_contador_monedas(dineroInicial){
 
-        const offsetX = 40
-        const offsetY = 10
+        const offsetX = 35
+        const offsetY = 8
 
         const monedas = this.scene.add.container(PlayerUI.POS_X_MONEDAS, PlayerUI.POS_Y_MONEDAS)
         const cantidad = this.scene.add.text(0, 0, dineroInicial)
-        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'dineroUI') // Hacer y meter al boot    
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'coinIcon').setScale(0.025).setOrigin(0.5)
 
         monedas.setScrollFactor(0)
-        monedas.add(cantidad)
-        monedas.add(sprite)
+        monedas.addAt(cantidad, 0)
+        monedas.addAt(sprite, 1)
 
         return monedas
     }
@@ -116,11 +116,17 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return balas
     }
 
-    actualizar_UI(vidaActual, escudoActual){
-        const porcentajeVida = Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1);
+    actualizar_UI(vidaActual, escudoActual, dineroActual){
+
+        const porcentajeVida = Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1)
         const porcentajeEscudo = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
+
         this._puntosDeVida.scaleX = porcentajeVida
         this._puntosDeEscudo.scaleX = porcentajeEscudo
+
+        const cantidad = this.scene.add.text(0, 0, dineroActual)
+        this._contadorMonedas.getAt(0).destroy()
+        this._contadorMonedas.addAt(cantidad, 0)
     }
 
 }
