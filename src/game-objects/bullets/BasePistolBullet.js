@@ -1,4 +1,4 @@
-import Bullet from "../../base-game-objects/Bullet";
+import Bullet from '../base-game-objects/Bullet.js'
 
 export default class BasePistolBullet extends Bullet {
 

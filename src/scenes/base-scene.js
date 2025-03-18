@@ -1,7 +1,8 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
-import Bullet from '../base-game-objects/Bullet.js'
+import Bullet from '../game-objects/base-game-objects/Bullet.js'
 import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
+import Object from '../game-objects/base-game-objects/Object.js'
 
 export default class BaseScene extends Phaser.Scene {
 
@@ -36,7 +37,9 @@ export default class BaseScene extends Phaser.Scene {
         // Crear personajes
         this._player = this.config_jugador(1000, 1000)
         var enemigos = this.config_enemigos()
-        
+
+        const objeto = new Object(this, 1000, 900, 'coinIcon')
+
         // Configuraciones generales
         this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
         this.config_camara(this._player)

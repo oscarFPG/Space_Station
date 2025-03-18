@@ -1,6 +1,5 @@
-import Weapon from './Weapon'
-import BasePistolBullet from '../game-objects/bullets/BasePistolBullet';
-import Bullet from './Bullet';
+import Weapon from './Weapon.js'
+import Bullet from './Bullet.js';
 
 export default class RangeWeapon extends Weapon {
 

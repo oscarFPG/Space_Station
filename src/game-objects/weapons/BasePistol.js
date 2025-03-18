@@ -1,4 +1,4 @@
-import RangeWeapon from "../../base-game-objects/RangeWeapon";
+import RangeWeapon from '../base-game-objects/RangeWeapon.js'
 
 export default class BasePistol extends RangeWeapon {
     

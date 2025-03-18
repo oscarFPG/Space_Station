@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import BaseActor from './BaseActor';
-import WeaponFactory from '../factories/WeaponFactory';
+import WeaponFactory from '../../factories/WeaponFactory';
 
 
 export default class BaseEnemy extends BaseActor {

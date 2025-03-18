@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import PlayerUI from '../../UI/PlayerUI.js'
-import BasePistol from '../weapons/BasePistol.js';
-import BaseActor from '../../base-game-objects/BaseActor.js';
+import BasePistol from '../weapons/BasePistol.js'
+import BaseActor from '../base-game-objects/BaseActor.js'
 
 export default class Player extends BaseActor {
   

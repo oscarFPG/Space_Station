@@ -1,4 +1,4 @@
-import BasedEnemy from '../../base-game-objects/BaseEnemy'
+import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 
 
 export default class ExtendedEnemy extends BasedEnemy {
