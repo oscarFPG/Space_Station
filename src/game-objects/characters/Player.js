@@ -31,6 +31,12 @@ export default class Player extends BaseActor {
 		this.config_animacion('player_idle', Player.IDLE_ANIMATION, 0, 2, 6)
 		this.config_animacion('player_running', Player.RUNNING_ANIMATION, 0, 3, 10)
 		this._sprite.play('player_idle')
+
+		//para que suene mientras camina
+		//this.stepSound = this.scene.sound.add('stepSound', { volume: 0.5, loop: true });
+		/*const stepSound = this.scene.sound.add('step_Sound');
+		stepSound.setVolume(0.5);  // Ajusta el volumen del sonido
+		stepSound.play();*/
 		
 		// Registrar los métodos update y postupdate
 		this.scene.events.on('update', this.update, this);
@@ -87,6 +93,7 @@ export default class Player extends BaseActor {
 		if (velocityX !== 0 || velocityY !== 0) {
 			if (this._sprite.anims.currentAnim.key !== 'player_running') {
 				this._sprite.play('player_running');
+				
 			}
 		} else {
 			if (this._sprite.anims.currentAnim.key !== 'player_idle') {
