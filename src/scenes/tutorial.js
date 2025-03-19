@@ -1,12 +1,11 @@
 import Phaser from 'phaser'
-import BaseScene from './base-scene.js'
+import BaseScene from './BaseScene.js'
 
 
 export default class Tutorial extends BaseScene {
 
     constructor(){
-        Tutorial.KEY = 'tutorial'
-        super(Tutorial.KEY)
+        super('tutorial')
     }
 
     create(){

@@ -1,6 +1,7 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser'
+import Interactive from './Interactive.js'
 
-export default class Weapon extends Phaser.Physics.Arcade.Sprite {
+export default class Weapon extends Interactive {
 
     constructor(scene, x, y, texture, damage) {
         super(scene, x, y, texture);

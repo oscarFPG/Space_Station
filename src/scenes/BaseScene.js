@@ -2,11 +2,11 @@ import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
 import Bullet from '../game-objects/base-game-objects/Bullet.js'
 import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
-import Object from '../game-objects/base-game-objects/Object.js'
+import Coin from '../game-objects/objects/Coin.js'
+import Options from '../options-manager/Options.js'
+
 
 export default class BaseScene extends Phaser.Scene {
-
-    static KEY = '' // Clave de la escena
 
     static LAYER_SUELO = 'floor'
     static LAYER_PARED = 'wall'
@@ -16,13 +16,14 @@ export default class BaseScene extends Phaser.Scene {
 
     constructor(sceneKey){
         super({ key: sceneKey })
-        BaseScene.KEY = sceneKey
     }
 
 
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
     // SIEMPRE esta funcion con super.create()
     create(map, tileset){
+        
+        this.#config_eventos()
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
@@ -38,7 +39,8 @@ export default class BaseScene extends Phaser.Scene {
         this._player = this.config_jugador(1000, 1000)
         var enemigos = this.config_enemigos()
 
-        const objeto = new Object(this, 1000, 900, 'coinIcon')
+        const moneda = new Coin(this, 1000, 900)
+        moneda.interactuar(this._player)
 
         // Configuraciones generales
         this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
@@ -113,6 +115,16 @@ export default class BaseScene extends Phaser.Scene {
         this.scene.launch('')
     }
     
+    #config_eventos(){
+
+        // Evento para abrir el menu de ajustes
+        this.input.keyboard.on(Options.TECLA, () => {
+            this.scene.stop()
+            this.scene.start('settings', this.scene.key)
+        }, this)
+
+    }
+
     //Métodos de adquisicion de PLAYER:
     receiveHealthPlayer(health) {
         this._player.healthBoost(health);

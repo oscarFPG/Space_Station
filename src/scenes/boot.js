@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import BaseScene from './base-scene.js'
+import BaseScene from './BaseScene.js'
 
 // Animaciones
 import CharacterIdle from '../../assets/sprites/idle_player_new.png'

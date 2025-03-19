@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import BaseScene from './base-scene'
+import BaseScene from './BaseScene.js'
 
 export default class Store extends BaseScene {
 

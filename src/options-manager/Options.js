@@ -10,7 +10,7 @@
 export default class Options {
 
     static MAX_VOLUMEN = 1
-
+    static TECLA = 'keydown-ESC'
     #volumen_general
     #volumen_musica
     #volumen_efectos_sonido
