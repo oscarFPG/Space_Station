@@ -31,6 +31,12 @@ export default class BaseScene extends Phaser.Scene {
         this._layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
         this._layerPersonaje = map.createLayer(BaseScene.LAYER_PERSONAJE, tileset, 0, 0)
 
+        //musica
+        //this.ambient = this.sound.add('ambiente')
+        //const ambient = this.sound.add('ambiente');
+        this.ambient.setVolume(0.5)
+        this.ambient.play()
+
         // Limites del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
