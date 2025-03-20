@@ -29,7 +29,7 @@ export default class Note extends InteractiveObject {
   
   update() {
     // Ocultar el texto de interacción si el jugador se aleja
-    if (Phaser.Math.Distance.Between(this.x, this.y, this.scene._player.x, this.scene._player.y) > 100) {
+    if (this.esta_dentro_de_rango(this.scene._player.x, this.scene._player.y)) {
       this.interactionText.setVisible(false);
     }
     // Al pulsar E, alterna la ventana

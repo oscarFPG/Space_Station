@@ -18,6 +18,7 @@ import Explode from '../../assets/effects/explode.png'
 // Mapas
 import TilemapImage from '../../assets/blocks/tilemap.png'
 import Map from '../../assets/maps/map1.json'
+import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 
 //Objetos 
 import Paper from '../../assets/objects/paper.png'
@@ -70,6 +71,7 @@ export default class Boot extends BaseScene {
         
         // Mapas
         this.load.tilemapTiledJSON('map', Map);
+        this.load.tilemapTiledJSON('tutorialMap', TutorialMap);
 
         // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });

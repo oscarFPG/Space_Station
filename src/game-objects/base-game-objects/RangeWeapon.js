@@ -52,7 +52,7 @@ export default class RangeWeapon extends Weapon {
         // Crear la bala en la posición del arma
         const bullet = new Bullet(this.scene, bulletX, bulletY, this._ammo.texture, this._specs.damage);
         this.scene.add.existing(bullet);
-        this.scene.bullets.add(bullet);
+        this.scene._grupoBalas.add(bullet);
         bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed);
     }
 

@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
 import Bullet from '../game-objects/base-game-objects/Bullet.js'
-import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
 import Coin from '../game-objects/objects/Coin.js'
 import Options from '../options-manager/Options.js'
 
@@ -10,8 +9,8 @@ export default class BaseScene extends Phaser.Scene {
 
     static LAYER_SUELO = 'floor'
     static LAYER_PARED = 'wall'
-    static LAYER_OBJETO = 'butano'
-    static LAYER_PERSONAJE = 'Personaje'
+    static LAYER_OBJETO = 'decoration'
+    static LAYER_PERSONAJE = 'characters'
 
 
     constructor(sceneKey){
@@ -22,14 +21,15 @@ export default class BaseScene extends Phaser.Scene {
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
     // SIEMPRE esta funcion con super.create()
     create(map, tileset){
-        
-        this.#config_eventos()
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
         this._layerPared = map.createLayer(BaseScene.LAYER_PARED, tileset, 0, 0)
         this._layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
         this._layerPersonaje = map.createLayer(BaseScene.LAYER_PERSONAJE, tileset, 0, 0)
+
+        // Crear clase de ajustes
+        this._options = Options.get_instance()
 
         //musica
         //this.ambient = this.sound.add('ambiente')
@@ -44,9 +44,6 @@ export default class BaseScene extends Phaser.Scene {
         // Crear personajes
         this._player = this.config_jugador(1000, 1000)
         var enemigos = this.config_enemigos()
-
-        const moneda = new Coin(this, 1000, 900)
-        moneda.interactuar(this._player)
 
         // Configuraciones generales
         this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
@@ -86,7 +83,7 @@ export default class BaseScene extends Phaser.Scene {
         })
 
         // Crear el grupo global de balas
-        this.bullets = this.physics.add.group();
+        this._grupoBalas = this.physics.add.group();
         const onBulletCollision = (obj1, obj2) => {
 
             let bullet = obj1 instanceof Bullet ? obj1 : obj2;
@@ -101,13 +98,23 @@ export default class BaseScene extends Phaser.Scene {
                 bullet.destroy();
             }
         };
-        this.physics.add.collider(this.bullets, this._layerPared, onBulletCollision);
-        this.physics.add.collider(this.bullets, this._player, onBulletCollision);
-        this.physics.add.collider(this.bullets, this._butanoColliders, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, this._layerPared, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, this._player, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, this._butanoColliders, onBulletCollision);
         enemigos.forEach(enemigo => {
-            this.physics.add.collider(this.bullets, enemigo, onBulletCollision);
+            this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision);
         })
 
+        // Grupo global de objetos interactuables TODO
+        this._grupoObjectos = this.physics.add.staticGroup()
+        this.physics.add.overlap(this._player, this._grupoObjectos)
+        this.physics.world.on('overlap', (gameobject1, gameobject2, body1, body2) => {
+            console.log(gameobject1)
+        })
+
+        // Configuracion de eventos
+        this.#config_eventos()
+        
         // Crear la animación de la chispa (si no existe)
         if (!this.anims.exists('spark')) {
             this.anims.create({
@@ -152,15 +159,7 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     config_enemigos(){
-
-        var enemigos = []
-        var unEnemigo = new ExtendedEnemy(this, 1500, 1500)
-        unEnemigo.body.setCollideWorldBounds(true)
-        unEnemigo.body.setImmovable(true)
-
-        enemigos.push(unEnemigo)
-
-        return enemigos
+        return null;
     }
 
     config_iluminacion(capas){
