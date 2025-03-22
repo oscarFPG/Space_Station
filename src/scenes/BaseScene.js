@@ -34,8 +34,8 @@ export default class BaseScene extends Phaser.Scene {
         //musica
         //this.ambient = this.sound.add('ambiente')
         //const ambient = this.sound.add('ambiente');
-        this.ambient.setVolume(0.5)
-        this.ambient.play()
+        //this.ambient.setVolume(0.5)
+        //this.ambient.play()
 
         // Limites del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
