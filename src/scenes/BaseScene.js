@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
 import Bullet from '../game-objects/base-game-objects/Bullet.js'
-import Coin from '../game-objects/objects/Coin.js'
 import Options from '../options-manager/Options.js'
 
 
@@ -9,8 +8,8 @@ export default class BaseScene extends Phaser.Scene {
 
     static LAYER_SUELO = 'floor'
     static LAYER_PARED = 'wall'
-    static LAYER_OBJETO = 'decoration'
-    static LAYER_PERSONAJE = 'characters'
+    static LAYER_OBJETO = 'extra'
+    static LAYER_PERSONAJE = 'butano'
 
 
     constructor(sceneKey){
@@ -31,7 +30,7 @@ export default class BaseScene extends Phaser.Scene {
         // Crear clase de ajustes
         this._options = Options.get_instance()
 
-        //musica
+        // Musica
         //this.ambient = this.sound.add('ambiente')
         //const ambient = this.sound.add('ambiente');
         //this.ambient.setVolume(0.5)
@@ -108,9 +107,6 @@ export default class BaseScene extends Phaser.Scene {
         // Grupo global de objetos interactuables TODO
         this._grupoObjectos = this.physics.add.staticGroup()
         this.physics.add.overlap(this._player, this._grupoObjectos)
-        this.physics.world.on('overlap', (gameobject1, gameobject2, body1, body2) => {
-            console.log(gameobject1)
-        })
 
         // Configuracion de eventos
         this.#config_eventos()

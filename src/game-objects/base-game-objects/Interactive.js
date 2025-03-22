@@ -4,7 +4,7 @@ export default class Interactive extends Phaser.GameObjects.Sprite {
 
     active = true
     radius = 0
-    rangoAccion
+    rangoAccion = 0
 
 
     constructor(scene, x, y, texture, radius){
@@ -17,10 +17,15 @@ export default class Interactive extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this.rangoAccion)
     }
 
+
+    accion(gameobject){
+        console.log('DENTRO')
+    }
+
     interactuar(gameobject){
         
         if(this.active && this.esta_dentro_de_rango(gameobject.x, gameobject.y))
-            console.log('DENTRO')
+            this.accion(gameobject)
     }
 
     esta_dentro_de_rango(x, y){

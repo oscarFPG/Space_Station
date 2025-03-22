@@ -25,13 +25,15 @@ export default class Player extends BaseActor {
 		this._dinero = Player.DINERO_INICIAL;
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
-		this.#config_controles()
-		this.#config_arma()
-		this.#config_iluminacion()
+		this._weapon = this.#config_arma()
 		this.config_animacion('player_idle', Player.IDLE_ANIMATION, 0, 2, 6)
 		this.config_animacion('player_running', Player.RUNNING_ANIMATION, 0, 3, 10)
 		this._sprite.play('player_idle')
 		
+		// Configuraciones
+		this.#config_controles()
+		this.#config_iluminacion()
+
 		// Registrar los métodos update y postupdate
 		this.scene.events.on('update', this.update, this);
 		this.scene.events.on('postupdate', this.updateWeapon, this);
@@ -40,7 +42,7 @@ export default class Player extends BaseActor {
 		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL);
 
 		// Añadir al container
-		this.add(this.weapon);
+		this.add(this._weapon);
 	}
 
 
@@ -58,21 +60,22 @@ export default class Player extends BaseActor {
 		let velocityX = 0;
 		let velocityY = 0;
 
-		if (this.cursors.up.isDown || this.keys.up.isDown) {
+		if (this.cursors.up.isDown || this.controles.up.isDown) {
 			velocityY = -1;
 		}
-		if (this.cursors.down.isDown || this.keys.down.isDown) {
+		if (this.cursors.down.isDown || this.controles.down.isDown) {
 			velocityY = 1;
 		}
-		if (this.cursors.left.isDown || this.keys.left.isDown) {
+		if (this.cursors.left.isDown || this.controles.left.isDown) {
 			velocityX = -1;
 			this._sprite.setFlipX(true);
 			this._sprite.setX(34);
 		}
-		if (this.cursors.right.isDown || this.keys.right.isDown) {
+		if (this.cursors.right.isDown || this.controles.right.isDown) {
 			velocityX = 1;
 			this._sprite.setFlipX(false);
 		}
+
 		// Normalizar para que la velocidad no sea mayor en diagonal
 		if (velocityX !== 0 || velocityY !== 0) {
 			const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
@@ -101,8 +104,14 @@ export default class Player extends BaseActor {
 		if (this.light) {
 			this.light.setPosition(this.x + offsetX, this.y);
 		}
-	}
 
+		this._playerUI.actualizar_UI(
+			this._atributos.vida, 
+			this._escudo, 
+			this._dinero, 
+			this._weapon.getBulletsFromClip(), 
+			this._weapon.getMunicionReserva())
+	}
 
 	quitarVida(cantidad){
 
@@ -112,7 +121,6 @@ export default class Player extends BaseActor {
 			this._atributos.vida -= cantidad
 
         this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
-		this._playerUI.actualizar_UI(this._atributos.vida, this._escudo, this._dinero)
 		if(this._atributos.vida <= 0)
             this.destroy(true)
     }
@@ -160,47 +168,51 @@ export default class Player extends BaseActor {
 
 		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
-		const weaponWorldX = this.x + this.weapon.x;
-		const weaponWorldY = this.y + this.weapon.y;
+		const weaponWorldX = this.x + this._weapon.x;
+		const weaponWorldY = this.y + this._weapon.y;
 
 		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
-		this.weapon.setRotation(angle);
+		this._weapon.setRotation(angle);
 
 		// Arma y modelo siempre mirando al mismo lado
 		let shouldFlip = worldPoint.x < weaponWorldX
-		this.weapon.setFlipY(shouldFlip)
+		this._weapon.setFlipY(shouldFlip)
 		this._sprite.setFlipX(shouldFlip)
 	}
 
 	#config_controles(){
 
 		// Controles de teclado
-		this.cursors = this.scene.input.keyboard.createCursorKeys();
-		this.keys = this.scene.input.keyboard.addKeys({
-			up: Phaser.Input.Keyboard.KeyCodes.W,
-			down: Phaser.Input.Keyboard.KeyCodes.S,
-			left: Phaser.Input.Keyboard.KeyCodes.A,
-			right: Phaser.Input.Keyboard.KeyCodes.D
-		});
+		this.cursors = this.scene.input.keyboard.createCursorKeys()
+		this.controles = {
+			up: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
+			down: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+			right: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+			left: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+		}
+
+		this.controles.reload.on('down', () => {
+			this._weapon.reload()
+		})
 
 		// Disparo mediante ratón (si la consola no está activa)
 		this.scene.input.on('pointerdown', (pointer) => {
 
-			if (this.scene.consoleActive) 
-				return;
-
 			/*const gunSound = this.scene.sound.add('gun_sound');
 			gunSound.setVolume(2);  // Ajusta el volumen del sonido
 			gunSound.play();*/
-			this.weapon.shot(pointer.worldX, pointer.worldY);
-		}, this);
+			this._weapon.shot(pointer.worldX, pointer.worldY);
+		}, this)
 	}
 
 	#config_arma() {
 
-		this.weaponOffset = { x: 39, y: 54 };
-		this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
-		this.weapon.setOrigin(0.5, 0.5); 
+		var weaponOffset = { x: 39, y: 54 }
+		var weapon = new BasePistol(this.scene, weaponOffset.x, weaponOffset.y)
+		weapon.setOrigin(0.5, 0.5)
+
+		return weapon
 	}
 
 	#config_iluminacion(){
@@ -208,7 +220,7 @@ export default class Player extends BaseActor {
 		// Crear la luz que seguirá al jugador
 		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
 		this._sprite.setPipeline('Light2D');
-		this.weapon.setPipeline('Light2D');
+		//this._weapon.setPipeline('')
 	}
   
 }

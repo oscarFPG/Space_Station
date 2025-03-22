@@ -20,9 +20,9 @@ export default class BasePistol extends RangeWeapon {
         this._specs.sprite = BasePistol.BASE_PISTOL_TEXTURE;
         this._specs.weight = 1;
         
-        this._ammo.clipSize = 150;
+        this._ammo.clipSize = 4;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
-        this._ammo.numClips = -1;
+        this._ammo.ammoExtra = 200;
         this._ammo.texture = BasePistol.BASE_PISTOL_AMMO_TEXTURE;
     }
 }
