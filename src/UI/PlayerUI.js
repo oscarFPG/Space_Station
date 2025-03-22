@@ -99,34 +99,40 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
     crear_contador_balas(){
 
         const balas = this.scene.add.container(PlayerUI.POS_X_BALAS, PlayerUI.POS_Y_BALAS)
-        const cargador = this.scene.add.text(0, 0, "30")
+        const cargador = this.scene.add.text(0, 0, '-')
         cargador.setOrigin(1, 0.5)  // Importante -> crece el texto hacia la izquierda, no a la derecha
 
-        const separador = this.scene.add.text(cargador.x + 10, 0, "/")
+        const separador = this.scene.add.text(cargador.x + 10, 0, '/')
         separador.setOrigin(1, 0.5)
 
-        const reserva = this.scene.add.text(separador.x + 2, 0, "200")
+        const reserva = this.scene.add.text(separador.x + 2, 0, '-')
         reserva.setOrigin(0, 0.5)
 
         balas.setScrollFactor(0)
-        balas.add(cargador)
-        balas.add(separador)
-        balas.add(reserva)
+        balas.addAt(cargador, 0)
+        balas.addAt(separador, 1)
+        balas.addAt(reserva, 2)
 
         return balas
     }
 
-    actualizar_UI(vidaActual, escudoActual, dineroActual){
+    actualizar_UI(vidaActual, escudoActual, dineroActual, balasCargador, balasReserva){
 
         const porcentajeVida = Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1)
         const porcentajeEscudo = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
+        const cantidad = this.scene.add.text(0, 0, dineroActual)
+        
 
+        // Vida y escudo
         this._puntosDeVida.scaleX = porcentajeVida
         this._puntosDeEscudo.scaleX = porcentajeEscudo
 
-        const cantidad = this.scene.add.text(0, 0, dineroActual)
+        // Monedas
         this._contadorMonedas.getAt(0).destroy()
         this._contadorMonedas.addAt(cantidad, 0)
+
+        // Balas
+
     }
 
 }

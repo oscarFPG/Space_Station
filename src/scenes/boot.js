@@ -51,7 +51,7 @@ export default class Boot extends BaseScene {
     preload(){
 
         // Imagenes
-        this.load.image('tiles', TilemapImage);
+
         this.load.image('baseWeapon', OldColt);
         this.load.image('note', Paper);
         this.load.image('laser2', laserUp);
@@ -71,7 +71,10 @@ export default class Boot extends BaseScene {
         
         // Mapas
         this.load.tilemapTiledJSON('map', Map);
-        this.load.tilemapTiledJSON('tutorialMap', TutorialMap);
+        this.load.tilemapTiledJSON('map_tutorial', TutorialMap);
+
+        // Tilesets
+        this.load.image('tiles', TilemapImage);
 
         // Spritesheets
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });
