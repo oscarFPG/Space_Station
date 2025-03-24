@@ -15,7 +15,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
     static POS_X_ESCUDO = 34;
     static POS_Y_VIDA = 46;
     static POS_Y_ESCUDO = 14;
-    static POS_X_MONEDAS = 30;
+    static POS_X_MONEDAS = 32;
     static POS_Y_MONEDAS = 75;
     static POS_X_BALAS = 30;
     static POS_Y_BALAS = 700;
@@ -87,7 +87,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         const monedas = this.scene.add.container(PlayerUI.POS_X_MONEDAS, PlayerUI.POS_Y_MONEDAS)
         const cantidad = this.scene.add.text(0, 0, dineroInicial)
-        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'coinIcon').setScale(0.025).setOrigin(0.5)
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'coinIcon').setScale(0.8).setOrigin(1.1, 0.55)
 
         monedas.setScrollFactor(0)
         monedas.addAt(cantidad, 0)

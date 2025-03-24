@@ -16,7 +16,7 @@ import Bullet1 from '../../assets/bullets/bullet1.png'
 import Explode from '../../assets/effects/explode.png'
 
 // Mapas
-import TilemapImage from '../../assets/blocks/Tilemap.png'
+import TilemapImage from '../../assets/blocks/Tilemap2.png'
 import Map from '../../assets/maps/map1.json'
 import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 
