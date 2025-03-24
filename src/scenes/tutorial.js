@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
 import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
+import Player from '../game-objects/characters/Player.js'
 import Coin from '../game-objects/objects/Coin.js'
 
 
@@ -17,7 +18,11 @@ export default class Tutorial extends BaseScene {
 
         super.create(map, tileset)
 
-        const moneda = new Coin(this, 850, 1000)
+        //const moneda = new Coin(this, 850, 1000)
+    }
+
+    update(time, deltaTime){
+        
     }
 
     config_enemigos(){
@@ -32,7 +37,8 @@ export default class Tutorial extends BaseScene {
         return enemigos
     }
 
-    update(time, deltaTime){
-        
+    config_jugador(){
+        return new Player(this, 350, 450)
     }
+    
 }

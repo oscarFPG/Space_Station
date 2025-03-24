@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+
+// Escenas
 import BaseScene from './BaseScene.js'
 
 // Animaciones
@@ -20,7 +22,7 @@ import TilemapImage from '../../assets/blocks/Tilemap2.png'
 import Map from '../../assets/maps/map1.json'
 import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 
-//Objetos 
+// Objetos 
 import Paper from '../../assets/objects/paper.png'
 import ConsoleBlocked from '../../assets/objects/panel_off.png'
 import laserUp from '../../assets/objects/laser_2.png'
@@ -51,43 +53,42 @@ export default class Boot extends BaseScene {
     preload(){
 
         // Imagenes
-
-        this.load.image('baseWeapon', OldColt);
-        this.load.image('note', Paper);
-        this.load.image('laser2', laserUp);
-        this.load.image('laser1', laserDown);
-        this.load.image('consoleBlocked', ConsoleBlocked);
-        this.load.image('weapon1', Weapon1);
-        this.load.image('weapon2', Weapon2);
-        this.load.image('weapon3', Weapon3);
-        this.load.image('weapon4', Weapon4);
-        this.load.image('bullet1', Bullet1);
-        this.load.image('front-page', FRONT);
-        this.load.image('store-page', STORE);
+        this.load.image('baseWeapon', OldColt)
+        this.load.image('note', Paper)
+        this.load.image('laser2', laserUp)
+        this.load.image('laser1', laserDown)
+        this.load.image('consoleBlocked', ConsoleBlocked)
+        this.load.image('weapon1', Weapon1)
+        this.load.image('weapon2', Weapon2)
+        this.load.image('weapon3', Weapon3)
+        this.load.image('weapon4', Weapon4)
+        this.load.image('bullet1', Bullet1)
+        this.load.image('front-page', FRONT)
+        this.load.image('store-page', STORE)
 
         // UI
-        this.load.image('playerUI', PlayerHealth);
+        this.load.image('playerUI', PlayerHealth)
         this.load.image('coinIcon', COIN_ICON)
         
         // Mapas
-        this.load.tilemapTiledJSON('map', Map);
-        this.load.tilemapTiledJSON('map_tutorial', TutorialMap);
+        this.load.tilemapTiledJSON('map', Map)
+        this.load.tilemapTiledJSON('map_tutorial', TutorialMap)
 
         // Tilesets
-        this.load.image('tiles', TilemapImage);
+        this.load.image('tiles', TilemapImage)
 
         // Spritesheets
-        this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });
-        this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 });
-        this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });
-        this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 });
+        this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
+        this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
-        this.load.audio('mainMenuMusic', MAINMENU_MUSIC);
-        this.load.audio('ClickSOund', ClickSOund);
-        this.load.audio('gun_sound',GUN_SOUND);
-        this.load.audio('console_sound', CONSOLE_SOUND);
-        this.load.audio('ambiente', AMBIENTE);
+        this.load.audio('mainMenuMusic', MAINMENU_MUSIC)
+        this.load.audio('ClickSOund', ClickSOund)
+        this.load.audio('gun_sound',GUN_SOUND)
+        this.load.audio('console_sound', CONSOLE_SOUND)
+        this.load.audio('ambiente', AMBIENTE)
     }
     
     create(){

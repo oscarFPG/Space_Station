@@ -11,6 +11,7 @@ export default class BaseScene extends Phaser.Scene {
     static LAYER_OBJETO = 'extra'
     static LAYER_PERSONAJE = 'butano'
 
+    _previousScene = null
 
     constructor(sceneKey){
         super({ key: sceneKey })
@@ -20,6 +21,9 @@ export default class BaseScene extends Phaser.Scene {
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
     // SIEMPRE esta funcion con super.create()
     create(map, tileset){
+
+        if(map == null || tileset == null)
+            return
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
@@ -109,7 +113,7 @@ export default class BaseScene extends Phaser.Scene {
         this.physics.add.overlap(this._player, this._grupoObjectos)
 
         // Configuracion de eventos
-        this.#config_eventos()
+        this.config_eventos()
         
         // Crear la animación de la chispa (si no existe)
         if (!this.anims.exists('spark')) {
@@ -124,34 +128,29 @@ export default class BaseScene extends Phaser.Scene {
         this.scene.launch('')
     }
     
-    #config_eventos(){
+
+    config_eventos(){
 
         // Evento para abrir el menu de ajustes
-        this.input.keyboard.on(Options.TECLA, () => {
-            this.scene.stop()
-            this.scene.start('settings', this.scene.key)
+        this.input.keyboard.on(Options.TECLA_PAUSA, () => {
+            this.scene.switch('settings', this.scene.key)
         }, this)
-
     }
 
-    //Métodos de adquisicion de PLAYER:
     receiveHealthPlayer(health) {
         this._player.healthBoost(health);
     }
+
     receiveShieldPlayer(shield) {
         this._player.shieldBoost(shield);
     }
+
     receiveMoneyPlayer(value) {
         this._player.moneyBoost(value);
     }
 
-    config_jugador(x, y){
-
-        var player = new Player(this, x, y)
-        player.body.setCollideWorldBounds(true)
-        player.body.setImmovable(true)
-
-        return player
+    config_jugador(){
+        return new Player(this, 0, 0)
     }
 
     config_enemigos(){

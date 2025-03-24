@@ -9,19 +9,24 @@ export default class Settings extends BaseScene {
     }
 
     init(data){
-        this.previous_scene = data
+        this._previousScene = data
     }
 
     create(){
-
-        // Evento para volver a la escena anterior
-        this.input.keyboard.on(Options.TECLA, () => {
-            this.scene.stop()
-            this.scene.start('tutorial', this.previous_scene)
-        }, this)
+        super.create(null, null)
+        this.config_eventos()
     }
 
     update(){
         
     }
+
+    config_eventos(){
+
+        // Evento para volver a la escena anterior
+        this.input.keyboard.on(Options.TECLA_PAUSA, () => {
+            this.scene.switch(this._previousScene, null)
+        }, this)
+    }
+
 }

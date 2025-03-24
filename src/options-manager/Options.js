@@ -12,7 +12,7 @@ export default class Options {
     static instance = null
 
     static MAX_VOLUMEN = 2
-    static TECLA = 'keydown-ESC'
+    static TECLA_PAUSA = 'keydown-ESC'
     #volumen_general
     #volumen_musica
     #volumen_efectos_sonido
