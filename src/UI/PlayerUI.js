@@ -109,9 +109,9 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         reserva.setOrigin(0, 0.5)
 
         balas.setScrollFactor(0)
-        balas.addAt(cargador, 0)
-        balas.addAt(separador, 1)
-        balas.addAt(reserva, 2)
+        balas.add(cargador)
+        balas.add(separador)
+        balas.add(reserva)
 
         return balas
     }
@@ -122,7 +122,6 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         const porcentajeEscudo = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
         const cantidad = this.scene.add.text(0, 0, dineroActual)
         
-
         // Vida y escudo
         this._puntosDeVida.scaleX = porcentajeVida
         this._puntosDeEscudo.scaleX = porcentajeEscudo
@@ -132,5 +131,17 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._contadorMonedas.addAt(cantidad, 0)
 
         // Balas
+        this._contadorBalas.getFirst().destroy()
+        this._contadorBalas.getFirst().destroy()
+        this._contadorBalas.getFirst().destroy()
+
+        const cargador = this.scene.add.text(0, 0, balasCargador).setOrigin(1, 0.5)
+        this._contadorBalas.add(cargador)
+
+        const separador = this.scene.add.text(cargador.x + 10, 0, '/').setOrigin(1, 0.5)
+        this._contadorBalas.add(separador)
+
+        const reserva = this.scene.add.text(separador.x + 2, 0, balasReserva).setOrigin(0, 0.5)
+        this._contadorBalas.add(reserva)
     }
 }

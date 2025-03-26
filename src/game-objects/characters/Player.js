@@ -19,7 +19,9 @@ export default class Player extends BaseActor {
 
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
 
-		this.body.setSize(66, 73);	
+		this.body.setSize(66, 73);
+		this.body.setCollideWorldBounds(true)
+        this.body.setImmovable(true)
 
 		// Atributos del jugador
 		this._escudo = Player.ESCUDO_INICIAL;

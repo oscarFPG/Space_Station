@@ -12,6 +12,7 @@ export default class BaseScene extends Phaser.Scene {
     static LAYER_OBJETO = 'extra'
     static LAYER_PERSONAJE = 'butano'
 
+    _previousScene = null
 
     constructor(sceneKey){
         super({ key: sceneKey })
@@ -21,6 +22,9 @@ export default class BaseScene extends Phaser.Scene {
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
     // SIEMPRE esta funcion con super.create()
     create(map, tileset){
+
+        if(map == null || tileset == null)
+            return
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)

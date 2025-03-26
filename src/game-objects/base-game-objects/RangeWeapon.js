@@ -67,10 +67,12 @@ export default class RangeWeapon extends Weapon {
             return
 
         console.log('RELOADING...')
+        this.#_isReloading = true
         this.scene.time.delayedCall(this._specs.reloadTime * 1000, () => {
-            var bulletsUsed = this._ammo.currentClipAmmo - this._ammo.clipSize
+            var bulletsUsed = Math.abs(this._ammo.clipSize - this._ammo.currentClipAmmo)
             this._ammo.currentClipAmmo = this._ammo.clipSize
             this._ammo.ammoExtra -= bulletsUsed
+            this.#_isReloading = false
             console.log('RELOADED')
         }, null)
     }
