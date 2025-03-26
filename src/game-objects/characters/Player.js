@@ -12,6 +12,7 @@ export default class Player extends BaseActor {
 	static VIDA_INICIAL = 50;
 	static ESCUDO_INICIAL = 50;
 	static DINERO_INICIAL = 50;
+	static BATERIA_INICIAL = 0;
 	static SPEED = 180;
 
 	constructor(scene, x, y) {
@@ -23,6 +24,10 @@ export default class Player extends BaseActor {
 		// Atributos del jugador
 		this._escudo = Player.ESCUDO_INICIAL;
 		this._dinero = Player.DINERO_INICIAL;
+		this._baterias = Player.BATERIA_INICIAL;
+
+		// Booleano para saber si esta en un menu o consola para no permitir el disparo
+		this.isOnConsole = false;
 
 		// Configuracion de controles, animaciones, iluminacion y del arma
 		this._weapon = this.#config_arma()
@@ -68,12 +73,10 @@ export default class Player extends BaseActor {
 		}
 		if (this.cursors.left.isDown || this.controles.left.isDown) {
 			velocityX = -1;
-			this._sprite.setFlipX(true);
-			this._sprite.setX(34);
+			
 		}
 		if (this.cursors.right.isDown || this.controles.right.isDown) {
 			velocityX = 1;
-			this._sprite.setFlipX(false);
 		}
 
 		// Normalizar para que la velocidad no sea mayor en diagonal
@@ -121,8 +124,16 @@ export default class Player extends BaseActor {
 			this._atributos.vida -= cantidad
 
         this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
-		if(this._atributos.vida <= 0)
-            this.destroy(true)
+		if (this._atributos.vida <= 0) {
+			this.scene.tweens.add({
+				targets: this.player,
+				alpha: 0,
+				duration: 500,
+				onComplete: () => {
+				  this.scene.scene.restart();
+				}
+			  });	
+		}
     }
 
 	healthBoost(health) {
@@ -136,7 +147,6 @@ export default class Player extends BaseActor {
 		else {
 			this._vida += health;
 		}
-		this._playerUI.actualizar_vida(this._vida);
 	}
 
 	shieldBoost(shield) {
@@ -149,11 +159,24 @@ export default class Player extends BaseActor {
 		else {
 			this._escudo += shield;
 		}
-		this._playerUI.actualizar_escudo(this._escudo);
 	}
 
 	moneyBoost(value) {
 		this._dinero += value;
+	}
+
+	pickBattery() {
+		this._baterias++;
+	}
+
+	vaciarBaterias() {
+		this._baterias = Player.BATERIA_INICIAL;
+	}
+	getBatteries() {
+		return this._baterias;
+	}
+	setIsConsoleActive(value) {
+		this.isOnConsole = value;
 	}
 
 	updateWeapon() {
@@ -177,6 +200,9 @@ export default class Player extends BaseActor {
 		// Arma y modelo siempre mirando al mismo lado
 		let shouldFlip = worldPoint.x < weaponWorldX
 		this._weapon.setFlipY(shouldFlip)
+		if(shouldFlip) {
+			this._sprite.setX(34);
+		}
 		this._sprite.setFlipX(shouldFlip)
 	}
 
@@ -198,7 +224,8 @@ export default class Player extends BaseActor {
 
 		// Disparo mediante ratón (si la consola no está activa)
 		this.scene.input.on('pointerdown', (pointer) => {
-
+			if (this.isOnConsole) 
+				return;
 			/*const gunSound = this.scene.sound.add('gun_sound');
 			gunSound.setVolume(2);  // Ajusta el volumen del sonido
 			gunSound.play();*/

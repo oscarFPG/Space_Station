@@ -45,7 +45,7 @@ export default class BaseEnemy extends BaseActor {
         const playerX = this.scene._player.x;
         const playerY = this.scene._player.y;
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, playerX, playerY);
-
+        this.setPosition(this.body.x, this.body.y);
         // Determinar estado según la distancia del jugador
         if (distanceToPlayer <= this._atributosIA.shootingRange) {
             this.state = 'perseguir';

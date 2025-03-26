@@ -132,7 +132,5 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._contadorMonedas.addAt(cantidad, 0)
 
         // Balas
-
     }
-
 }

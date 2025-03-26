@@ -62,5 +62,4 @@ export default class BaseActor extends Phaser.GameObjects.Container {
 			});
     	}
     }
-
 }

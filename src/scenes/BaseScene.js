@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
 import Bullet from '../game-objects/base-game-objects/Bullet.js'
 import Options from '../options-manager/Options.js'
+import BaseGroup from '../game-objects/objects/BaseGroup.js'
 
 
 export default class BaseScene extends Phaser.Scene {
@@ -41,73 +42,12 @@ export default class BaseScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
         // Crear personajes
-        this._player = this.config_jugador(1000, 1000)
-        var enemigos = this.config_enemigos()
+        //this._player = this.config_jugador(1000, 1000)
+        //var enemigos = this.config_enemigos()
 
         // Configuraciones generales
         this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
-        this.config_camara(this._player)
-        this.config_cursor()
-
-        // Configurar colisiones
-        this._layerPared.setCollisionByExclusion([-1])
-        this._layerObjeto.setCollisionByExclusion([-1])
-        this.crearColliderConSuelo(this._player)
-        this.crearColliderConPared(this._player)
-
-        enemigos.forEach(enemigo => {   // Para todos los enemigos de la escena
-            this.crearColliderConSuelo(enemigo)
-            this.crearColliderConPared(enemigo)
-        })
-        
-        this._butanoColliders = this.physics.add.staticGroup();
-        this._layerObjeto.forEachTile(tile => {
-            if (tile.index !== -1) {
-
-                const baseX = tile.getCenterX();
-                const baseY = tile.getCenterY();
-                const offsetX = 4;
-                const offsetY = -1;
-
-                // Crear el collider en la posición ajustada
-                const collider = this.physics.add.staticImage(baseX + offsetX, baseY + offsetY, null);
-                collider.body.setSize(54, 90);
-                collider.setVisible(false);
-                this._butanoColliders.add(collider);
-            }
-        });
-        this.physics.add.collider(this._player, this._butanoColliders);
-        enemigos.forEach(enemigo => {
-            this.physics.add.collider(enemigo, this._butanoColliders);
-        })
-
-        // Crear el grupo global de balas
-        this._grupoBalas = this.physics.add.group();
-        const onBulletCollision = (obj1, obj2) => {
-
-            let bullet = obj1 instanceof Bullet ? obj1 : obj2;
-            let target = bullet === obj1 ? obj2 : obj1;
-            
-            // Si es un objeto que recibe daño -> Aplicar daño de la bala
-            if(target.quitarVida)
-                target.quitarVida(bullet._damage)
-
-            if (bullet && typeof bullet.createSpark === 'function') {
-                bullet.createSpark(bullet.x, bullet.y);
-                bullet.destroy();
-            }
-        };
-        this.physics.add.collider(this._grupoBalas, this._layerPared, onBulletCollision);
-        this.physics.add.collider(this._grupoBalas, this._player, onBulletCollision);
-        this.physics.add.collider(this._grupoBalas, this._butanoColliders, onBulletCollision);
-        enemigos.forEach(enemigo => {
-            this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision);
-        })
-
-        // Grupo global de objetos interactuables TODO
-        this._grupoObjectos = this.physics.add.staticGroup()
-        this.physics.add.overlap(this._player, this._grupoObjectos)
-
+    
         // Configuracion de eventos
         this.#config_eventos()
         
@@ -135,6 +75,7 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     //Métodos de adquisicion de PLAYER:
+    /*
     receiveHealthPlayer(health) {
         this._player.healthBoost(health);
     }
@@ -144,13 +85,84 @@ export default class BaseScene extends Phaser.Scene {
     receiveMoneyPlayer(value) {
         this._player.moneyBoost(value);
     }
+    */
+    config_characters(player, enemigos, boxes, doors) {
+        this.config_camara(player)
+        this.config_cursor()
 
+        // Configurar colisiones
+        this._layerPared.setCollisionByExclusion([-1])
+        this._layerObjeto.setCollisionByExclusion([-1])
+
+        this.crearColliderConSuelo(player)
+        this.crearColliderConPared(player)
+
+        enemigos.forEach(enemigo => {   // Para todos los enemigos de la escena
+            this.crearColliderConSuelo(enemigo)
+            this.crearColliderConPared(enemigo)
+        })
+        
+        this._butanoColliders = this.physics.add.staticGroup();
+        this._layerObjeto.forEachTile(tile => {
+            if (tile.index !== -1) {
+
+                const baseX = tile.getCenterX();
+                const baseY = tile.getCenterY();
+                const offsetX = 4;
+                const offsetY = -1;
+
+                // Crear el collider en la posición ajustada
+                const collider = this.physics.add.staticImage(baseX + offsetX, baseY + offsetY, null);
+                collider.body.setSize(54, 90);
+                collider.setVisible(false);
+                this._butanoColliders.add(collider);
+            }
+        });
+        this.physics.add.collider(player, this._butanoColliders);
+        enemigos.forEach(enemigo => {
+            this.physics.add.collider(enemigo, this._butanoColliders);
+            this.physics.add.collider(enemigo, player);
+        })
+        this.physics.add.collider(player, enemigos);
+        this.physics.add.collider(player, boxes);
+        this.physics.add.collider(player, doors);
+
+        // Crear el grupo global de balas
+        this._grupoBalas = this.physics.add.group();
+        const onBulletCollision = (obj1, obj2) => {
+
+            let bullet = obj1 instanceof Bullet ? obj1 : obj2;
+            let target = bullet === obj1 ? obj2 : obj1;
+            
+            // Si es un objeto que recibe daño -> Aplicar daño de la bala
+            if(target.quitarVida)
+                target.quitarVida(bullet._damage)
+
+            if (bullet && typeof bullet.createSpark === 'function') {
+                bullet.createSpark(bullet.x, bullet.y);
+                bullet.destroy();
+            }
+        };
+        this.physics.add.collider(this._grupoBalas, this._layerPared, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, player, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, this._butanoColliders, onBulletCollision);
+
+        enemigos.forEach(enemigo => {
+            this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision);
+        })
+        boxes.forEach(box => {
+            this.physics.add.collider(this._grupoBalas, box, onBulletCollision);
+        });
+        doors.forEach(door => {
+            this.physics.add.collider(this._grupoBalas, door, onBulletCollision);
+        });
+        this._grupoObjectos = this.physics.add.staticGroup()
+        this.physics.add.overlap(player, this._grupoObjectos)
+    }
     config_jugador(x, y){
-
         var player = new Player(this, x, y)
         player.body.setCollideWorldBounds(true)
         player.body.setImmovable(true)
-
         return player
     }
 

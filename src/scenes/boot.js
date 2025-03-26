@@ -6,6 +6,9 @@ import CharacterIdle from '../../assets/sprites/idle_player_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
 
+import boxBroken from '../../assets/objects/box_broken.png'
+import doorsOpen from '../../assets/objects/doors_open.png'
+
 // Armas / Objetos
 import OldColt from '../../assets/weapons/OldColt.png'
 import Weapon1 from '../../assets/weapons/weapon1.png'
@@ -19,12 +22,21 @@ import Explode from '../../assets/effects/explode.png'
 import TilemapImage from '../../assets/blocks/Tilemap2.png'
 import Map from '../../assets/maps/map1.json'
 import TutorialMap from '../../assets/maps/tutorial_mapa.json'
+import Level1Map from '../../assets/maps/Level1.json'
 
 //Objetos 
 import Paper from '../../assets/objects/paper.png'
 import ConsoleBlocked from '../../assets/objects/panel_off.png'
 import laserUp from '../../assets/objects/laser_2.png'
 import laserDown from '../../assets/objects/laser_1.png'
+
+import healthItem from '../../assets/objects/healthItem.png'
+import shieldItem from '../../assets/objects/shieldItem.png'
+import batteryItem from '../../assets/objects/batteryItem.png'
+import batteryStructure from '../../assets/objects/low_dispensator.png'
+import doors from '../../assets/objects/door.png'
+import box from '../../assets/objects/box.png'
+
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
@@ -52,6 +64,12 @@ export default class Boot extends BaseScene {
 
         // Imagenes
 
+        this.load.image('health', healthItem);
+        this.load.image('shield', shieldItem);
+        this.load.image('battery', batteryItem);
+        this.load.image('batteryStructure', batteryStructure);
+        this.load.image('door', doors);
+        this.load.image('box', box);
         this.load.image('baseWeapon', OldColt);
         this.load.image('note', Paper);
         this.load.image('laser2', laserUp);
@@ -72,11 +90,15 @@ export default class Boot extends BaseScene {
         // Mapas
         this.load.tilemapTiledJSON('map', Map);
         this.load.tilemapTiledJSON('map_tutorial', TutorialMap);
-
+        this.load.tilemapTiledJSON('map_level_1', Level1Map);
+        
         // Tilesets
         this.load.image('tiles', TilemapImage);
 
         // Spritesheets
+        this.load.spritesheet('boxAnimation', boxBroken, { frameWidth: 111 , frameHeight: 111 });
+        this.load.spritesheet('doorsAnimation', doorsOpen, { frameWidth: 111 , frameHeight: 111 });
+
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });

@@ -38,7 +38,7 @@
             15, 7, 7, 7, 7, 7, 7, 7, 7, 15, 15, 15, 15, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15,
             15, 1, 7, 7, 7, 7, 7, 7, 1, 15, 15, 15, 15, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 15, 15,
-            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 15, 15,
+            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 1, 7, 7,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 0,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 15,
@@ -70,9 +70,9 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 8, 0, 6, 0, 6, 0, 6, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 14, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 14, 0, 6, 0, 6, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 14, 0, 0, 0, 14, 0, 14, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -141,14 +141,14 @@
                      "color":"#ffffff",
                      "fontfamily":"Nirmala UI",
                      "pixelsize":27,
-                     "text":"-> CLICK IZQUIERDO\/RATON",
+                     "text":"-> LEFT MOUSE CLICK",
                      "wrap":true
                     },
                  "type":"Text",
                  "visible":true,
-                 "width":262.5,
-                 "x":1832.83183333333,
-                 "y":239.508
+                 "width":363.5,
+                 "x":1750.16516666667,
+                 "y":170.008
                 }, 
                 {
                  "height":48.6225,
@@ -160,14 +160,14 @@
                      "color":"#aaff00",
                      "fontfamily":"Seven Segment",
                      "pixelsize":34,
-                     "text":"Accionar disparo",
+                     "text":"Shoot weapon",
                      "wrap":true
                     },
                  "type":"Text",
                  "visible":true,
                  "width":255,
-                 "x":1533.36183333333,
-                 "y":244.174
+                 "x":1450.69516666667,
+                 "y":174.674
                 }, 
                 {
                  "height":53.5624,
@@ -180,7 +180,7 @@
                      "fontfamily":"Seven Segment",
                      "halign":"center",
                      "pixelsize":45,
-                     "text":"Controles",
+                     "text":"Controls",
                      "wrap":true
                     },
                  "type":"Text",
@@ -199,7 +199,7 @@
                      "color":"#aaff00",
                      "fontfamily":"Seven Segment",
                      "pixelsize":34,
-                     "text":"Movimiento",
+                     "text":"Movement",
                      "wrap":true
                     },
                  "type":"Text",
@@ -282,7 +282,7 @@
                  "visible":true,
                  "width":24,
                  "x":868.000833333333,
-                 "y":249.29
+                 "y":251.14
                 }, 
                 {
                  "height":46,
@@ -313,7 +313,7 @@
                      "color":"#aaff00",
                      "fontfamily":"Seven Segment",
                      "pixelsize":34,
-                     "text":"Interaccion",
+                     "text":"Interaction",
                      "wrap":true
                     },
                  "type":"Text",
@@ -331,7 +331,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"100"
+                         "value":"2025"
                         }],
                  "rotation":0,
                  "type":"Note",
@@ -441,6 +441,12 @@
                  "height":111,
                  "id":23,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"numBatteries",
+                         "type":"int",
+                         "value":2
+                        }],
                  "rotation":0,
                  "type":"BatteryStructure",
                  "visible":true,
@@ -463,9 +469,14 @@
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
-                 "type":"Laser2",
+                 "type":"Laser",
                  "visible":true,
                  "width":111,
                  "x":2330.18,
@@ -486,9 +497,14 @@
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
-                 "type":"Laser2",
+                 "type":"Laser",
                  "visible":true,
                  "width":111,
                  "x":2330.18181818182,
@@ -509,9 +525,14 @@
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
                         }],
                  "rotation":0,
-                 "type":"Laser2",
+                 "type":"Laser",
                  "visible":true,
                  "width":111,
                  "x":2330.18181818182,
@@ -532,6 +553,11 @@
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":true
                         }],
                  "rotation":0,
                  "type":"Laser",
@@ -549,7 +575,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"100"
+                         "value":"The boxes can be destroyed!!!"
                         }],
                  "rotation":0,
                  "type":"Note",
@@ -581,8 +607,14 @@
                  "height":111,
                  "id":36,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"isActivate",
+                         "type":"bool",
+                         "value":false
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Door",
                  "visible":true,
                  "width":111,
                  "x":3552,
@@ -593,8 +625,14 @@
                  "height":111,
                  "id":37,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":100
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Box",
                  "visible":true,
                  "width":111,
                  "x":2329.66666666667,
@@ -605,8 +643,14 @@
                  "height":111,
                  "id":38,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":100
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Box",
                  "visible":true,
                  "width":111,
                  "x":2329.66666666667,
@@ -617,8 +661,14 @@
                  "height":111,
                  "id":39,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":100
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Box",
                  "visible":true,
                  "width":111,
                  "x":3105,
@@ -629,12 +679,123 @@
                  "height":111,
                  "id":40,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":100
+                        }],
                  "rotation":0,
-                 "type":"",
+                 "type":"Box",
                  "visible":true,
                  "width":111,
                  "x":3105.66666666667,
                  "y":994.666666666667
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":46,
+                 "name":"",
+                 "rotation":0,
+                 "type":"EnemyPosition",
+                 "visible":true,
+                 "width":0,
+                 "x":2164.66666666667,
+                 "y":1722.66666666667
+                }, 
+                {
+                 "height":0,
+                 "id":49,
+                 "name":"",
+                 "rotation":0,
+                 "type":"FinalPosition",
+                 "visible":true,
+                 "width":0,
+                 "x":3825.33333333333,
+                 "y":612
+                }, 
+                {
+                 "height":76.5,
+                 "id":51,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#ffffff",
+                     "fontfamily":"Nirmala UI",
+                     "pixelsize":27,
+                     "text":"R",
+                     "wrap":true
+                    },
+                 "type":"Text",
+                 "visible":true,
+                 "width":262.5,
+                 "x":1750.17,
+                 "y":258.416666666667
+                }, 
+                {
+                 "height":48.6225,
+                 "id":52,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#aaff00",
+                     "fontfamily":"Seven Segment",
+                     "pixelsize":34,
+                     "text":"reload weapon",
+                     "wrap":true
+                    },
+                 "type":"Text",
+                 "visible":true,
+                 "width":255,
+                 "x":1450.7,
+                 "y":262.082666666667
+                }, 
+                {
+                 "height":0,
+                 "id":54,
+                 "name":"",
+                 "point":true,
+                 "rotation":0,
+                 "type":"PlayerRespawn",
+                 "visible":true,
+                 "width":0,
+                 "x":371.878787878788,
+                 "y":400.242424242427
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":56,
+                 "name":"",
+                 "rotation":0,
+                 "type":"EnemyPosition",
+                 "visible":true,
+                 "width":0,
+                 "x":3260.16666666667,
+                 "y":1704.16666666667
+                },
+            
+                {
+                 "height":76.5,
+                 "id":57,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#ffffff",
+                     "fontfamily":"Nirmala UI",
+                     "pixelsize":49,
+                     "text":"-> -> ->",
+                     "wrap":true
+                    },
+                 "type":"Text",
+                 "visible":true,
+                 "width":209.5,
+                 "x":3648.58333333333,
+                 "y":491.083333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -643,7 +804,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":41,
+ "nextobjectid":59,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

@@ -8,7 +8,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		scene.physics.add.existing(this);
 
 		this.body.setSize(150, 150);
-		this.body.setOffset(35, 0);
+		this.body.setOffset(-20, -15);
 		
 		this.interactionText = scene.add.text(x, y - 50, 'Interactuar [E]', { 
 			fontSize: '16px', 
@@ -28,14 +28,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		this.lasers = lasers;
 		this.player = player;
 		this.interactionText.setPosition(this.x, this.y - 50);
-		this.scene.physics.add.overlap(player, this, this.showInteraction, null, this);
 		this.body.allowGravity = false;
 		this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 		
-	}
-
-	showInteraction() {
-		this.interactionText.setVisible(true);
 	}
 
 	update() {
@@ -45,17 +40,20 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			return;
 		}
 
-		if (Phaser.Math.Distance.Between(this.x, this.y, this.scene._player.x, this.scene._player.y) > 100) {
+		if (Phaser.Math.Distance.Between(this.x - 35, this.y, this.player.x, this.player.y) > 130) {
 			this.interactionText.setVisible(false);
 		}
-		else if (this.interactionText.visible && Phaser.Input.Keyboard.JustDown(this.eKey)) {
-			if (this.windowOpen) {
-				this.closeConsoleWindow();
-			} else {
-				const consoleSound= this.scene.sound.add('console_sound');
-        		consoleSound.setVolume(2);  // Ajusta el volumen del sonido
-        		consoleSound.play();
-				this.openConsoleWindow();
+		else {
+			this.interactionText.setVisible(true);
+			if (Phaser.Input.Keyboard.JustDown(this.eKey)) {
+				if (this.windowOpen) {
+					this.closeConsoleWindow();
+				} else {
+					const consoleSound= this.scene.sound.add('console_sound');
+					consoleSound.setVolume(2);  // Ajusta el volumen del sonido
+					consoleSound.play();
+					this.openConsoleWindow();
+				}
 			}
 		}
 	}
@@ -63,6 +61,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 
 	openConsoleWindow() {
 		
+		this.player.setIsConsoleActive(true);
 		this.windowOpen = true;
 		this.scene.consoleActive = true; 
 
@@ -182,7 +181,10 @@ export default class Console extends Phaser.GameObjects.Sprite {
 				this._secret_sound.play();*/
 				if (enteredPassword === correctPassword) {
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
-					this.lasers.forEach(laser => laser.desactivateLaser());
+					this.lasers.forEach(laser => {
+						if(laser.getIsStoppable())
+							laser.desactivateLaser()
+					});
 					this.setVisible(false);
 					this.interactionText.setVisible(false);
 					this.closeConsoleWindow();
@@ -211,5 +213,8 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		}
 		this.windowOpen = false;
 		this.scene.consoleActive = false; 
+		this.scene.time.delayedCall(200, () => {
+			this.player.setIsConsoleActive(false);
+		});
 	}
 }

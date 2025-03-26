@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import InteractiveObject from './InteractiveObject';
+import InteractiveObject from '../base-game-objects/InteractiveObject';
 
 export default class Note extends InteractiveObject {
   constructor(scene, x, y, sprite) {
@@ -14,37 +14,15 @@ export default class Note extends InteractiveObject {
     // Referencia al temporizador de cierre automático
     this.delayedClose = null;
   }
-  
-  configure(player) {
-    this._player = player;
-    this.interactionText.setPosition(this.x, this.y - 50);
-    this.scene.physics.add.overlap(player, this, this.showInteraction, null, this);
-    this.body.allowGravity = false;
-    this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-  }
-  
-  showInteraction() {
-    this.interactionText.setVisible(true);
-  }
-  
   update() {
-    // Ocultar el texto de interacción si el jugador se aleja
-    if (this.esta_dentro_de_rango(this.scene._player.x, this.scene._player.y)) {
-      this.interactionText.setVisible(false);
-    }
-    // Al pulsar E, alterna la ventana
-    else if (Phaser.Input.Keyboard.JustDown(this.eKey)) {
-      this.openNoteWindow();
-    }
+    super.update();
   }
-  
-  openNoteWindow() {
+  activateAction() {
     // Si ya está abierta, se cierra la ventana y se sale del método
     if (this.windowOpen) {
       this.closeNoteWindow();
       return;
     }
-    
     this.windowOpen = true;
     const windowX = this.x + 100;
     const windowY = this.y - 100;

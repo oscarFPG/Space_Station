@@ -16,8 +16,6 @@ export default class Interactive extends Phaser.GameObjects.Sprite {
         this.rangoAccion.setOrigin(0.5)
         this.scene.add.existing(this.rangoAccion)
     }
-
-
     accion(gameobject){
         console.log('DENTRO')
     }

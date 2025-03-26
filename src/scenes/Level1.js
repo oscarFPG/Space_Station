@@ -16,12 +16,12 @@ import BaseGroup from '../game-objects/objects/BaseGroup.js'
 export default class Tutorial extends BaseScene {
 
     constructor(){
-        super('tutorial')
+        super('Level1')
     }
 
     create(){
 
-        var map = this.make.tilemap({ key: 'map_tutorial', tileWidth: 111, tileHeight: 111 })
+        var map = this.make.tilemap({ key: 'map_level_1', tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
         this._enemigos = []
         
