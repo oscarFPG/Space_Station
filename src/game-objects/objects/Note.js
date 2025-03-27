@@ -14,8 +14,8 @@ export default class Note extends InteractiveObject {
     // Referencia al temporizador de cierre automático
     this.delayedClose = null;
   }
-  update() {
-    super.update();
+  update(time) {
+    super.update(time);
   }
   activateAction() {
     // Si ya está abierta, se cierra la ventana y se sale del método

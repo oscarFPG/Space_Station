@@ -3,6 +3,16 @@ import Player from '../game-objects/characters/Player.js'
 import Bullet from '../game-objects/base-game-objects/Bullet.js'
 import Options from '../options-manager/Options.js'
 import BaseGroup from '../game-objects/objects/BaseGroup.js'
+import Note from '../game-objects/objects//Note.js';
+import Console from '../game-objects/objects//Console.js';
+import Laser from '../game-objects/objects//Laser.js';
+import HealthItem from '../game-objects/objects//Health.js';
+import ShieldItem from '../game-objects/objects//Shield.js';
+import BatteryItem from '../game-objects/objects//Battery.js';
+import Coin from '../game-objects/objects/Coin.js'
+import Box from '../game-objects/objects//Box.js';
+import BatteryStructure from '../game-objects/objects//BatteryStructure.js';
+import Door from '../game-objects/objects/Door.js';
 
 
 export default class BaseScene extends Phaser.Scene {
@@ -13,11 +23,11 @@ export default class BaseScene extends Phaser.Scene {
     static LAYER_PERSONAJE = 'butano'
 
     _previousScene = null
+    _nextScene = null;
 
     constructor(sceneKey){
         super({ key: sceneKey })
     }
-
 
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
     // SIEMPRE esta funcion con super.create()
@@ -45,10 +55,6 @@ export default class BaseScene extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
-        // Crear personajes
-        //this._player = this.config_jugador(1000, 1000)
-        //var enemigos = this.config_enemigos()
-
         // Configuraciones generales
         this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
     
@@ -64,12 +70,10 @@ export default class BaseScene extends Phaser.Scene {
                 repeat: 0
             });
         }
-
         this.scene.launch('')
     }
     
     #config_eventos(){
-
         // Evento para abrir el menu de ajustes
         this.input.keyboard.on(Options.TECLA, () => {
             this.scene.stop()
@@ -77,31 +81,18 @@ export default class BaseScene extends Phaser.Scene {
         }, this)
 
     }
-
-    //Métodos de adquisicion de PLAYER:
-    /*
-    receiveHealthPlayer(health) {
-        this._player.healthBoost(health);
-    }
-    receiveShieldPlayer(shield) {
-        this._player.shieldBoost(shield);
-    }
-    receiveMoneyPlayer(value) {
-        this._player.moneyBoost(value);
-    }
-    */
-    config_characters(player, enemigos, boxes, doors) {
-        this.config_camara(player)
+    config_characters() {
+        this.config_camara(this._player)
         this.config_cursor()
 
         // Configurar colisiones
         this._layerPared.setCollisionByExclusion([-1])
         this._layerObjeto.setCollisionByExclusion([-1])
 
-        this.crearColliderConSuelo(player)
-        this.crearColliderConPared(player)
+        this.crearColliderConSuelo(this._player)
+        this.crearColliderConPared(this._player)
 
-        enemigos.forEach(enemigo => {   // Para todos los enemigos de la escena
+        this._enemigos.forEach(enemigo => {   // Para todos los enemigos de la escena
             this.crearColliderConSuelo(enemigo)
             this.crearColliderConPared(enemigo)
         })
@@ -122,14 +113,24 @@ export default class BaseScene extends Phaser.Scene {
                 this._butanoColliders.add(collider);
             }
         });
-        this.physics.add.collider(player, this._butanoColliders);
-        enemigos.forEach(enemigo => {
+        this.physics.add.collider(this._player, this._butanoColliders);
+        this._paredColliders = this.physics.add.staticGroup();
+
+        this._layerPared.forEachTile(tile => {
+            if (tile.index !== -1) { // Solo creamos colisión en los tiles que existen
+                const collider = this.physics.add.staticImage(tile.getCenterX(), tile.getCenterY(), null);
+                collider.body.setSize(tile.width, tile.height);
+                collider.setVisible(false);
+                this._paredColliders.add(collider);
+            }
+        });
+        this._enemigos.forEach(enemigo => {
             this.physics.add.collider(enemigo, this._butanoColliders);
-            this.physics.add.collider(enemigo, player);
+            this.physics.add.collider(enemigo, this._player);
         })
-        this.physics.add.collider(player, enemigos);
-        this.physics.add.collider(player, boxes);
-        this.physics.add.collider(player, doors);
+        this.physics.add.collider(this._player, this._enemigos);
+        this.physics.add.collider(this._player, this.boxes);
+        this.physics.add.collider(this._player, this.doors);
 
         // Crear el grupo global de balas
         this._grupoBalas = this.physics.add.group();
@@ -137,7 +138,6 @@ export default class BaseScene extends Phaser.Scene {
 
             let bullet = obj1 instanceof Bullet ? obj1 : obj2;
             let target = bullet === obj1 ? obj2 : obj1;
-            
             // Si es un objeto que recibe daño -> Aplicar daño de la bala
             if(target.quitarVida)
                 target.quitarVida(bullet._damage)
@@ -148,39 +148,125 @@ export default class BaseScene extends Phaser.Scene {
             }
         };
         this.physics.add.collider(this._grupoBalas, this._layerPared, onBulletCollision);
-        this.physics.add.collider(this._grupoBalas, player, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, this._player, onBulletCollision);
         this.physics.add.collider(this._grupoBalas, this._butanoColliders, onBulletCollision);
+        this.physics.add.collider(this._grupoBalas, this._paredColliders, onBulletCollision);
 
-        enemigos.forEach(enemigo => {
+        this._enemigos.forEach(enemigo => {
             this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision);
         })
-        boxes.forEach(box => {
+        this.boxes.forEach(box => {
             this.physics.add.collider(this._grupoBalas, box, onBulletCollision);
         });
-        doors.forEach(door => {
+        this.doors.forEach(door => {
             this.physics.add.collider(this._grupoBalas, door, onBulletCollision);
         });
         this._grupoObjectos = this.physics.add.staticGroup()
-        this.physics.add.overlap(player, this._grupoObjectos)
-    }
-    config_jugador(x, y){
-        var player = new Player(this, x, y)
-        player.body.setCollideWorldBounds(true)
-        player.body.setImmovable(true)
-        return player
+        this.physics.add.overlap(this._player, this._grupoObjectos)
     }
 
-    config_enemigos(){
-        return null;
-    }
+    createMushroom(map) { 
+        //Se obtiene el jugador que proviene del Manager
+        const objectLayer = map.getObjectLayer('objects');
+        //Aqui se crean los textos del mapa que contienen informacion importante
+        //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
+        //Insercion del resto de objetos con sus respectivas clases
+        this.notes = map.createFromObjects('objects', { gid: 11, classType: Note, key: 'note' });
+        this.lasers = map.createFromObjects('objects', { gid: 16, classType: Laser, key: 'laser2' });
+        this.healthItems = map.createFromObjects('objects', { gid: 20, classType: HealthItem, key: 'health' });
+        this.shieldItems = map.createFromObjects('objects', { gid: 21, classType: ShieldItem, key: 'shield' });
+        this.batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' });
+        this.coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' });
+        this.consolesOff = map.createFromObjects('objects', { gid: 18, classType: Console, key: 'consoleBlocked' });
+        this.batteriesStructures = map.createFromObjects('objects', { gid: 12, classType: BatteryStructure, key: 'batteryStructure' });
+        this.doors = map.createFromObjects('objects', { gid: 24, classType: Door, key: 'door' });
+        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' });
 
+        objectLayer.objects.forEach(object => {
+            if(object.type === "Text" && object.text) {
+                const textContent = object.text.text; 
+                const fontSize = object.text.pixelsize;
+                const fontFamily = object.text.fontfamily;
+                const color = object.text.color;
+                // Crea el objeto de texto en Phaser
+                this.add.text(object.x, object.y, textContent, {
+                font: `${fontSize}px ${fontFamily}`,
+                color: color
+                });
+            }
+            else if(object.type === "EnemyPosition") {
+                this.config_enemigos(object.x, object.y)
+            }
+            else if(object.type === "PlayerRespawn") {
+                this.playerRespawnPosition = { x: object.x, y: object.y };
+            }
+            else if(object.type === "FinalPosition") {
+                this._finalPosition = { x: object.x, y: object.y };
+            }
+            else if(object.type === "BlueLightPoint") {
+                this.lights.addLight(object.x, object.y, 250, 0x8888ff, 0.5);
+            }
+        });     
+        this._player = this.config_jugador(this.playerRespawnPosition.x, this.playerRespawnPosition.y)
+        this.config_characters()
+
+        //Gestion de colisiones entre objetos de tiled y el player
+        let group = new BaseGroup(this, true, true, true, [], this._layerPared);
+        //Se añaden los personajes al BaseGroup 
+        group.addElement(this._player);
+        this._enemigos.forEach(_enemigo => {
+            group.addElement(_enemigo);
+        });
+        //Se establecen las colisiones entre las cajas y las puertas con los personajes
+        this.boxes.forEach(box => {
+             group.addCollision(box);
+        });
+        this.doors.forEach(door => {
+            group.addCollision(door);
+        });
+        //Funciones iniciales de los objetos
+        this.notes.forEach(note => {
+            note.configure(this._player, 0xffffff);
+        });
+        this.healthItems.forEach(healthItem => {
+            healthItem.configure(this._player, 0xffff00, 'Pick up health kit');
+        });
+        this.shieldItems.forEach(shieldItem => {
+            shieldItem.configure(this._player, 0x0000ff, 'Pick up shield');
+        });
+        this.coinItems.forEach(coinItem => {
+            coinItem.configure(this._player, 0xffffff, 'Pick up coin');
+        });
+        this.consolesOff.forEach(console => {
+            console.configure(this._player, this.lasers);
+        });
+        this.lasers.forEach(laser => {
+            laser.configure(this._player);
+        });
+        this.batteryItems.forEach(battery => {
+            battery.configure(this._player, 0x00ff00, 'Pick up cell');
+        });
+        this.batteriesStructures.forEach(batteriesStructure => {
+            batteriesStructure.configure(this._player, this.doors);
+        });
+        this.doors.forEach(door => {
+            door.configure(this._player);
+        });
+    }
+    config_jugador(x, y) {
+        this._player = new Player(this, x, y);
+        this._player.body.setCollideWorldBounds(true);
+        this._player.body.setImmovable(true);
+        return this._player;
+      }
+      
     config_iluminacion(capas){
 
         for(let i = 0; i < capas.length; i++)
             capas[i].setPipeline('Light2D')
 
         this.lights.enable();
-        this.lights.setAmbientColor(0x888888);
+        this.lights.setAmbientColor(0x777777);
     }
 
     config_cursor(){
@@ -202,5 +288,44 @@ export default class BaseScene extends Phaser.Scene {
     crearColliderConObjetos(gameobject){
         this.physics.add.collider(gameobject, this._layerObjeto)
     }
-
+    //Aqui se hace el update de todos los objetos de la escena 
+    update(time, deltaTime){
+        this.notes.forEach(note => {
+            note.update(time);
+        });
+        this.healthItems.forEach(healthItem => {
+            healthItem.update(time);
+        });
+        this.shieldItems.forEach(shieldItem => {
+            shieldItem.update(time);
+        });
+        this.coinItems.forEach(coinItem => {
+            coinItem.update(time);
+        });
+        this.batteryItems.forEach(batteryItem => {
+            batteryItem.update(time);
+        });
+        this.lasers.forEach(laser => {
+            laser.update(time, deltaTime);
+        });
+        this.consolesOff.forEach(console => {
+            console.update();
+        });
+        this.doors.forEach(door => {
+            door.update();
+        });
+        this.batteriesStructures.forEach(batteriesStructure => {
+            batteriesStructure.update();
+        });
+        if (this._finalPosition && this._player) {
+            const distance = Phaser.Math.Distance.Between(
+                this._player.x, this._player.y,
+                this._finalPosition.x, this._finalPosition.y
+            );
+            if (distance < 100) { 
+                if(this._nextScene != null)
+                    this.scene.switch(this._nextScene, { player: this._player });
+            }
+        }
+    }
 }

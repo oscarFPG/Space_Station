@@ -25,6 +25,7 @@ export default class BatteryStructure extends Phaser.GameObjects.Sprite {
       this._doors = doors;
       this.scene.physics.add.overlap(player, this, this.showInteraction, null, this);
       this.body.allowGravity = false;
+      this.light = this.scene.lights.addLight(this.x, this.y, 250, 0xff0000, 0.6);
       this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
   }
 
@@ -78,6 +79,7 @@ export default class BatteryStructure extends Phaser.GameObjects.Sprite {
             stateText.setText(`${this._batteries} / ${this._remainingBatteries} CELLS`);
             if (this._batteries === this._remainingBatteries) {
               this.setVisible(false);
+              this.light.setColor(0x8888ff);
               this._doors.forEach(_door => {
                 if(!_door.getIsActivate())
                   _door.activateDoor()

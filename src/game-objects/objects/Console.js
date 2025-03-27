@@ -4,13 +4,13 @@ export default class Console extends Phaser.GameObjects.Sprite {
 
 	constructor(scene, x, y, sprite) {
 		super(scene, x, y, sprite); 
-		scene.add.existing(this);
-		scene.physics.add.existing(this);
+		this.scene.add.existing(this);
+		this.scene.physics.add.existing(this);
 
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
 		
-		this.interactionText = scene.add.text(x, y - 50, 'Interactuar [E]', { 
+		this.interactionText = scene.add.text(x, y - 50, 'Interact [E]', { 
 			fontSize: '16px', 
 			fill: '#fff',
 			backgroundColor: 'rgba(0, 0, 0, 0.5)'
@@ -29,6 +29,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		this.player = player;
 		this.interactionText.setPosition(this.x, this.y - 50);
 		this.body.allowGravity = false;
+		this.light = this.scene.lights.addLight(this.x, this.y, 150, 0xffffff, 1);
 		this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 		
 	}

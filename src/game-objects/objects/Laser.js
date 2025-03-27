@@ -16,6 +16,7 @@ export default class Laser extends Phaser.GameObjects.Sprite {
         this.isActivate = true;
         this.isStatic = this.data.values.isStatic;
         this.scene.physics.add.overlap(player, this, this.damagePlayer, null, this);
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.5);
     }
 
     update(time, delta) {
@@ -30,17 +31,26 @@ export default class Laser extends Phaser.GameObjects.Sprite {
               this.setActive(false);
               this.body.checkCollision.none = true;
               this.setVisible(false);
+              this.light.setColor(0x000000);
             } else {
               // Activamos el laser: vuelve a colisionar y se muestra
               this.setActive(true);
               this.body.checkCollision.none = false;
               this.setVisible(true);
+              this.light.setColor(0xffffff);
             }
-            // Reiniciamos el temporizador
             this._blinkTimer = 0;
           }
         }
       }
+
+      destroy(fromScene) {      
+        if (this.light) {
+            this.scene.lights.removeLight(this.light);
+            this.light = null; 
+        }
+        super.destroy(fromScene);
+    }
       
 
     damagePlayer() {

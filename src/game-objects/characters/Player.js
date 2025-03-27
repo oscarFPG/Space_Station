@@ -9,9 +9,9 @@ export default class Player extends BaseActor {
 	static IDLE_ANIMATION = 'playerIdle';
 	static RUNNING_ANIMATION = 'playerRunning';
 
-	static VIDA_INICIAL = 50;
-	static ESCUDO_INICIAL = 50;
-	static DINERO_INICIAL = 50;
+	static VIDA_INICIAL = 15;
+	static ESCUDO_INICIAL = 10;
+	static DINERO_INICIAL = 0;
 	static BATERIA_INICIAL = 0;
 	static SPEED = 180;
 
@@ -139,24 +139,17 @@ export default class Player extends BaseActor {
     }
 
 	healthBoost(health) {
-
-		if (this._vida == this.VIDA_INICIAL) {
-			return;
-		}
-		if (this._vida + health >= this.VIDA_INICIAL) {
-			this._vida = this.VIDA_INICIAL;
+		if (this._atributos.vida + health >= Player.VIDA_INICIAL) {
+			this._atributos.vida = Player.VIDA_INICIAL;
 		}
 		else {
-			this._vida += health;
+			this._atributos.vida += health;
 		}
 	}
 
 	shieldBoost(shield) {
-		//if (this._escudo == this.VIDA_INICIAL) {
-		//	return;
-		//}
-		if (this._escudo + shield >= this.ESCUDO_INICIAL) {
-			this._escudo = this.ESCUDO_INICIAL;
+		if (this._escudo + shield >= Player.ESCUDO_INICIAL) {
+			this._escudo = Player.ESCUDO_INICIAL;
 		}
 		else {
 			this._escudo += shield;
@@ -165,6 +158,9 @@ export default class Player extends BaseActor {
 
 	moneyBoost(value) {
 		this._dinero += value;
+	}
+	moneyAction(value) {
+		this._dinero -= value;
 	}
 
 	pickBattery() {
@@ -176,6 +172,12 @@ export default class Player extends BaseActor {
 	}
 	getBatteries() {
 		return this._baterias;
+	}
+	isFullHealth() {
+		return this._atributos.vida === Player.VIDA_INICIAL;
+	}
+	isFullShield() {
+		return this._escudo === Player.ESCUDO_INICIAL;
 	}
 	setIsConsoleActive(value) {
 		this.isOnConsole = value;

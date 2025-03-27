@@ -1,23 +1,16 @@
-import Phaser from 'phaser'
-import Object from '../base-game-objects/Object.js'
+import InteractiveObject from '../base-game-objects/InteractiveObject.js'
 
-
-export default class Coin extends Object {
-
-    constructor(scene, x, y){
-        super(scene, x, y, 'coinIcon', 140)
-        this.setScale(0.015)
-        this.setOrigin(0.5)
-        this.body.setSize(200, 200)
-        this.body.setOffset(0, 0)
+export default class Coin extends InteractiveObject {
+    static MONEY_VALUE = 25
+    constructor(scene, x, y, sprite) {
+        super(scene, x, y, sprite);
     }
-
-
-    preUpdate(){
-        
-        var player = this.scene._player ? this.scene._player : null
-        if(player)
-            this.interactuar(player)
+    update(time) {
+        super.update(time);
     }
-
+    activateAction() {
+        this._player.moneyBoost(Coin.MONEY_VALUE);
+        this.removeLight();
+        this.destroy(true);
+    }
 }
