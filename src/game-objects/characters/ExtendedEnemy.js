@@ -16,9 +16,9 @@ export default class ExtendedEnemy extends BasedEnemy {
         this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
         this._sprite.play('enemy_idle')
         
-        this._atributosIA.visionRange = 850
-        this._atributosIA.fireRate = 1000;
-        this._atributosIA.shootingRange = 468;
+        this._enemyParameters.visionRange = 540
+        this._enemyParameters.fireRate = 1000;
+        this._enemyParameters.shootingRange = 468;
     }
 
     
