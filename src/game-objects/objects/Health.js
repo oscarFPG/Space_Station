@@ -10,9 +10,11 @@ export default class Health extends InteractiveObject {
     }
     activateAction() {
         if(!this._player.isFullHealth()) {
+            this.alreadyPulse = true;
             this._player.healthBoost(Health.AUMENTO_VIDA);
             this.removeLight();
             this.destroy(true);
         }
     }
+
 }

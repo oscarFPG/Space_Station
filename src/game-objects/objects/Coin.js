@@ -10,6 +10,7 @@ export default class Coin extends InteractiveObject {
     }
     activateAction() {
         this._player.moneyBoost(Coin.MONEY_VALUE);
+        this.alreadyPulse = true;
         this.removeLight();
         this.destroy(true);
     }

@@ -1099,6 +1099,18 @@
                  "width":111,
                  "x":110.333333333333,
                  "y":2216
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":67,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":1614.66666666667,
+                 "y":1501.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1107,7 +1119,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":67,
+ "nextobjectid":68,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

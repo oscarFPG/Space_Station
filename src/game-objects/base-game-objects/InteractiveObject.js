@@ -57,7 +57,6 @@ export default class InteractiveObject extends Phaser.GameObjects.Sprite {
           if (this.numberRGB === 0xffffff) {
              this.removeLight();
           }
-          this.alreadyPulse = true;
           this.activateAction();
       }
         if (this.light) {
@@ -72,5 +71,8 @@ export default class InteractiveObject extends Phaser.GameObjects.Sprite {
         this.light.intensity = 0.2; // "apagada"
       }
     }
+  }
+  configItem() {
+    return null
   }
 }

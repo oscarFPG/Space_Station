@@ -11,6 +11,7 @@ export default class Shield extends InteractiveObject {
     }
     activateAction() {
         if(!this._player.isFullShield()) {
+            this.alreadyPulse = true;
             this._player.shieldBoost(Shield.AUMENTO_ESCUDO);
             this.removeLight();
             this.destroy(true);

@@ -8,6 +8,7 @@ export default class Battery extends InteractiveObject {
         super.update(time);
     }
     activateAction() {
+        this.alreadyPulse = true;
         this._player.pickBattery();
         this.removeLight();
         this.destroy(true);

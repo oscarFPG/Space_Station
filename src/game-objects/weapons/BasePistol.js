@@ -15,12 +15,12 @@ export default class BasePistol extends RangeWeapon {
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;
-        this._specs.fireRate = 6;
+        this._specs.fireRate = 2.5;
         this._specs.reloadTime = 1.5;
         this._specs.sprite = BasePistol.BASE_PISTOL_TEXTURE;
         this._specs.weight = 1;
         
-        this._ammo.clipSize = 10;
+        this._ammo.clipSize = 15;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
         this._ammo.ammoExtra = 200;
         this._ammo.texture = BasePistol.BASE_PISTOL_AMMO_TEXTURE;
