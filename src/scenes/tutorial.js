@@ -26,11 +26,10 @@ export default class Tutorial extends BaseScene {
         this._enemigos = []
         
         super.create(map, tileset)
-        //const moneda = new Coin(this, 850, 1000)
         this.createMushroom(map)
     }
 
-    createMushroom(map) { 
+    createMushroom(map) {
         const objectLayer = map.getObjectLayer('objects');
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
@@ -71,7 +70,7 @@ export default class Tutorial extends BaseScene {
         });     
         this.config_characters(this._player, this._enemigos, this.boxes, this.doors)
 
-        //Gestion de colisiones entre objetos de tiled y el player
+        // Gestion de colisiones entre objetos de tiled y el player
         let group = new BaseGroup(this, true, true, true, [], this._layerPared);
         group.addElement(this._player);
         this.boxes.forEach(box => {

@@ -25,9 +25,7 @@ export default class BaseEnemy extends BaseActor {
         lastDodgeSwitch: undefined,
         dodgeSwitchInterval: undefined,
         dodgeDirection: undefined
-    };
-
-    
+    }
 
     
     constructor(scene, x, y, sprite, vida, speed) {
