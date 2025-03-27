@@ -21,5 +21,9 @@ export default class ExtendedEnemy extends BasedEnemy {
         this._atributosIA.shootingRange = 468;
     }
 
+    preUpdate(time, delta) {
+        BasedEnemy.buscaJugador(this.scene, this, this.scene._player);//!!!
+    }
+
     
 }

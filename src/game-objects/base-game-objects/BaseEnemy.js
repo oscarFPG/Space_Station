@@ -1,16 +1,33 @@
 import Phaser from 'phaser';
 import BaseActor from './BaseActor';
 import WeaponFactory from '../../factories/WeaponFactory';
+import ClassIA from '../../factories/ClassIA';
 
 
 export default class BaseEnemy extends BaseActor {
      
     // Atributos
-    _atributosIA = {
+    _enemyParameters = {
+
+        state: undefined,
+
+        weapon: undefined,
         visionRange: undefined,
         fireRate: undefined,
-        shootingRange: undefined
+        shootingRange: undefined,
+        minDistance: undefined,
+
+        direction: undefined,
+        x: undefined,
+        y: undefined,
+
+        dodgeIntensity: undefined,
+        lastDodgeSwitch: undefined,
+        dodgeSwitchInterval: undefined,
+        dodgeDirection: undefined
     };
+
+    
 
     
     constructor(scene, x, y, sprite, vida, speed) {
@@ -21,23 +38,27 @@ export default class BaseEnemy extends BaseActor {
         // Configurar física
         this.body.setSize(66, 78);
         this.body.setCollideWorldBounds(true);
+        
+
+        this._enemyParameters.x = this.x;
+        this._enemyParameters.y = this.y;
 
         // Propiedades de la IA
-        this.state = 'patrol';          
-        this._atributosIA.shootingRange = 540;             
-        this.minDistance = 150;        
-        this.patrolDirection = new Phaser.Math.Vector2(1, 0); 
+        this._enemyParameters.state = 'patrullar';          
+        this._enemyParameters.shootingRange = 540;             
+        this._enemyParameters.minDistance = 150;        
+        this._enemyParameters.direction = new Phaser.Math.Vector2(1, 0); 
 
         // Propiedades para el dodge(IA)
-        this.dodgeIntensity = 50;        
-        this.lastDodgeSwitch = 0;       
-        this.dodgeSwitchInterval = 1500; 
-        this.dodgeDirection = 1; 
+        this._enemyParameters.dodgeIntensity = 50;        
+        this._enemyParameters.lastDodgeSwitch = 0;       
+        this._enemyParameters.dodgeSwitchInterval = 1500; 
+        this._enemyParameters.dodgeDirection = 1; 
     }
 
     add_weapon(weaponName, offset){
-        this._weapon = WeaponFactory.createWeapon(weaponName, this.scene, offset)
-        this.add(this._weapon)
+        this._enemyParameters.weapon = WeaponFactory.createWeapon(weaponName, this.scene, offset)
+        this.add(this._enemyParameters.weapon)
     }
 
     preUpdate(time, delta) {
@@ -45,9 +66,9 @@ export default class BaseEnemy extends BaseActor {
         const playerX = this.scene._player.x;
         const playerY = this.scene._player.y;
         const distanceToPlayer = Phaser.Math.Distance.Between(this.x, this.y, playerX, playerY);
-        this.setPosition(this.body.x, this.body.y);
+
         // Determinar estado según la distancia del jugador
-        if (distanceToPlayer <= this._atributosIA.shootingRange) {
+        if (distanceToPlayer <= this._enemyParameters.shootingRange) {
             this.state = 'perseguir';
         }
         else if (this.state === 'perseguir') {
@@ -66,7 +87,7 @@ export default class BaseEnemy extends BaseActor {
 
             // Determinar velocidad base según la distancia:
             let baseVX = 0, baseVY = 0;
-            if (distanceToPlayer > this._atributosIA.shootingRange) {
+            if (distanceToPlayer > this._enemyParameters.shootingRange) {
 
                 baseVX = Math.cos(chaseAngle) * this._atributos.speed;
                 baseVY = Math.sin(chaseAngle) * this._atributos.speed;
@@ -87,7 +108,7 @@ export default class BaseEnemy extends BaseActor {
             this.body.setVelocity(baseVX + dodgeVX, baseVY + dodgeVY);
 
             // Disparar si está en rango
-            if (distanceToPlayer <= this._atributosIA.shootingRange && time > this.lastShotTime + this._atributosIA.fireRate) {
+            if (distanceToPlayer <= this._enemyParameters.shootingRange && time > this.lastShotTime + this._enemyParameters.fireRate) {
                 this._weapon.shot(playerX, playerY);
                 this.lastShotTime = time;
             }
