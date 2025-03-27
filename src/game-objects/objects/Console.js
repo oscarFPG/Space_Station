@@ -182,18 +182,29 @@ export default class Console extends Phaser.GameObjects.Sprite {
 				this._secret_sound.play();*/
 				if (enteredPassword === correctPassword) {
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
+					this.acierto= this.scene.sound.add('success');
+					this.acierto.setVolume(2);  // Ajusta el volumen del sonido
+					this.acierto.play();
 					this.lasers.forEach(laser => {
 						if(laser.getIsStoppable())
 							laser.desactivateLaser()
 					});
+					
+
 					this.setVisible(false);
 					this.interactionText.setVisible(false);
 					this.closeConsoleWindow();
 				} else {
 					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
+
+					const errorSound= this.scene.sound.add('error');
+					errorSound.setVolume(2);  // Ajusta el volumen del sonido
+					errorSound.play();
+					
 					passwordDisplay.setText('Contraseña incorrecta');
 					enteredPassword = "";
 					this.scene.time.delayedCall(1000, () => {
+				
 					if (passwordDisplay && passwordDisplay.active) {
 						passwordDisplay.setText('');
 					}
