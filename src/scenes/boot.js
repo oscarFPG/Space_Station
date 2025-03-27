@@ -53,7 +53,9 @@ import MAINMENU_MUSIC from '../../audio/music/SpaceStation-Menu.mp3'
 import ClickSOund from '../../audio/effects/posibleClickSound.mp3'
 import GUN_SOUND from '../../audio/effects/gunSound.mp3'
 import CONSOLE_SOUND from '../../audio/effects/consoleSoundmp3.mp3'
-import AMBIENTE from '../../audio/music/ambiente.mp3'    
+import AMBIENTE from '../../audio/music/ambiente.mp3'  
+import ERROR from  '../../audio/effects/error1.mp3'
+import SUCCESS from '../../audio/effects/acierto.mp3'
 
 
 export default class Boot extends BaseScene {
@@ -111,6 +113,8 @@ export default class Boot extends BaseScene {
         this.load.audio('gun_sound',GUN_SOUND)
         this.load.audio('console_sound', CONSOLE_SOUND)
         this.load.audio('ambiente', AMBIENTE)
+        this.load.audio('error',ERROR)
+        this.load.audio('success',SUCCESS)
     }
     
     create(){
