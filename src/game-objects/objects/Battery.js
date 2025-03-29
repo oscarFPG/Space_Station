@@ -1,16 +1,11 @@
-import InteractiveObject from '../base-game-objects/InteractiveObject.js'
+import Interactive from "../base-game-objects/Interactive";
 
-export default class Battery extends InteractiveObject {
+
+export default class Battery extends Interactive {
+    
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
     }
-    update(time) {
-        super.update(time);
-    }
-    activateAction() {
-        this.alreadyPulse = true;
-        this._player.pickBattery();
-        this.removeLight();
-        this.destroy(true);
-    }
+
+    
 }

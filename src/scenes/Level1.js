@@ -14,7 +14,7 @@ export default class Level1 extends BaseScene {
         this._enemigos = []
         //this._nextScene = 'Level2';
         super.create(map, tileset)
-        this.createMushroom(map)
+        this.crear_objetos(map)
     }
     config_enemigos(x, y){
         var unEnemigo = new ExtendedEnemy(this, x, y)

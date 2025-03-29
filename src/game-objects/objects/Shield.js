@@ -1,6 +1,7 @@
-import InteractiveObject from '../base-game-objects/InteractiveObject.js'
+import Interactive from "../base-game-objects/Interactive";
 
-export default class Shield extends InteractiveObject {
+
+export default class Shield extends Interactive {
 
     static AUMENTO_ESCUDO = 5;
     constructor(scene, x, y, sprite) {

@@ -9,4 +9,15 @@ export default class Object extends Interactive {
         this.scene._grupoObjectos.add(this)
     }
 
+    config_helperText(){
+
+        const text = this.scene.add.text(x, y, string, { 
+            fontSize: `${fontSize}px`, 
+            fill: fillColor,
+            backgroundColor: `rgba(${r}, ${g}, ${b}, ${alpha})`
+        })
+
+        return text
+    }
+
 }

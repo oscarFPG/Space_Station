@@ -13,8 +13,7 @@ export default class Settings extends BaseScene {
     }
 
     create(){
-        super.create(null, null)
-        this.config_eventos()
+        super.create(null, null, null)
     }
 
     update(){

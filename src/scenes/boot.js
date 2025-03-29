@@ -27,11 +27,10 @@ import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 import Level1Map from '../../assets/maps/Level1.json'
 
 // Objetos 
-import Paper from '../../assets/objects/paper.png'
+import Note from '../../assets/objects/paper.png'
 import ConsoleBlocked from '../../assets/objects/panel_off.png'
 import laserUp from '../../assets/objects/laser_2.png'
 import laserDown from '../../assets/objects/laser_1.png'
-
 import healthItem from '../../assets/objects/healthItem.png'
 import shieldItem from '../../assets/objects/shieldItem.png'
 import batteryItem from '../../assets/objects/batteryItem.png'
@@ -74,7 +73,7 @@ export default class Boot extends BaseScene {
         this.load.image('door', doors);
         this.load.image('box', box);
         this.load.image('baseWeapon', OldColt)
-        this.load.image('note', Paper)
+        this.load.image('note', Note)
         this.load.image('laser2', laserUp)
         this.load.image('laser1', laserDown)
         this.load.image('consoleBlocked', ConsoleBlocked)
@@ -101,7 +100,6 @@ export default class Boot extends BaseScene {
         // Spritesheets
         this.load.spritesheet('boxAnimation', boxBroken, { frameWidth: 111 , frameHeight: 111 });
         this.load.spritesheet('doorsAnimation', doorsOpen, { frameWidth: 111 , frameHeight: 111 });
-
         this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 });
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 });
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 });

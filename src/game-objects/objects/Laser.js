@@ -1,68 +1,16 @@
 import Phaser from 'phaser';
+import Interactive from '../base-game-objects/Interactive'
 
-export default class Laser extends Phaser.GameObjects.Sprite {
+export default class Laser extends Interactive {
+
     static DEFAULT_DAMAGE = 200;
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
-        this.setPipeline('Light2D');
-        this.body.setSize(30, 100);
-        this.body.setOffset(38, 0);
+		
     }
 
-    configure(player) {
-        this._player = player;
-        this.isActivate = true;
-        this.isStatic = this.data.values.isStatic;
-        this.scene.physics.add.overlap(player, this, this.damagePlayer, null, this);
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.5);
+    preUpdate(time, delta) {
+        
     }
 
-    update(time, delta) {
-        if (!this.isStatic) {
-          if (this._blinkTimer === undefined) {
-            this._blinkTimer = 0;
-          }
-          this._blinkTimer += delta;
-          if (this._blinkTimer >= 1200) {
-            if (this.active) {
-              // Desactivamos el laser: no colisiona y lo ocultamos
-              this.setActive(false);
-              this.body.checkCollision.none = true;
-              this.setVisible(false);
-              this.light.setColor(0x000000);
-            } else {
-              // Activamos el laser: vuelve a colisionar y se muestra
-              this.setActive(true);
-              this.body.checkCollision.none = false;
-              this.setVisible(true);
-              this.light.setColor(0xffffff);
-            }
-            this._blinkTimer = 0;
-          }
-        }
-      }
-
-      destroy(fromScene) {      
-        if (this.light) {
-            this.scene.lights.removeLight(this.light);
-            this.light = null; 
-        }
-        super.destroy(fromScene);
-    }
-      
-
-    damagePlayer() {
-        if (this._player) {
-            this._player.quitarVida(Laser.DEFAULT_DAMAGE);
-        }
-    }
-    desactivateLaser() {
-        this.destroy(true);
-    }
-
-    getIsStoppable() {
-        return this.data.values.isStoppable;
-    }
 }

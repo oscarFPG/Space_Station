@@ -18,7 +18,7 @@ export default class Player extends BaseActor {
 	constructor(scene, x, y) {
 
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
-
+		
 		this.body.setSize(66, 73);
 		this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
@@ -132,7 +132,7 @@ export default class Player extends BaseActor {
 				alpha: 0,
 				duration: 500,
 				onComplete: () => {
-				  this.scene.scene.restart();
+				  this.scene.scene.restart()	// TODO - Modificar a: llevar al lobby
 				}
 			  });	
 		}
@@ -159,8 +159,9 @@ export default class Player extends BaseActor {
 	moneyBoost(value) {
 		this._dinero += value;
 	}
-	moneyAction(value) {
-		this._dinero -= value;
+
+	receiveMoney(amount) {
+		this._dinero += amount;
 	}
 
 	pickBattery() {
@@ -169,18 +170,6 @@ export default class Player extends BaseActor {
 
 	vaciarBaterias() {
 		this._baterias = Player.BATERIA_INICIAL;
-	}
-	getBatteries() {
-		return this._baterias;
-	}
-	isFullHealth() {
-		return this._atributos.vida === Player.VIDA_INICIAL;
-	}
-	isFullShield() {
-		return this._escudo === Player.ESCUDO_INICIAL;
-	}
-	setIsConsoleActive(value) {
-		this.isOnConsole = value;
 	}
 
 	updateWeapon() {
@@ -215,11 +204,16 @@ export default class Player extends BaseActor {
 		// Controles de teclado
 		this.cursors = this.scene.input.keyboard.createCursorKeys()
 		this.controles = {
+			// Movimiento
 			up: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
 			down: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
 			right: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
 			left: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
-			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R)
+
+			// Acciones
+			use: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
+			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R),
+			pause: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
 		}
 
 		this.controles.reload.on('down', () => {
@@ -253,5 +247,15 @@ export default class Player extends BaseActor {
 		this._sprite.setPipeline('Light2D');
 		//this._weapon.setPipeline('')
 	}
-  
+
+	setIsConsoleActive(value) {
+		this.isOnConsole = value;
+	}
+
+	
+	getBatteries() { return this._baterias }
+	isFullHealth() { return this._atributos.vida === Player.VIDA_INICIAL }
+	isFullShield() { return this._escudo === Player.ESCUDO_INICIAL }
+	isUseKeyJustPressed(){ return Phaser.Input.Keyboard.JustDown(this.controles.use) }
+	isPauseKeyJustPressed(){ return Phaser.Input.Keyboard.JustDown(this.controles.pause) }
 }

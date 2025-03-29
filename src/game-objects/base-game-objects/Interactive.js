@@ -2,35 +2,47 @@ import Phaser from 'phaser'
 
 export default class Interactive extends Phaser.GameObjects.Sprite {
 
-    active = true
     radius = 0
-    rangoAccion = 0
+    _rangoAccion = 0
 
 
-    constructor(scene, x, y, texture, radius){
+    constructor(scene, x, y, texture){
         super(scene, x, y, texture)
-
-        this.radius = radius
-        this.rangoAccion = new Phaser.GameObjects.Ellipse(scene, x, y, this.radius, this.radius, 0xff0000, 0.2)
-        this.rangoAccion.setVisible(this.scene.game.config.physics.arcade.debug)    // Mostrar solo si debug esta a true
-        this.rangoAccion.setOrigin(0.5)
-        this.scene.add.existing(this.rangoAccion)
-    }
-    accion(gameobject){
-        console.log('DENTRO')
-    }
-
-    interactuar(gameobject){
+        this.scene.add.existing(this)
+        this.scene.physics.add.existing(this)
+        this.setOrigin(0.5)
         
-        if(this.active && this.esta_dentro_de_rango(gameobject.x, gameobject.y))
-            this.accion(gameobject)
+        const player = scene.get_player()
+        if(player)
+            this.scene.physics.add.overlap(player, this, this.#player_overlaps, null, this)
+
+        // Cuadro de texto
+        this._textoInteraccion = this.config_helperText()
+        this.scene.add.existing(this._textoInteraccion)
     }
 
-    esta_dentro_de_rango(x, y){
-        return Phaser.Math.Distance.Between(this.x, this.y, x, y) < (this.radius / 2)
+    #player_overlaps(player){
+        if(player.isUseKeyJustPressed())
+            this.accion()
     }
 
-    set_interactive(state){
-        this.active = state
+    config_helperText(){
+
+        let tecla = 'E' // Temporal
+
+        const text = this.scene.add.text(this.x, this.y, `Interactuar[${tecla}]`, { 
+            fontSize: '16px', 
+            fill: '#fff',
+            backgroundColor: `rgba(0, 0, 0, 0.5)`
+        })
+        text.setVisible(false)
+
+        return text
     }
+
+    destroyObject(){
+        this._textoInteraccion.destroy()
+        this.destroy()
+    }
+
 }
