@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import Interactive from './Interactive.js'
 
 export default class Weapon extends Phaser.GameObjects.Sprite {
 

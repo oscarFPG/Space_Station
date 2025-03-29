@@ -6,8 +6,8 @@ import BaseGroup from '../game-objects/objects/BaseGroup.js'
 import Note from '../game-objects/objects/Note.js'
 import Console from '../game-objects/objects/Console.js'
 import Laser from '../game-objects/objects/Laser.js'
-import HealthItem from '../game-objects/objects/Health.js'
-import ShieldItem from '../game-objects/objects/Shield.js'
+import Health from '../game-objects/objects/Health.js'
+import Shield from '../game-objects/objects/Shield.js'
 import BatteryItem from '../game-objects/objects/Battery.js'
 import Coin from '../game-objects/objects/Coin.js'
 import Box from '../game-objects/objects/Box.js'
@@ -19,7 +19,7 @@ export default class BaseScene extends Phaser.Scene {
 
     static LAYER_SUELO = 'floor'
     static LAYER_PARED = 'wall'
-    static LAYER_OBJETO = 'extra'
+    static LAYER_OBJETO = 'objects'
 
     _previousScene = null
     _nextScene = null
@@ -36,13 +36,21 @@ export default class BaseScene extends Phaser.Scene {
         if(map == null || tileset == null)
             return
 
-        // Escena siguiente
-        this._nextScene = nextScene
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
         this._layerPared = map.createLayer(BaseScene.LAYER_PARED, tileset, 0, 0)
         this._layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
+
+        // Configurar colisiones
+        this._layerPared.setCollisionByExclusion([-1])
+        this._layerObjeto.setCollisionByExclusion([-1])
+
+        // Grupo para gestionar colisiones de los personajes
+        this._charactersGroup = new BaseGroup(this, true, true, true, [], this._layerPared)
+        
+        // Escena siguiente
+        this._nextScene = nextScene
 
         // Crear objetos
         this.crear_objetos(map)
@@ -60,9 +68,9 @@ export default class BaseScene extends Phaser.Scene {
 
         // Configuraciones generales
         this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
-    
-        // Configuracion de eventos
+        this.config_camara(this._player)
         this.config_eventos()
+        this.config_cursor()
         
         // Crear la animación de la chispa (si no existe)
         if (!this.anims.exists('spark')) {
@@ -90,15 +98,6 @@ export default class BaseScene extends Phaser.Scene {
         }
     }
     
-    config_eventos(){
-
-        // Evento para abrir el menu de ajustes
-        this.input.keyboard.on(Options.TECLA_PAUSA, () => {
-            this.scene.switch('settings')
-        }, this)
-
-    }
-
     crear_objetos(map) {
 
         //Se obtiene el jugador que proviene del Manager
@@ -117,11 +116,19 @@ export default class BaseScene extends Phaser.Scene {
                 })
             }
             else if(object.type === 'EnemyPosition') {
-                this._enemigos = this.config_enemigos(object.x, object.y)
+                const type = undefined
+                this._enemigos = this.#config_enemigos(type, object.x, object.y)
+                /*  TODO
+                    Esto solo crea un enemigo porque devuelve un array con un unico enemigo cada vez que se llama.
+                    Crea varios enemigos que son visibles pero no se llegan a añadir al grupo para detectar colisiones.
+                    Debe haber un array global (this._enemigos = []) y que cada vez que se llame a esta funcion se meta otro enemigo
+                    Segun el tiled con el metodo add().
+                    ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!!
+                */
             }
             else if(object.type === 'PlayerRespawn') {
-                this.playerRespawnPosition = { x: object.x, y: object.y }
-                this._player = this.config_jugador(this.playerRespawnPosition.x, this.playerRespawnPosition.y)
+                const playerRespawnPosition = { x: object.x, y: object.y }
+                this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y)
             }
             else if(object.type === 'FinalPosition') {
                 this._finalPosition = { x: object.x, y: object.y }
@@ -135,57 +142,43 @@ export default class BaseScene extends Phaser.Scene {
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
         var notes = map.createFromObjects('objects', { gid: 11, classType: Note, key: 'note' })
-        //var lasers = map.createFromObjects('objects', { gid: 16, classType: Laser, key: 'laser2' })
-        //var healthItems = map.createFromObjects('objects', { gid: 20, classType: HealthItem, key: 'health' })
-        //var shieldItems = map.createFromObjects('objects', { gid: 21, classType: ShieldItem, key: 'shield' })
-        //var batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
-        //var coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
-        //var consolesOff = map.createFromObjects('objects', { gid: 18, classType: Console, key: 'consoleBlocked' })
-        //var batteriesStructures = map.createFromObjects('objects', { gid: 12, classType: BatteryStructure, key: 'batteryStructure' })
-        //var doors = map.createFromObjects('objects', { gid: 24, classType: Door, key: 'door' })
-        //var boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
+        var consoles = map.createFromObjects('objects', { gid: 18, classType: Console, key: 'consoleBlocked' })
+        var lasers = map.createFromObjects('objects', { gid: 16, classType: Laser, key: 'laser2' })
+        var healthItems = map.createFromObjects('objects', { gid: 20, classType: Health, key: 'health' })
+        var shieldItems = map.createFromObjects('objects', { gid: 21, classType: Shield, key: 'shield' })
+        var batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
+        var coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
+        var batteriesStructures = map.createFromObjects('objects', { gid: 12, classType: BatteryStructure, key: 'batteryStructure' })
+        this.doors = map.createFromObjects('objects', { gid: 24, classType: Door, key: 'door' })
+        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
 
+        // Se establecen las colisiones entre las cajas y las puertas con los personajes
+        this.doors.forEach(door => {
+            this._charactersGroup.addCollision(door)
+        })
+        this.boxes.forEach(box => {
+            this._charactersGroup.addCollision(box)
+        })
         
+        // Gestion de colisiones entre objetos de tiled y el player
+        this._charactersGroup.addElement(this._player)
+        this._enemigos.forEach(_enemigo => {
+            this._charactersGroup.addElement(_enemigo)
+        })
+
         // Configurar el resto de objetos
         this.config_characters()
-
-        // Gestion de colisiones entre objetos de tiled y el player
-        let group = new BaseGroup(this, true, true, true, [], this._layerPared)
-        group.addElement(this._player)
-        this._enemigos.forEach(_enemigo => {
-            group.addElement(_enemigo)
-        })
-        //Se establecen las colisiones entre las cajas y las puertas con los personajes
-        /*
-        this.boxes.forEach(box => {
-            group.addCollision(box)
-        })
-        this.doors.forEach(door => {
-            group.addCollision(door)
-        })
-        */
     }
 
     config_jugador(x, y) {
-        this._player = new Player(this, x, y)
-        this._player.body.setCollideWorldBounds(true)
-        this._player.body.setImmovable(true)
-        return this._player
+
+        var player = new Player(this, x, y)
+        player.body.setCollideWorldBounds(true)
+        player.body.setImmovable(true)
+        return player
     }
     
-    config_enemigos(x, y){
-
-        return []
-    }
-
     config_characters() {
-
-        this.config_camara(this._player)
-        this.config_cursor()
-
-        // Configurar colisiones
-        this._layerPared.setCollisionByExclusion([-1])
-        this._layerObjeto.setCollisionByExclusion([-1])
 
         this.crearColliderConSuelo(this._player)
         this.crearColliderConPared(this._player)
@@ -195,7 +188,7 @@ export default class BaseScene extends Phaser.Scene {
             this.crearColliderConPared(enemigo)
         })
         
-        this._butanoColliders = this.physics.add.staticGroup()
+        this._objectsCollider = this.physics.add.staticGroup()
         this._layerObjeto.forEachTile(tile => {
             if (tile.index !== -1) {
 
@@ -208,13 +201,12 @@ export default class BaseScene extends Phaser.Scene {
                 const collider = this.physics.add.staticImage(baseX + offsetX, baseY + offsetY, null)
                 collider.body.setSize(54, 90)
                 collider.setVisible(false)
-                this._butanoColliders.add(collider)
+                this._objectsCollider.add(collider)
             }
         })
+        this.physics.add.collider(this._player, this._objectsCollider)
 
-        this.physics.add.collider(this._player, this._butanoColliders)
         this._paredColliders = this.physics.add.staticGroup()
-
         this._layerPared.forEachTile(tile => {
             if (tile.index !== -1) { // Solo creamos colisión en los tiles que existen
                 const collider = this.physics.add.staticImage(tile.getCenterX(), tile.getCenterY(), null)
@@ -223,8 +215,9 @@ export default class BaseScene extends Phaser.Scene {
                 this._paredColliders.add(collider)
             }
         })
+
         this._enemigos.forEach(enemigo => {
-            this.physics.add.collider(enemigo, this._butanoColliders)
+            this.physics.add.collider(enemigo, this._objectsCollider)
             this.physics.add.collider(enemigo, this._player)
         })
         this.physics.add.collider(this._player, this._enemigos)
@@ -248,22 +241,25 @@ export default class BaseScene extends Phaser.Scene {
         }
         this.physics.add.collider(this._grupoBalas, this._layerPared, onBulletCollision)
         this.physics.add.collider(this._grupoBalas, this._player, onBulletCollision)
-        this.physics.add.collider(this._grupoBalas, this._butanoColliders, onBulletCollision)
+        this.physics.add.collider(this._grupoBalas, this._objectsCollider, onBulletCollision)
         this.physics.add.collider(this._grupoBalas, this._paredColliders, onBulletCollision)
 
         this._enemigos.forEach(enemigo => {
             this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision)
         })
-        /* TODO
         this.boxes.forEach(box => {
             this.physics.add.collider(this._grupoBalas, box, onBulletCollision)
         })
         this.doors.forEach(door => {
             this.physics.add.collider(this._grupoBalas, door, onBulletCollision)
         })
-        */
         this._grupoObjectos = this.physics.add.staticGroup()
-        this.physics.add.overlap(this._player, this._grupoObjectos)
+        this.physics.add.overlap(this._player, this._grupoObjectos)  
+    }
+
+    #config_enemigos(type, x, y){
+
+        return []
     }
 
     config_iluminacion(capas){
@@ -281,6 +277,15 @@ export default class BaseScene extends Phaser.Scene {
 
     config_camara(player){
         this.cameras.main.startFollow(player)
+    }
+
+    config_eventos(){
+
+        // Evento para abrir el menu de ajustes
+        this.input.keyboard.on(Options.TECLA_PAUSA, () => {
+            this.scene.switch('settings')
+        }, this)
+
     }
 
     config_musica(){

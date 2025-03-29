@@ -1,14 +1,17 @@
 import Phaser from 'phaser'
-import Interactive from '../base-game-objects/Interactive.js'
+import Object from '../base-game-objects/Object'
 
-export default class Note extends Interactive {
+
+export default class Note extends Object {
   
 	static TEXT = '2025'
 	static AUTO_CLOSING_TIME = 3000
 
 	constructor(scene, x, y, sprite) {
 		super(scene, x, y, sprite)
-		this.body.setSize(100, 100)
+		this.body.setSize(90, 90)
+		this.body.setOffset(15, 15)
+
 
 		// Bandera para saber si la ventana ya está abierta
 		this.windowOpen = false
@@ -65,7 +68,6 @@ export default class Note extends Interactive {
 			this.delayedClose = null
 		}
 
-		console.log('CERRANDO NOTA')
 		this.noteElements.forEach(el => el.destroy())
 		this.noteElements = null
 		this.windowOpen = false

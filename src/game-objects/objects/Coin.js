@@ -1,6 +1,6 @@
-import Interactive from '../base-game-objects/Interactive.js'
+import Object from '../base-game-objects/Object.js'
 
-export default class Coin extends Interactive {
+export default class Coin extends Object {
 
     static VELOCITY = 10
     static MINIMUM_DISTANCE_TO_PICKUP = 20
@@ -11,22 +11,10 @@ export default class Coin extends Interactive {
 
     }
 
-    preUpdate(time, delta){
+    player_overlaps(player){
 
-        const player = this.scene.get_player()
-        if(!player)
-            return
-
-        if(this.esta_dentro(player.x, player.y))
-            this.accion(player)
-    }
-
-    accion(gameobject){
-
-        if(gameobject.receiveMoney){
-            gameobject.receiveMoney(Coin.MONEY_VALUE)
-            this.destroyObject()
-        }
+        player.receiveMoney(Coin.MONEY_VALUE)
+        this.destroyObject()
     }
 
 }

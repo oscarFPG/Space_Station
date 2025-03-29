@@ -1,38 +1,32 @@
 import Phaser from 'phaser';
+import Object from '../base-game-objects/Object';
 
-export default class Console extends Phaser.GameObjects.Sprite {
+
+export default class Console extends Object {
 
 	constructor(scene, x, y, sprite) {
 		super(scene, x, y, sprite); 
-		this.scene.add.existing(this);
-		this.scene.physics.add.existing(this);
-
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
-		
-		this.interactionText = scene.add.text(x, y - 50, 'Interact [E]', { 
-			fontSize: '16px', 
-			fill: '#fff',
-			backgroundColor: 'rgba(0, 0, 0, 0.5)'
-		});
-		this.interactionText.setPipeline('Light2D');
-		this.interactionText.setVisible(false);
 
 		// Bandera para controlar si la ventana de la consola está abierta
 		this.windowOpen = false;
+
 		// Aquí se almacenarán los elementos creados para la ventana
 		this.consoleElements = null;
 	}
 
-	configure(player, lasers) {
-		this.lasers = lasers;
-		this.player = player;
-		this.interactionText.setPosition(this.x, this.y - 50);
-		this.body.allowGravity = false;
-		this.light = this.scene.lights.addLight(this.x, this.y, 150, 0xffffff, 1);
-		this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+	// TODO
+	accion(){
+
 		
 	}
+
+	player_overlaps(){
+		this._textoInteraccion.setPosition(this.x, this.y)
+		this._textoInteraccion.setVisible(true)
+	}
+
 
 	update() {
 
@@ -59,12 +53,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		}
 	}
   
-
 	openConsoleWindow() {
 		
-		this.player.setIsConsoleActive(true);
 		this.windowOpen = true;
-		this.scene.consoleActive = true; 
 
 		const overlay = this.scene.add
 			.rectangle(
@@ -75,7 +66,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			0
 			)
 			.setOrigin(0)
-			.setInteractive();
+			.setInteractive()
 
 		const panelX = this.x + 100;
 		const panelY = this.y - 100;
@@ -147,7 +138,8 @@ export default class Console extends Phaser.GameObjects.Sprite {
 				passwordDisplay.setText(enteredPassword);
 			});
 			elements.push(btn);
-		});
+		})
+
 		// Botón para borrar la entrada
 		const clearBtn = this.scene.add
 			.text(panelX - 50, panelY + 140, 'Delete', {

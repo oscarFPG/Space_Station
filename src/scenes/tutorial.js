@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
-import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
 
 
 export default class Tutorial extends BaseScene {
@@ -17,16 +16,5 @@ export default class Tutorial extends BaseScene {
 
     }
 
-    config_enemigos(x, y){
-
-        var enemigos =  []
-
-        const enemy = new ExtendedEnemy(this, x, y)
-        enemy.body.setCollideWorldBounds(true)
-        enemy.body.setImmovable(true)
-
-        enemigos.push(enemy)
-
-        return enemigos
-    }
+    
 }

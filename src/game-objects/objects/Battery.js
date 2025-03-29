@@ -1,7 +1,7 @@
-import Interactive from "../base-game-objects/Interactive";
+import Object from "../base-game-objects/Object.js"
 
 
-export default class Battery extends Interactive {
+export default class Battery extends Object {
     
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite);
