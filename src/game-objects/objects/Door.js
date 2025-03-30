@@ -7,8 +7,8 @@ export default class Door extends Object {
 
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite)
-        this.body.setSize(60, 180)
-        this.body.setOffset(27, -40)
+        this.body.setSize(110, 110)
+        this.body.setOffset(0, 0)
         this.body.setImmovable(true)
         this.body.setAllowGravity(false)
 
@@ -32,29 +32,20 @@ export default class Door extends Object {
 
 
         const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
-        if (distance < 200) { // Ajusta el rango según sea necesario
-            if (!this._isPlayerNearby) {
-                this._isPlayerNearby = true 
-                this.abrirPuerta()
-                this.body.checkCollision.none = true
-            }
-        } else {
-            if (this._isPlayerNearby) {
-                this._isPlayerNearby = false 
-                this.cerrarPuerta()
-                this.body.checkCollision.none = false
-            }
+        if (distance < 200) {
+            this.body.checkCollision.none = true
+            this.abrirPuerta()
+        }
+        else {
+            this.body.checkCollision.none = false
+            this.cerrarPuerta()
         }
     }
-
-    player_overlaps(player){}
-
-    accion(){}
 
     abrirPuerta() {
 
         this.play('open_doors') 
-        this.scene.time.delayedCall(800, () => {
+        this.scene.time.delayedCall(100, () => {
             this.setFrame(4) 
         })
     }
@@ -62,7 +53,7 @@ export default class Door extends Object {
     cerrarPuerta() {
 
         this.play('close_doors') 
-        this.scene.time.delayedCall(800, () => {
+        this.scene.time.delayedCall(100, () => {
             this.setFrame(0) 
         })
     }

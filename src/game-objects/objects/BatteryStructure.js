@@ -22,7 +22,7 @@ export default class BatteryStructure extends Object {
 		// FUNCION QUE SE EJECUTA CONTINUAMENTE MIENTRAS EL JUGADOR HAGA OVERLAP
 	}
 
-	accion(){
+	accion(player){
 		// FUNCION QUE SE EJECUTA CUANDO EL JUGADOR HACE OVERLAP Y PULSA LA TECLA DE 'USAR'
 	}
 
@@ -32,6 +32,7 @@ export default class BatteryStructure extends Object {
 			this.closeNoteWindow()
 			return
 		}
+		
 		this._remainingBatteries = this.data.values.numBatteries
 		this.windowOpen = true
 		const windowX = this.x

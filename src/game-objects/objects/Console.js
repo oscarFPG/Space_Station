@@ -14,49 +14,47 @@ export default class Console extends Object {
 
 		// Aquí se almacenarán los elementos creados para la ventana
 		this.consoleElements = null;
-	}
 
-	// TODO
-	accion(){
-
-		
-	}
-
-	player_overlaps(){
-		this._textoInteraccion.setPosition(this.x, this.y)
-		this._textoInteraccion.setVisible(true)
+		this._displayHelperText = true
+		this._interactiveDistance = 120
 	}
 
 
-	update() {
+	preUpdate() {
 
-		if (this.windowOpen && (this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0)) {
-			this.closeConsoleWindow();
-			return;
+		const player = this.scene.get_player()
+		if(!player || !this._displayHelperText)
+			return
+
+
+		const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
+		if(distance < this._interactiveDistance){
+			this._textoInteraccion.setVisible(true)
+			this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+		}	
+		else{
+			this._textoInteraccion.setVisible(false)
 		}
 
-		if (Phaser.Math.Distance.Between(this.x - 35, this.y, this.player.x, this.player.y) > 130) {
-			this.interactionText.setVisible(false);
-		}
-		else {
-			this.interactionText.setVisible(true);
-			if (Phaser.Input.Keyboard.JustDown(this.eKey)) {
-				if (this.windowOpen) {
-					this.closeConsoleWindow();
-				} else {
-					const consoleSound= this.scene.sound.add('console_sound');
-					consoleSound.setVolume(2);  // Ajusta el volumen del sonido
-					consoleSound.play();
-					this.openConsoleWindow();
-				}
-			}
-		}
+	}
+
+	accion(player){
+
+		if(!player.isUseKeyJustPressed())
+			return
+
+		this.openConsoleWindow()
+	}
+
+	player_overlaps(player){
+		this.accion(player)
 	}
   
 	openConsoleWindow() {
 		
-		this.windowOpen = true;
+		this.windowOpen = true
 
+		const elements = []
 		const overlay = this.scene.add
 			.rectangle(
 			0, 0,
@@ -67,6 +65,7 @@ export default class Console extends Object {
 			)
 			.setOrigin(0)
 			.setInteractive()
+		elements.push(overlay)
 
 		const panelX = this.x + 100;
 		const panelY = this.y - 100;
@@ -75,17 +74,17 @@ export default class Console extends Object {
 			.rectangle(panelX, panelY, 300, 250, 0x000000, 0.8)
 			.setOrigin(0.5)
 			.setDepth(1);
+		elements.push(panelBg)
 
 		const passwordDisplay = this.scene.add
 			.text(panelX, panelY - 80, '', { fontSize: '20px', fill: '#fff' })
 			.setOrigin(0.5)
 			.setDepth(1);
+		elements.push(passwordDisplay)
 
 		const correctPassword = this.data.values.password || this.data.values.Contraseña;
 		let enteredPassword = "";
 
-		// Almacenar los elementos en un arreglo para poder destruirlos luego
-		const elements = [overlay, panelBg, passwordDisplay];
 
 		// Botón de cierre (X) en la parte superior derecha del panel
 		const closeBtn = this.scene.add
@@ -101,7 +100,7 @@ export default class Console extends Object {
 			.on('pointerdown', () => {
 			this.closeConsoleWindow();
 			});
-		elements.push(closeBtn);
+		elements.push(closeBtn)
 
 		// Definir las posiciones de los botones numéricos
 		const keys = [
@@ -173,9 +172,10 @@ export default class Console extends Object {
 				this._secret_sound.setVolume(0,2);
 				this._secret_sound.play();*/
 				if (enteredPassword === correctPassword) {
+
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
-					this.acierto= this.scene.sound.add('success');
-					this.acierto.setVolume(2);  // Ajusta el volumen del sonido
+					this.acierto = this.scene.sound.add('success');
+					this.acierto.setVolume(2);
 					this.acierto.play();
 					this.lasers.forEach(laser => {
 						if(laser.getIsStoppable())
@@ -187,10 +187,11 @@ export default class Console extends Object {
 					this.interactionText.setVisible(false);
 					this.closeConsoleWindow();
 				} else {
+
 					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
 
 					const errorSound= this.scene.sound.add('error');
-					errorSound.setVolume(2);  // Ajusta el volumen del sonido
+					errorSound.setVolume(2);o
 					errorSound.play();
 					
 					passwordDisplay.setText('Contraseña incorrecta');

@@ -30,6 +30,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         super(scene, 0, 0)
         this.scene.add.existing(this);
         this.setPosition(PlayerUI.UI_MARGIN_X, PlayerUI.UI_MARGIN_Y)
+        this.setDepth(10)
 
         this._MAX_VIDA = maxHealth;
         this._MAX_ESCUDO = maxEscudo;

@@ -7,7 +7,9 @@ export default class Health extends Object {
     static AUMENTO_VIDA = 5;
 
     constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite);
+        super(scene, x, y, sprite)
+        this.body.setSize(80, 80)
+        this.body.setOffset(20, 20)
     }
 
 
@@ -16,7 +18,11 @@ export default class Health extends Object {
         if(player.isFullHealth())
             return
 
-        player.healthBoost(Health.AUMENTO_VIDA);
+        this.accion(player)
+    }
+
+    accion(player){
+        player.healthBoost(Health.AUMENTO_VIDA)
         this.destroyObject()
     }
 

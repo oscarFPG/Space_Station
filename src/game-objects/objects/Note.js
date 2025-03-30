@@ -12,18 +12,24 @@ export default class Note extends Object {
 		this.body.setSize(90, 90)
 		this.body.setOffset(15, 15)
 
-
 		// Bandera para saber si la ventana ya está abierta
 		this.windowOpen = false
 
 		// Referencia a los elementos de la ventana
 		this.noteElements = null
 
-		// Referencia al temporizador de cierre automático
-		this.delayedClose = null
+		this._displayHelperText = true
+		this._interactiveDistance = 110
+	}
+
+	player_overlaps(player){
+		this.accion(player)
 	}
 
 	accion(player) {
+
+		if(!player.isUseKeyJustPressed())
+			return
 
 		this.windowOpen = !this.windowOpen	// Alternar accion abrir/cerrar ventana
 		if(!this.windowOpen){

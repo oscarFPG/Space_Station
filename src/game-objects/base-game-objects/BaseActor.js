@@ -14,12 +14,15 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
         this.scene._charactersGroup.addElement(this)
+        this.setDepth(10)
         
         BaseActor.MAX_VIDA = vida
         this._atributos.vida = vida
         this._atributos.speed = speed
 
         this._sprite = this.scene.add.sprite(sprite.x, sprite.y, sprite.texture)
+        this._sprite.setOrigin(0.5, 0.5)
+        
         this.add(this._sprite)
     }
 

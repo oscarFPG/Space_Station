@@ -18,9 +18,13 @@ export default class Laser extends Object {
             alpha: 0,
             duration: 500,
             onComplete: () => {
-                this.scene.scene.restart();
+                this.accion(player)
             }
         })
+    }
+
+    accion(player){
+        this.scene.restart()
     }
 
 

@@ -16,13 +16,12 @@ export default class Player extends BaseActor {
 	static SPEED = 180;
 
 	constructor(scene, x, y) {
-
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
 		
 		this.body.setSize(66, 73);
 		this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
-
+		
 		// Atributos del jugador
 		this._escudo = Player.ESCUDO_INICIAL;
 		this._dinero = Player.DINERO_INICIAL;
@@ -31,15 +30,19 @@ export default class Player extends BaseActor {
 		// Booleano para saber si esta en un menu o consola para no permitir el disparo
 		this.isOnConsole = false;
 
-		// Configuracion de controles, animaciones, iluminacion y del arma
+		// Configuracion del arma
 		this._weapon = this.#config_arma()
+		
+		// Configuracion de controles
+		this.#config_controles()
+
+		// Configuracion de iluminacion
+		this.#config_iluminacion()
+
+		// Configuracion de animaciones
 		this.config_animacion('player_idle', Player.IDLE_ANIMATION, 0, 2, 6)
 		this.config_animacion('player_running', Player.RUNNING_ANIMATION, 0, 3, 10)
 		this._sprite.play('player_idle')
-		
-		// Configuraciones
-		this.#config_controles()
-		this.#config_iluminacion()
 
 		// Registrar los métodos update y postupdate
 		this.scene.events.on('update', this.update, this);

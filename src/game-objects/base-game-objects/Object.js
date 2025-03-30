@@ -2,6 +2,10 @@ import Phaser from 'phaser'
 
 export default class Object extends Phaser.GameObjects.Sprite {
 
+    _displayHelperText = false
+    _interactiveDistance = 10
+    _offsetX = 0
+    _offsetY = 0
 
     constructor(scene, x, y, texture){
         super(scene, x, y, texture)
@@ -10,6 +14,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         
         this.setOrigin(0.5)
 
+        // Configurar evento de solapamiento con el jugador
         const player = scene.get_player()
         if(player)
             this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
@@ -17,15 +22,32 @@ export default class Object extends Phaser.GameObjects.Sprite {
         // Cuadro de texto
         this._textoInteraccion = this.config_helperText()
         this._textoInteraccion.setVisible(false)
+
         this.scene.add.existing(this._textoInteraccion)
     }
 
+    preUpdate(){
+
+		const player = this.scene.get_player()
+        if(!player || !this._displayHelperText)
+            return
+
+
+		const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
+		if(distance < this._interactiveDistance){
+			this._textoInteraccion.setVisible(true)
+			this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+		}	
+		else{
+			this._textoInteraccion.setVisible(false)
+		}
+	}
+
     player_overlaps(player){
-        if(player.isUseKeyJustPressed())
-            this.accion()
+        this.accion(player)
     }
 
-    accion(){
+    accion(player){
 
     }
 
