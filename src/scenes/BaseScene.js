@@ -85,7 +85,7 @@ export default class BaseScene extends Phaser.Scene {
         this.scene.launch('')
     }
 
-    update(time, delta){    
+    update(time, delta){
 
         if (this._finalPosition && this._player) {
             const distance = Phaser.Math.Distance.Between(
@@ -168,6 +168,13 @@ export default class BaseScene extends Phaser.Scene {
 
         // Configurar el resto de objetos
         this.config_characters()
+
+        // Configurar posicion y tamaño del cuerpo de los laseres
+        lasers.forEach(laser => {
+            console.log(laser.body)
+            laser.body.setOffset(0, 0)
+            laser.body.setSize(20, 110)
+        })
     }
 
     config_jugador(x, y) {
@@ -283,7 +290,7 @@ export default class BaseScene extends Phaser.Scene {
 
         // Evento para abrir el menu de ajustes
         this.input.keyboard.on(Options.TECLA_PAUSA, () => {
-            this.scene.switch('settings')
+            this.scene.switch('settings', this.scene.key)
         }, this)
 
     }

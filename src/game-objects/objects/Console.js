@@ -15,12 +15,20 @@ export default class Console extends Object {
 		// Aquí se almacenarán los elementos creados para la ventana
 		this.consoleElements = null;
 
+		// Flag para evitar la apertura de la consola si ya ha sido utilizada con éxito
+		this._successfullUsed = false
+
 		this._displayHelperText = true
 		this._interactiveDistance = 120
+
+		this._lasers = []
 	}
 
 
 	preUpdate() {
+
+		if(this._successfullUsed)
+			return
 
 		const player = this.scene.get_player()
 		if(!player || !this._displayHelperText)
@@ -43,15 +51,20 @@ export default class Console extends Object {
 		if(!player.isUseKeyJustPressed())
 			return
 
-		this.openConsoleWindow()
+		this.openConsoleWindow(player)
 	}
 
 	player_overlaps(player){
+
+		if(this._successfullUsed)
+			return
+
 		this.accion(player)
 	}
   
-	openConsoleWindow() {
+	openConsoleWindow(player) {
 		
+		player.set_player_activo(false)
 		this.windowOpen = true
 
 		const elements = []
@@ -98,7 +111,7 @@ export default class Console extends Object {
 			.setInteractive()
 			.setDepth(1)
 			.on('pointerdown', () => {
-			this.closeConsoleWindow();
+			this.closeConsoleWindow(player);
 			});
 		elements.push(closeBtn)
 
@@ -177,21 +190,20 @@ export default class Console extends Object {
 					this.acierto = this.scene.sound.add('success');
 					this.acierto.setVolume(2);
 					this.acierto.play();
-					this.lasers.forEach(laser => {
-						if(laser.getIsStoppable())
-							laser.desactivateLaser()
+
+					this._lasers.forEach(laser => {
+						laser.disable_laser()
 					});
 					
-
+					this._successfullUsed = true
 					this.setVisible(false);
-					this.interactionText.setVisible(false);
-					this.closeConsoleWindow();
+					this._textoInteraccion.setVisible(false);
+					this.closeConsoleWindow(player);
 				} else {
 
 					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
-
 					const errorSound= this.scene.sound.add('error');
-					errorSound.setVolume(2);o
+					errorSound.setVolume(2);
 					errorSound.play();
 					
 					passwordDisplay.setText('Contraseña incorrecta');
@@ -210,7 +222,7 @@ export default class Console extends Object {
 		this.consoleElements = elements;
 	}
 
-	closeConsoleWindow() {
+	closeConsoleWindow(player) {
 
 		if (this.consoleElements) {
 			this.consoleElements.forEach(el => el.destroy());
@@ -219,7 +231,7 @@ export default class Console extends Object {
 		this.windowOpen = false;
 		this.scene.consoleActive = false; 
 		this.scene.time.delayedCall(200, () => {
-			this.player.setIsConsoleActive(false);
-		});
+			player.set_player_activo(true)
+		})
 	}
 }

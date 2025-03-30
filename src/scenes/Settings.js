@@ -13,11 +13,16 @@ export default class Settings extends BaseScene {
     }
 
     create(){
-        super.create(null, null, null)
+        super.create()
+        this.config_eventos()
+
+        this.add.text(0, 0, 'PAUSA', { fontSize: '64px', color: '#FFFFFF' })
+        .setOrigin(0.5)
+        .setPosition(this.game.config.width / 2, this.game.config.height / 2)
     }
 
-    update(){
-        
+    update(time, delta){
+
     }
 
     config_eventos(){

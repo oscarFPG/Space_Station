@@ -27,9 +27,6 @@ export default class Player extends BaseActor {
 		this._dinero = Player.DINERO_INICIAL;
 		this._baterias = Player.BATERIA_INICIAL;
 
-		// Booleano para saber si esta en un menu o consola para no permitir el disparo
-		this.isOnConsole = false;
-
 		// Configuracion del arma
 		this._weapon = this.#config_arma()
 		
@@ -58,9 +55,8 @@ export default class Player extends BaseActor {
 
 	update(time, delta) {
 
-		// Verificar que el body existe antes de acceder a él
-		if (!this.body)
-			return;
+		if(!this._atributos.activo)
+			return
 
 		// Actualiza la posición del container usando la posición del body
 		this.setPosition(this.body.x, this.body.y);
@@ -220,17 +216,15 @@ export default class Player extends BaseActor {
 		}
 
 		this.controles.reload.on('down', () => {
-			this._weapon.reload()
+			if(this._atributos.activo)
+				this._weapon.reload()
 		})
 
 		// Disparo mediante ratón (si la consola no está activa)
 		this.scene.input.on('pointerdown', (pointer) => {
-			if (this.isOnConsole) 
-				return;
-			/*const gunSound = this.scene.sound.add('gun_sound');
-			gunSound.setVolume(2);  // Ajusta el volumen del sonido
-			gunSound.play();*/
-			this._weapon.shot(pointer.worldX, pointer.worldY);
+			
+			if(this._atributos.activo)
+				this._weapon.shot(pointer.worldX, pointer.worldY);
 		}, this)
 	}
 
@@ -251,8 +245,8 @@ export default class Player extends BaseActor {
 		//this._weapon.setPipeline('')
 	}
 
-	setIsConsoleActive(value) {
-		this.isOnConsole = value;
+	set_player_activo(status) {
+		this._atributos.activo = status
 	}
 
 	

@@ -6,7 +6,8 @@ export default class BaseActor extends Phaser.GameObjects.Container {
 
     _atributos = {
         vida: undefined,
-        speed: undefined
+        speed: undefined,
+        activo: undefined
     }
 
     constructor(scene, x, y, sprite, vida, speed){
@@ -19,6 +20,7 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         BaseActor.MAX_VIDA = vida
         this._atributos.vida = vida
         this._atributos.speed = speed
+        this._atributos.activo = true
 
         this._sprite = this.scene.add.sprite(sprite.x, sprite.y, sprite.texture)
         this._sprite.setOrigin(0.5, 0.5)

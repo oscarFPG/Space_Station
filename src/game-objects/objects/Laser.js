@@ -3,12 +3,8 @@ import Object from '../base-game-objects/Object';
 
 export default class Laser extends Object {
 
-    static DEFAULT_DAMAGE = 200;
     constructor(scene, x, y, sprite) {
         super(scene, x, y, sprite)
-        this.body.setOffset(0, 0)
-        this.body.setSize(1, 1)
-		
     }
 
     player_overlaps(player){
@@ -17,16 +13,16 @@ export default class Laser extends Object {
             targets: player,
             alpha: 0,
             duration: 500,
-            onComplete: () => {
-                this.accion(player)
-            }
+            onComplete: this.accion(player)
         })
     }
 
     accion(player){
-        this.scene.restart()
+        console.log('Restart de escena')
     }
 
-
+    disable_laser(){
+        this.body.checkCollision.none = true
+    }
 
 }
