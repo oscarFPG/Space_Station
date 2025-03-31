@@ -4,8 +4,10 @@ import Object from '../base-game-objects/Object';
 
 export default class Console extends Object {
 
-	constructor(scene, x, y, sprite) {
-		super(scene, x, y, sprite); 
+	static TEXTURE = 'consoleBlocked'
+
+	constructor(scene, x, y, password, laserID) {
+		super(scene, x, y, Console.TEXTURE);
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
 
@@ -19,9 +21,9 @@ export default class Console extends Object {
 		this._successfullUsed = false
 
 		this._displayHelperText = true
-		this._interactiveDistance = 120
-
-		this._lasers = []
+		this._interactiveDistance = 130
+		this._password = password
+		this._laserId = laserID
 	}
 
 
@@ -46,6 +48,14 @@ export default class Console extends Object {
 
 	}
 
+	player_overlaps(player){
+
+		if(this._successfullUsed)
+			return
+
+		this.accion(player)
+	}
+
 	accion(player){
 
 		if(!player.isUseKeyJustPressed())
@@ -54,20 +64,17 @@ export default class Console extends Object {
 		this.openConsoleWindow(player)
 	}
 
-	player_overlaps(player){
-
-		if(this._successfullUsed)
-			return
-
-		this.accion(player)
+	desactivar_laseres(){
+		this.scene.desactivar_laseres(this._laserId)
 	}
   
 	openConsoleWindow(player) {
-		
+	
 		player.set_player_activo(false)
 		this.windowOpen = true
-
+		let enteredPassword = "";
 		const elements = []
+		
 		const overlay = this.scene.add
 			.rectangle(
 			0, 0,
@@ -94,10 +101,6 @@ export default class Console extends Object {
 			.setOrigin(0.5)
 			.setDepth(1);
 		elements.push(passwordDisplay)
-
-		const correctPassword = this.data.values.password || this.data.values.Contraseña;
-		let enteredPassword = "";
-
 
 		// Botón de cierre (X) en la parte superior derecha del panel
 		const closeBtn = this.scene.add
@@ -184,16 +187,15 @@ export default class Console extends Object {
 				/*this._secret_sound = this.sound.add('secret_code');
 				this._secret_sound.setVolume(0,2);
 				this._secret_sound.play();*/
-				if (enteredPassword === correctPassword) {
+				if (enteredPassword === this._password) {
 
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
 					this.acierto = this.scene.sound.add('success');
 					this.acierto.setVolume(2);
 					this.acierto.play();
 
-					this._lasers.forEach(laser => {
-						laser.disable_laser()
-					});
+					// Desactivar todos los laseres asociados a esta consola
+					this.desactivar_laseres()
 					
 					this._successfullUsed = true
 					this.setVisible(false);

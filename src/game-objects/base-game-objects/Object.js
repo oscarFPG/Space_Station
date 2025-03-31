@@ -11,8 +11,6 @@ export default class Object extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture)
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
-        
-        this.setOrigin(0.5)
 
         // Configurar evento de solapamiento con el jugador
         const player = scene.get_player()

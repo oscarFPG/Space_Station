@@ -100,8 +100,14 @@ export default class BaseScene extends Phaser.Scene {
     
     crear_objetos(map) {
 
-        //Se obtiene el jugador que proviene del Manager
+        // Se obtiene el jugador que proviene del Manager
         const objectLayer = map.getObjectLayer('objects')
+        this.listaConsolas = []
+        this.listaLaseres = []
+        
+        const playerRespawnPosition = objectLayer.objects.find(objecto => objecto.type === 'PlayerRespawn')
+        this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y)
+
         objectLayer.objects.forEach(object => {
 
             if(object.type === 'Text' && object.text) {
@@ -117,7 +123,7 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type === 'EnemyPosition') {
                 const type = undefined
-                this._enemigos = this.#config_enemigos(type, object.x, object.y)
+                this._enemigos = this.config_enemigos(type, object.x, object.y)
                 /*  TODO
                     Esto solo crea un enemigo porque devuelve un array con un unico enemigo cada vez que se llama.
                     Crea varios enemigos que son visibles pero no se llegan a añadir al grupo para detectar colisiones.
@@ -126,24 +132,34 @@ export default class BaseScene extends Phaser.Scene {
                     ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!!
                 */
             }
-            else if(object.type === 'PlayerRespawn') {
-                const playerRespawnPosition = { x: object.x, y: object.y }
-                this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y)
-            }
             else if(object.type === 'FinalPosition') {
                 this._finalPosition = { x: object.x, y: object.y }
             }
             else if(object.type === 'BlueLightPoint') {
                 this.lights.addLight(object.x, object.y, 250, 0x8888ff, 0.5)
             }
+            else if(object.type === 'Console'){
+                const password = object.properties[0].value
+                const laserID = 31  // MUY PROVISIONAL
+                let consoles = new Console(this, object.x + 55, object.y - 50, password, laserID)
+                this.listaConsolas.push(consoles)
+            }
+        })
+
+        objectLayer.objects.forEach(object => {
+            if(object.type === 'Laser'){
+                const laserID = object.id
+                let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
+                this.listaLaseres.push(laser)
+            }
         })
 
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
+        //var consoles = map.createFromObjects('objects', { gid: 18, classType: Console, key: 'consoleBlocked' })
+        //var lasers = map.createFromObjects('objects', { gid: 16, classType: Laser, key: 'laser2' })
         var notes = map.createFromObjects('objects', { gid: 11, classType: Note, key: 'note' })
-        var consoles = map.createFromObjects('objects', { gid: 18, classType: Console, key: 'consoleBlocked' })
-        var lasers = map.createFromObjects('objects', { gid: 16, classType: Laser, key: 'laser2' })
         var healthItems = map.createFromObjects('objects', { gid: 20, classType: Health, key: 'health' })
         var shieldItems = map.createFromObjects('objects', { gid: 21, classType: Shield, key: 'shield' })
         var batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
@@ -169,12 +185,6 @@ export default class BaseScene extends Phaser.Scene {
         // Configurar el resto de objetos
         this.config_characters()
 
-        // Configurar posicion y tamaño del cuerpo de los laseres
-        lasers.forEach(laser => {
-            console.log(laser.body)
-            laser.body.setOffset(0, 0)
-            laser.body.setSize(20, 110)
-        })
     }
 
     config_jugador(x, y) {
@@ -185,6 +195,11 @@ export default class BaseScene extends Phaser.Scene {
         return player
     }
     
+    config_enemigos(type, x, y){
+
+        return []
+    }
+
     config_characters() {
 
         this.crearColliderConSuelo(this._player)
@@ -264,11 +279,6 @@ export default class BaseScene extends Phaser.Scene {
         this.physics.add.overlap(this._player, this._grupoObjectos)  
     }
 
-    #config_enemigos(type, x, y){
-
-        return []
-    }
-
     config_iluminacion(capas){
 
         for(let i = 0; i < capas.length; i++)
@@ -278,12 +288,12 @@ export default class BaseScene extends Phaser.Scene {
         this.lights.setAmbientColor(0x777777)
     }
 
-    config_cursor(){
-        this.input.setDefaultCursor('crosshair')
-    }
-
     config_camara(player){
         this.cameras.main.startFollow(player)
+    }
+
+    config_cursor(){
+        this.input.setDefaultCursor('crosshair')
     }
 
     config_eventos(){
@@ -305,6 +315,13 @@ export default class BaseScene extends Phaser.Scene {
 
     config_efectos_sonido(){
 
+    }
+
+    desactivar_laseres(laserID){
+        this.listaLaseres.forEach(laser => {
+            if(laserID === laser.get_laser_ID())
+                laser.disable_laser()
+        })
     }
 
     get_player(){
