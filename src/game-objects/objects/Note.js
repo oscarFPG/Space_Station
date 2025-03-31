@@ -4,11 +4,13 @@ import Object from '../base-game-objects/Object'
 
 export default class Note extends Object {
   
+	static TEXTURE = 'note'
 	static TEXT = '2025'
 	static AUTO_CLOSING_TIME = 3000
 
-	constructor(scene, x, y, sprite) {
-		super(scene, x, y, sprite)
+
+	constructor(scene, x, y, text) {
+		super(scene, x, y, Note.TEXTURE)
 		this.body.setSize(90, 90)
 		this.body.setOffset(15, 15)
 
@@ -20,6 +22,7 @@ export default class Note extends Object {
 
 		this._displayHelperText = true
 		this._interactiveDistance = 110
+		this._noteText = text
 	}
 
 	player_overlaps(player){
@@ -50,7 +53,7 @@ export default class Note extends Object {
 		// Crear el texto de la nota
 		const noteText = this.scene.add.text(
 			windowX, windowY, 
-			Note.TEXT,
+			this._noteText,
 			{ fontSize: '14px', fill: '#fff', wordWrap: { width: 200 } }
 		)
 		noteText.setOrigin(0.5)

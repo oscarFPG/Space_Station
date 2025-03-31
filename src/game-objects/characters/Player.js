@@ -13,7 +13,7 @@ export default class Player extends BaseActor {
 	static ESCUDO_INICIAL = 10;
 	static DINERO_INICIAL = 0;
 	static BATERIA_INICIAL = 0;
-	static SPEED = 180;
+	static SPEED = 300;
 
 	constructor(scene, x, y) {
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
@@ -249,6 +249,10 @@ export default class Player extends BaseActor {
 		this._atributos.activo = status
 	}
 
+	quitar_baterias(amount){
+		this._baterias -= amount
+		this._baterias = (this._baterias < 0) ? 0 : this._baterias
+	}
 	
 	getBatteries() { return this._baterias }
 	isFullHealth() { return this._atributos.vida === Player.VIDA_INICIAL }

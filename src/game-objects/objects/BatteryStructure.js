@@ -3,49 +3,77 @@ import Object from '../base-game-objects/Object'
 
 export default class BatteryStructure extends Object {
 
+	static TEXTURE = 'batteryStructure'
 	
-
-	constructor(scene, x, y, sprite) {
-		super(scene, x, y, sprite)
-		this.body.setSize(150, 150)
-		this.body.setOffset(10, 10)
+	constructor(scene, x, y, doorsID, numBaterias) {
+		super(scene, x, y, BatteryStructure.TEXTURE)
+		this.body.setSize(160, 160)
+		this.body.setOffset(-10, -20)
 
 		this.windowOpen = false
 		this.noteElements = null
-
 		this.delayedClose = null
-		this._batteries = 0
-		this.minimumDistance = 100
+		this._displayHelperText = true
+		this._interactiveDistance = 150
+		this._offsetX = -40
+		this._offsetY = 80
+
+		this._doorsID = doorsID
+		this._numBateriasActuales = 0
+		this._numBaterias = numBaterias
 	}
 
-	player_overlaps(player){
-		// FUNCION QUE SE EJECUTA CONTINUAMENTE MIENTRAS EL JUGADOR HAGA OVERLAP
-	}
 
 	accion(player){
-		// FUNCION QUE SE EJECUTA CUANDO EL JUGADOR HACE OVERLAP Y PULSA LA TECLA DE 'USAR'
+		
+		if(!player.isUseKeyJustPressed())
+			return
+
+		if(this.windowOpen)
+			this.closeNoteWindow()
+
+		const bateriasJugador = player.getBatteries()
+		this.mostrarVentana(player, bateriasJugador)
 	}
 
-	activateAction() {
+	mostrarVentana(player, bateriasJugador){
 
-		if (this.windowOpen) {
-			this.closeNoteWindow()
-			return
+		if(bateriasJugador > 0){
+			this._numBateriasActuales += bateriasJugador
+			player.quitar_baterias(bateriasJugador)
+			console.log(`QUITANDO ${bateriasJugador} BATERIAS AL JUGADOR`)
+		}
+
+		if(this.noteElements == null){
+			this.noteElements = this.crearVentana()
+			this.noteElements.setVisible(true)
+		}
+		else{
+			this.noteElements.destroy()
+			this.noteElements = null
 		}
 		
-		this._remainingBatteries = this.data.values.numBatteries
-		this.windowOpen = true
+	}
+
+	crearVentana(){
+
+		console.log('VENTANA ABIERTA')
 		const windowX = this.x
-		const windowY = this.y - 100
-		
-		const stateMessage = `${this._batteries} / ${this._remainingBatteries} CELLS`
-		const stateText = this.scene.add.text(windowX, windowY - 20, stateMessage, {
+		const windowY = this.y
+
+		const stateMessage = `${this._numBateriasActuales} / ${this._numBaterias} CELLS`
+		const stateText = this.scene.add.text(windowX, windowY, stateMessage, {
 			fontSize: '18px',
 			fill: '#fff',
 			wordWrap: { width: 250 }
 		})
 		stateText.setOrigin(0.5)
-		
+
+		return stateText
+	}
+
+	activateAction(player) {
+
 		let actionText
 		let playerCells = this._player.getBatteries()
 		if (playerCells > 0) {
@@ -106,11 +134,12 @@ export default class BatteryStructure extends Object {
 			this.noteElements.forEach(el => el.destroy())
 			this.noteElements = null
 		}
-		this.windowOpen = false
 		if (this.delayedClose) {
 			this.delayedClose.remove()
 			this.delayedClose = null
 		}
+
+		this.windowOpen = false
 	}
 
 }

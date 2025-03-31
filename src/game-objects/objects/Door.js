@@ -3,16 +3,17 @@ import Object from '../base-game-objects/Object'
 
 export default class Door extends Object {
 
+    static TEXTURE = 'door'
     static OPEN_ANIMATION = 'doorsAnimation'
 
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite)
+    constructor(scene, x, y, active) {
+        super(scene, x, y, Door.TEXTURE)
         this.body.setSize(110, 110)
         this.body.setOffset(0, 0)
         this.body.setImmovable(true)
         this.body.setAllowGravity(false)
 
-        this._isActive = true
+        this._isActive = active
 
         // Frame inicial de la puerta (cerrada)
         this.setFrame(0)
@@ -24,12 +25,15 @@ export default class Door extends Object {
         this._isPlayerNearby = false // Para evitar múltiples reproducciones de animación
     }
 
-    preUpdate(tim, delta){
+    preUpdate(time, delta){
 
         const player = this.scene.get_player()
-        if(!this._isActive || !player)
+        if(!player)
             return
 
+        // Abrir de forma automatica si esta activada
+        if(!this._isActive)
+            return
 
         const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
         if (distance < 200) {
@@ -56,6 +60,10 @@ export default class Door extends Object {
         this.scene.time.delayedCall(100, () => {
             this.setFrame(0) 
         })
+    }
+
+    set_active(status){
+        this._isActive = status
     }
 
     #config_animacion(animKey, animName, start, end, frameRate) {

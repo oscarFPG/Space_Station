@@ -14,8 +14,10 @@ export default class Object extends Phaser.GameObjects.Sprite {
 
         // Configurar evento de solapamiento con el jugador
         const player = scene.get_player()
-        if(player)
-            this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
+        if(!player)
+            return new Error('La clase necesita una previa referencia al Player')
+        
+        this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
 
         // Cuadro de texto
         this._textoInteraccion = this.config_helperText()
@@ -24,7 +26,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this._textoInteraccion)
     }
 
-    preUpdate(){
+    preUpdate(time, delta){
 
 		const player = this.scene.get_player()
         if(!player || !this._displayHelperText)

@@ -104,9 +104,13 @@ export default class BaseScene extends Phaser.Scene {
         const objectLayer = map.getObjectLayer('objects')
         this.listaConsolas = []
         this.listaLaseres = []
-        
+        this.listaPuertas = []
+        this.listaEstructuraBaterias = []
+
         const playerRespawnPosition = objectLayer.objects.find(objecto => objecto.type === 'PlayerRespawn')
         this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y)
+        this.crearColliderConSuelo(this._player)
+        this.crearColliderConPared(this._player)
 
         objectLayer.objects.forEach(object => {
 
@@ -140,51 +144,62 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type === 'Console'){
                 const password = object.properties[0].value
-                const laserID = 31  // MUY PROVISIONAL
+                const laserID = 31  // TODO - MUY PROVISIONAL
                 let consoles = new Console(this, object.x + 55, object.y - 50, password, laserID)
                 this.listaConsolas.push(consoles)
             }
-        })
-
-        objectLayer.objects.forEach(object => {
-            if(object.type === 'Laser'){
+            else if(object.type === 'Laser'){
                 const laserID = object.id
                 let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
                 this.listaLaseres.push(laser)
+            }
+            else if(object.type === 'Note'){
+                const text = object.properties[0].value
+                let note = new Note(this, object.x, object.y, text)
+            }
+            else if(object.type === 'Door'){
+                const isActivated = object.properties[0].value
+                let door = new Door(this, object.x + 55, object.y - 55, isActivated)
+                this.listaPuertas.push(door)
+            }
+            else if(object.type === 'BatteryStructure'){
+                const doorID = 36 
+                const numBaterias = 2   // TODO - MUY PROVISIONAL
+                const consolaBateria = new BatteryStructure(this, object.x + 55, object.y - 55 , doorID, numBaterias)
+                this.listaEstructuraBaterias.push(consolaBateria)
             }
         })
 
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        //var consoles = map.createFromObjects('objects', { gid: 18, classType: Console, key: 'consoleBlocked' })
-        //var lasers = map.createFromObjects('objects', { gid: 16, classType: Laser, key: 'laser2' })
-        var notes = map.createFromObjects('objects', { gid: 11, classType: Note, key: 'note' })
         var healthItems = map.createFromObjects('objects', { gid: 20, classType: Health, key: 'health' })
         var shieldItems = map.createFromObjects('objects', { gid: 21, classType: Shield, key: 'shield' })
         var batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
         var coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
-        var batteriesStructures = map.createFromObjects('objects', { gid: 12, classType: BatteryStructure, key: 'batteryStructure' })
-        this.doors = map.createFromObjects('objects', { gid: 24, classType: Door, key: 'door' })
         this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
 
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
-        this.doors.forEach(door => {
+        this.listaPuertas.forEach(door => {
             this._charactersGroup.addCollision(door)
         })
+        this.physics.add.collider(this._player, this.listaPuertas)
+
         this.boxes.forEach(box => {
             this._charactersGroup.addCollision(box)
         })
+        this.physics.add.collider(this._player, this.boxes)
         
         // Gestion de colisiones entre objetos de tiled y el player
         this._charactersGroup.addElement(this._player)
         this._enemigos.forEach(_enemigo => {
             this._charactersGroup.addElement(_enemigo)
+            this.crearColliderConSuelo(enemigo)
+            this.crearColliderConPared(enemigo)
         })
 
         // Configurar el resto de objetos
         this.config_characters()
-
     }
 
     config_jugador(x, y) {
@@ -201,14 +216,6 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     config_characters() {
-
-        this.crearColliderConSuelo(this._player)
-        this.crearColliderConPared(this._player)
-
-        this._enemigos.forEach(enemigo => {   // Para todos los enemigos de la escena
-            this.crearColliderConSuelo(enemigo)
-            this.crearColliderConPared(enemigo)
-        })
         
         this._objectsCollider = this.physics.add.staticGroup()
         this._layerObjeto.forEachTile(tile => {
@@ -243,8 +250,6 @@ export default class BaseScene extends Phaser.Scene {
             this.physics.add.collider(enemigo, this._player)
         })
         this.physics.add.collider(this._player, this._enemigos)
-        this.physics.add.collider(this._player, this.boxes)
-        this.physics.add.collider(this._player, this.doors)
 
         // Crear el grupo global de balas
         this._grupoBalas = this.physics.add.group()
@@ -272,7 +277,7 @@ export default class BaseScene extends Phaser.Scene {
         this.boxes.forEach(box => {
             this.physics.add.collider(this._grupoBalas, box, onBulletCollision)
         })
-        this.doors.forEach(door => {
+        this.listaPuertas.forEach(door => {
             this.physics.add.collider(this._grupoBalas, door, onBulletCollision)
         })
         this._grupoObjectos = this.physics.add.staticGroup()
