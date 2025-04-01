@@ -14,7 +14,7 @@ export default class Laser extends Object {
     }
 
     player_overlaps(player){
-        return
+
         this.scene.tweens.add({
             targets: player,
             alpha: 0,
@@ -24,7 +24,7 @@ export default class Laser extends Object {
     }
 
     accion(player){
-        console.log('Restart de escena')
+        this.scene.gameOver()
     }
 
     disable_laser(){

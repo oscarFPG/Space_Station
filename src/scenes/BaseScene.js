@@ -97,7 +97,7 @@ export default class BaseScene extends Phaser.Scene {
             }
         }
     }
-    
+
     crear_objetos(map) {
 
         // Se obtiene el jugador que proviene del Manager
@@ -159,11 +159,12 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type === 'Door'){
                 const isActivated = object.properties[0].value
-                let door = new Door(this, object.x + 55, object.y - 55, isActivated)
+                const doorID = object.id
+                let door = new Door(this, object.x + 55, object.y - 55, isActivated, doorID)
                 this.listaPuertas.push(door)
             }
             else if(object.type === 'BatteryStructure'){
-                const doorID = 36 
+                const doorID = 36
                 const numBaterias = 2   // TODO - MUY PROVISIONAL
                 const consolaBateria = new BatteryStructure(this, object.x + 55, object.y - 55 , doorID, numBaterias)
                 this.listaEstructuraBaterias.push(consolaBateria)
@@ -200,6 +201,31 @@ export default class BaseScene extends Phaser.Scene {
 
         // Configurar el resto de objetos
         this.config_characters()
+    }
+
+    desactivar_laseres(laserID){
+        this.listaLaseres.forEach(laser => {
+            if(laserID === laser.get_laser_ID())
+                laser.disable_laser()
+        })
+    }
+
+    activar_puertas(doorID){
+
+        console.log('Abriendo puerta ' + doorID)
+        this.listaPuertas.forEach(door => {
+            if(doorID === door.getID())
+                door.set_active(true)
+        })
+    }
+
+    gameOver(){
+        console.log('Game Over')
+        this._player.set_player_activo(false)
+    }
+
+    get_player(){
+        return this._player
     }
 
     config_jugador(x, y) {
@@ -320,17 +346,6 @@ export default class BaseScene extends Phaser.Scene {
 
     config_efectos_sonido(){
 
-    }
-
-    desactivar_laseres(laserID){
-        this.listaLaseres.forEach(laser => {
-            if(laserID === laser.get_laser_ID())
-                laser.disable_laser()
-        })
-    }
-
-    get_player(){
-        return this._player
     }
 
     crearColliderConSuelo(gameobject){
