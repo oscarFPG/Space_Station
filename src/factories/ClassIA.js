@@ -60,8 +60,10 @@ export default class ClassIA {
 
         // Disparar si está en rango
         if (distanceToPlayer <= enemy._enemyParameters.shootingRange) {
-            enemy._enemyParameters.weapon.shot(player.x, player.y);
-            
+            if(enemy._enemyParameters.weapon._ammo.currentClipAmmo <= 0)
+                enemy._enemyParameters.weapon.reload();
+            else
+                enemy._enemyParameters.weapon.shot(player.x, player.y);
         }
         enemy._enemyParameters.weapon.setRotation(chaseAngle);
 
