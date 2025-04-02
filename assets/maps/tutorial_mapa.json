@@ -350,7 +350,13 @@
                          "name":"password",
                          "type":"string",
                          "value":"2025"
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                         }
+                     ],
                  "rotation":0,
                  "type":"Console",
                  "visible":true,
@@ -446,7 +452,13 @@
                          "name":"numBatteries",
                          "type":"int",
                          "value":2
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                         }
+                     ],
                  "rotation":0,
                  "type":"BatteryStructure",
                  "visible":true,
@@ -474,7 +486,13 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":false
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }
+                     ],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -502,7 +520,13 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":false
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }
+                     ],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -530,7 +554,13 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":false
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                         }
+                     ],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -558,7 +588,13 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":true
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }
+                     ],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -594,7 +630,13 @@
                          "name":"isActivate",
                          "type":"bool",
                          "value":true
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }
+                     ],
                  "rotation":0,
                  "type":"Door",
                  "visible":true,
@@ -612,7 +654,13 @@
                          "name":"isActivate",
                          "type":"bool",
                          "value":false
-                        }],
+                        },
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }
+                     ],
                  "rotation":0,
                  "type":"Door",
                  "visible":true,

@@ -140,28 +140,28 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type === 'Console'){
                 const password = object.properties[0].value
-                const laserID = 31  // TODO - MUY PROVISIONAL
+                const laserID = object.properties[1].value  // TODO - MUY PROVISIONAL
                 let consoles = new Console(this, object.x + 55, object.y - 50, password, laserID)
                 this.listaConsolas.push(consoles)
             }
             else if(object.type === 'Laser'){
-                const laserID = object.id
+                const laserID = object.properties[3].value
                 let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
                 this.listaLaseres.push(laser)
             }
             else if(object.type === 'Note'){
                 const text = object.properties[0].value
-                let note = new Note(this, object.x, object.y, text)
+                let note = new Note(this, object.x + 55, object.y - 55, text)
             }
             else if(object.type === 'Door'){
                 const isActivated = object.properties[0].value
-                const doorID = object.id
+                const doorID = object.properties[1].value
                 let door = new Door(this, object.x + 55, object.y - 55, isActivated, doorID)
                 this.listaPuertas.push(door)
             }
             else if(object.type === 'BatteryStructure'){
-                const doorID = 36
-                const numBaterias = 2   // TODO - MUY PROVISIONAL
+                const doorID = object.properties[1].value
+                const numBaterias = object.properties[0].value
                 const consolaBateria = new BatteryStructure(this, object.x + 55, object.y - 55 , doorID, numBaterias)
                 this.listaEstructuraBaterias.push(consolaBateria)
             }
@@ -198,7 +198,6 @@ export default class BaseScene extends Phaser.Scene {
         // Configurar el resto de objetos
         this.config_characters()
     }
-
 
     addEnemy(enemyType, x, y){
 

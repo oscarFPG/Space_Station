@@ -25,27 +25,27 @@ export default class Level1 extends BaseScene {
         })
     }
 
-    activar_laseres(){
+    activar_todos_los_laseres(){
         this.listaLaseres.forEach(laser => {
-            laser.activate_laser()
+            if(laser.get_laser_ID() != 0)
+                laser.activate_laser()
         })
     }
 
-    desactivar_laseres(){
+    desactivar_todos_los_laseres(){
         this.listaLaseres.forEach(laser => {
-            if(laser.get_laser_ID() != 22)
+            if(laser.get_laser_ID() != 0)
                 laser.disable_laser()
         })
     }
 
     permutar_laseres(){
 
-        console.log('Permutar:' + !this.laseresActivos)
         this.laseresActivos = !this.laseresActivos
         if(this.laseresActivos)
-            this.desactivar_laseres()
+            this.desactivar_todos_los_laseres()
         else
-            this.activar_laseres()
+            this.activar_todos_los_laseres()
     }
 
 }
