@@ -1,71 +1,80 @@
 import Phaser from 'phaser';
+import Object from '../base-game-objects/Object';
 
-export default class Console extends Phaser.GameObjects.Sprite {
 
-	constructor(scene, x, y, sprite) {
-		super(scene, x, y, sprite); 
-		scene.add.existing(this);
-		scene.physics.add.existing(this);
+export default class Console extends Object {
 
+	static TEXTURE = 'consoleBlocked'
+
+	constructor(scene, x, y, password, laserID) {
+		super(scene, x, y, Console.TEXTURE);
 		this.body.setSize(150, 150);
-		this.body.setOffset(35, 0);
-		
-		this.interactionText = scene.add.text(x, y - 50, 'Interactuar [E]', { 
-			fontSize: '16px', 
-			fill: '#fff',
-			backgroundColor: 'rgba(0, 0, 0, 0.5)'
-		});
-		this.interactionText.setPipeline('Light2D');
-		this.interactionText.setVisible(false);
+		this.body.setOffset(-20, -15);
 
 		// Bandera para controlar si la ventana de la consola está abierta
 		this.windowOpen = false;
+
 		// Aquí se almacenarán los elementos creados para la ventana
 		this.consoleElements = null;
+
+		// Flag para evitar la apertura de la consola si ya ha sido utilizada con éxito
+		this._successfullUsed = false
+
+		this._displayHelperText = true
+		this._interactiveDistance = 130
+		this._password = password
+		this._laserId = laserID
 	}
 
-	configure(player, lasers) {
-		this.lasers = lasers;
-		this.player = player;
-		this.interactionText.setPosition(this.x, this.y - 50);
-		this.scene.physics.add.overlap(player, this, this.showInteraction, null, this);
-		this.body.allowGravity = false;
-		this.eKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
-		
+
+	preUpdate() {
+
+		if(this._successfullUsed)
+			return
+
+		const player = this.scene.get_player()
+		if(!player || !this._displayHelperText)
+			return
+
+
+		const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
+		if(distance < this._interactiveDistance){
+			this._textoInteraccion.setVisible(true)
+			this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+		}	
+		else{
+			this._textoInteraccion.setVisible(false)
+		}
+
 	}
 
-	showInteraction() {
-		this.interactionText.setVisible(true);
+	player_overlaps(player){
+
+		if(this._successfullUsed)
+			return
+
+		this.accion(player)
 	}
 
-	update() {
+	accion(player){
 
-		if (this.windowOpen && (this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0)) {
-			this.closeConsoleWindow();
-			return;
-		}
+		if(!player.isUseKeyJustPressed())
+			return
 
-		if (Phaser.Math.Distance.Between(this.x, this.y, this.scene._player.x, this.scene._player.y) > 100) {
-			this.interactionText.setVisible(false);
-		}
-		else if (this.interactionText.visible && Phaser.Input.Keyboard.JustDown(this.eKey)) {
-			if (this.windowOpen) {
-				this.closeConsoleWindow();
-			} else {
-				const consoleSound= this.scene.sound.add('console_sound');
-        		consoleSound.setVolume(2);  // Ajusta el volumen del sonido
-        		consoleSound.play();
-				this.openConsoleWindow();
-			}
-		}
+		this.openConsoleWindow(player)
+	}
+
+	desactivar_laseres(){
+		this.scene.desactivar_laseres(this._laserId)
 	}
   
-
-	openConsoleWindow() {
+	openConsoleWindow(player) {
+	
+		player.set_player_activo(false)
+		this.windowOpen = true
+		let enteredPassword = "";
+		const elements = []
 		
-		this.windowOpen = true;
-		this.scene.consoleActive = true; 
-
 		const overlay = this.scene.add
 			.rectangle(
 			0, 0,
@@ -75,7 +84,8 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			0
 			)
 			.setOrigin(0)
-			.setInteractive();
+			.setInteractive()
+		elements.push(overlay)
 
 		const panelX = this.x + 100;
 		const panelY = this.y - 100;
@@ -84,17 +94,13 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.rectangle(panelX, panelY, 300, 250, 0x000000, 0.8)
 			.setOrigin(0.5)
 			.setDepth(1);
+		elements.push(panelBg)
 
 		const passwordDisplay = this.scene.add
 			.text(panelX, panelY - 80, '', { fontSize: '20px', fill: '#fff' })
 			.setOrigin(0.5)
 			.setDepth(1);
-
-		const correctPassword = this.data.values.password || this.data.values.Contraseña;
-		let enteredPassword = "";
-
-		// Almacenar los elementos en un arreglo para poder destruirlos luego
-		const elements = [overlay, panelBg, passwordDisplay];
+		elements.push(passwordDisplay)
 
 		// Botón de cierre (X) en la parte superior derecha del panel
 		const closeBtn = this.scene.add
@@ -108,9 +114,9 @@ export default class Console extends Phaser.GameObjects.Sprite {
 			.setInteractive()
 			.setDepth(1)
 			.on('pointerdown', () => {
-			this.closeConsoleWindow();
+			this.closeConsoleWindow(player);
 			});
-		elements.push(closeBtn);
+		elements.push(closeBtn)
 
 		// Definir las posiciones de los botones numéricos
 		const keys = [
@@ -147,7 +153,8 @@ export default class Console extends Phaser.GameObjects.Sprite {
 				passwordDisplay.setText(enteredPassword);
 			});
 			elements.push(btn);
-		});
+		})
+
 		// Botón para borrar la entrada
 		const clearBtn = this.scene.add
 			.text(panelX - 50, panelY + 140, 'Delete', {
@@ -180,17 +187,31 @@ export default class Console extends Phaser.GameObjects.Sprite {
 				/*this._secret_sound = this.sound.add('secret_code');
 				this._secret_sound.setVolume(0,2);
 				this._secret_sound.play();*/
-				if (enteredPassword === correctPassword) {
+				if (enteredPassword === this._password) {
+
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
-					this.lasers.forEach(laser => laser.desactivateLaser());
+					this.acierto = this.scene.sound.add('success');
+					this.acierto.setVolume(2);
+					this.acierto.play();
+
+					// Desactivar todos los laseres asociados a esta consola
+					this.desactivar_laseres()
+					
+					this._successfullUsed = true
 					this.setVisible(false);
-					this.interactionText.setVisible(false);
-					this.closeConsoleWindow();
+					this._textoInteraccion.setVisible(false);
+					this.closeConsoleWindow(player);
 				} else {
+
 					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
+					const errorSound= this.scene.sound.add('error');
+					errorSound.setVolume(2);
+					errorSound.play();
+					
 					passwordDisplay.setText('Contraseña incorrecta');
 					enteredPassword = "";
 					this.scene.time.delayedCall(1000, () => {
+				
 					if (passwordDisplay && passwordDisplay.active) {
 						passwordDisplay.setText('');
 					}
@@ -203,7 +224,7 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		this.consoleElements = elements;
 	}
 
-	closeConsoleWindow() {
+	closeConsoleWindow(player) {
 
 		if (this.consoleElements) {
 			this.consoleElements.forEach(el => el.destroy());
@@ -211,5 +232,8 @@ export default class Console extends Phaser.GameObjects.Sprite {
 		}
 		this.windowOpen = false;
 		this.scene.consoleActive = false; 
+		this.scene.time.delayedCall(200, () => {
+			player.set_player_activo(true)
+		})
 	}
 }

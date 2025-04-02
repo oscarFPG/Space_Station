@@ -6,7 +6,7 @@ export default class ExtendedEnemy extends BasedEnemy {
     static BASE_ENEMY_WEAPON = 'weapon1';
     static BASE_ENEMY_TEXTURE = 'enemyIdle';
 
-    static VIDA = 10
+    static VIDA = 25
     static SPEED = 10
 
     constructor(scene, x, y){
@@ -16,7 +16,7 @@ export default class ExtendedEnemy extends BasedEnemy {
         this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
         this._sprite.play('enemy_idle')
         
-        this._atributosIA.visionRange = 540
+        this._atributosIA.visionRange = 900
         this._atributosIA.fireRate = 1000;
         this._atributosIA.shootingRange = 468;
     }

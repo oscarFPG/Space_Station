@@ -9,35 +9,38 @@ export default class Player extends BaseActor {
 	static IDLE_ANIMATION = 'playerIdle';
 	static RUNNING_ANIMATION = 'playerRunning';
 
-	static VIDA_INICIAL = 50;
-	static ESCUDO_INICIAL = 50;
-	static DINERO_INICIAL = 50;
-	static SPEED = 180;
+	static VIDA_INICIAL = 15;
+	static ESCUDO_INICIAL = 10;
+	static DINERO_INICIAL = 0;
+	static BATERIA_INICIAL = 0;
+	static SPEED = 300;
 
 	constructor(scene, x, y) {
-
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
-
-		this.body.setSize(66, 73);	
-
+		
+		this.body.setSize(66, 73);
+		this.body.setCollideWorldBounds(true)
+        this.body.setImmovable(true)
+		
 		// Atributos del jugador
 		this._escudo = Player.ESCUDO_INICIAL;
 		this._dinero = Player.DINERO_INICIAL;
+		this._baterias = Player.BATERIA_INICIAL;
 
-		// Configuracion de controles, animaciones, iluminacion y del arma
+		// Configuracion del arma
+		this._weapon = this.#config_arma()
+		
+		// Configuracion de controles
 		this.#config_controles()
-		this.#config_arma()
+
+		// Configuracion de iluminacion
 		this.#config_iluminacion()
+
+		// Configuracion de animaciones
 		this.config_animacion('player_idle', Player.IDLE_ANIMATION, 0, 2, 6)
 		this.config_animacion('player_running', Player.RUNNING_ANIMATION, 0, 3, 10)
 		this._sprite.play('player_idle')
 
-		//para que suene mientras camina
-		//this.stepSound = this.scene.sound.add('stepSound', { volume: 0.5, loop: true });
-		/*const stepSound = this.scene.sound.add('step_Sound');
-		stepSound.setVolume(0.5);  // Ajusta el volumen del sonido
-		stepSound.play();*/
-		
 		// Registrar los métodos update y postupdate
 		this.scene.events.on('update', this.update, this);
 		this.scene.events.on('postupdate', this.updateWeapon, this);
@@ -46,15 +49,14 @@ export default class Player extends BaseActor {
 		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL);
 
 		// Añadir al container
-		this.add(this.weapon);
+		this.add(this._weapon);
 	}
 
 
 	update(time, delta) {
 
-		// Verificar que el body existe antes de acceder a él
-		if (!this.body)
-			return;
+		if(!this._atributos.activo)
+			return
 
 		// Actualiza la posición del container usando la posición del body
 		this.setPosition(this.body.x, this.body.y);
@@ -64,21 +66,20 @@ export default class Player extends BaseActor {
 		let velocityX = 0;
 		let velocityY = 0;
 
-		if (this.cursors.up.isDown || this.keys.up.isDown) {
+		if (this.cursors.up.isDown || this.controles.up.isDown) {
 			velocityY = -1;
 		}
-		if (this.cursors.down.isDown || this.keys.down.isDown) {
+		if (this.cursors.down.isDown || this.controles.down.isDown) {
 			velocityY = 1;
 		}
-		if (this.cursors.left.isDown || this.keys.left.isDown) {
+		if (this.cursors.left.isDown || this.controles.left.isDown) {
 			velocityX = -1;
-			this._sprite.setFlipX(true);
-			this._sprite.setX(34);
+			
 		}
-		if (this.cursors.right.isDown || this.keys.right.isDown) {
+		if (this.cursors.right.isDown || this.controles.right.isDown) {
 			velocityX = 1;
-			this._sprite.setFlipX(false);
 		}
+
 		// Normalizar para que la velocidad no sea mayor en diagonal
 		if (velocityX !== 0 || velocityY !== 0) {
 			const length = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
@@ -108,8 +109,14 @@ export default class Player extends BaseActor {
 		if (this.light) {
 			this.light.setPosition(this.x + offsetX, this.y);
 		}
-	}
 
+		this._playerUI.actualizar_UI(
+			this._atributos.vida, 
+			this._escudo, 
+			this._dinero, 
+			this._weapon.getBulletsFromClip(), 
+			this._weapon.getMunicionReserva())
+	}
 
 	quitarVida(cantidad){
 
@@ -119,40 +126,50 @@ export default class Player extends BaseActor {
 			this._atributos.vida -= cantidad
 
         this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
-		this._playerUI.actualizar_UI(this._atributos.vida, this._escudo, this._dinero)
-		if(this._atributos.vida <= 0)
-            this.destroy(true)
+		if (this._atributos.vida <= 0) {
+			this.scene.tweens.add({
+				targets: this.player,
+				alpha: 0,
+				duration: 500,
+				onComplete: () => {
+				  this.scene.scene.restart()	// TODO - Modificar a: llevar al lobby
+				}
+			  });	
+		}
     }
 
 	healthBoost(health) {
-
-		if (this._vida == this.VIDA_INICIAL) {
-			return;
-		}
-		if (this._vida + health >= this.VIDA_INICIAL) {
-			this._vida = this.VIDA_INICIAL;
+		if (this._atributos.vida + health >= Player.VIDA_INICIAL) {
+			this._atributos.vida = Player.VIDA_INICIAL;
 		}
 		else {
-			this._vida += health;
+			this._atributos.vida += health;
 		}
-		this._playerUI.actualizar_vida(this._vida);
 	}
 
 	shieldBoost(shield) {
-		//if (this._escudo == this.VIDA_INICIAL) {
-		//	return;
-		//}
-		if (this._escudo + shield >= this.ESCUDO_INICIAL) {
-			this._escudo = this.ESCUDO_INICIAL;
+		if (this._escudo + shield >= Player.ESCUDO_INICIAL) {
+			this._escudo = Player.ESCUDO_INICIAL;
 		}
 		else {
 			this._escudo += shield;
 		}
-		this._playerUI.actualizar_escudo(this._escudo);
 	}
 
 	moneyBoost(value) {
 		this._dinero += value;
+	}
+
+	receiveMoney(amount) {
+		this._dinero += amount;
+	}
+
+	pickBattery() {
+		this._baterias++;
+	}
+
+	vaciarBaterias() {
+		this._baterias = Player.BATERIA_INICIAL;
 	}
 
 	updateWeapon() {
@@ -167,47 +184,58 @@ export default class Player extends BaseActor {
 
 		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
-		const weaponWorldX = this.x + this.weapon.x;
-		const weaponWorldY = this.y + this.weapon.y;
+		const weaponWorldX = this.x + this._weapon.x;
+		const weaponWorldY = this.y + this._weapon.y;
 
 		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
-		this.weapon.setRotation(angle);
+		this._weapon.setRotation(angle);
 
 		// Arma y modelo siempre mirando al mismo lado
 		let shouldFlip = worldPoint.x < weaponWorldX
-		this.weapon.setFlipY(shouldFlip)
+		this._weapon.setFlipY(shouldFlip)
+		if(shouldFlip) {
+			this._sprite.setX(34);
+		}
 		this._sprite.setFlipX(shouldFlip)
 	}
 
 	#config_controles(){
 
 		// Controles de teclado
-		this.cursors = this.scene.input.keyboard.createCursorKeys();
-		this.keys = this.scene.input.keyboard.addKeys({
-			up: Phaser.Input.Keyboard.KeyCodes.W,
-			down: Phaser.Input.Keyboard.KeyCodes.S,
-			left: Phaser.Input.Keyboard.KeyCodes.A,
-			right: Phaser.Input.Keyboard.KeyCodes.D
-		});
+		this.cursors = this.scene.input.keyboard.createCursorKeys()
+		this.controles = {
+			// Movimiento
+			up: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
+			down: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+			right: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+			left: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+
+			// Acciones
+			use: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
+			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R),
+			pause: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
+		}
+
+		this.controles.reload.on('down', () => {
+			if(this._atributos.activo)
+				this._weapon.reload()
+		})
 
 		// Disparo mediante ratón (si la consola no está activa)
 		this.scene.input.on('pointerdown', (pointer) => {
-
-			if (this.scene.consoleActive) 
-				return;
-
-			/*const gunSound = this.scene.sound.add('gun_sound');
-			gunSound.setVolume(2);  // Ajusta el volumen del sonido
-			gunSound.play();*/
-			this.weapon.shot(pointer.worldX, pointer.worldY);
-		}, this);
+			
+			if(this._atributos.activo)
+				this._weapon.shot(pointer.worldX, pointer.worldY);
+		}, this)
 	}
 
 	#config_arma() {
 
-		this.weaponOffset = { x: 39, y: 54 };
-		this.weapon = new BasePistol(this.scene, this.weaponOffset.x, this.weaponOffset.y);
-		this.weapon.setOrigin(0.5, 0.5); 
+		var weaponOffset = { x: 39, y: 54 }
+		var weapon = new BasePistol(this.scene, weaponOffset.x, weaponOffset.y)
+		weapon.setOrigin(0.5, 0.5)
+
+		return weapon
 	}
 
 	#config_iluminacion(){
@@ -215,7 +243,21 @@ export default class Player extends BaseActor {
 		// Crear la luz que seguirá al jugador
 		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
 		this._sprite.setPipeline('Light2D');
-		this.weapon.setPipeline('Light2D');
+		//this._weapon.setPipeline('')
 	}
-  
+
+	set_player_activo(status) {
+		this._atributos.activo = status
+	}
+
+	quitar_baterias(amount){
+		this._baterias -= amount
+		this._baterias = (this._baterias < 0) ? 0 : this._baterias
+	}
+	
+	getBatteries() { return this._baterias }
+	isFullHealth() { return this._atributos.vida === Player.VIDA_INICIAL }
+	isFullShield() { return this._escudo === Player.ESCUDO_INICIAL }
+	isUseKeyJustPressed(){ return Phaser.Input.Keyboard.JustDown(this.controles.use) }
+	isPauseKeyJustPressed(){ return Phaser.Input.Keyboard.JustDown(this.controles.pause) }
 }

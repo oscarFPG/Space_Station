@@ -1,6 +1,6 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser'
 
-export default class Weapon extends Phaser.Physics.Arcade.Sprite {
+export default class Weapon extends Phaser.GameObjects.Sprite {
 
     constructor(scene, x, y, texture, damage) {
         super(scene, x, y, texture);

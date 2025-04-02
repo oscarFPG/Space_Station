@@ -24,6 +24,21 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
                 repeat: 0
             });
         }
+        
+        // Esperar un breve tiempo antes de verificar superposiciones
+        scene.time.delayedCall(10, () => {
+            const checkOverlapAndDestroy = (bala, obj) => {
+                if (obj.quitarVida) obj.quitarVida(bala._damage)
+                if (bala.active) {
+                    bala.createSpark(bala.x, bala.y);
+                    bala.destroy();
+                }
+            };
+            scene.physics.world.overlap(this, scene._butanoColliders, checkOverlapAndDestroy);
+            scene.physics.world.overlap(this, scene.boxes, checkOverlapAndDestroy);
+            scene.physics.world.overlap(this, scene.doors, checkOverlapAndDestroy);
+            scene.physics.world.overlap(this, scene._paredColliders, checkOverlapAndDestroy);
+        });
 
         // Listener para cuando la bala toca los límites del mundo
         this.body.world.on('worldbounds', (body) => {

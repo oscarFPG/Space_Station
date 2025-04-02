@@ -6,20 +6,26 @@ export default class BaseActor extends Phaser.GameObjects.Container {
 
     _atributos = {
         vida: undefined,
-        speed: undefined
+        speed: undefined,
+        activo: undefined
     }
 
     constructor(scene, x, y, sprite, vida, speed){
         super(scene, x, y)
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
-
-        this._sprite = this.scene.add.sprite(sprite.x, sprite.y, sprite.texture)
-        this.add(this._sprite)
-
+        this.scene._charactersGroup.addElement(this)
+        this.setDepth(10)
+        
         BaseActor.MAX_VIDA = vida
         this._atributos.vida = vida
         this._atributos.speed = speed
+        this._atributos.activo = true
+
+        this._sprite = this.scene.add.sprite(sprite.x, sprite.y, sprite.texture)
+        this._sprite.setOrigin(0.5, 0.5)
+        
+        this.add(this._sprite)
     }
 
     aumentarVida(cantidad){
@@ -31,7 +37,11 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         this.actualizar_color_efecto(this._atributos.vida / BaseActor.MAX_VIDA)
 
         if(this._atributos.vida <= 0)
-            this.destroy(true)
+            this.eliminar()
+    }
+
+    eliminar(){
+        this.destroy(true)
     }
 
     actualizar_color_efecto(porcentaje){
@@ -62,5 +72,4 @@ export default class BaseActor extends Phaser.GameObjects.Container {
 			});
     	}
     }
-
 }

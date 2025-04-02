@@ -9,19 +9,29 @@
 */
 export default class Options {
 
-    static MAX_VOLUMEN = 1
+    static instance = null
 
+    static MAX_VOLUMEN = 2
+    static TECLA_PAUSA = 'keydown-ESC'
     #volumen_general
     #volumen_musica
     #volumen_efectos_sonido
 
-    constructor(){
 
+    constructor(){
         this.#volumen_general = 0.5
         this.#volumen_musica = 0.5
         this.#volumen_efectos_sonido = 0.5
     }
 
+    
+    static get_instance(){
+
+        if(Options.instance == null)
+            Options.instance = new Options()
+        
+        return Options.instance;
+    }
 
     cambiar_volumen_general(volumen){
         this.#volumen_general = Phaser.Math.Clamp(volumen, 0, Options.MAX_VOLUMEN)
@@ -34,5 +44,18 @@ export default class Options {
     cambiar_volumen_efectos(volumen){
         this.#volumen_efectos_sonido = Phaser.Math.Clamp(volumen, 0, Options.MAX_VOLUMEN)
     }
+
+    get_volumen_general(){
+        return this.#volumen_general;
+    }
+
+    get_volumen_musica(){
+        return this.#volumen_musica;
+    }
+
+    get_volumen_efectos_sonido(){
+        return this.#volumen_efectos_sonido;
+    }
+
 
 }

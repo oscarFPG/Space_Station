@@ -24,7 +24,7 @@
     "homepage": "https://github.com/cleongh/plantillaphaser#readme",
     "type": "module",
     "devDependencies": {
-        "electron": "^34.0.1",
+        "electron": "^35.0.3",
         "electron-builder": "^25.1.8",
         "electron-vite": "^2.3.0",
         "rollup": "^4.32.1",
