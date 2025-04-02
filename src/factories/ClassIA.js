@@ -15,11 +15,11 @@ export default class ClassIA {
 
         if (distanceToPlayer <= enemy._enemyParameters.visionRange) {
             enemy._enemyParameters.state = 'perseguir';
-            ClassIA.logicPersigue(time, enemy, player, distanceToPlayer);
+            this.logicPersigue(time, enemy, player, distanceToPlayer);
         }
         else /*if (enemy._enemyParameters.state === 'perseguir')*/ {
             enemy._enemyParameters.state = 'patrullar';
-            ClassIA.logicPatrulla(enemy);
+            this.logicPatrulla(enemy);
         }
     }
 
@@ -60,23 +60,11 @@ export default class ClassIA {
 
         // Disparar si está en rango
         if (distanceToPlayer <= enemy._enemyParameters.shootingRange) {
-            enemy._enemyParameters.weapon.shot(playerX, playerY);
+            enemy._enemyParameters.weapon.shot(player.x, player.y);
             
         }
         enemy._enemyParameters.weapon.setRotation(chaseAngle);
 
-        /*
-        const angleDeg = Phaser.Math.RadToDeg(chaseAngle);
-
-        if (angleDeg >= -90 && angleDeg <= 90) {
-            this._sprite.setFlipX(false);
-            this._enemyParameters.weapon.setFlipY(false); 
-        } else {
-            this._sprite.setFlipX(true);
-            this._enemyParameters.weapon.setFlipY(true); 
-            this._sprite.setX(34);
-        }
-        */
         this.flipCharacter(enemy);
     }
 
@@ -89,7 +77,7 @@ export default class ClassIA {
             enemy._enemyParameters.direction.x * enemy._atributos.speed,
             enemy._enemyParameters.direction.y * enemy._atributos.speed
         );
-        const patrolAngle = Phaser.Math.Angle.Between(0, 0, this.patrolDirection.x, this.patrolDirection.y);
+        const patrolAngle = Phaser.Math.Angle.Between(0, 0, enemy._enemyParameters.direction.x, enemy._enemyParameters.direction.y);
         enemy._enemyParameters.weapon.setRotation(patrolAngle);
 
         this.flipCharacter(enemy);

@@ -22,8 +22,8 @@ export default class ExtendedEnemy extends BasedEnemy {
 
         
     }
-    /*
+    
     preUpdate(time, delta) {
         ClassIA.buscaJugador(time, this, this.scene._player);
-    }/**/
+    }
 }
