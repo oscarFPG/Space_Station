@@ -1,6 +1,6 @@
-import ClassIA from '../../factories/ClassIA.js';
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
-
+import Phaser from 'phaser'
+import ClassIA from '../../factories/ClassIA.js';
 
 export default class ExtendedEnemy extends BasedEnemy {
 

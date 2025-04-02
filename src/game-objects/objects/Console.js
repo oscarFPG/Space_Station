@@ -53,25 +53,24 @@ export default class Console extends Object {
 		if(this._successfullUsed)
 			return
 
-		this.accion(player)
+		if(player.isUseKeyJustPressed())
+			this.accion(player)
 	}
 
 	accion(player){
 
-		if(!player.isUseKeyJustPressed())
-			return
-
-		this.openConsoleWindow(player)
-	}
-
-	desactivar_laseres(){
-		this.scene.desactivar_laseres(this._laserId)
+		if(this.windowOpen){
+			this.windowOpen = false
+			this.closeConsoleWindow(player)
+		}
+		else
+			this.openConsoleWindow(player)
 	}
   
 	openConsoleWindow(player) {
 	
 		player.set_player_activo(false)
-		this.windowOpen = true
+		this.windowOpen = !this.windowOpen
 		let enteredPassword = "";
 		const elements = []
 
@@ -79,7 +78,6 @@ export default class Console extends Object {
 		openSound.setVolume(1.5);  // Ajusta el volumen según prefieras
 		openSound.play();
 	
-		
 		const overlay = this.scene.add
 			.rectangle(
 			0, 0,
@@ -154,10 +152,14 @@ export default class Console extends Object {
 				const ClickSOund = this.scene.sound.add('ClickSOund');
 				ClickSOund.setVolume(4);  // Ajusta el volumen del sonido
 				ClickSOund.play();
-				enteredPassword += key.label;
-				passwordDisplay.setText(enteredPassword);
-			});
-			elements.push(btn);
+				if(enteredPassword.length < 4){
+					enteredPassword += key.label
+					passwordDisplay.setText(enteredPassword)
+				}
+				
+			})
+
+			elements.push(btn)
 		})
 
 		// Botón para borrar la entrada
@@ -241,4 +243,9 @@ export default class Console extends Object {
 			player.set_player_activo(true)
 		})
 	}
+
+	desactivar_laseres(){
+		this.scene.desactivar_laseres(this._laserId)
+	}
+
 }

@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser'
 import PlayerUI from '../../UI/PlayerUI.js'
 import BasePistol from '../weapons/BasePistol.js'
 import BaseActor from '../base-game-objects/BaseActor.js'
@@ -55,7 +55,7 @@ export default class Player extends BaseActor {
 
 	update(time, delta) {
 
-		if(!this._atributos.activo)
+		if(!this.scene || !this._atributos.activo)
 			return
 
 		// Actualiza la posición del container usando la posición del body
@@ -66,6 +66,7 @@ export default class Player extends BaseActor {
 		let velocityX = 0;
 		let velocityY = 0;
 
+		// Detectar teclas pulsadas
 		if (this.cursors.up.isDown || this.controles.up.isDown) {
 			velocityY = -1;
 		}
@@ -74,7 +75,6 @@ export default class Player extends BaseActor {
 		}
 		if (this.cursors.left.isDown || this.controles.left.isDown) {
 			velocityX = -1;
-			
 		}
 		if (this.cursors.right.isDown || this.controles.right.isDown) {
 			velocityX = 1;
@@ -92,14 +92,12 @@ export default class Player extends BaseActor {
 
 		// Actualizar animación según el movimiento
 		if (velocityX !== 0 || velocityY !== 0) {
-			if (this._sprite.anims.currentAnim.key !== 'player_running') {
+			if (this._sprite.anims.currentAnim.key !== 'player_running')
 				this._sprite.play('player_running');
-				
-			}
-		} else {
-			if (this._sprite.anims.currentAnim.key !== 'player_idle') {
+		}
+		else {
+			if (this._sprite.anims.currentAnim.key !== 'player_idle')
 				this._sprite.play('player_idle');
-			}
 		}
 
 		let offsetX = 75; // Valor por defecto para cuando no está volteado
@@ -125,26 +123,24 @@ export default class Player extends BaseActor {
 		else
 			this._atributos.vida -= cantidad
 
+		// Animacion de daño respecto a la vida restante
         this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
+
+		// Personaje muerto
 		if (this._atributos.vida <= 0) {
 			this.scene.tweens.add({
 				targets: this.player,
 				alpha: 0,
 				duration: 500,
 				onComplete: () => {
-				  this.scene.scene.restart()	// TODO - Modificar a: llevar al lobby
+				  this.scene.restart()	// TODO - Modificar a: llevar al lobby
 				}
 			  });	
 		}
     }
 
 	healthBoost(health) {
-		if (this._atributos.vida + health >= Player.VIDA_INICIAL) {
-			this._atributos.vida = Player.VIDA_INICIAL;
-		}
-		else {
-			this._atributos.vida += health;
-		}
+		this._atributos.vida = Phaser.Math.Clamp(this._atributos.vida + health, 0, Player.VIDA_INICIAL)
 	}
 
 	shieldBoost(shield) {
