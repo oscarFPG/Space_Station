@@ -32,20 +32,6 @@ export default class BaseEnemy extends BaseActor {
         // Configurar física
         this.body.setSize(66, 78);
         this.body.setCollideWorldBounds(true);
-
-        // Propiedades de la IA
-        this._enemyParameters.state = 'patrol';
-
-        this._enemyParameters.minDistance = 150; 
-        this._enemyParameters.visionRange = 900          
-        this._enemyParameters.shootingRange = 540;             
-        this._enemyParameters.direction = new Phaser.Math.Vector2(1, 0); 
-
-        // Propiedades para el dodge(IA)
-        this._enemyParameters.dodgeIntensity = 50;        
-        this._enemyParameters.lastDodgeSwitch = 0;       
-        this._enemyParameters.dodgeSwitchInterval = 1500; 
-        this._enemyParameters.dodgeDirection = 1; 
     }
 
     add_weapon(weaponName, offset){
