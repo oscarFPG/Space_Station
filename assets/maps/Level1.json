@@ -117,7 +117,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":30,
          "id":5,
-         "name":"extra",
+         "name":"objects",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,

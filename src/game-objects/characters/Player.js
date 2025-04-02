@@ -94,6 +94,7 @@ export default class Player extends BaseActor {
 		if (velocityX !== 0 || velocityY !== 0) {
 			if (this._sprite.anims.currentAnim.key !== 'player_running') {
 				this._sprite.play('player_running');
+				
 			}
 		} else {
 			if (this._sprite.anims.currentAnim.key !== 'player_idle') {

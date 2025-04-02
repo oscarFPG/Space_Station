@@ -74,6 +74,11 @@ export default class Console extends Object {
 		this.windowOpen = true
 		let enteredPassword = "";
 		const elements = []
+
+		const openSound = this.scene.sound.add('console_sound');
+		openSound.setVolume(1.5);  // Ajusta el volumen según prefieras
+		openSound.play();
+	
 		
 		const overlay = this.scene.add
 			.rectangle(

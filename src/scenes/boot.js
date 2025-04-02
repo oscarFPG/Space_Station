@@ -34,7 +34,8 @@ import laserDown from '../../assets/objects/laser_1.png'
 import healthItem from '../../assets/objects/healthItem.png'
 import shieldItem from '../../assets/objects/shieldItem.png'
 import batteryItem from '../../assets/objects/batteryItem.png'
-import batteryStructure from '../../assets/objects/low_dispensator.png'
+import BATTERY_STRUCTURE_FULL from '../../assets/objects/full_dispensator.png'
+import BATTERY_STRUCTURE_LOW from '../../assets/objects/low_dispensator.png'
 import doors from '../../assets/objects/door.png'
 import box from '../../assets/objects/box.png'
 
@@ -69,7 +70,8 @@ export default class Boot extends BaseScene {
         this.load.image('health', healthItem);
         this.load.image('shield', shieldItem);
         this.load.image('battery', batteryItem);
-        this.load.image('batteryStructure', batteryStructure);
+        this.load.image('batteryStructLow', BATTERY_STRUCTURE_LOW);
+        this.load.image('batteryStructFull', BATTERY_STRUCTURE_FULL);
         this.load.image('door', doors);
         this.load.image('box', box);
         this.load.image('baseWeapon', OldColt)
