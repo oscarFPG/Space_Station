@@ -202,7 +202,7 @@ export default class BaseScene extends Phaser.Scene {
 
     addEnemy(enemyType, x, y){
 
-        return new ExtendedEnemy(this.scene, x, y)
+        return new ExtendedEnemy(this, x, y)
     }
 
     desactivar_laseres(laserID){
@@ -214,7 +214,6 @@ export default class BaseScene extends Phaser.Scene {
 
     activar_puertas(doorID){
 
-        console.log('Abriendo puerta ' + doorID)
         this.listaPuertas.forEach(door => {
             if(doorID === door.getID())
                 door.set_active(true)
@@ -222,8 +221,8 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     gameOver(){
-        console.log('Game Over')
-        this._player.set_player_activo(false)
+       console.log('Game over')
+       this.scene.restart()
     }
 
     get_player(){

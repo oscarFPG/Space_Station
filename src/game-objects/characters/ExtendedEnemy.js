@@ -1,3 +1,4 @@
+import Phaser from 'phaser'
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 
 
