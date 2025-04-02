@@ -13,6 +13,7 @@ import Coin from '../game-objects/objects/Coin.js'
 import Box from '../game-objects/objects/Box.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
+import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
 
 
 export default class BaseScene extends Phaser.Scene {
@@ -36,6 +37,12 @@ export default class BaseScene extends Phaser.Scene {
         if(map == null || tileset == null)
             return
 
+
+        this.listaConsolas = []
+        this.listaLaseres = []
+        this.listaPuertas = []
+        this.listaEstructuraBaterias = []
+        this._listaEnemigos = []
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
@@ -102,11 +109,6 @@ export default class BaseScene extends Phaser.Scene {
 
         // Se obtiene el jugador que proviene del Manager
         const objectLayer = map.getObjectLayer('objects')
-        this.listaConsolas = []
-        this.listaLaseres = []
-        this.listaPuertas = []
-        this.listaEstructuraBaterias = []
-
         const playerRespawnPosition = objectLayer.objects.find(objecto => objecto.type === 'PlayerRespawn')
         this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y)
         this.crearColliderConSuelo(this._player)
@@ -127,14 +129,8 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type === 'EnemyPosition') {
                 const type = undefined
-                this._enemigos = this.config_enemigos(type, object.x, object.y)
-                /*  TODO
-                    Esto solo crea un enemigo porque devuelve un array con un unico enemigo cada vez que se llama.
-                    Crea varios enemigos que son visibles pero no se llegan a añadir al grupo para detectar colisiones.
-                    Debe haber un array global (this._enemigos = []) y que cada vez que se llame a esta funcion se meta otro enemigo
-                    Segun el tiled con el metodo add().
-                    ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!! ¡¡¡ MUY IMPORTANTE !!!
-                */
+                const enemigo = this.addEnemy(type, object.x, object.y)
+                this._listaEnemigos.push(enemigo)
             }
             else if(object.type === 'FinalPosition') {
                 this._finalPosition = { x: object.x, y: object.y }
@@ -193,14 +189,20 @@ export default class BaseScene extends Phaser.Scene {
         
         // Gestion de colisiones entre objetos de tiled y el player
         this._charactersGroup.addElement(this._player)
-        this._enemigos.forEach(_enemigo => {
-            this._charactersGroup.addElement(_enemigo)
+        this._listaEnemigos.forEach(enemigo => {
+            this._charactersGroup.addElement(enemigo)
             this.crearColliderConSuelo(enemigo)
             this.crearColliderConPared(enemigo)
         })
 
         // Configurar el resto de objetos
         this.config_characters()
+    }
+
+
+    addEnemy(enemyType, x, y){
+
+        return new ExtendedEnemy(this.scene, x, y)
     }
 
     desactivar_laseres(laserID){
@@ -235,11 +237,6 @@ export default class BaseScene extends Phaser.Scene {
         player.body.setImmovable(true)
         return player
     }
-    
-    config_enemigos(type, x, y){
-
-        return []
-    }
 
     config_characters() {
         
@@ -271,11 +268,12 @@ export default class BaseScene extends Phaser.Scene {
             }
         })
 
-        this._enemigos.forEach(enemigo => {
+        this._listaEnemigos.forEach(enemigo => {
             this.physics.add.collider(enemigo, this._objectsCollider)
             this.physics.add.collider(enemigo, this._player)
+            this.physics.add.collider(this._player, enemigo)
         })
-        this.physics.add.collider(this._player, this._enemigos)
+        
 
         // Crear el grupo global de balas
         this._grupoBalas = this.physics.add.group()
@@ -297,7 +295,7 @@ export default class BaseScene extends Phaser.Scene {
         this.physics.add.collider(this._grupoBalas, this._objectsCollider, onBulletCollision)
         this.physics.add.collider(this._grupoBalas, this._paredColliders, onBulletCollision)
 
-        this._enemigos.forEach(enemigo => {
+        this._listaEnemigos.forEach(enemigo => {
             this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision)
         })
         this.boxes.forEach(box => {

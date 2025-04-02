@@ -1,10 +1,36 @@
 
 # Indice
+- [Features del juego](#features)
 - [Equipo de desarollo](#1-equipo-de-desarrollo)
 - [Introducción](#2-introducion)
 - [Gameplay](#3-gameplay)
 - [Características principales](#4-características-principales)
+- [Ambientacion](#5-ambientación)
 
+# Features
+1. [] Enemigos con diferentes armas
+2. [] Tienda para mejoras de personaje permanentes
+3. [] Tienda para mejoras de arma base permanentes
+4. [] Mapas dividos en salas(dungeon)
+5. [] Bosses y mini-bosses
+
+6. [] Objetos como monedas, utilidades(vida, escudo, etc...)
+7. [] Distintos tipos de armas adicionales a la arma base
+8. [] Elementos de puzzle
+9. [] Puzzles compuestos
+10. [] Trampas(láseres)
+
+11. [] Sala con temporizador/eliminar enemigos para salir
+12. [] Elementos que cuenten la historia oculta
+13. [] Estructura videojuego 'Roguelike'
+14. [] Tienda estilo comandos Linux
+15. []
+
+16. []
+17. []
+18. []
+19. []
+20. []
 
 # GDD: (nombre provisional) Escape Station
 
@@ -61,8 +87,6 @@ El juego termina cuando derrotas al boss final del último nivel.
 
 ⦁   Mueve a “V300” usando su arma para abrirte paso rompiendo muros o eliminando enemigos.
 
-⦁   ~~Generador de niveles de forma procedural. (`por capas`).~~
-
 ⦁   Analiza de forma minuciosa cada rincón para captar los láseres que se interponen en tu camino.
 
 ⦁   Esquiva y usa las cajas para abrir puertas y cubrirte de las torretas.
@@ -89,7 +113,7 @@ Las salas está conectadas por un pasillo, puede estar abiertas siempre o pueden
 
 ⦁   Sala mini-boss (`opcional`).
 
-⦁   Sala de cierre automático (`sala del panico`).
+⦁   Sala de con temporizador y cierre automático (`sala del panico`).
 
 
 ### 4.2 Tipos de Enemigos:
@@ -113,3 +137,11 @@ Los enemigos pueden ser: estáticos, móviles, de rango, cuerpo a cuerpo y suppo
 ⦁   Movimiento del personaje: Utilizando el el teclado con W / A / S / D
 
 ⦁   Movimiento del arma: Utilizando el ratón en cualquier dirección como puntero
+
+## 5. Ambientación
+En este apartado describiremos en detalle qué influencias artísticas y/o conceptuales hemos empleado para los distintos puntos:
+
+### Musical
+
+### Personajes
+

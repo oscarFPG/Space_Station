@@ -17,16 +17,4 @@ export default class Level1 extends BaseScene {
         this.crear_objetos(map)
     }
 
-    config_enemigos(x, y){
-
-        return []
-
-        var enemigos = []
-        var unEnemigo = new ExtendedEnemy(this, x, y)
-        unEnemigo.body.setCollideWorldBounds(true)
-        unEnemigo.body.setImmovable(true)
-        enemigos.push(unEnemigo)
-
-        return enemigos
-    }
 }
