@@ -27,6 +27,11 @@ export default class Laser extends Object {
         this.scene.gameOver()
     }
 
+    activate_laser(){
+        this.body.checkCollision.none = false
+        this.setAlpha(1)
+    }   
+
     disable_laser(){
         this.body.checkCollision.none = true
         this.scene.tweens.add({

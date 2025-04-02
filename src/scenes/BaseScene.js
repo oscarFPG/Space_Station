@@ -205,6 +205,13 @@ export default class BaseScene extends Phaser.Scene {
         return new ExtendedEnemy(this, x, y)
     }
 
+    activar_laseres(laserID){
+        this.listaLaseres.forEach(laser => {
+            if(laserID === laser.get_laser_ID())
+                laser.activate_laser()
+        })
+    }
+
     desactivar_laseres(laserID){
         this.listaLaseres.forEach(laser => {
             if(laserID === laser.get_laser_ID())

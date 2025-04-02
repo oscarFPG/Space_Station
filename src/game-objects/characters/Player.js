@@ -13,7 +13,7 @@ export default class Player extends BaseActor {
 	static ESCUDO_INICIAL = 10;
 	static DINERO_INICIAL = 0;
 	static BATERIA_INICIAL = 0;
-	static SPEED = 300;
+	static SPEED = 180;
 
 	constructor(scene, x, y) {
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
@@ -21,7 +21,7 @@ export default class Player extends BaseActor {
 		this.body.setSize(66, 73);
 		this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
-		
+
 		// Atributos del jugador
 		this._escudo = Player.ESCUDO_INICIAL;
 		this._dinero = Player.DINERO_INICIAL;
