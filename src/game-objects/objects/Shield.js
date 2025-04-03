@@ -8,7 +8,12 @@ export default class Shield extends Object {
         super(scene, x, y, sprite)
         this.body.setSize(80, 80)
         this.body.setOffset(20, 20)
-
+        this._displayHelperText = true
+        this._interactiveDistance = 110
+        this.setText("Pick up shield")
+    }
+    configure() {
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x0000ff, 0.5);
     }
 
     player_overlaps(player){
@@ -20,6 +25,9 @@ export default class Shield extends Object {
     }
 
     accion(player){
+        if(!player.isUseKeyJustPressed())
+			return
+        this.removeLight();
         player.shieldBoost(Shield.AUMENTO_ESCUDO);
         this.destroyObject()
     }

@@ -218,6 +218,11 @@
                          "value":100
                         }, 
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":false
@@ -226,13 +231,7 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":false
-                        },
-                        {
-                            "name":"ID",
-                            "type":"int",
-                            "value":1
-                           }
-                     ],
+                        }],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -252,6 +251,11 @@
                          "value":100
                         }, 
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":false
@@ -260,13 +264,7 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":false
-                        },
-                        {
-                            "name":"ID",
-                            "type":"int",
-                            "value":1
-                           }
-                     ],
+                        }],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -286,6 +284,11 @@
                          "value":100
                         }, 
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":false
@@ -294,13 +297,7 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":false
-                        },
-                        {
-                            "name":"ID",
-                            "type":"int",
-                            "value":1
-                           }
-                     ],
+                        }],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -453,16 +450,15 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"password",
-                         "type":"string",
-                         "value":"1001"
-                        },
-                        {
                          "name":"ID",
                          "type":"int",
                          "value":0
-                         }
-                     ],
+                        }, 
+                        {
+                         "name":"password",
+                         "type":"string",
+                         "value":"1001"
+                        }],
                  "rotation":0,
                  "type":"Console",
                  "visible":true,
@@ -482,6 +478,11 @@
                          "value":100
                         }, 
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -490,13 +491,7 @@
                          "name":"isStoppable",
                          "type":"bool",
                          "value":true
-                        },
-                        {
-                         "name":"ID",
-                         "type":"int",
-                          "value":0
-                         }
-                     ],
+                        }],
                  "rotation":0,
                  "type":"Laser",
                  "visible":true,
@@ -878,16 +873,15 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"isActivate",
-                         "type":"bool",
-                         "value":false
-                        },
-                        {
                          "name":"ID",
                          "type":"int",
                          "value":0
-                        }
-                     ],
+                        }, 
+                        {
+                         "name":"isActivate",
+                         "type":"bool",
+                         "value":false
+                        }],
                  "rotation":0,
                  "type":"Door",
                  "visible":true,
@@ -902,16 +896,15 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"numBatteries",
-                         "type":"int",
-                         "value":5
-                        },
-                        {
                          "name":"ID",
                          "type":"int",
                          "value":0
-                        }
-                     ],
+                        }, 
+                        {
+                         "name":"numBatteries",
+                         "type":"int",
+                         "value":5
+                        }],
                  "rotation":0,
                  "type":"BatteryStructure",
                  "visible":true,
@@ -926,16 +919,15 @@
                  "name":"",
                  "properties":[
                         {
-                         "name":"isActivate",
-                         "type":"bool",
-                         "value":true
-                        },
-                        {
                          "name":"ID",
                          "type":"int",
                          "value":1
-                        }
-                     ],
+                        }, 
+                        {
+                         "name":"isActivate",
+                         "type":"bool",
+                         "value":true
+                        }],
                  "rotation":0,
                  "type":"Door",
                  "visible":true,
@@ -1177,12 +1169,12 @@
          "columns":8,
          "firstgid":1,
          "image":"..\/blocks\/Tilemap2.png",
-         "imageheight":333,
+         "imageheight":444,
          "imagewidth":888,
          "margin":0,
          "name":"Tilemap2",
          "spacing":0,
-         "tilecount":24,
+         "tilecount":32,
          "tileheight":111,
          "tilewidth":111
         }],

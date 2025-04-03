@@ -16,7 +16,7 @@ export default class Level1 extends BaseScene {
         super.create(map, tileset)
         //this._nextScene = 'Level2';
 
-        this.laseresActivos = true
+        this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
             delay: 2000,
             callbackScope: this,

@@ -29,11 +29,15 @@ export default class Note extends Object {
 		this.accion(player)
 	}
 
+	configure() {
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.5);
+    }
+
 	accion(player) {
 
 		if(!player.isUseKeyJustPressed())
 			return
-
+		this.removeLight();
 		this.windowOpen = !this.windowOpen	// Alternar accion abrir/cerrar ventana
 		if(!this.windowOpen){
 			this.closeNoteWindow()
@@ -81,5 +85,4 @@ export default class Note extends Object {
 		this.noteElements = null
 		this.windowOpen = false
 	}
-
 }

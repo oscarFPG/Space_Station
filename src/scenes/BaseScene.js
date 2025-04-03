@@ -103,6 +103,21 @@ export default class BaseScene extends Phaser.Scene {
                 this.scene.switch(this._nextScene, { player: this._player })
             }
         }
+        this.listaPuertas.forEach(door => {
+            door.update();
+        });
+        this.healthItems.forEach(healthItem => {
+            healthItem.update(time);
+        });
+        this.shieldItems.forEach(shieldItem => {
+            shieldItem.update(time);
+        });
+        this.coinItems.forEach(coinItem => {
+            coinItem.update(time);
+        });
+        this.batteryItems.forEach(batteryItem => {
+            batteryItem.update(time);
+        });
     }
 
     crear_objetos(map) {
@@ -139,29 +154,30 @@ export default class BaseScene extends Phaser.Scene {
                 this.lights.addLight(object.x, object.y, 250, 0x8888ff, 0.5)
             }
             else if(object.type === 'Console'){
-                const password = object.properties[0].value
-                const laserID = object.properties[1].value  // TODO - MUY PROVISIONAL
+                const laserID = object.properties[0].value  // TODO - MUY PROVISIONAL
+                const password = object.properties[1].value
                 let consoles = new Console(this, object.x + 55, object.y - 50, password, laserID)
                 this.listaConsolas.push(consoles)
             }
             else if(object.type === 'Laser'){
-                const laserID = object.properties[3].value
+                const laserID = object.properties[1].value
                 let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
                 this.listaLaseres.push(laser)
             }
             else if(object.type === 'Note'){
                 const text = object.properties[0].value
                 let note = new Note(this, object.x + 55, object.y - 55, text)
+                note.configure()
             }
             else if(object.type === 'Door'){
-                const isActivated = object.properties[0].value
-                const doorID = object.properties[1].value
+                const doorID = object.properties[0].value
+                const isActivated = object.properties[1].value
                 let door = new Door(this, object.x + 55, object.y - 55, isActivated, doorID)
                 this.listaPuertas.push(door)
             }
             else if(object.type === 'BatteryStructure'){
-                const doorID = object.properties[1].value
-                const numBaterias = object.properties[0].value
+                const doorID = object.properties[0].value
+                const numBaterias = object.properties[1].value
                 const consolaBateria = new BatteryStructure(this, object.x + 55, object.y - 55 , doorID, numBaterias)
                 this.listaEstructuraBaterias.push(consolaBateria)
             }
@@ -170,10 +186,10 @@ export default class BaseScene extends Phaser.Scene {
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        var healthItems = map.createFromObjects('objects', { gid: 20, classType: Health, key: 'health' })
-        var shieldItems = map.createFromObjects('objects', { gid: 21, classType: Shield, key: 'shield' })
-        var batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
-        var coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
+        this.healthItems = map.createFromObjects('objects', { gid: 20, classType: Health, key: 'health' })
+        this.shieldItems = map.createFromObjects('objects', { gid: 21, classType: Shield, key: 'shield' })
+        this.batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
+        this.coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
         this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
 
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
@@ -197,6 +213,18 @@ export default class BaseScene extends Phaser.Scene {
 
         // Configurar el resto de objetos
         this.config_characters()
+        this.healthItems.forEach(healthItem => {
+            healthItem.configure();
+        });
+        this.shieldItems.forEach(shieldItem => {
+            shieldItem.configure();
+        });
+        this.coinItems.forEach(coinItem => {
+            coinItem.configure();
+        });
+        this.batteryItems.forEach(battery => {
+            battery.configure();
+        });
     }
 
     addEnemy(enemyType, x, y){
@@ -310,6 +338,9 @@ export default class BaseScene extends Phaser.Scene {
             this.physics.add.collider(this._grupoBalas, door, onBulletCollision)
         })
         this._grupoObjectos = this.physics.add.staticGroup()
+        //let group = new BaseGroup(this, true, true, true, [], this._layerPared);
+        //Se añaden los personajes al BaseGroup 
+        //group.addElement(this._player);
         this.physics.add.overlap(this._player, this._grupoObjectos)  
     }
 
