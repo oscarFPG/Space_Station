@@ -11,6 +11,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture)
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
+        this.setPipeline('Light2D');
 
         // Configurar evento de solapamiento con el jugador
         const player = scene.get_player()
@@ -20,11 +21,13 @@ export default class Object extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
 
         // Cuadro de texto
+        this._noteText = ""
         this._textoInteraccion = this.config_helperText()
         this._textoInteraccion.setVisible(false)
 
         this.scene.add.existing(this._textoInteraccion)
     }
+
 
     preUpdate(time, delta){
         
@@ -56,18 +59,44 @@ export default class Object extends Phaser.GameObjects.Sprite {
         let tecla = 'E' // Temporal
 
         // Bug: al crearse desde tiled la posicion es (0 - 0) -> Cambiar posicion al querer mostrar este texto
-        const text = this.scene.add.text(this.x, this.y, `Interactuar[${tecla}]`, { 
+        const text = this.scene.add.text(this.x, this.y, `Interact ${this._noteText}[${tecla}]`, { 
             fontSize: '16px', 
             fill: '#fff',
             backgroundColor: `rgba(0, 0, 0, 0.5)`
-        })
+        }).setDepth(11)
 
         return text
+    }
+        // En Object.js
+    setText(text) {
+        this._text = text;
+        if (this._textoInteraccion) {
+            // Actualiza el texto existente
+            let tecla = 'E' 
+            this._textoInteraccion.setText(`${this._text}[${tecla}]`);
+        }
     }
 
     destroyObject(){
         this._textoInteraccion.destroy()
         this.destroy()
     }
-
+    removeLight() {
+        if (this.light) {
+          this.scene.lights.removeLight(this.light);
+          this.light = null; 
+        }
+    }
+    update(time) {
+        if (this.light) {
+            const blinkPeriod = 1500; 
+            const modTime = time % blinkPeriod;
+            
+            if (modTime < blinkPeriod / 2) {
+            this.light.intensity = 0.5; // intensidad encendida
+            } else {
+            this.light.intensity = 0.2; // apagada
+            }
+        }
+    }
 }

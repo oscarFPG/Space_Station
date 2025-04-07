@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
-import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
+
 
 export default class Level1 extends BaseScene {
 
@@ -8,13 +8,44 @@ export default class Level1 extends BaseScene {
         super('Level1')
     }
 
+
     create(){
 
         var map = this.make.tilemap({ key: 'map_level_1', tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
-        //this._nextScene = 'Level2';
         super.create(map, tileset)
-        this.crear_objetos(map)
+        //this._nextScene = 'Level2';
+
+        this.laseresActivos = false
+        this.laserTimer = this.time.addEvent({
+            delay: 2000,
+            callbackScope: this,
+            callback: this.permutar_laseres,
+            loop: true
+        })
+    }
+
+    activar_todos_los_laseres(){
+        this.listaLaseres.forEach(laser => {
+            if(laser.get_laser_ID() != 0)
+                laser.activate_laser()
+        })
+    }
+
+    desactivar_todos_los_laseres(){
+        this.listaLaseres.forEach(laser => {
+            if(laser.get_laser_ID() != 0)
+                laser.disable_laser()
+        })
+    }
+
+    permutar_laseres(){
+
+        this.laseresActivos = !this.laseresActivos
+        if(this.laseresActivos)
+            this.desactivar_todos_los_laseres()
+        else
+            this.activar_todos_los_laseres()
     }
 
 }

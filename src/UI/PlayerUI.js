@@ -30,7 +30,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         super(scene, 0, 0)
         this.scene.add.existing(this);
         this.setPosition(PlayerUI.UI_MARGIN_X, PlayerUI.UI_MARGIN_Y)
-        this.setDepth(10)
+        this.setDepth(11)
 
         this._MAX_VIDA = maxHealth;
         this._MAX_ESCUDO = maxEscudo;
@@ -136,13 +136,21 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._contadorBalas.getFirst().destroy()
         this._contadorBalas.getFirst().destroy()
 
+
+
         const cargador = this.scene.add.text(0, 0, balasCargador).setOrigin(1, 0.5)
-        this._contadorBalas.add(cargador)
-
         const separador = this.scene.add.text(cargador.x + 10, 0, '/').setOrigin(1, 0.5)
-        this._contadorBalas.add(separador)
-
         const reserva = this.scene.add.text(separador.x + 2, 0, balasReserva).setOrigin(0, 0.5)
+
+        // MUY PROVISIONAL
+        if(balasCargador < 8){
+            cargador.setTint(0xff0000)
+            separador.setTint(0xff0000)
+            reserva.setTint(0xff0000)
+        }
+
+        this._contadorBalas.add(cargador)
+        this._contadorBalas.add(separador)
         this._contadorBalas.add(reserva)
     }
 }

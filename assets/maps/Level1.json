@@ -218,6 +218,11 @@
                          "value":100
                         }, 
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":false
@@ -246,6 +251,11 @@
                          "value":100
                         }, 
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":false
@@ -272,6 +282,11 @@
                          "name":"Damage",
                          "type":"int",
                          "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
                         }, 
                         {
                          "name":"isStatic",
@@ -435,6 +450,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
                          "name":"password",
                          "type":"string",
                          "value":"1001"
@@ -456,6 +476,11 @@
                          "name":"Damage",
                          "type":"int",
                          "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
                         }, 
                         {
                          "name":"isStatic",
@@ -848,6 +873,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
                          "name":"isActivate",
                          "type":"bool",
                          "value":false
@@ -866,6 +896,11 @@
                  "name":"",
                  "properties":[
                         {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
                          "name":"numBatteries",
                          "type":"int",
                          "value":5
@@ -883,6 +918,11 @@
                  "id":52,
                  "name":"",
                  "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
                         {
                          "name":"isActivate",
                          "type":"bool",
@@ -1129,12 +1169,12 @@
          "columns":8,
          "firstgid":1,
          "image":"..\/blocks\/Tilemap2.png",
-         "imageheight":333,
+         "imageheight":444,
          "imagewidth":888,
          "margin":0,
          "name":"Tilemap2",
          "spacing":0,
-         "tilecount":24,
+         "tilecount":32,
          "tileheight":111,
          "tilewidth":111
         }],

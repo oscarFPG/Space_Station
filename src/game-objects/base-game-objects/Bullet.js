@@ -34,7 +34,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
                     bala.destroy();
                 }
             };
-            scene.physics.world.overlap(this, scene._butanoColliders, checkOverlapAndDestroy);
+            scene.physics.world.overlap(this, scene._objectsCollider, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene.boxes, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene.doors, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene._paredColliders, checkOverlapAndDestroy);

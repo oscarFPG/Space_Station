@@ -15,8 +15,8 @@ export default class BatteryStructure extends Object {
 		this.windowOpen = false
 		this.noteElements = null
 		this.delayedClose = null
-		this._displayHelperText = true
-		this._interactiveDistance = 150
+		this._displayHelperText = false
+		this._interactiveDistance = 165
 		this._offsetX = -40
 		this._offsetY = 80
 
@@ -29,8 +29,8 @@ export default class BatteryStructure extends Object {
 
 	accion(player){
 		
-		if(!player.isUseKeyJustPressed())
-			return
+		//if(!player.isUseKeyJustPressed())
+		//	return
 
 		if(this.windowOpen)
 			this.closeNoteWindow()
@@ -42,7 +42,7 @@ export default class BatteryStructure extends Object {
 	mostrarVentana(player, bateriasJugador){
 
 		this.windowOpen = !this.windowOpen
-
+		
 		if(bateriasJugador > 0){
 			this._numBateriasActuales += bateriasJugador
 			player.quitar_baterias(bateriasJugador)
@@ -67,8 +67,8 @@ export default class BatteryStructure extends Object {
 
 	crearVentana(){
 
-		const windowX = this.x
-		const windowY = this.y
+		const windowX = this.x + 10
+		const windowY = this.y - 75
 		const stateMessage = `${this._numBateriasActuales} / ${this._numBaterias} CELLS`
 		const stateText = this.scene.add.text(windowX, windowY, stateMessage, {
 			fontSize: '18px',

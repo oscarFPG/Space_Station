@@ -52,7 +52,6 @@ export default class Console extends Object {
 
 		if(this._successfullUsed)
 			return
-
 		if(player.isUseKeyJustPressed())
 			this.accion(player)
 	}
@@ -96,13 +95,13 @@ export default class Console extends Object {
 		const panelBg = this.scene.add
 			.rectangle(panelX, panelY, 300, 250, 0x000000, 0.8)
 			.setOrigin(0.5)
-			.setDepth(1);
+			.setDepth(15);
 		elements.push(panelBg)
 
 		const passwordDisplay = this.scene.add
 			.text(panelX, panelY - 80, '', { fontSize: '20px', fill: '#fff' })
 			.setOrigin(0.5)
-			.setDepth(1);
+			.setDepth(15);
 		elements.push(passwordDisplay)
 
 		// Botón de cierre (X) en la parte superior derecha del panel
@@ -115,7 +114,7 @@ export default class Console extends Object {
 			.setPadding(5)
 			.setOrigin(0.5)
 			.setInteractive()
-			.setDepth(1)
+			.setDepth(15)
 			.on('pointerdown', () => {
 			this.closeConsoleWindow(player);
 			});
@@ -146,7 +145,7 @@ export default class Console extends Object {
 			.setPadding(10)
 			.setOrigin(0.5)
 			.setInteractive()
-			.setDepth(1)
+			.setDepth(15)
 			.on('pointerdown', () => {
 				//poner la musica
 				const ClickSOund = this.scene.sound.add('ClickSOund');
@@ -172,7 +171,7 @@ export default class Console extends Object {
 			.setPadding(10)
 			.setOrigin(0.5)
 			.setInteractive()
-			.setDepth(1)
+			.setDepth(15)
 			.on('pointerdown', () => {
 				enteredPassword = "";
 				passwordDisplay.setText('');
@@ -189,7 +188,7 @@ export default class Console extends Object {
 			.setPadding(10)
 			.setOrigin(0.5)
 			.setInteractive()
-			.setDepth(1)
+			.setDepth(15)
 			.on('pointerdown', () => {
 				/*this._secret_sound = this.sound.add('secret_code');
 				this._secret_sound.setVolume(0,2);
