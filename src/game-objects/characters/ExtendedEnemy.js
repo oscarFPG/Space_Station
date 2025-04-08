@@ -1,6 +1,5 @@
-import Phaser from 'phaser'
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
-
+import ClassIA from '../../factories/ClassIA.js';
 
 export default class ExtendedEnemy extends BasedEnemy {
 
@@ -17,10 +16,22 @@ export default class ExtendedEnemy extends BasedEnemy {
         this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
         this._sprite.play('enemy_idle')
         
-        this._atributosIA.visionRange = 900
-        this._atributosIA.fireRate = 1000;
-        this._atributosIA.shootingRange = 468;
-    }
+        // Propiedades de la IA
+        this._enemyParameters.state = 'patrol';
 
+        this._enemyParameters.minDistance = 150; 
+        this._enemyParameters.visionRange = 900          
+        this._enemyParameters.shootingRange = 540;             
+        this._enemyParameters.direction = new Phaser.Math.Vector2(1, 0); 
+
+        // Propiedades para el dodge(IA)
+        this._enemyParameters.dodgeIntensity = 50;        
+        this._enemyParameters.lastDodgeSwitch = 0;       
+        this._enemyParameters.dodgeSwitchInterval = 1500; 
+        this._enemyParameters.dodgeDirection = 1; 
+    }
     
+    preUpdate(time, delta) {
+        ClassIA.buscaJugador(time, this, this.scene._player);
+    }
 }
