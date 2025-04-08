@@ -19,6 +19,7 @@ import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
 export default class BaseScene extends Phaser.Scene {
 
     static LAYER_SUELO = 'floor'
+    static LAYER_SUELO2 = 'floor2'
     static LAYER_PARED = 'wall'
     static LAYER_OBJETO = 'objects'
 
@@ -46,6 +47,7 @@ export default class BaseScene extends Phaser.Scene {
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
+        this._layerSuelo2 = map.createLayer(BaseScene.LAYER_SUELO2, tileset, 0, 0)
         this._layerPared = map.createLayer(BaseScene.LAYER_PARED, tileset, 0, 0)
         this._layerObjeto = map.createLayer(BaseScene.LAYER_OBJETO, tileset, 0, 0)
 
@@ -74,7 +76,7 @@ export default class BaseScene extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels)
 
         // Configuraciones generales
-        this.config_iluminacion([this._layerSuelo, this._layerPared, this._layerObjeto])
+        this.config_iluminacion([this._layerSuelo, this._layerSuelo2, this._layerPared, this._layerObjeto])
         this.config_camara(this._player)
         this.config_eventos()
         this.config_cursor()

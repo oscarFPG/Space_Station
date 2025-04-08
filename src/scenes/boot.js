@@ -25,6 +25,7 @@ import TilemapImage from '../../assets/blocks/Tilemap2.png'
 import Map from '../../assets/maps/map1.json'
 import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 import Level1Map from '../../assets/maps/Level1.json'
+import Level2Map from '../../assets/maps/Level2.json'
 
 // Objetos 
 import Note from '../../assets/objects/paper.png'
@@ -95,6 +96,7 @@ export default class Boot extends BaseScene {
         this.load.tilemapTiledJSON('map', Map);
         this.load.tilemapTiledJSON('map_tutorial', TutorialMap);
         this.load.tilemapTiledJSON('map_level_1', Level1Map);
+        this.load.tilemapTiledJSON('map_level_2', Level2Map);
         
         // Tilesets
         this.load.image('tiles', TilemapImage)
