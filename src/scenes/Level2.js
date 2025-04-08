@@ -5,16 +5,14 @@ import BaseScene from './BaseScene.js'
 export default class Level1 extends BaseScene {
 
     constructor(){
-        super('Level1')
+        super('Level2')
     }
-
-
     create(){
 
-        var map = this.make.tilemap({ key: 'map_level_1', tileWidth: 111, tileHeight: 111 })
+        var map = this.make.tilemap({ key: 'map_level_2', tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
-        super.create(map, tileset, 'Level2')
-
+        super.create(map, tileset)
+        //this._nextScene = 'Level2';
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
             delay: 2000,
