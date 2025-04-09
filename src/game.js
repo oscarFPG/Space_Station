@@ -1,4 +1,4 @@
-import Boot from './scenes/Boot.js'
+import Boot from './scenes/boot.js'
 import Settings from './scenes/settings.js';
 import Store from './scenes/store.js';
 import Tutorial from './scenes/tutorial.js'

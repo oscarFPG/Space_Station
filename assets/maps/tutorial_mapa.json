@@ -737,6 +737,12 @@
                  "height":0,
                  "id":46,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -802,14 +808,20 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":3689.0465245304,
-                 "y":679.600855987953
+                 "x":304.198039681912,
+                 "y":429.419037806135
                 }, 
                 {
                  "ellipse":true,
                  "height":0,
                  "id":56,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,

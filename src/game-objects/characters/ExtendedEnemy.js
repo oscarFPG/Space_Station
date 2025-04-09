@@ -3,7 +3,7 @@ import ClassIA from '../../factories/ClassIA.js';
 
 export default class ExtendedEnemy extends BasedEnemy {
 
-    static BASE_ENEMY_WEAPON = 'weapon1';
+    static BASE_ENEMY_WEAPON = 'weapon1Enemy';
     static BASE_ENEMY_TEXTURE = 'enemyIdle';
 
     static VIDA = 25
@@ -15,7 +15,7 @@ export default class ExtendedEnemy extends BasedEnemy {
         this.add_weapon(ExtendedEnemy.BASE_ENEMY_WEAPON, {x: 40, y: 50})
         this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
         this._sprite.play('enemy_idle')
-        
+        this.light = this.scene.lights.addLight(this.x, this.y, 350, 0xff4444, 0.85);
         // Propiedades de la IA
         this._enemyParameters.state = 'patrol';
 

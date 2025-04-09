@@ -13,7 +13,7 @@ export default class Battery extends Object {
         this.setText("Pick up cell")
     }
     configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.5);
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.7);
     }
     accion(player){
         if(!player.isUseKeyJustPressed())

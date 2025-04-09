@@ -24,6 +24,8 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
     static COLOR_BARRA_ESCUDO = 0x00007a;
     static COLOR_BARRA_VACIA = 0xffffff;
 
+    static DIMENSION_TEXTO = 25;
+
 
     constructor(scene, maxHealth, maxEscudo, dineroInicial){
 
@@ -101,12 +103,15 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         const balas = this.scene.add.container(PlayerUI.POS_X_BALAS, PlayerUI.POS_Y_BALAS)
         const cargador = this.scene.add.text(0, 0, '-')
+        cargador.setFontSize(PlayerUI.DIMENSION_TEXTO);
         cargador.setOrigin(1, 0.5)  // Importante -> crece el texto hacia la izquierda, no a la derecha
 
         const separador = this.scene.add.text(cargador.x + 10, 0, '/')
+        separador.setFontSize(PlayerUI.DIMENSION_TEXTO);
         separador.setOrigin(1, 0.5)
 
         const reserva = this.scene.add.text(separador.x + 2, 0, '-')
+        reserva.setFontSize(PlayerUI.DIMENSION_TEXTO);
         reserva.setOrigin(0, 0.5)
 
         balas.setScrollFactor(0)
@@ -138,9 +143,18 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
 
 
-        const cargador = this.scene.add.text(0, 0, balasCargador).setOrigin(1, 0.5)
-        const separador = this.scene.add.text(cargador.x + 10, 0, '/').setOrigin(1, 0.5)
-        const reserva = this.scene.add.text(separador.x + 2, 0, balasReserva).setOrigin(0, 0.5)
+        const cargador = this.scene.add.text(0, 0, balasCargador)
+            .setOrigin(1, 0.5)
+            .setFontSize(PlayerUI.DIMENSION_TEXTO);
+
+        const separador = this.scene.add.text(cargador.x + 10, 0, ' / ')
+            .setOrigin(0.57, 0.5)
+            .setFontSize(PlayerUI.DIMENSION_TEXTO);
+
+        const reserva = this.scene.add.text(separador.x + 2, 0, balasReserva)
+            .setOrigin(0, 0.5)
+            .setFontSize(PlayerUI.DIMENSION_TEXTO);
+
 
         // MUY PROVISIONAL
         if(balasCargador < 8){

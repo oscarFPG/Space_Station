@@ -36,6 +36,7 @@ export default class BaseEnemy extends BaseActor {
 
     add_weapon(weaponName, offset){
         this._enemyParameters.weapon = WeaponFactory.createWeapon(weaponName, this.scene, offset)
+        this._enemyParameters.weapon.setPipeline('Light2D');
         this.add(this._enemyParameters.weapon)
     }
     /*

@@ -30,7 +30,7 @@ export default class Note extends Object {
 	}
 
 	configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.5);
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
     }
 
 	accion(player) {

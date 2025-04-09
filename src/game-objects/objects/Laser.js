@@ -22,17 +22,25 @@ export default class Laser extends Object {
             onComplete: this.accion(player)
         })
     }
+    configure() {
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
+    }
 
     accion(player){
         this.scene.gameOver()
     }
 
     activate_laser(){
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
         this.body.checkCollision.none = false
         this.setAlpha(1)
     }   
 
     disable_laser(){
+        if (this.light) {
+            this.scene.lights.removeLight(this.light);
+            this.light = null; 
+        }
         this.body.checkCollision.none = true
         this.scene.tweens.add({
             targets: this,

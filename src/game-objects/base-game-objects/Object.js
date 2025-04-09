@@ -23,6 +23,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         // Cuadro de texto
         this._noteText = ""
         this._textoInteraccion = this.config_helperText()
+        this._textoInteraccion.setDepth(12)
         this._textoInteraccion.setVisible(false)
 
         this.scene.add.existing(this._textoInteraccion)
@@ -93,7 +94,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
             const modTime = time % blinkPeriod;
             
             if (modTime < blinkPeriod / 2) {
-            this.light.intensity = 0.5; // intensidad encendida
+            this.light.intensity = 0.7; // intensidad encendida
             } else {
             this.light.intensity = 0.2; // apagada
             }

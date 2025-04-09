@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="22" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="27" height="22" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="102">
  <editorsettings>
   <export target="Level2.json" format="json"/>
  </editorsettings>
@@ -92,18 +92,18 @@
 0,8,0,6,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,0,
 0,0,0,13,0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,
-0,14,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,8,6,0,6,0,6,0,0,2,2,
+0,14,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,8,6,0,6,0,6,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,14,6,0,6,0,6,0,0,0,0,
 0,14,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,8,14,8,14,8,0,0,8,8,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,
 0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,
 0,14,0,0,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,31,0,0,0,10,0,0,0,0,0,0,14,0,0,14,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,14,0,0,14,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,14,0,14,0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,10,0,0,10,0,0,0,0,0,14,0,14,23,23,23,0,
+0,0,0,0,0,0,0,0,0,0,0,10,0,0,10,0,0,0,0,0,14,0,14,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,14,0,10,10,0,10,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -112,10 +112,10 @@
  </layer>
  <objectgroup id="2" name="objects">
   <object id="2" type="FinalPosition" x="2938.83" y="720.727"/>
-  <object id="3" type="PlayerRespawn" x="45.8865" y="2151.34">
+  <object id="3" type="PlayerRespawn" x="87.7653" y="2157.28">
    <point/>
   </object>
-  <object id="4" type="Laser" gid="16" x="1553.23" y="221.102" width="111" height="111">
+  <object id="4" type="Laser" gid="16" x="1559.48" y="221.102" width="111" height="111">
    <properties>
     <property name="Damage" type="int" value="100"/>
     <property name="ID" type="int" value="1"/>
@@ -124,14 +124,6 @@
    </properties>
   </object>
   <object id="5" type="Laser" gid="16" x="1329.75" y="332.163" width="111" height="111">
-   <properties>
-    <property name="Damage" type="int" value="100"/>
-    <property name="ID" type="int" value="1"/>
-    <property name="isStatic" type="bool" value="false"/>
-    <property name="isStoppable" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="6" type="Laser" gid="16" x="997.561" y="221.83" width="111" height="111">
    <properties>
     <property name="Damage" type="int" value="100"/>
     <property name="ID" type="int" value="1"/>
@@ -249,10 +241,9 @@
     <property name="value" type="int" value="15"/>
    </properties>
   </object>
-  <object id="55" type="BlueLightPoint" x="388.337" y="613.891">
+  <object id="55" type="BlueLightPoint" x="2503.13" y="1057.93">
    <ellipse/>
   </object>
-  <object id="56" type="Turret" gid="30" x="1212.62" y="1564.49" width="111" height="111"/>
   <object id="57" type="Box" gid="23" x="653.5" y="2313.5" width="111" height="111">
    <properties>
     <property name="health" type="int" value="100"/>
@@ -274,7 +265,7 @@
    </properties>
   </object>
   <object id="61" type="Battery" gid="19" x="1558.5" y="889.167" width="111" height="111"/>
-  <object id="63" type="Laser" gid="16" x="1664.25" y="221.292" width="111" height="111">
+  <object id="63" type="Laser" gid="16" x="1997" y="331.792" width="111" height="111">
    <properties>
     <property name="Damage" type="int" value="100"/>
     <property name="ID" type="int" value="1"/>
@@ -290,14 +281,6 @@
     <property name="isStoppable" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="65" type="Laser" gid="16" x="2106.38" y="332.379" width="111" height="111">
-   <properties>
-    <property name="Damage" type="int" value="100"/>
-    <property name="ID" type="int" value="1"/>
-    <property name="isStatic" type="bool" value="false"/>
-    <property name="isStoppable" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="66" type="Coin" gid="22" x="2435.5" y="325.5" width="111" height="111">
    <properties>
     <property name="value" type="int" value="10"/>
@@ -305,7 +288,7 @@
   </object>
   <object id="67" type="Note" gid="11" x="2549.5" y="324" width="111" height="111">
    <properties>
-    <property name="title" value="You were "/>
+    <property name="title" value="You are the last hope to save the world, Vyls"/>
    </properties>
   </object>
   <object id="69" type="Box" gid="23" x="1627.17" y="1657.83" width="111" height="111">
@@ -328,17 +311,12 @@
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
-  <object id="78" type="Box" gid="23" x="885.167" y="1219.17" width="111" height="111">
-   <properties>
-    <property name="health" type="int" value="100"/>
-   </properties>
-  </object>
   <object id="79" type="ShieldKit" gid="21" x="2640.5" y="242.5" width="111" height="111">
    <properties>
     <property name="value" type="int" value="15"/>
    </properties>
   </object>
-  <object id="81" type="BoxHard" gid="29" x="1107.33" y="967.667" width="111" height="111"/>
+  <object id="81" type="BoxHard" gid="29" x="882" y="1227.67" width="111" height="111"/>
   <object id="87" type="BoxHard" gid="29" x="1224.17" y="934.167" width="111" height="111"/>
   <object id="88" type="BoxHard" gid="29" x="1334.17" y="972.833" width="111" height="111"/>
   <object id="89" type="BoxHard" gid="29" x="1451.17" y="933.167" width="111" height="111"/>
@@ -349,6 +327,30 @@
    <properties>
     <property name="health" type="int" value="100"/>
    </properties>
+  </object>
+  <object id="94" type="Box" gid="23" x="2580.5" y="2008.5" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="95" type="Box" gid="23" x="2653.83" y="2063.17" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="96" type="Box" gid="23" x="2733.83" y="2012.5" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="98" type="EnemyPosition" gid="30" x="1217" y="1566.67" width="111" height="111">
+   <properties>
+    <property name="type" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="99" type="BoxHard" gid="29" x="1116.5" y="980.5" width="111" height="111"/>
+  <object id="101" type="BlueLightPoint" x="388.5" y="612.5">
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

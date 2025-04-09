@@ -7,7 +7,7 @@ export default class BasePistol extends RangeWeapon {
     static BASE_PISTOL_AMMO_TEXTURE = 'bullet1';
 
     constructor(scene, x, y){
-        super(scene, x, y, BasePistol.BASE_PISTOL_TEXTURE);
+        super(scene, x, y, BasePistol.BASE_PISTOL_TEXTURE, 0x87CEFA);
 
         // Gun config
         this._specs.damage = BasePistol.BASE_PISTOL_DAMAGE;
@@ -20,7 +20,7 @@ export default class BasePistol extends RangeWeapon {
         this._specs.sprite = BasePistol.BASE_PISTOL_TEXTURE;
         this._specs.weight = 1;
         
-        this._ammo.clipSize = 20;
+        this._ammo.clipSize = 12;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
         this._ammo.ammoExtra = 200;
         this._ammo.texture = BasePistol.BASE_PISTOL_AMMO_TEXTURE;

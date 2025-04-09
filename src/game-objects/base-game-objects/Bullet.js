@@ -4,7 +4,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     static EXPLODE_ANIMATION = 'explode'; // Nombre de la animación
 
-    constructor(scene, x, y, texture, damage) {
+    constructor(scene, x, y, texture, damage, color) {
         super(scene, x, y, texture);
         this._damage = damage;
 
@@ -13,7 +13,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.add.existing(this);
         this.setCollideWorldBounds(true);
         this.body.onWorldBounds = true;
-        this.light = this.scene.lights.addLight(this.x, this.y, 600, 0x87CEFA, 1.5);
+        this.light = this.scene.lights.addLight(this.x, this.y, 600, color, 1.5);
 
         // Crear la animación "spark" (usando la textura 'explode' ya cdsargada)
         if (!scene.anims.exists('spark')) {
@@ -36,6 +36,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
             };
             scene.physics.world.overlap(this, scene._objectsCollider, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene.boxes, checkOverlapAndDestroy);
+            scene.physics.world.overlap(this, scene.boxesHard, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene.doors, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene._paredColliders, checkOverlapAndDestroy);
         });

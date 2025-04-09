@@ -13,11 +13,14 @@ import doorsOpen from '../../assets/objects/doors_open.png'
 
 // Armas / Objetos
 import OldColt from '../../assets/weapons/OldColt.png'
+import Weapon1Enemy from '../../assets/weapons/weapon1_enemy.png'
 import Weapon1 from '../../assets/weapons/weapon1.png'
 import Weapon2 from '../../assets/weapons/weapon2.png'
 import Weapon3 from '../../assets/weapons/weapon3.png'
 import Weapon4 from '../../assets/weapons/weapon4.png'
 import Bullet1 from '../../assets/bullets/bullet1.png'
+import Bullet1Enemy from '../../assets/bullets/bullet1_enemy.png'
+import Bullet1Turret from '../../assets/bullets/bullet1_turret.png'
 import Explode from '../../assets/effects/explode.png'
 
 // Mapas
@@ -39,7 +42,9 @@ import BATTERY_STRUCTURE_FULL from '../../assets/objects/full_dispensator.png'
 import BATTERY_STRUCTURE_LOW from '../../assets/objects/low_dispensator.png'
 import doors from '../../assets/objects/door.png'
 import box from '../../assets/objects/box.png'
-
+import boxHard from '../../assets/objects/box_hard.png'
+import turret_default from '../../assets/objects/turret_default_.png'
+import turret_base from '../../assets/objects/turret_base_.png'
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
@@ -75,16 +80,22 @@ export default class Boot extends BaseScene {
         this.load.image('batteryStructFull', BATTERY_STRUCTURE_FULL);
         this.load.image('door', doors);
         this.load.image('box', box);
+        this.load.image('boxHard', boxHard);
         this.load.image('baseWeapon', OldColt)
         this.load.image('note', Note)
         this.load.image('laser2', laserUp)
         this.load.image('laser1', laserDown)
         this.load.image('consoleBlocked', ConsoleBlocked)
+        this.load.image('turretBase', turret_base);
+        this.load.image('turret', turret_default);
+        this.load.image('weapon1Enemy', Weapon1Enemy)
         this.load.image('weapon1', Weapon1)
         this.load.image('weapon2', Weapon2)
         this.load.image('weapon3', Weapon3)
         this.load.image('weapon4', Weapon4)
         this.load.image('bullet1', Bullet1)
+        this.load.image('bullet1Enemy', Bullet1Enemy)
+        this.load.image('bullet1Turret', Bullet1Turret)
         this.load.image('front-page', FRONT)
         this.load.image('store-page', STORE)
 

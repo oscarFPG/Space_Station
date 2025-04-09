@@ -13,7 +13,7 @@ export default class Shield extends Object {
         this.setText("Pick up shield")
     }
     configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x0000ff, 0.5);
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x0000ff, 0.7);
     }
 
     player_overlaps(player){

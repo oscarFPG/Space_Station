@@ -15,7 +15,7 @@ export default class Health extends Object {
         this.setText("Pick up healthKit")
     }
     configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.5);
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.7);
     }
     player_overlaps(player) {
         if(player.isFullHealth())

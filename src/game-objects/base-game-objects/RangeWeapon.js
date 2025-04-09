@@ -25,8 +25,9 @@ export default class RangeWeapon extends Weapon {
     #_isReloading = false
     _lastShotTime = 0; // Guarda el tiempo del último disparo
 
-    constructor(scene, x, y, texture){
+    constructor(scene, x, y, texture, color){
         super(scene, x, y, texture)
+        this.colorLightBullet = color;
         this.scene.add.existing(this);
     }
 
@@ -44,16 +45,19 @@ export default class RangeWeapon extends Weapon {
         this._lastShotTime = now
  
         // Obtener la posición mundial del arma
-        const weaponX = this.parentContainer.x + this.x
-        const weaponY = this.parentContainer.y + this.y
-
+        var weaponX = this.x
+        var weaponY = this.y
+        if (this.parentContainer) {
+             weaponX += this.parentContainer.x 
+             weaponY += this.parentContainer.y
+        } 
         // Calcular el ángulo de disparo
         const angle = Phaser.Math.Angle.Between(weaponX, weaponY, targetX, targetY)
         const bulletX = weaponX + Math.cos(angle) * this._specs.muzzleOffset
         const bulletY = weaponY + Math.sin(angle) * this._specs.muzzleOffset
 
         // Crear la bala en la posición del arma
-        const bullet = new Bullet(this.scene, bulletX, bulletY, this._ammo.texture, this._specs.damage)
+        const bullet = new Bullet(this.scene, bulletX, bulletY, this._ammo.texture, this._specs.damage, this.colorLightBullet)
         this.scene.add.existing(bullet)
         this.scene._grupoBalas.add(bullet)
         bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed)

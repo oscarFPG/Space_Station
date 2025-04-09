@@ -9,8 +9,8 @@ export default class Player extends BaseActor {
 	static IDLE_ANIMATION = 'playerIdle';
 	static RUNNING_ANIMATION = 'playerRunning';
 
-	static VIDA_INICIAL = 15;
-	static ESCUDO_INICIAL = 10;
+	static VIDA_INICIAL = 20;
+	static ESCUDO_INICIAL = 15;
 	static DINERO_INICIAL = 0;
 	static BATERIA_INICIAL = 0;
 	static SPEED = 180;
@@ -118,8 +118,12 @@ export default class Player extends BaseActor {
 
 	quitarVida(cantidad){
 
-        if(this._escudo > 0)
-			this._escudo -= cantidad
+        if(this._escudo > 0) {
+			if (this._escudo - cantidad <= 0)
+				this._escudo = 0;
+			else
+				this._escudo -= cantidad
+		}
 		else
 			this._atributos.vida -= cantidad
 
@@ -230,7 +234,7 @@ export default class Player extends BaseActor {
 		var weaponOffset = { x: 39, y: 54 }
 		var weapon = new BasePistol(this.scene, weaponOffset.x, weaponOffset.y)
 		weapon.setOrigin(0.5, 0.5)
-
+		weapon.setPipeline('Light2D');
 		return weapon
 	}
 

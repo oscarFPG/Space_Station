@@ -11,9 +11,11 @@ import Shield from '../game-objects/objects/Shield.js'
 import BatteryItem from '../game-objects/objects/Battery.js'
 import Coin from '../game-objects/objects/Coin.js'
 import Box from '../game-objects/objects/Box.js'
+import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
-import ExtendedEnemy from '../game-objects/characters/ExtendedEnemy.js'
+
+import EnemyFactory from '../factories/EnemyFactory.js';
 
 
 export default class BaseScene extends Phaser.Scene {
@@ -43,6 +45,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaLaseres = []
         this.listaPuertas = []
         this.listaEstructuraBaterias = []
+        this.listaTorretas = []
         this._listaEnemigos = []
 
         // Capas de todos los niveles
@@ -145,7 +148,7 @@ export default class BaseScene extends Phaser.Scene {
                 })
             }
             else if(object.type === 'EnemyPosition') {
-                const type = undefined
+                const type = object.properties[0].value
                 const enemigo = this.addEnemy(type, object.x, object.y)
                 this._listaEnemigos.push(enemigo)
             }
@@ -164,6 +167,7 @@ export default class BaseScene extends Phaser.Scene {
             else if(object.type === 'Laser'){
                 const laserID = object.properties[1].value
                 let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
+                laser.configure()
                 this.listaLaseres.push(laser)
             }
             else if(object.type === 'Note'){
@@ -193,17 +197,25 @@ export default class BaseScene extends Phaser.Scene {
         this.batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
         this.coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
         this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
-
+        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'boxHard' })
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
         this.listaPuertas.forEach(door => {
             this._charactersGroup.addCollision(door)
         })
+        this.listaTorretas.forEach(turret => {
+            this._charactersGroup.addCollision(turret)
+        })
+
         this.physics.add.collider(this._player, this.listaPuertas)
 
         this.boxes.forEach(box => {
             this._charactersGroup.addCollision(box)
         })
+        this.boxesHard.forEach(boxHard => {
+            this._charactersGroup.addCollision(boxHard)
+        })
         this.physics.add.collider(this._player, this.boxes)
+        this.physics.add.collider(this._player, this.boxesHard)
         
         // Gestion de colisiones entre objetos de tiled y el player
         this._charactersGroup.addElement(this._player)
@@ -230,8 +242,7 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     addEnemy(enemyType, x, y){
-
-        return new ExtendedEnemy(this, x, y)
+        return EnemyFactory.createEnemy(enemyType, this, x, y)
     }
 
     activar_laseres(laserID){
@@ -333,7 +344,13 @@ export default class BaseScene extends Phaser.Scene {
         this._listaEnemigos.forEach(enemigo => {
             this.physics.add.collider(this._grupoBalas, enemigo, onBulletCollision)
         })
+        this.listaTorretas.forEach(turret => {
+            this.physics.add.collider(this._grupoBalas, turret, onBulletCollision)
+        })
         this.boxes.forEach(box => {
+            this.physics.add.collider(this._grupoBalas, box, onBulletCollision)
+        })
+        this.boxesHard.forEach(box => {
             this.physics.add.collider(this._grupoBalas, box, onBulletCollision)
         })
         this.listaPuertas.forEach(door => {
@@ -352,7 +369,7 @@ export default class BaseScene extends Phaser.Scene {
             capas[i].setPipeline('Light2D')
 
         this.lights.enable()
-        this.lights.setAmbientColor(0x777777)
+        this.lights.setAmbientColor(0x666666)
     }
 
     config_camara(player){

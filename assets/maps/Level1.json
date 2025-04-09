@@ -176,6 +176,12 @@
                  "height":0,
                  "id":5,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -203,8 +209,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":2573.23484848485,
-                 "y":157.863636363637
+                 "x":51.3560606060619,
+                 "y":1377.31818181818
                 }, 
                 {
                  "gid":16,
@@ -310,6 +316,12 @@
                  "height":0,
                  "id":11,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -733,6 +745,12 @@
                  "height":0,
                  "id":39,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -745,6 +763,12 @@
                  "height":0,
                  "id":40,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -757,6 +781,12 @@
                  "height":0,
                  "id":41,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -940,6 +970,12 @@
                  "height":0,
                  "id":54,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -1042,6 +1078,12 @@
                  "height":0,
                  "id":61,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,

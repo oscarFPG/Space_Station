@@ -115,7 +115,7 @@
             0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 14, 0, 0, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 14, 0, 0, 14, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 14, 0, 0, 14, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 14, 0, 14, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -159,8 +159,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":45.8865151515151,
-                 "y":2151.33636363636
+                 "x":87.765303030303,
+                 "y":2157.27575757576
                 }, 
                 {
                  "gid":16,
@@ -192,7 +192,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1553.23484848485,
+                 "x":1559.48484848485,
                  "y":221.101818181818
                 }, 
                 {
@@ -229,39 +229,6 @@
                  "y":332.163333333333
                 }, 
                 {
-                 "gid":16,
-                 "height":111,
-                 "id":6,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":997.560606060606,
-                 "y":221.83
-                }, 
-                {
                  "gid":21,
                  "height":111,
                  "id":47,
@@ -284,6 +251,12 @@
                  "height":0,
                  "id":7,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -506,6 +479,12 @@
                  "height":0,
                  "id":32,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -641,8 +620,7 @@
                  "width":111,
                  "x":2223.5,
                  "y":1572.16
-                },
-            
+                }, 
                 {
                  "gid":22,
                  "height":111,
@@ -660,12 +638,19 @@
                  "width":111,
                  "x":113.5,
                  "y":876.5
-                }, 
+                },
+            
                 {
                  "ellipse":true,
                  "height":0,
                  "id":49,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":0
+                        }],
                  "rotation":0,
                  "type":"EnemyPosition",
                  "visible":true,
@@ -700,20 +685,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":388.336666666667,
-                 "y":613.890606060606
-                }, 
-                {
-                 "gid":30,
-                 "height":111,
-                 "id":56,
-                 "name":"",
-                 "rotation":0,
-                 "type":"Turret",
-                 "visible":true,
-                 "width":111,
-                 "x":1212.61666666667,
-                 "y":1564.49
+                 "x":2503.12833333333,
+                 "y":1057.93227272727
                 }, 
                 {
                  "gid":23,
@@ -829,8 +802,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1664.25,
-                 "y":221.291666666667
+                 "x":1997,
+                 "y":331.791666666667
                 }, 
                 {
                  "gid":16,
@@ -866,39 +839,6 @@
                  "y":332.454545454545
                 }, 
                 {
-                 "gid":16,
-                 "height":111,
-                 "id":65,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":false
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":2106.37878787879,
-                 "y":332.378787878788
-                }, 
-                {
                  "gid":22,
                  "height":111,
                  "id":66,
@@ -925,7 +865,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"You were "
+                         "value":"You are the last hope to save the world, Vyls"
                         }],
                  "rotation":0,
                  "type":"Note",
@@ -1007,24 +947,6 @@
                  "y":1216.5
                 }, 
                 {
-                 "gid":23,
-                 "height":111,
-                 "id":78,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":885.166666666667,
-                 "y":1219.16666666667
-                }, 
-                {
                  "gid":21,
                  "height":111,
                  "id":79,
@@ -1051,8 +973,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1107.33333333333,
-                 "y":967.666666666667
+                 "x":882,
+                 "y":1227.66666666667
                 }, 
                 {
                  "gid":29,
@@ -1113,8 +1035,7 @@
                  "width":111,
                  "x":1671.16666666667,
                  "y":937.166666666667
-                },
-            
+                }, 
                 {
                  "gid":29,
                  "height":111,
@@ -1180,7 +1101,8 @@
                  "width":111,
                  "x":2653.83333333333,
                  "y":2063.16666666667
-                }, 
+                },
+            
                 {
                  "gid":23,
                  "height":111,
@@ -1198,6 +1120,48 @@
                  "width":111,
                  "x":2733.83333333333,
                  "y":2012.5
+                }, 
+                {
+                 "gid":30,
+                 "height":111,
+                 "id":98,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"EnemyPosition",
+                 "visible":true,
+                 "width":111,
+                 "x":1217,
+                 "y":1566.66666666667
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":99,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":1116.5,
+                 "y":980.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":101,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":388.5,
+                 "y":612.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1206,7 +1170,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":97,
+ "nextobjectid":102,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

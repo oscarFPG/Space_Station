@@ -23,6 +23,19 @@ export default class ClassIA {
         }
     }
 
+    static buscaJugadorEstatico(time, enemy, player){
+
+        const distanceToPlayer = Phaser.Math.Distance.Between(enemy.x, enemy.y, player.x, player.y);
+
+        if (distanceToPlayer <= enemy._enemyParameters.visionRange) {
+            enemy._enemyParameters.state = 'disparar';
+            this.logicPersigueEstatico(time, enemy, player, distanceToPlayer);
+        }
+        else /*if (enemy._enemyParameters.state === 'perseguir')*/ {
+            enemy._enemyParameters.state = 'patrullar';
+        }
+    }
+
     //static patrullaArea(){}
     // ------------------------------------------------ Metodos de tipo de IA ------------------------------------------------ //
 
@@ -58,6 +71,9 @@ export default class ClassIA {
         // Aplicar velocidad
         enemy.body.setVelocity(baseVX + dodgeVX, baseVY + dodgeVY);
 
+        if (enemy.light) {
+            enemy.light.setPosition(enemy.x, enemy.y);  // Actualizar posición de la luz
+        }
         // Disparar si está en rango
         if (distanceToPlayer <= enemy._enemyParameters.shootingRange) {
             if(enemy._enemyParameters.weapon._ammo.currentClipAmmo <= 0)
@@ -67,7 +83,7 @@ export default class ClassIA {
         }
         enemy._enemyParameters.weapon.setRotation(chaseAngle);
 
-        this.flipCharacter(enemy);
+        this.flipCharacter(enemy, player.x);
     }
 
     static logicPatrulla(enemy){
@@ -84,19 +100,32 @@ export default class ClassIA {
 
         this.flipCharacter(enemy);
     }
+
+    static logicPersigueEstatico(time, enemy, player, distanceToPlayer) {
+        const chaseAngle = Phaser.Math.Angle.Between(enemy.x, enemy.y, player.x, player.y);
+        if (distanceToPlayer <= enemy._enemyParameters.shootingRange) {
+            if(enemy._enemyParameters.weapon._ammo.currentClipAmmo <= 0)
+                enemy._enemyParameters.weapon.reload();
+            else
+                enemy._enemyParameters.weapon.shot(player.x, player.y);
+        }
+        enemy._enemyParameters.weapon.setRotation(chaseAngle);
+    }
     // -------------------------------------------------- Metodos de logica -------------------------------------------------- //
 
     // -------------------------------------------------- Metodos Agregados -------------------------------------------------- //
-    static flipCharacter(enemy){
-        if (enemy._enemyParameters.direction.x < 0) {
-            enemy._sprite.setFlipX(true);
-            enemy._enemyParameters.weapon.setFlipY(true);
+    static flipCharacter(enemy, playerEjex) {
+        // Si el objetivo (player) está a la izquierda del enemigo, se activa el flip
+        let shouldFlip = playerEjex < enemy.x;
+        
+        enemy._enemyParameters.weapon.setFlipY(shouldFlip);
+        // Ajuste en la posición del sprite del enemigo si se voltea, similar a lo que hace el player
+        if (shouldFlip) {
             enemy._sprite.setX(34);
-        } else if (enemy._enemyParameters.direction.x > 0) {
-            enemy._sprite.setFlipX(false);
-            enemy._enemyParameters.weapon.setFlipY(false);
-        }
+        } 
+        enemy._sprite.setFlipX(shouldFlip);
     }
+    
     // -------------------------------------------------- Metodos Agregados -------------------------------------------------- //
 
 }
