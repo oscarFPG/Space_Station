@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
+import Test from '../game-objects/objects/Test.js'
 
 
 export default class Tutorial extends BaseScene {
@@ -13,6 +14,8 @@ export default class Tutorial extends BaseScene {
         var map = this.make.tilemap({ key: 'map_tutorial', tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
         super.create(map, tileset, 'Level1')
+
+        const test = new Test(this)
     }
 
 }

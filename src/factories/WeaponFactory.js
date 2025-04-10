@@ -14,15 +14,35 @@ export default class WeaponFactory {
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');
     }
 
+    static createPistol(weaponName, scene, weaponOffset){
+
+    }
+
+    static createSubmachineGun(weaponName, scene, weaponOffset){
+        
+    }
+
+    static createRifle(weaponName, scene, weaponOffset){
+        
+    }
+
+    static createShotgun(weaponName, scene, weaponOffset){
+        
+    }
+
+    static createSniper(weaponName, scene, weaponOffset){
+        
+    }
+
     static createWeapon(weaponName, scene, weaponOffset){
 
         switch(weaponName){
         case WeaponFactory.BASE_WEAPON:
-            return new BasePistol(scene, weaponOffset.x, weaponOffset.y);   // Aqui habria que hacer algo tipo { return new BasePistol() }
+            return new BasePistol(scene, weaponOffset.x, weaponOffset.y)
         case WeaponFactory.BASE_WEAPON_ENEMY:
-            return new BasePistolEnemy(scene, weaponOffset.x, weaponOffset.y);   // Aqui habria que hacer algo tipo { return new BasePistol() }
+            return new BasePistolEnemy(scene, weaponOffset.x, weaponOffset.y)
         case WeaponFactory.BASE_TURRET_WEAPON:
-            return new BaseTurretWeapon(scene, weaponOffset.x, weaponOffset.y); 
+            return new BaseTurretWeapon(scene, weaponOffset.x, weaponOffset.y) 
         default:
             throw new Error(`Objeto \'Weapon\' con identificador ${weapon} no encontrado`)
         }

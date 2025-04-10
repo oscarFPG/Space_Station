@@ -11,7 +11,7 @@ import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
 
-// Armas / Objetos
+// Armas
 import OldColt from '../../assets/weapons/OldColt.png'
 import Weapon1Enemy from '../../assets/weapons/weapon1_enemy.png'
 import Weapon1 from '../../assets/weapons/weapon1.png'
