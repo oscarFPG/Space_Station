@@ -14,7 +14,6 @@ import Box from '../game-objects/objects/Box.js'
 import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
-
 import EnemyFactory from '../factories/EnemyFactory.js';
 
 
@@ -30,7 +29,6 @@ export default class BaseScene extends Phaser.Scene {
 
     constructor(sceneKey){
         super({ key: sceneKey })
-        this._previousScene = 'settings'
     }
 
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
@@ -159,7 +157,7 @@ export default class BaseScene extends Phaser.Scene {
                 this.lights.addLight(object.x, object.y, 250, 0x8888ff, 0.5)
             }
             else if(object.type === 'Console'){
-                const laserID = object.properties[0].value  // TODO - MUY PROVISIONAL
+                const laserID = object.properties[0].value
                 const password = object.properties[1].value
                 let consoles = new Console(this, object.x + 55, object.y - 50, password, laserID)
                 this.listaConsolas.push(consoles)
@@ -186,6 +184,9 @@ export default class BaseScene extends Phaser.Scene {
                 const numBaterias = object.properties[1].value
                 const consolaBateria = new BatteryStructure(this, object.x + 55, object.y - 55 , doorID, numBaterias)
                 this.listaEstructuraBaterias.push(consolaBateria)
+            }
+            else if(object.type === '' /* TODO - Incluir tipo para la tienda */){
+
             }
         })
 
