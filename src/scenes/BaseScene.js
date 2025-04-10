@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player.js'
 import Bullet from '../game-objects/base-game-objects/Bullet.js'
-import Options from '../options-manager/Options.js'
+import Options from '../managers/Options.js'
 import BaseGroup from '../game-objects/objects/BaseGroup.js'
 import Note from '../game-objects/objects/Note.js'
 import Console from '../game-objects/objects/Console.js'
@@ -106,6 +106,7 @@ export default class BaseScene extends Phaser.Scene {
                 this.scene.switch(this._nextScene, { player: this._player })
             }
         }
+        /*
         this.listaPuertas.forEach(door => {
             door.update();
         });
@@ -121,6 +122,7 @@ export default class BaseScene extends Phaser.Scene {
         this.batteryItems.forEach(batteryItem => {
             batteryItem.update(time);
         });
+        */
     }
 
     crear_objetos(map) {
@@ -165,13 +167,11 @@ export default class BaseScene extends Phaser.Scene {
             else if(object.type === 'Laser'){
                 const laserID = object.properties[1].value
                 let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
-                laser.configure()
                 this.listaLaseres.push(laser)
             }
             else if(object.type === 'Note'){
                 const text = object.properties[0].value
                 let note = new Note(this, object.x + 55, object.y - 55, text)
-                note.configure()
             }
             else if(object.type === 'Door'){
                 const doorID = object.properties[0].value
@@ -228,18 +228,6 @@ export default class BaseScene extends Phaser.Scene {
 
         // Configurar el resto de objetos
         this.config_characters()
-        this.healthItems.forEach(healthItem => {
-            healthItem.configure();
-        });
-        this.shieldItems.forEach(shieldItem => {
-            shieldItem.configure();
-        });
-        this.coinItems.forEach(coinItem => {
-            coinItem.configure();
-        });
-        this.batteryItems.forEach(battery => {
-            battery.configure();
-        });
     }
 
     addEnemy(enemyType, x, y){

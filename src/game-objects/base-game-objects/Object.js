@@ -18,7 +18,15 @@ export default class Object extends Phaser.GameObjects.Sprite {
         if(!player)
             return new Error('La clase necesita una previa referencia al Player')
         
-        this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
+        //this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
+		this.on('overlapstart', () => {
+            this.player_overlaps(player)
+        })
+        this.on('overlapend', () => {
+            this.player_end_overlaps(player)
+        })
+
+        this.scene.physics.add.overlap(this, player);
 
         // Cuadro de texto
         this._noteText = ""
@@ -36,23 +44,29 @@ export default class Object extends Phaser.GameObjects.Sprite {
         if(!player || !this._displayHelperText)
             return
 
-
-		const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
-		if(distance < this._interactiveDistance){
-			this._textoInteraccion.setVisible(true)
-			this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
-		}	
-		else{
-			this._textoInteraccion.setVisible(false)
-		}
+        // IMPORTANTE - Gestion de overlap con el body
+        var touching = !this.body.touching.none || this.body.embedded;
+        var wasTouching = !this.body.wasTouching.none;
+      
+        if (touching && !wasTouching) 
+            this.emit('overlapstart')
+        if (!touching && wasTouching) 
+            this.emit('overlapend')
 	}
 
     player_overlaps(player){
+
+        this._textoInteraccion.setVisible(true)
+		this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
         this.accion(player)
     }
 
-    accion(player){
+    player_end_overlaps(player){
+        this._textoInteraccion.setVisible(false)
+    }
 
+    accion(player){
+        
     }
 
     config_helperText(){

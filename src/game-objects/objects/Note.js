@@ -13,6 +13,7 @@ export default class Note extends Object {
 		super(scene, x, y, Note.TEXTURE)
 		this.body.setSize(90, 90)
 		this.body.setOffset(15, 15)
+		this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7)
 
 		// Bandera para saber si la ventana ya está abierta
 		this.windowOpen = false
@@ -25,18 +26,11 @@ export default class Note extends Object {
 		this._noteText = text
 	}
 
-	player_overlaps(player){
-		this.accion(player)
-	}
-
-	configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
-    }
-
 	accion(player) {
 
 		if(!player.isUseKeyJustPressed())
 			return
+		
 		this.removeLight();
 		this.windowOpen = !this.windowOpen	// Alternar accion abrir/cerrar ventana
 		if(!this.windowOpen){
