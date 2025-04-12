@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
-import Options from '../options-manager/Options.js'
+import Options from '../managers/Options.js'
 
 export default class Settings extends BaseScene {
 

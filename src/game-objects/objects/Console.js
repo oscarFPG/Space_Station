@@ -27,33 +27,17 @@ export default class Console extends Object {
 	}
 
 
-	preUpdate() {
-
-		if(this._successfullUsed)
-			return
-
-		const player = this.scene.get_player()
-		if(!player || !this._displayHelperText)
-			return
-
-
-		const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y)
-		if(distance < this._interactiveDistance){
-			this._textoInteraccion.setVisible(true)
-			this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
-		}	
-		else{
-			this._textoInteraccion.setVisible(false)
-		}
-
-	}
-
 	player_overlaps(player){
 
 		if(this._successfullUsed)
 			return
+		
 		if(player.isUseKeyJustPressed())
 			this.accion(player)
+		else{
+			this._textoInteraccion.setVisible(true)
+			this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+		}
 	}
 
 	accion(player){

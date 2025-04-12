@@ -50,6 +50,8 @@ export default class Player extends BaseActor {
 
 		// Añadir al container
 		this.add(this._weapon);
+
+
 	}
 
 

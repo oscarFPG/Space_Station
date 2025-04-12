@@ -7,7 +7,6 @@ import BaseScene from './BaseScene.js'
 import CharacterIdle from '../../assets/sprites/idle_player_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
-
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
 
