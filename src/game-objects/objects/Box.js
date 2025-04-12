@@ -6,8 +6,8 @@ export default class Box extends Object {
     static BROKEN_ANIMATION = 'boxAnimation';
     static VIDA_INICIAL = 10;
 
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite);
+    constructor(scene, x, y) {
+        super(scene, x, y);
         this.body.setImmovable(true);
         this.body.setAllowGravity(false)
         this.body.setSize(60, 90);	

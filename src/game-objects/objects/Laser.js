@@ -1,33 +1,27 @@
-import Phaser from 'phaser';
-import Object from '../base-game-objects/Object';
+import Phaser from 'phaser'
+import Object from '../base-game-objects/Object.js'
+import Builder from '../../managers/Builder.js'
 
 export default class Laser extends Object {
 
-    static TEXTURE = 'laser2'
-
     constructor(scene, x, y, ID) {
-        super(scene, x, y, Laser.TEXTURE)
+        super(scene, x, y, Builder.OBJ_LASER_VERTICAL)
         this.body.setOffset(0, 0)
         this.body.setSize(20, 110)
+
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
 
         this._laserID = ID
     }
 
-    player_overlaps(player){
+    accion(player){
 
         this.scene.tweens.add({
             targets: player,
             alpha: 0,
             duration: 500,
-            onComplete: this.accion(player)
+            onComplete: this.scene.gameOver()
         })
-    }
-    configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
-    }
-
-    accion(player){
-        this.scene.gameOver()
     }
 
     activate_laser(){

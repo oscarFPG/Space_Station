@@ -19,7 +19,6 @@ export default class RangeWeapon extends Weapon {
         currentClipAmmo: undefined, // Municion del cargador actual
         clipSize: undefined,        // Municion maxima de los cargadores
         ammoExtra: undefined,       // Municion de reserva
-        texture: undefined          // Sprite de la bala
     };
 
     #_isReloading = false
@@ -29,6 +28,10 @@ export default class RangeWeapon extends Weapon {
         super(scene, x, y, texture)
         this.colorLightBullet = color;
         this.scene.add.existing(this);
+    }
+
+    createBullet(){
+        throw new Error('El metodo `createBullet` debe sobreescribirse para disparar proyectiles')
     }
 
     shot(targetX, targetY) {
@@ -57,7 +60,7 @@ export default class RangeWeapon extends Weapon {
         const bulletY = weaponY + Math.sin(angle) * this._specs.muzzleOffset
 
         // Crear la bala en la posición del arma
-        const bullet = new Bullet(this.scene, bulletX, bulletY, this._ammo.texture, this._specs.damage, this.colorLightBullet)
+        const bullet = this.createBullet();
         this.scene.add.existing(bullet)
         this.scene._grupoBalas.add(bullet)
         bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed)

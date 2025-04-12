@@ -1,13 +1,14 @@
 import Phaser from "phaser";
 import Object from "../base-game-objects/Object";
+import Builder from "../../managers/Builder";
 
 
 export default class Health extends Object {
 
     static AUMENTO_VIDA = 5;
 
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite)
+    constructor(scene, x, y) {
+        super(scene, x, y, Builder.OBJ_BATERIA)
         this.body.setSize(80, 80)
         this.body.setOffset(20, 20)
         this._displayHelperText = true

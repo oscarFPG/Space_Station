@@ -41,7 +41,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
     preUpdate(time, delta){
         
 		const player = this.scene.get_player()
-        if(!player || !this._displayHelperText)
+        if(!player)
             return
 
         // IMPORTANTE - Gestion de overlap con el body

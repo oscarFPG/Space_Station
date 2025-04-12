@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
 
 export default class Door extends Phaser.GameObjects.Sprite {
+    
     static OPEN_ANIMATION = 'doorsAnimation';
 
     constructor(scene, x, y, active, doorID) {
         super(scene, x, y, Door.OPEN_ANIMATION);
         scene.add.existing(this);
-        scene.physics.add.existing(this); // Hacer que el cuerpo sea estático
+        scene.physics.add.existing(this);
+
         this.setPipeline('Light2D');
         this.body.setImmovable(true);
         this.body.setAllowGravity(false)
@@ -26,10 +28,10 @@ export default class Door extends Phaser.GameObjects.Sprite {
         this._isPlayerNearby = false; // Para evitar múltiples reproducciones de animación
     }
 
-     configure(player) {
-        this._player = player;
-        
-      }
+    configure(player) {
+    this._player = player;
+    
+    }
 
     config_animacion(animKey, animName, start, end, frameRate) {
         if (!this.scene.anims.exists(animKey)) {
@@ -43,6 +45,7 @@ export default class Door extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+
         // Detectar si el jugador está cerca de la puerta
         if(this.isActivate) {
             const distance = Phaser.Math.Distance.Between(
@@ -64,6 +67,7 @@ export default class Door extends Phaser.GameObjects.Sprite {
             }
         }
     }
+
     activarPuerta() {
         this.play('open_doors'); 
         this.scene.time.delayedCall(800, () => {
@@ -77,10 +81,12 @@ export default class Door extends Phaser.GameObjects.Sprite {
             this.setFrame(0); 
         });
     }
+
     set_active(status){
         this.isActivate = status
         console.log('Puerta activada')
     }
+
     getID(){
         return this._doorID
     }

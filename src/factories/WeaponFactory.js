@@ -1,11 +1,10 @@
-import BasePistol from '../game-objects/weapons/BasePistol';
-import BasePistolEnemy from '../game-objects/weapons/BasePistolEnemy';
-import BaseTurretWeapon from '../game-objects/weapons/BaseTurretWeapon';
+import BasePistol from '../game-objects/weapons/BasePistol.js'
+import BasePistolEnemy from '../game-objects/weapons/BasePistolEnemy.js'
+import BaseTurretWeapon from '../game-objects/weapons/BaseTurretWeapon.js'
+import Builder from '../managers/Builder.js';
 
 export default class WeaponFactory {
 
-    //  Identificadores para evitar 'numeros magicos'
-    // Arma base
     static BASE_WEAPON = 'weapon1';
     static BASE_WEAPON_ENEMY = 'weapon1Enemy';
     static BASE_TURRET_WEAPON = 'turretWeapon';
@@ -16,6 +15,25 @@ export default class WeaponFactory {
 
     static createPistol(weaponName, scene, weaponOffset){
 
+        const x = weaponOffset.x
+        const y = weaponOffset.y
+
+        // Hacer esto con polimorfismo - TODO
+        switch(weaponName){
+        case Builder.WEAPON_OLD_COLT:
+            return null
+        case Builder.WEAPON_PISTOLA_BASE:
+            return null
+        case Builder.WEAPON_2:
+            return null
+        case Builder.WEAPON_3:
+            return null
+        case Builder.WEAPON_4:
+            return null
+        default:
+            throw new Error(`Objeto \'Weapon\' con identificador ${weaponName} no encontrado`)
+        }
+    
     }
 
     static createSubmachineGun(weaponName, scene, weaponOffset){
@@ -44,7 +62,7 @@ export default class WeaponFactory {
         case WeaponFactory.BASE_TURRET_WEAPON:
             return new BaseTurretWeapon(scene, weaponOffset.x, weaponOffset.y) 
         default:
-            throw new Error(`Objeto \'Weapon\' con identificador ${weapon} no encontrado`)
+            throw new Error(`Objeto \'Weapon\' con identificador ${weaponName} no encontrado`)
         }
     }
 

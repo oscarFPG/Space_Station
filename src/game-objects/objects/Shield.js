@@ -1,17 +1,20 @@
+import Builder from "../../managers/Builder";
 import Object from "../base-game-objects/Object";
 
 
 export default class Shield extends Object {
 
     static AUMENTO_ESCUDO = 5;
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite)
+    constructor(scene, x, y) {
+        super(scene, x, y, Builder.OBJ_ESCUDO)
         this.body.setSize(80, 80)
         this.body.setOffset(20, 20)
+
         this._displayHelperText = true
         this._interactiveDistance = 110
         this.setText("Pick up shield")
     }
+    
     configure() {
         this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x0000ff, 0.7);
     }

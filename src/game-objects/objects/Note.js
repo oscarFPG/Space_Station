@@ -1,16 +1,15 @@
 import Phaser from 'phaser'
 import Object from '../base-game-objects/Object'
+import Builder from '../../managers/Builder'
 
 
 export default class Note extends Object {
   
-	static TEXTURE = 'note'
-	static TEXT = '2025'
 	static AUTO_CLOSING_TIME = 3000
 
 
 	constructor(scene, x, y, text) {
-		super(scene, x, y, Note.TEXTURE)
+		super(scene, x, y, Builder.OBJ_NOTA)
 		this.body.setSize(90, 90)
 		this.body.setOffset(15, 15)
 		this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7)
