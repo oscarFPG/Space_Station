@@ -1,7 +1,8 @@
-import Phaser from 'phaser'
+import Phaser, { NONE } from 'phaser'
 import PlayerUI from '../../UI/PlayerUI.js'
 import BasePistol from '../weapons/BasePistol.js'
 import BaseActor from '../base-game-objects/BaseActor.js'
+import WeaponFactory from '../../factories/WeaponFactory.js';
 
 export default class Player extends BaseActor {
   
@@ -118,6 +119,33 @@ export default class Player extends BaseActor {
 			this._weapon.getMunicionReserva())
 	}
 
+	updateWeapon() {
+
+		// Si this.scene o this.scene.input no existen, no hacer nada.
+		if (!this.scene || !this.scene.input) 
+			return;
+
+		const pointer = this.scene.input.activePointer;
+		if (!pointer) 
+			return; // Seguridad extra, en caso de que no exista el puntero.
+
+		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+
+		const weaponWorldX = this.x + this._weapon.x;
+		const weaponWorldY = this.y + this._weapon.y;
+
+		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
+		this._weapon.setRotation(angle);
+
+		// Arma y modelo siempre mirando al mismo lado
+		let shouldFlip = worldPoint.x < weaponWorldX
+		this._weapon.setFlipY(shouldFlip)
+		if(shouldFlip) {
+			this._sprite.setX(34);
+		}
+		this._sprite.setFlipX(shouldFlip)
+	}
+
 	quitarVida(cantidad){
 
         if(this._escudo > 0) {
@@ -150,12 +178,7 @@ export default class Player extends BaseActor {
 	}
 
 	shieldBoost(shield) {
-		if (this._escudo + shield >= Player.ESCUDO_INICIAL) {
-			this._escudo = Player.ESCUDO_INICIAL;
-		}
-		else {
-			this._escudo += shield;
-		}
+		this._escudo = Phaser.Math.Clamp(this._escudo + shield, 0, Player.ESCUDO_INICIAL)
 	}
 
 	moneyBoost(value) {
@@ -174,31 +197,36 @@ export default class Player extends BaseActor {
 		this._baterias = Player.BATERIA_INICIAL;
 	}
 
-	updateWeapon() {
+	set_player_activo(status) {
+		this._atributos.activo = status
+	}
 
-		// Si this.scene o this.scene.input no existen, no hacer nada.
-		if (!this.scene || !this.scene.input) 
-			return;
+	quitar_baterias(amount){
+		this._baterias -= amount
+		this._baterias = (this._baterias < 0) ? 0 : this._baterias
+	}
 
-		const pointer = this.scene.input.activePointer;
-		if (!pointer) 
-			return; // Seguridad extra, en caso de que no exista el puntero.
+	// Objeto para preservar el estado actual del jugador(vida, monedas, armas, etc...) entre niveles o partidas
+	getPlayerStatus(){
 
-		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
-
-		const weaponWorldX = this.x + this._weapon.x;
-		const weaponWorldY = this.y + this._weapon.y;
-
-		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
-		this._weapon.setRotation(angle);
-
-		// Arma y modelo siempre mirando al mismo lado
-		let shouldFlip = worldPoint.x < weaponWorldX
-		this._weapon.setFlipY(shouldFlip)
-		if(shouldFlip) {
-			this._sprite.setX(34);
+		const status = {
+			vida: this._atributos.vida,
+			escudo: this._escudo,
+			dinero: this._dinero,
+			velocidad: this._atributos.speed,
+			armaBase: { /* Guardar aquí las mejoras u otros atributos */ },
+			armaSecundaria: { /* Guardar aquí las mejoras, municion, etc... */ },
+			municion: 
+				{ 
+					pistola: NONE,
+					subfusil: NONE,
+					rifle: NONE,
+					escopeta: NONE,
+					sniper: NONE
+				}
 		}
-		this._sprite.setFlipX(shouldFlip)
+
+		return status
 	}
 
 	#config_controles(){
@@ -225,7 +253,6 @@ export default class Player extends BaseActor {
 
 		// Disparo mediante ratón (si la consola no está activa)
 		this.scene.input.on('pointerdown', (pointer) => {
-			
 			if(this._atributos.activo)
 				this._weapon.shot(pointer.worldX, pointer.worldY);
 		}, this)
@@ -234,7 +261,7 @@ export default class Player extends BaseActor {
 	#config_arma() {
 
 		var weaponOffset = { x: 39, y: 54 }
-		var weapon = new BasePistol(this.scene, weaponOffset.x, weaponOffset.y)
+		var weapon = WeaponFactory.crearPistola(WeaponFactory.BASE_WEAPON, this.scene, weaponOffset)
 		weapon.setOrigin(0.5, 0.5)
 		weapon.setPipeline('Light2D');
 		return weapon
@@ -248,14 +275,6 @@ export default class Player extends BaseActor {
 		//this._weapon.setPipeline('')
 	}
 
-	set_player_activo(status) {
-		this._atributos.activo = status
-	}
-
-	quitar_baterias(amount){
-		this._baterias -= amount
-		this._baterias = (this._baterias < 0) ? 0 : this._baterias
-	}
 	
 	getBatteries() { return this._baterias }
 	isFullHealth() { return this._atributos.vida === Player.VIDA_INICIAL }

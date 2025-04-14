@@ -1,5 +1,6 @@
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 import ClassIA from '../../factories/ClassIA.js';
+import WeaponFactory from '../../factories/WeaponFactory.js';
 
 export default class ExtendedEnemy extends BasedEnemy {
 
@@ -12,10 +13,10 @@ export default class ExtendedEnemy extends BasedEnemy {
     constructor(scene, x, y){
         super(scene, x, y, {texture: ExtendedEnemy.BASE_ENEMY_TEXTURE, x: 30, y: 30}, ExtendedEnemy.VIDA, ExtendedEnemy.SPEED)
 
-        this.add_weapon(ExtendedEnemy.BASE_ENEMY_WEAPON, {x: 40, y: 50})
         this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
         this._sprite.play('enemy_idle')
-        this.light = this.scene.lights.addLight(this.x, this.y, 350, 0xff4444, 0.85);
+        this.light = this.scene.lights.addLight(this.x, this.y, 350, 0xff4444, 0.85)
+
         // Propiedades de la IA
         this._enemyParameters.state = 'patrol';
 
@@ -34,4 +35,9 @@ export default class ExtendedEnemy extends BasedEnemy {
     preUpdate(time, delta) {
         ClassIA.buscaJugador(time, this, this.scene._player);
     }
+
+    add_weapon(){
+        return WeaponFactory.crearPistola(WeaponFactory.BASE_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
+    }
+
 }

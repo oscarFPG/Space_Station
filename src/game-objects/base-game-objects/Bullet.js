@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+
 export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     static EXPLODE_ANIMATION = 'explode'; // Nombre de la animación
@@ -67,7 +68,6 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     
     // Sobrescribimos preUpdate para actualizar la posición de la luz
     preUpdate(time, delta) {
-        super.preUpdate(time, delta);
 
         if (this.light) {
             this.light.x = this.x;

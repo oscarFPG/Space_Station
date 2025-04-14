@@ -2,6 +2,7 @@ import Builder from '../../managers/Builder.js';
 import RangeWeapon from '../base-game-objects/RangeWeapon.js'
 import BasePistolBullet from '../bullets/BasePistolBullet.js';
 
+
 export default class BasePistol extends RangeWeapon {
     
     static BASE_PISTOL_DAMAGE = 5;
