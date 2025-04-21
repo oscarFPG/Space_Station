@@ -67,9 +67,10 @@ import SUCCESS from '../../audio/effects/acierto.mp3'
 export default class Boot extends BaseScene {
 
     constructor(){
-        super('boot');
+        super('boot')
     }
 
+    
     preload(){
 
         // Armas

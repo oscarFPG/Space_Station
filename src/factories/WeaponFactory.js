@@ -5,9 +5,11 @@ import Builder from '../managers/Builder.js';
 
 export default class WeaponFactory {
 
-    static BASE_WEAPON = 'weapon1'
-    static BASE_WEAPON_ENEMY = 'weapon1Enemy'
-    static BASE_TURRET_WEAPON = 'turretWeapon'
+    // Identificadores de todas las armas
+    static BASE_WEAPON = Builder.WEAPON_PISTOLA_BASE
+    static BASE_WEAPON_ENEMY = Builder.ENEMY_WEAPON_PISTOLA_BASE
+    static BASE_TURRET_WEAPON = Builder.WEAPON_TURRENT
+
 
     constructor(){
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');

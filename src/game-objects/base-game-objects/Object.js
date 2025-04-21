@@ -84,6 +84,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
     }
         // En Object.js
     setText(text) {
+        
         this._text = text;
         if (this._textoInteraccion) {
             // Actualiza el texto existente

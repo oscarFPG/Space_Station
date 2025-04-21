@@ -7,26 +7,26 @@ import WeaponFactory from '../../factories/WeaponFactory.js';
 export default class Player extends BaseActor {
   
 	// Player animation names
-	static IDLE_ANIMATION = 'playerIdle';
-	static RUNNING_ANIMATION = 'playerRunning';
+	static IDLE_ANIMATION = 'playerIdle'
+	static RUNNING_ANIMATION = 'playerRunning'
 
-	static VIDA_INICIAL = 20;
-	static ESCUDO_INICIAL = 15;
-	static DINERO_INICIAL = 0;
-	static BATERIA_INICIAL = 0;
-	static SPEED = 180;
+	static VIDA_INICIAL = 20
+	static ESCUDO_INICIAL = 15
+	static DINERO_INICIAL = 0
+	static BATERIA_INICIAL = 0
+	static SPEED = 180
 
 	constructor(scene, x, y) {
-		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
+		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)
 		
-		this.body.setSize(66, 73);
+		this.body.setSize(66, 73)
 		this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
 
 		// Atributos del jugador
-		this._escudo = Player.ESCUDO_INICIAL;
-		this._dinero = Player.DINERO_INICIAL;
-		this._baterias = Player.BATERIA_INICIAL;
+		this._escudo = Player.ESCUDO_INICIAL
+		this._dinero = Player.DINERO_INICIAL
+		this._baterias = Player.BATERIA_INICIAL
 
 		// Configuracion del arma
 		this._weapon = this.#config_arma()
@@ -43,16 +43,14 @@ export default class Player extends BaseActor {
 		this._sprite.play('player_idle')
 
 		// Registrar los métodos update y postupdate
-		this.scene.events.on('update', this.update, this);
-		this.scene.events.on('postupdate', this.updateWeapon, this);
+		this.scene.events.on('update', this.update, this)
+		this.scene.events.on('postupdate', this.updateWeapon, this)
 
 		// Interfaz del personaje
-		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL);
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL)
 
 		// Añadir al container
-		this.add(this._weapon);
-
-
+		this.add(this._weapon)
 	}
 
 
@@ -240,21 +238,23 @@ export default class Player extends BaseActor {
 			right: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
 			left: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
 
-			// Acciones
+			// Acciones - TODO implementar esto en el loop de preUpdate
 			use: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
 			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R),
+			switchWeapon: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
 			pause: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
 		}
 
+		// TODO - cambiar por el reload de this.controles
 		this.controles.reload.on('down', () => {
 			if(this._atributos.activo)
 				this._weapon.reload()
 		})
 
-		// Disparo mediante ratón (si la consola no está activa)
+		// Disparo mediante el click izquierdo del ratón
 		this.scene.input.on('pointerdown', (pointer) => {
 			if(this._atributos.activo)
-				this._weapon.shot(pointer.worldX, pointer.worldY);
+				this._weapon.shot(pointer.worldX, pointer.worldY)
 		}, this)
 	}
 
