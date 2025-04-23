@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Options from '../../managers/Options.js';
 
 export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
@@ -56,10 +57,8 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     fire(x, y, angle, speed) {
 
-        const gunSound = this.scene.sound.add('gun_sound');
-        gunSound.setVolume(0.1);
-        gunSound.play();
-
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'gun_sound', { isMusic: false, volume: 1.0 });
         this.setPosition(x, y);
         this.setRotation(angle);
         this.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
