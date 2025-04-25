@@ -30,4 +30,8 @@ export default class BasePistol extends RangeWeapon {
         return new BasePistolBullet(this.scene, this.x, this.y, this._specs.damage)
     }
 
+    eliminateBulletFromClip(){
+        // No quitar balas de este arma
+    }
+
 }

@@ -64,7 +64,7 @@ export default class RangeWeapon extends Weapon {
         this.scene.add.existing(bullet)
         this.scene._grupoBalas.add(bullet)
         bullet.fire(bulletX, bulletY, angle, this._specs.bulletSpeed)
-        this._ammo.currentClipAmmo--
+        this.eliminateBulletFromClip()    
     }
 
     reload(){
@@ -79,6 +79,10 @@ export default class RangeWeapon extends Weapon {
             this._ammo.ammoExtra -= bulletsUsed
             this.#_isReloading = false
         }, null)
+    }
+
+    eliminateBulletFromClip(){
+        this._ammo.currentClipAmmo--
     }
 
     getBulletsFromClip(){

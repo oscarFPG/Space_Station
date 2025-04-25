@@ -1,6 +1,5 @@
-import Phaser, { NONE } from 'phaser'
+import Phaser from 'phaser'
 import PlayerUI from '../../UI/PlayerUI.js'
-import BasePistol from '../weapons/BasePistol.js'
 import BaseActor from '../base-game-objects/BaseActor.js'
 import WeaponFactory from '../../factories/WeaponFactory.js';
 
@@ -14,7 +13,7 @@ export default class Player extends BaseActor {
 	static ESCUDO_INICIAL = 15
 	static DINERO_INICIAL = 0
 	static BATERIA_INICIAL = 0
-	static SPEED = 180
+	static SPEED = 300
 
 	constructor(scene, x, y) {
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)

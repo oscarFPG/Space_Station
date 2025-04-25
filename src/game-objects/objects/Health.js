@@ -9,16 +9,20 @@ export default class Health extends Object {
 
     constructor(scene, x, y) {
         super(scene, x, y, Builder.OBJ_BATERIA)
-        this.body.setSize(80, 80)
-        this.body.setOffset(20, 20)
+        this.body.setSize(65, 65)
+        this.body.setOffset(27, 27)
+        
         this._displayHelperText = true
         this._interactiveDistance = 110
-        this.setText("Pick up healthKit")
-    }
-    configure() {
+        this.setText("Pick up health")
         this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.7);
     }
+
     player_overlaps(player) {
+
+        this._textoInteraccion.setVisible(true)
+		this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+
         if(player.isFullHealth())
             return
         
@@ -26,10 +30,11 @@ export default class Health extends Object {
     }
 
 
-
     accion(player){
+
         if(!player.isUseKeyJustPressed())
 			return
+        
         this.removeLight();
         player.healthBoost(Health.AUMENTO_VIDA)
         this.destroyObject()

@@ -169,13 +169,16 @@ export default class BaseScene extends Phaser.Scene {
                 this.listaEstructuraBaterias.push(consolaBateria)
             }
             else if(object.type == 'Battery'){
-                const bateria = new Battery(this, object.x, object.y)
+                const bateria = new Battery(this, object.x + 55, object.y - 55)
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type == 'HealthKit'){
                 const healthObject = new Health(this, object.x + 55, object.y - 55)
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type == 'ShieldKit'){
                 const healthObject = new Shield(this, object.x + 55, object.y - 55)
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type === '' /* TODO - Incluir tipo para la tienda */){
 

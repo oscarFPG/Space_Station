@@ -10,14 +10,11 @@ export default class Coin extends Object {
         super(scene, x, y, sprite, 250)
         this.body.setSize(80, 80)
         this.body.setOffset(20, 20)
-    }
-
-    configure() {
         this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
     }
 
     player_overlaps(player){
-        console.log('Moneda cogida')
+        
         player.receiveMoney(Coin.MONEY_VALUE)
         this.removeLight();
         this.destroyObject()
