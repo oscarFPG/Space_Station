@@ -10,6 +10,7 @@ export default class BasePistolEnemy extends RangeWeapon {
         super(scene, x, y, Builder.ENEMY_WEAPON_PISTOLA_BASE, 0xFF2222);
 
         // Gun config
+        this._specs.name = 'Red pistol'
         this._specs.damage = BasePistolEnemy.BASE_PISTOL_DAMAGE;
         this._specs.bulletSpeed = 666;
         this._specs.muzzleOffset = 42;
@@ -17,16 +18,16 @@ export default class BasePistolEnemy extends RangeWeapon {
         this._specs.canDrill = false;
         this._specs.fireRate = 1;
         this._specs.reloadTime = 1.5;
-        this._specs.sprite = Builder.ENEMY_WEAPON_PISTOLA_BASE;
+        this._specs.sprite = Builder.AMMO_ENEMY_BASE;
         this._specs.weight = 1;
         
+        this._ammo.type = 'pistola'
         this._ammo.clipSize = 20;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
-        this._ammo.ammoExtra = 200;
     }
 
     createBullet(){
-        return new BasePistolBullet(this.scene, this.x, this.y, this._specs.damage)
+        return new BasePistolBullet(this.scene, this.x, this.y, this._specs.damage, Builder.AMMO_ENEMY_BASE)
     }
 
 }

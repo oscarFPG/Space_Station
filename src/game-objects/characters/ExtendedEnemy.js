@@ -37,7 +37,7 @@ export default class ExtendedEnemy extends BasedEnemy {
     }
 
     add_weapon(){
-        return WeaponFactory.crearPistola(WeaponFactory.BASE_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
+        return WeaponFactory.crearArma(WeaponFactory.BASE_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
     }
 
 }

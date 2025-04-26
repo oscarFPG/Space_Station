@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 import PlayerUI from '../../UI/PlayerUI.js'
 import BaseActor from '../base-game-objects/BaseActor.js'
 import WeaponFactory from '../../factories/WeaponFactory.js';
+import WeaponObject from '../objects/WeaponObject.js';
 
 export default class Player extends BaseActor {
   
@@ -14,6 +15,8 @@ export default class Player extends BaseActor {
 	static DINERO_INICIAL = 0
 	static BATERIA_INICIAL = 0
 	static SPEED = 300
+
+	static WEAPON_OFFSET = { x: 39, y: 54 }
 
 	constructor(scene, x, y) {
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)
@@ -29,6 +32,8 @@ export default class Player extends BaseActor {
 
 		// Configuracion del arma
 		this._weapon = this.#config_arma()
+		this._armaEquipada = this._weapon
+		this._secondaryWeapon = null
 		
 		// Configuracion de controles
 		this.#config_controles()
@@ -112,8 +117,9 @@ export default class Player extends BaseActor {
 			this._atributos.vida, 
 			this._escudo, 
 			this._dinero, 
-			this._weapon.getBulletsFromClip(), 
-			this._weapon.getMunicionReserva())
+			this._weapon.getBulletsFromClip(),
+			this.getCountAmmoType(this._armaEquipada._ammo.type)
+		)
 	}
 
 	updateWeapon() {
@@ -126,19 +132,19 @@ export default class Player extends BaseActor {
 		if (!pointer) 
 			return; // Seguridad extra, en caso de que no exista el puntero.
 
-		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
 
-		const weaponWorldX = this.x + this._weapon.x;
-		const weaponWorldY = this.y + this._weapon.y;
+		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y)
+		const weaponWorldX = this.x + this._armaEquipada.x
+		const weaponWorldY = this.y + this._armaEquipada.y
 
-		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
-		this._weapon.setRotation(angle);
+		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y)
+		this._armaEquipada.setRotation(angle)
 
 		// Arma y modelo siempre mirando al mismo lado
 		let shouldFlip = worldPoint.x < weaponWorldX
-		this._weapon.setFlipY(shouldFlip)
+		this._armaEquipada.setFlipY(shouldFlip)
 		if(shouldFlip) {
-			this._sprite.setX(34);
+			this._sprite.setX(34)
 		}
 		this._sprite.setFlipX(shouldFlip)
 	}
@@ -203,6 +209,38 @@ export default class Player extends BaseActor {
 		this._baterias = (this._baterias < 0) ? 0 : this._baterias
 	}
 
+	getCountAmmoType(weaponAmmo){
+		
+		switch(weaponAmmo){
+			case 'pistola':
+				return 0
+		
+			case 'subfusil':
+				return 0
+
+			case 'fusil':
+				return 0
+
+			case 'escopeta':
+				return 0
+
+			case 'sniper':
+				return 0
+				
+			default:
+				return -1
+			}
+    }
+
+	recogerArma(texturaArma){
+
+		this._secondaryWeapon = WeaponFactory.crearArma(texturaArma, this.scene, Player.WEAPON_OFFSET)
+		this._armaEquipada = this._secondaryWeapon
+		this._weapon.setVisible(false)
+
+		this.add(this._secondaryWeapon)
+	}
+
 	// Objeto para preservar el estado actual del jugador(vida, monedas, armas, etc...) entre niveles o partidas
 	getPlayerStatus(){
 
@@ -237,32 +275,49 @@ export default class Player extends BaseActor {
 			right: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
 			left: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
 
-			// Acciones - TODO implementar esto en el loop de preUpdate
+			// Acciones
 			use: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
 			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R),
 			switchWeapon: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
 			pause: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
 		}
 
-		// TODO - cambiar por el reload de this.controles
-		this.controles.reload.on('down', () => {
+		this.controles.reload.on('down', () => {	// Recargar
 			if(this._atributos.activo)
-				this._weapon.reload()
+				this._armaEquipada.reload()
+		})
+
+		this.controles.switchWeapon.on('down', () => {	// Cambiar de arma
+
+			if(this._secondaryWeapon == null)
+				return
+
+
+			if(this._armaEquipada == this._weapon){
+				this._weapon.setVisible(false)
+				this._secondaryWeapon.setVisible(true)
+				this._armaEquipada = this._secondaryWeapon
+			}
+			else{
+				this._secondaryWeapon.setVisible(false)
+				this._weapon.setVisible(true)
+				this._armaEquipada = this._weapon
+			}
 		})
 
 		// Disparo mediante el click izquierdo del ratón
-		this.scene.input.on('pointerdown', (pointer) => {
+		this.scene.input.on('pointerdown', (pointer) => {	// Disparar(click izquierdo)
 			if(this._atributos.activo)
-				this._weapon.shot(pointer.worldX, pointer.worldY)
+				this._armaEquipada.shot(pointer.worldX, pointer.worldY)
 		}, this)
 	}
 
 	#config_arma() {
 
-		var weaponOffset = { x: 39, y: 54 }
-		var weapon = WeaponFactory.crearPistola(WeaponFactory.BASE_WEAPON, this.scene, weaponOffset)
+		var weapon = WeaponFactory.crearArma(WeaponFactory.BASE_WEAPON, this.scene, Player.WEAPON_OFFSET)
 		weapon.setOrigin(0.5, 0.5)
-		weapon.setPipeline('Light2D');
+		weapon.setPipeline('Light2D')
+
 		return weapon
 	}
 

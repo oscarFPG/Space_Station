@@ -4,6 +4,7 @@ import Bullet from './Bullet.js';
 export default class RangeWeapon extends Weapon {
 
     _specs = {
+        name: undefined,        // Nombre del arma
         damage: undefined,      // Daño del arma
         bulletSpeed: undefined, // Velocidad de la bala
         fireRate: undefined,    // Cadencia de disparo
@@ -13,13 +14,13 @@ export default class RangeWeapon extends Weapon {
         canBounce: undefined,   // Bool para indicar si las balas rebotan
         canDrill: undefined,    // Bool para indicar si las balas penetrar objetivos
         muzzleOffset: undefined // Posicion relativa del cañon
-    };
+    }
 
     _ammo = {
+        type: undefined,            // Tipo de municion: 'pistola', 'subfusil', 'fusil', 'escopeta', 'sniper'
         currentClipAmmo: undefined, // Municion del cargador actual
-        clipSize: undefined,        // Municion maxima de los cargadores
-        ammoExtra: undefined,       // Municion de reserva
-    };
+        clipSize: undefined         // Municion maxima de los cargadores
+    }
 
     #_isReloading = false
     _lastShotTime = 0; // Guarda el tiempo del último disparo
@@ -36,6 +37,8 @@ export default class RangeWeapon extends Weapon {
 
     shot(targetX, targetY) {
 
+        console.log(`${this._specs.name} shooting`)
+
         if(this._ammo.currentClipAmmo <= 0)
             return
 
@@ -51,9 +54,10 @@ export default class RangeWeapon extends Weapon {
         var weaponX = this.x
         var weaponY = this.y
         if (this.parentContainer) {
-             weaponX += this.parentContainer.x 
-             weaponY += this.parentContainer.y
+            weaponX += this.parentContainer.x 
+            weaponY += this.parentContainer.y
         } 
+
         // Calcular el ángulo de disparo
         const angle = Phaser.Math.Angle.Between(weaponX, weaponY, targetX, targetY)
         const bulletX = weaponX + Math.cos(angle) * this._specs.muzzleOffset
@@ -76,7 +80,6 @@ export default class RangeWeapon extends Weapon {
         this.scene.time.delayedCall(this._specs.reloadTime * 1000, () => {
             var bulletsUsed = Math.abs(this._ammo.clipSize - this._ammo.currentClipAmmo)
             this._ammo.currentClipAmmo = this._ammo.clipSize
-            this._ammo.ammoExtra -= bulletsUsed
             this.#_isReloading = false
         }, null)
     }
@@ -87,10 +90,6 @@ export default class RangeWeapon extends Weapon {
 
     getBulletsFromClip(){
         return this._ammo.currentClipAmmo
-    }
-
-    getMunicionReserva(){
-        return this._ammo.ammoExtra
     }
 
 }
