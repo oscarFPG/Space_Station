@@ -361,13 +361,13 @@ export default class BaseScene extends Phaser.Scene {
         this.input.setDefaultCursor('crosshair')
     }
 
-    config_eventos(){
-
-        // Evento para abrir el menu de ajustes
+    config_eventos() {
         this.input.keyboard.on(Options.TECLA_PAUSA, () => {
-            this.scene.switch('settings', this.scene.key)
+           //para pausar el juego
+            this.scene.pause(this.scene.key)
+            // lanza la escena de ajustes
+            this.scene.launch('settings', { previousScene: this.scene.key })
         }, this)
-
     }
 
     config_musica(){
