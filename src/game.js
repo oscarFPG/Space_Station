@@ -24,7 +24,7 @@ const config = {
             fps: 60,
             timeStep: 1/60,
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     }
 };
