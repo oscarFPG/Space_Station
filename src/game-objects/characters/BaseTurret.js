@@ -1,5 +1,6 @@
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 import ClassIA from '../../factories/ClassIA.js';
+import WeaponFactory from '../../factories/WeaponFactory.js';
 
 export default class BaseTurret extends BasedEnemy {
 
@@ -12,7 +13,7 @@ export default class BaseTurret extends BasedEnemy {
     constructor(scene, x, y){
         super(scene, x, y, {texture: BaseTurret.BASE_ENEMY_TEXTURE, x: 30, y: 30}, BaseTurret.VIDA, BaseTurret.SPEED)
 
-        this.add_weapon(BaseTurret.BASE_ENEMY_WEAPON, {x: 40, y: 50})
+        this.add_weapon()
         this._enemyParameters.weapon.rotation = Phaser.Math.DegToRad(90); // Rota 90 grados
 
         this.body.setSize(80, 78);
@@ -21,6 +22,7 @@ export default class BaseTurret extends BasedEnemy {
         this.body.setVelocity(0, 0);              // Por seguridad, velocidad 0
         this.body.setAllowGravity(false);         // Si estás usando gravedad
         this.body.setCollideWorldBounds(false);
+
         // Propiedades de la IA
         this._enemyParameters.state = 'patrol';
 
@@ -47,11 +49,16 @@ export default class BaseTurret extends BasedEnemy {
         // Opcional: colocar el gráfico detrás de la torreta, ajustando su depth relativo
         this.rangeGraphic.setDepth(-1);
     }
+    
     quitarVida(cantidad){
         return
     }
     
     preUpdate(time, delta) {
         ClassIA.buscaJugadorEstatico(time, this, this.scene._player);
+    }
+
+    add_weapon(){
+        return null
     }
 }

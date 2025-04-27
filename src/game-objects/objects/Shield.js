@@ -1,23 +1,28 @@
+import Builder from "../../managers/Builder";
 import Object from "../base-game-objects/Object";
 
 
 export default class Shield extends Object {
 
-    static AUMENTO_ESCUDO = 5;
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite)
-        this.body.setSize(80, 80)
-        this.body.setOffset(20, 20)
+    static AUMENTO_ESCUDO = 5
+
+    constructor(scene, x, y) {
+        super(scene, x, y, Builder.OBJ_ESCUDO)
+        this.body.setSize(65, 65)
+        this.body.setOffset(27, 27)
+
         this._displayHelperText = true
         this._interactiveDistance = 110
         this.setText("Pick up shield")
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x0000ff, 0.7)
     }
-    configure() {
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x0000ff, 0.7);
-    }
+    
 
     player_overlaps(player){
 
+        this._textoInteraccion.setVisible(true)
+		this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+        
         if(player.isFullShield())
             return
 
@@ -25,10 +30,12 @@ export default class Shield extends Object {
     }
 
     accion(player){
+
         if(!player.isUseKeyJustPressed())
 			return
-        this.removeLight();
-        player.shieldBoost(Shield.AUMENTO_ESCUDO);
+
+        this.removeLight()
+        player.shieldBoost(Shield.AUMENTO_ESCUDO)
         this.destroyObject()
     }
 

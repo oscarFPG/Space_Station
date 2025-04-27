@@ -25,8 +25,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         this.on('overlapend', () => {
             this.player_end_overlaps(player)
         })
-
-        this.scene.physics.add.overlap(this, player);
+        this.scene.physics.add.overlap(this, player)
 
         // Cuadro de texto
         this._noteText = ""
@@ -41,7 +40,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
     preUpdate(time, delta){
         
 		const player = this.scene.get_player()
-        if(!player || !this._displayHelperText)
+        if(!player)
             return
 
         // IMPORTANTE - Gestion de overlap con el body
@@ -82,8 +81,9 @@ export default class Object extends Phaser.GameObjects.Sprite {
 
         return text
     }
-        // En Object.js
+    
     setText(text) {
+        
         this._text = text;
         if (this._textoInteraccion) {
             // Actualiza el texto existente
@@ -93,16 +93,21 @@ export default class Object extends Phaser.GameObjects.Sprite {
     }
 
     destroyObject(){
+        
         this._textoInteraccion.destroy()
         this.destroy()
     }
+
     removeLight() {
+
         if (this.light) {
           this.scene.lights.removeLight(this.light);
           this.light = null; 
         }
     }
+
     update(time) {
+
         if (this.light) {
             const blinkPeriod = 1500; 
             const modTime = time % blinkPeriod;

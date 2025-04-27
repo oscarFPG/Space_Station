@@ -1,51 +1,50 @@
-import BasePistol from '../game-objects/weapons/BasePistol';
-import BasePistolEnemy from '../game-objects/weapons/BasePistolEnemy';
-import BaseTurretWeapon from '../game-objects/weapons/BaseTurretWeapon';
+import BasePistol from '../game-objects/weapons/BasePistol.js'
+import BasePistolEnemy from '../game-objects/weapons/BasePistolEnemy.js'
+import BaseTurretWeapon from '../game-objects/weapons/BaseTurretWeapon.js'
+import Builder from '../managers/Builder.js';
 
 export default class WeaponFactory {
 
-    //  Identificadores para evitar 'numeros magicos'
-    // Arma base
-    static BASE_WEAPON = 'weapon1';
-    static BASE_WEAPON_ENEMY = 'weapon1Enemy';
-    static BASE_TURRET_WEAPON = 'turretWeapon';
+    // Identificadores de todas las armas
+    static BASE_WEAPON = Builder.WEAPON_PISTOLA_BASE
+    static BASE_WEAPON_ENEMY = Builder.ENEMY_WEAPON_PISTOLA_BASE
+    static BASE_TURRET_WEAPON = Builder.WEAPON_TURRENT
+
 
     constructor(){
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');
     }
 
-    static createPistol(weaponName, scene, weaponOffset){
+    static crearArma(weaponName, scene, weaponOffset){
 
-    }
+        const x = weaponOffset.x
+        const y = weaponOffset.y
 
-    static createSubmachineGun(weaponName, scene, weaponOffset){
-        
-    }
-
-    static createRifle(weaponName, scene, weaponOffset){
-        
-    }
-
-    static createShotgun(weaponName, scene, weaponOffset){
-        
-    }
-
-    static createSniper(weaponName, scene, weaponOffset){
-        
-    }
-
-    static createWeapon(weaponName, scene, weaponOffset){
-
+        // Hacer esto con polimorfismo - TODO
         switch(weaponName){
-        case WeaponFactory.BASE_WEAPON:
-            return new BasePistol(scene, weaponOffset.x, weaponOffset.y)
-        case WeaponFactory.BASE_WEAPON_ENEMY:
-            return new BasePistolEnemy(scene, weaponOffset.x, weaponOffset.y)
-        case WeaponFactory.BASE_TURRET_WEAPON:
-            return new BaseTurretWeapon(scene, weaponOffset.x, weaponOffset.y) 
-        default:
-            throw new Error(`Objeto \'Weapon\' con identificador ${weapon} no encontrado`)
+
+            // PISTOLAS
+            case WeaponFactory.BASE_WEAPON:
+                return new BasePistol(scene, x, y)
+    
+            case WeaponFactory.BASE_WEAPON_ENEMY:
+                return new BasePistolEnemy(scene, x, y)
+    
+            case WeaponFactory.BASE_TURRET_WEAPON:
+                return new BaseTurretWeapon(scene, x, y)
+    
+            // SUBFUSILES
+
+            // RIFLES
+
+            // ESCOPETAS
+
+            // FRANCOTIRADOR
+
+            default:
+                throw new Error(`Objeto \'Weapon\' con identificador ${weaponName} no encontrado`)
         }
     }
+
 
 }
