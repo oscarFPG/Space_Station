@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser'; //Console
 
 export default class Console extends Phaser.GameObjects.Sprite {
 
