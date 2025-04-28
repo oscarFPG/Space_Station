@@ -8,13 +8,13 @@ import Console from '../game-objects/objects/Console.js'
 import Laser from '../game-objects/objects/Laser.js'
 import Health from '../game-objects/objects/Health.js'
 import Shield from '../game-objects/objects/Shield.js'
-import BatteryItem from '../game-objects/objects/Battery.js'
 import Coin from '../game-objects/objects/Coin.js'
 import Box from '../game-objects/objects/Box.js'
 import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
 import EnemyFactory from '../factories/EnemyFactory.js';
+import Battery from '../game-objects/objects/Battery.js'
 
 
 export default class BaseScene extends Phaser.Scene {
@@ -92,7 +92,7 @@ export default class BaseScene extends Phaser.Scene {
             })
         }
 
-        this.scene.launch('')
+        //this.scene.launch('')
     }
 
     update(time, delta){
@@ -106,23 +106,6 @@ export default class BaseScene extends Phaser.Scene {
                 this.scene.switch(this._nextScene, { player: this._player })
             }
         }
-        /*
-        this.listaPuertas.forEach(door => {
-            door.update();
-        });
-        this.healthItems.forEach(healthItem => {
-            healthItem.update(time);
-        });
-        this.shieldItems.forEach(shieldItem => {
-            shieldItem.update(time);
-        });
-        this.coinItems.forEach(coinItem => {
-            coinItem.update(time);
-        });
-        this.batteryItems.forEach(batteryItem => {
-            batteryItem.update(time);
-        });
-        */
     }
 
     crear_objetos(map) {
@@ -185,6 +168,18 @@ export default class BaseScene extends Phaser.Scene {
                 const consolaBateria = new BatteryStructure(this, object.x + 55, object.y - 55 , doorID, numBaterias)
                 this.listaEstructuraBaterias.push(consolaBateria)
             }
+            else if(object.type == 'Battery'){
+                const bateria = new Battery(this, object.x + 55, object.y - 55)
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
+            else if(object.type == 'HealthKit'){
+                const healthObject = new Health(this, object.x + 55, object.y - 55)
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
+            else if(object.type == 'ShieldKit'){
+                const healthObject = new Shield(this, object.x + 55, object.y - 55)
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
             else if(object.type === '' /* TODO - Incluir tipo para la tienda */){
 
             }
@@ -193,12 +188,9 @@ export default class BaseScene extends Phaser.Scene {
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        this.healthItems = map.createFromObjects('objects', { gid: 20, classType: Health, key: 'health' })
-        this.shieldItems = map.createFromObjects('objects', { gid: 21, classType: Shield, key: 'shield' })
-        this.batteryItems = map.createFromObjects('objects', { gid: 19, classType: BatteryItem, key: 'battery' })
-        this.coinItems = map.createFromObjects('objects', { gid: 22, classType: Coin, key: 'coinIcon' })
         this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
         this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'boxHard' })
+
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
         this.listaPuertas.forEach(door => {
             this._charactersGroup.addCollision(door)
@@ -369,13 +361,13 @@ export default class BaseScene extends Phaser.Scene {
         this.input.setDefaultCursor('crosshair')
     }
 
-    config_eventos(){
-
-        // Evento para abrir el menu de ajustes
+    config_eventos() {
         this.input.keyboard.on(Options.TECLA_PAUSA, () => {
-            this.scene.switch('settings', this.scene.key)
+           //para pausar el juego
+            this.scene.pause(this.scene.key)
+            // lanza la escena de ajustes
+            this.scene.launch('settings', { previousScene: this.scene.key })
         }, this)
-
     }
 
     config_musica(){

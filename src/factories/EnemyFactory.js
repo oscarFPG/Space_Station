@@ -23,6 +23,4 @@ export default class EnemyFactory {
             throw new Error(`Objeto \'Weapon\' con identificador ${enemy} no encontrado`)
         }
     }
-
-
 }

@@ -1,34 +1,39 @@
 import Phaser from 'phaser'
 import PlayerUI from '../../UI/PlayerUI.js'
-import BasePistol from '../weapons/BasePistol.js'
 import BaseActor from '../base-game-objects/BaseActor.js'
+import WeaponFactory from '../../factories/WeaponFactory.js';
+import WeaponObject from '../objects/WeaponObject.js';
 
 export default class Player extends BaseActor {
   
 	// Player animation names
-	static IDLE_ANIMATION = 'playerIdle';
-	static RUNNING_ANIMATION = 'playerRunning';
+	static IDLE_ANIMATION = 'playerIdle'
+	static RUNNING_ANIMATION = 'playerRunning'
 
-	static VIDA_INICIAL = 20;
-	static ESCUDO_INICIAL = 15;
-	static DINERO_INICIAL = 0;
-	static BATERIA_INICIAL = 0;
-	static SPEED = 180;
+	static VIDA_INICIAL = 20
+	static ESCUDO_INICIAL = 15
+	static DINERO_INICIAL = 0
+	static BATERIA_INICIAL = 0
+	static SPEED = 200
+
+	static WEAPON_OFFSET = { x: 39, y: 54 }
 
 	constructor(scene, x, y) {
-		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED);
+		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)
 		
-		this.body.setSize(66, 73);
+		this.body.setSize(66, 73)
 		this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
 
 		// Atributos del jugador
-		this._escudo = Player.ESCUDO_INICIAL;
-		this._dinero = Player.DINERO_INICIAL;
-		this._baterias = Player.BATERIA_INICIAL;
+		this._escudo = Player.ESCUDO_INICIAL
+		this._dinero = Player.DINERO_INICIAL
+		this._baterias = Player.BATERIA_INICIAL
 
 		// Configuracion del arma
 		this._weapon = this.#config_arma()
+		this._armaEquipada = this._weapon
+		this._secondaryWeapon = null
 		
 		// Configuracion de controles
 		this.#config_controles()
@@ -42,16 +47,14 @@ export default class Player extends BaseActor {
 		this._sprite.play('player_idle')
 
 		// Registrar los métodos update y postupdate
-		this.scene.events.on('update', this.update, this);
-		this.scene.events.on('postupdate', this.updateWeapon, this);
+		this.scene.events.on('update', this.update, this)
+		this.scene.events.on('postupdate', this.updateWeapon, this)
 
 		// Interfaz del personaje
-		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL);
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL)
 
 		// Añadir al container
-		this.add(this._weapon);
-
-
+		this.add(this._weapon)
 	}
 
 
@@ -114,8 +117,36 @@ export default class Player extends BaseActor {
 			this._atributos.vida, 
 			this._escudo, 
 			this._dinero, 
-			this._weapon.getBulletsFromClip(), 
-			this._weapon.getMunicionReserva())
+			this._weapon.getBulletsFromClip(),
+			this.getCountAmmoType(this._armaEquipada._ammo.type)
+		)
+	}
+
+	updateWeapon() {
+
+		// Si this.scene o this.scene.input no existen, no hacer nada.
+		if (!this.scene || !this.scene.input) 
+			return;
+
+		const pointer = this.scene.input.activePointer;
+		if (!pointer) 
+			return; // Seguridad extra, en caso de que no exista el puntero.
+
+
+		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y)
+		const weaponWorldX = this.x + this._armaEquipada.x
+		const weaponWorldY = this.y + this._armaEquipada.y
+
+		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y)
+		this._armaEquipada.setRotation(angle)
+
+		// Arma y modelo siempre mirando al mismo lado
+		let shouldFlip = worldPoint.x < weaponWorldX
+		this._armaEquipada.setFlipY(shouldFlip)
+		if(shouldFlip) {
+			this._sprite.setX(34)
+		}
+		this._sprite.setFlipX(shouldFlip)
 	}
 
 	quitarVida(cantidad){
@@ -150,12 +181,7 @@ export default class Player extends BaseActor {
 	}
 
 	shieldBoost(shield) {
-		if (this._escudo + shield >= Player.ESCUDO_INICIAL) {
-			this._escudo = Player.ESCUDO_INICIAL;
-		}
-		else {
-			this._escudo += shield;
-		}
+		this._escudo = Phaser.Math.Clamp(this._escudo + shield, 0, Player.ESCUDO_INICIAL)
 	}
 
 	moneyBoost(value) {
@@ -174,31 +200,68 @@ export default class Player extends BaseActor {
 		this._baterias = Player.BATERIA_INICIAL;
 	}
 
-	updateWeapon() {
+	set_player_activo(status) {
+		this._atributos.activo = status
+	}
 
-		// Si this.scene o this.scene.input no existen, no hacer nada.
-		if (!this.scene || !this.scene.input) 
-			return;
+	quitar_baterias(amount){
+		this._baterias -= amount
+		this._baterias = (this._baterias < 0) ? 0 : this._baterias
+	}
 
-		const pointer = this.scene.input.activePointer;
-		if (!pointer) 
-			return; // Seguridad extra, en caso de que no exista el puntero.
+	getCountAmmoType(weaponAmmo){
+		
+		switch(weaponAmmo){
+			case 'pistola':
+				return 0
+		
+			case 'subfusil':
+				return 0
 
-		const worldPoint = this.scene.cameras.main.getWorldPoint(pointer.x, pointer.y);
+			case 'fusil':
+				return 0
 
-		const weaponWorldX = this.x + this._weapon.x;
-		const weaponWorldY = this.y + this._weapon.y;
+			case 'escopeta':
+				return 0
 
-		let angle = Phaser.Math.Angle.Between(weaponWorldX, weaponWorldY, worldPoint.x, worldPoint.y);
-		this._weapon.setRotation(angle);
+			case 'sniper':
+				return 0
+				
+			default:
+				return -1
+			}
+    }
 
-		// Arma y modelo siempre mirando al mismo lado
-		let shouldFlip = worldPoint.x < weaponWorldX
-		this._weapon.setFlipY(shouldFlip)
-		if(shouldFlip) {
-			this._sprite.setX(34);
+	recogerArma(texturaArma){
+
+		this._secondaryWeapon = WeaponFactory.crearArma(texturaArma, this.scene, Player.WEAPON_OFFSET)
+		this._armaEquipada = this._secondaryWeapon
+		this._weapon.setVisible(false)
+
+		this.add(this._secondaryWeapon)
+	}
+
+	// Objeto para preservar el estado actual del jugador(vida, monedas, armas, etc...) entre niveles o partidas
+	getPlayerStatus(){
+
+		const status = {
+			vida: this._atributos.vida,
+			escudo: this._escudo,
+			dinero: this._dinero,
+			velocidad: this._atributos.speed,
+			armaBase: { /* Guardar aquí las mejoras u otros atributos */ },
+			armaSecundaria: { /* Guardar aquí las mejoras, municion, etc... */ },
+			municion: 
+				{ 
+					pistola: NONE,
+					subfusil: NONE,
+					rifle: NONE,
+					escopeta: NONE,
+					sniper: NONE
+				}
 		}
-		this._sprite.setFlipX(shouldFlip)
+
+		return status
 	}
 
 	#config_controles(){
@@ -215,28 +278,46 @@ export default class Player extends BaseActor {
 			// Acciones
 			use: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
 			reload: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R),
+			switchWeapon: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q),
 			pause: this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC)
 		}
 
-		this.controles.reload.on('down', () => {
+		this.controles.reload.on('down', () => {	// Recargar
 			if(this._atributos.activo)
-				this._weapon.reload()
+				this._armaEquipada.reload()
 		})
 
-		// Disparo mediante ratón (si la consola no está activa)
-		this.scene.input.on('pointerdown', (pointer) => {
-			
+		this.controles.switchWeapon.on('down', () => {	// Cambiar de arma
+
+			if(this._secondaryWeapon == null)
+				return
+
+
+			if(this._armaEquipada == this._weapon){
+				this._weapon.setVisible(false)
+				this._secondaryWeapon.setVisible(true)
+				this._armaEquipada = this._secondaryWeapon
+			}
+			else{
+				this._secondaryWeapon.setVisible(false)
+				this._weapon.setVisible(true)
+				this._armaEquipada = this._weapon
+			}
+		})
+
+		// Disparo mediante el click izquierdo del ratón
+		this.scene.input.on('pointerdown', (pointer) => {	// Disparar(click izquierdo)
 			if(this._atributos.activo)
-				this._weapon.shot(pointer.worldX, pointer.worldY);
+				this._armaEquipada.shot(pointer.worldX, pointer.worldY)
 		}, this)
 	}
 
 	#config_arma() {
 
-		var weaponOffset = { x: 39, y: 54 }
-		var weapon = new BasePistol(this.scene, weaponOffset.x, weaponOffset.y)
+		var weapon = WeaponFactory.crearArma(WeaponFactory.BASE_WEAPON, this.scene, Player.WEAPON_OFFSET)
 		weapon.setOrigin(0.5, 0.5)
-		weapon.setPipeline('Light2D');
+		weapon.setPipeline('Light2D')
+
 		return weapon
 	}
 
@@ -248,14 +329,6 @@ export default class Player extends BaseActor {
 		//this._weapon.setPipeline('')
 	}
 
-	set_player_activo(status) {
-		this._atributos.activo = status
-	}
-
-	quitar_baterias(amount){
-		this._baterias -= amount
-		this._baterias = (this._baterias < 0) ? 0 : this._baterias
-	}
 	
 	getBatteries() { return this._baterias }
 	isFullHealth() { return this._atributos.vida === Player.VIDA_INICIAL }

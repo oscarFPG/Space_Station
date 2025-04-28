@@ -209,8 +209,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":51.3560606060619,
-                 "y":1377.31818181818
+                 "x":2575.35606060606,
+                 "y":183.31818181818
                 }, 
                 {
                  "gid":16,
@@ -1211,12 +1211,12 @@
          "columns":8,
          "firstgid":1,
          "image":"..\/blocks\/Tilemap2.png",
-         "imageheight":444,
+         "imageheight":555,
          "imagewidth":888,
          "margin":0,
          "name":"Tilemap2",
          "spacing":0,
-         "tilecount":32,
+         "tilecount":40,
          "tileheight":111,
          "tilewidth":111
         }],

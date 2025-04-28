@@ -1,11 +1,14 @@
+import Builder from '../../managers/Builder.js';
 import Box from './Box.js'
 export default class BoxHard extends Box {
     
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite)
+    constructor(scene, x, y) {
+        super(scene, x, y)
         this._vida += Box.VIDA_INICIAL;
     }
+
     quitarVida(cantidad){
+
         if(cantidad >= Box.VIDA_INICIAL) {
             this._vida -= cantidad
             this.setTintFill(0xffffff);
@@ -13,6 +16,7 @@ export default class BoxHard extends Box {
                 this.clearTint();
             })
         }
+
 		if(this._vida <= 0)
             this.destroyObject()
     }

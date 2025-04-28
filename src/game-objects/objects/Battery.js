@@ -1,12 +1,13 @@
+import Builder from "../../managers/Builder.js";
 import Object from "../base-game-objects/Object.js"
 
 
 export default class Battery extends Object {
     
-    constructor(scene, x, y, sprite) {
-        super(scene, x, y, sprite)
-        this.body.setSize(80, 80)
-        this.body.setOffset(20, 20)
+    constructor(scene, x, y) {
+        super(scene, x, y, Builder.OBJ_BATERIA)
+        this.body.setSize(65, 65)
+        this.body.setOffset(27, 27)
         this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.7);
 
         this._displayHelperText = true
@@ -14,6 +15,8 @@ export default class Battery extends Object {
         this.alreadyPulse = false
         this.setText("Pick up cell")
     }
+
+
 
     accion(player){
 
