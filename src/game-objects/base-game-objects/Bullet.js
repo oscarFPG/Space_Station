@@ -67,7 +67,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     
     // Sobrescribimos preUpdate para actualizar la posición de la luz
     preUpdate(time, delta) {
-
+        super.preUpdate(time, delta);
         if (this.light) {
             this.light.x = this.x;
             this.light.y = this.y;
