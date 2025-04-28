@@ -14,7 +14,7 @@ export default class Player extends BaseActor {
 	static ESCUDO_INICIAL = 15
 	static DINERO_INICIAL = 0
 	static BATERIA_INICIAL = 0
-	static SPEED = 300
+	static SPEED = 200
 
 	static WEAPON_OFFSET = { x: 39, y: 54 }
 

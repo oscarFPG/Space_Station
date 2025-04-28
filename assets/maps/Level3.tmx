@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="20" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="89">
+ <editorsettings>
+  <export target="Level3.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="Tilemap2.tsx"/>
+ <layer id="1" name="floor" width="28" height="20">
+  <data encoding="csv">
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,9,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,9,3,9,9,3,9,3,9,9,9,3,9,3,3,9,9,
+9,9,9,2,2,2,2,2,2,2,2,2,9,9,3,9,9,3,9,9,3,9,9,9,9,9,3,9,
+3758096388,3758096388,3758096388,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,9,9,9,9,9,9,9,9,9,9,3,9,3,3221225476,9,9,
+9,9,9,2,2,2,2,2,2,2,2,2,9,3,9,3,9,9,3,9,3,9,9,9,9,3221225476,9,9,
+9,9,9,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,9,9,9,9,9,9,9,9,9,9,9,9,9,3221225476,9,9,
+9,9,9,2,2,2,2,2,2,2,2,2,9,9,9,9,9,9,9,9,9,9,9,9,9,3221225476,9,9,
+9,9,9,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,1610612740,3221225476,9,9,
+9,9,9,2,2,2,2,2,2,2,2,2,9,9,9,9,9,9,9,9,9,9,4,9,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,4,9,9,9,9,9,
+9,2,2,2,2,2,2,2,2,2,9,9,9,9,3,9,9,9,9,9,9,9,4,9,9,9,9,9,
+9,2,2,2,2,2,2,2,2,2,9,3,9,9,9,9,9,3,9,9,3,3,9,9,9,1610612740,1610612740,1610612740,
+9,2,2,2,2,2,2,2,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,1610612740,1610612740,9,
+9,2,2,2,2,2,2,2,2,9,3,9,9,9,3,9,9,9,9,3,9,9,9,3,9,9,9,9,
+9,2,2,2,2,2,2,2,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,3,9,9,
+9,2,2,2,2,2,2,2,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,
+9,9,4,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,3,9,9,9,9,9,9,9,3,9,
+9,4,4,9,9,3,9,3,9,4,4,4,4,4,4,4,9,9,9,9,9,9,9,9,9,9,9,9,
+9,4,4,4,3,9,3,9,3,4,4,4,4,4,4,4,9,9,9,3,9,9,9,3,9,9,9,9,
+9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9
+</data>
+ </layer>
+ <layer id="3" name="floor2" width="28" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,26,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,26,
+0,0,0,0,0,0,0,0,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="2" name="wall" width="28" height="20">
+  <data encoding="csv">
+32,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,2684354592,
+15,7,7,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,
+1610612768,1610612751,1610612751,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,15,15,0,0,0,15,15,
+0,0,0,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,15,15,15,0,15,15,
+32,1610612751,1610612751,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,15,0,15,15,
+15,15,15,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,15,0,15,15,
+15,15,15,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,15,15,15,0,15,15,
+15,15,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,
+15,15,15,0,0,0,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,15,0,15,15,15,15,15,
+15,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,0,15,15,15,15,15,
+15,0,0,0,0,0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,15,15,15,15,15,
+15,0,0,0,0,0,0,7,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,0,0,0,
+15,0,0,0,0,0,0,0,0,15,0,0,15,15,0,0,15,0,0,0,0,0,0,0,15,0,0,15,
+15,0,0,0,0,0,0,0,0,15,0,0,15,15,0,0,15,0,0,0,0,0,0,0,15,7,0,15,
+15,0,0,0,0,0,0,0,0,15,0,0,15,15,0,0,15,0,0,0,0,0,0,0,15,0,0,15,
+15,0,0,0,0,0,0,0,0,15,0,0,15,15,0,0,15,0,0,15,15,15,15,15,15,0,0,15,
+15,15,0,15,15,15,15,15,15,15,15,15,15,15,15,15,15,0,0,0,0,0,0,0,0,0,0,15,
+15,15,0,7,0,0,0,0,0,15,15,15,15,15,15,15,15,0,0,0,0,0,0,0,0,0,0,15,
+15,15,0,0,0,0,0,0,0,15,15,15,15,15,15,15,15,0,0,0,0,0,0,0,0,0,0,15,
+1610612768,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,1610612751,3221225504
+</data>
+ </layer>
+ <layer id="4" name="objects" width="28" height="20">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,6,0,0,0,0,0,0,0,0,0,14,8,14,8,14,8,14,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,0,0,0,0,0,0,14,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,6,0,8,0,0,0,0,0,0,0,0,0,14,0,0,0,0,
+0,0,0,0,0,0,10,0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,14,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,14,6,8,0,6,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,0,0,0,0,0,0,
+0,8,0,0,0,0,0,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,0,0,0,0,0,0,0,
+0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,10,0,0,0,13,0,0,
+0,6,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="5" name="objects">
+  <object id="1" type="FinalPosition" x="3055.27" y="1276.93"/>
+  <object id="2" type="PlayerRespawn" x="47.2121" y="383.818">
+   <point/>
+  </object>
+  <object id="3" name="teclas tutorial" type="Text" x="112.167" y="166.552" width="209" height="53.5624">
+   <text fontfamily="Seven Segment" pixelsize="45" wrap="1" color="#55ffff" halign="center">Room 8080</text>
+  </object>
+  <object id="4" type="Laser" gid="17" x="1443.06" y="771.25" width="111" height="111"/>
+  <object id="5" type="Laser" gid="17" x="1554.06" y="771.25" width="111" height="111"/>
+  <object id="6" type="Laser" gid="17" x="1665.15" y="771.273" width="111" height="111"/>
+  <object id="7" type="Laser" gid="17" x="1776.19" y="771.313" width="111" height="111"/>
+  <object id="8" type="Laser" gid="17" x="1887.34" y="771.273" width="111" height="111"/>
+  <object id="10" type="Laser" gid="17" x="1998.34" y="771.273" width="111" height="111"/>
+  <object id="17" type="Laser" gid="17" x="1443.18" y="1001.89" width="111" height="111"/>
+  <object id="18" type="Laser" gid="17" x="1554.18" y="1001.89" width="111" height="111"/>
+  <object id="19" type="Laser" gid="17" x="1665.27" y="1001.91" width="111" height="111"/>
+  <object id="20" type="Laser" gid="17" x="1776.31" y="1001.95" width="111" height="111"/>
+  <object id="21" type="Laser" gid="17" x="1887.45" y="1001.91" width="111" height="111"/>
+  <object id="22" type="Laser" gid="17" x="1998.45" y="1001.91" width="111" height="111"/>
+  <object id="23" type="Laser" gid="17" x="2109.36" y="771.281" width="111" height="111"/>
+  <object id="24" type="Laser" gid="17" x="2220.36" y="771.281" width="111" height="111"/>
+  <object id="25" type="Laser" gid="17" x="2331.45" y="771.304" width="111" height="111"/>
+  <object id="29" type="Laser" gid="17" x="2109.51" y="1001.93" width="111" height="111"/>
+  <object id="30" type="Laser" gid="17" x="2220.51" y="1001.93" width="111" height="111"/>
+  <object id="35" type="EnemyPosition" gid="30" x="1908.62" y="373.591" width="111" height="111">
+   <properties>
+    <property name="type" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="36" type="Box" gid="23" x="599.167" y="466" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="37" type="Box" gid="23" x="612.167" y="364.666" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="38" type="Box" gid="23" x="645.833" y="566.167" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="39" type="Laser" gid="16" x="1663.17" y="836.25" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="1"/>
+    <property name="isStatic" type="bool" value="false"/>
+    <property name="isStoppable" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="46" type="Laser" gid="1073741840" x="1663.17" y="944" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="1"/>
+    <property name="isStatic" type="bool" value="false"/>
+    <property name="isStoppable" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="49" type="Laser" gid="16" x="2108.17" y="837.958" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="1"/>
+    <property name="isStatic" type="bool" value="false"/>
+    <property name="isStoppable" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="50" type="Laser" gid="1073741840" x="2108.17" y="945.708" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="1"/>
+    <property name="isStatic" type="bool" value="false"/>
+    <property name="isStoppable" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="51" type="Box" gid="23" x="1599.67" y="877.667" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="52" type="Box" gid="23" x="2053.17" y="880.5" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="53" type="Box" gid="23" x="2215.17" y="890.5" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="54" type="Box" gid="23" x="2323.83" y="887.833" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="55" type="EnemyPosition" x="2705.65" y="1930.21" rotation="5.43011">
+   <properties>
+    <property name="type" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="56" type="EnemyPosition" x="2016.67" y="1411" rotation="62.8919">
+   <properties>
+    <property name="type" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="58" type="Box" gid="23" x="2308.5" y="1963.17" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="60" type="Box" gid="23" x="2367.83" y="1881.83" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="61" type="Box" gid="23" x="1947.5" y="881.5" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="63" type="EnemyPosition" x="1667.42" y="1650.08" rotation="62.8919">
+   <properties>
+    <property name="type" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="64" type="EnemyPosition" x="1220.83" y="1651.17" rotation="62.8919">
+   <properties>
+    <property name="type" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="65" type="Door" gid="24" x="888" y="1330.98" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="1"/>
+    <property name="isActivate" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="66" type="Console" gid="18" x="334.046" y="1999.73" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+    <property name="password" value="8080"/>
+   </properties>
+  </object>
+  <object id="67" type="Laser" gid="16" x="331.98" y="2107.18" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="0"/>
+    <property name="isStatic" type="bool" value="true"/>
+    <property name="isStoppable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="68" type="Box" gid="23" x="683.167" y="1435.17" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="70" type="ShieldKit" gid="21" x="660.5" y="2000.5" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="71" type="Coin" gid="22" x="552.5" y="1993.83" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="73" type="HealthKit" gid="20" x="775.5" y="2108.5" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="74" type="Note" gid="11" x="212.5" y="1871.5" width="111" height="111">
+   <properties>
+    <property name="title" value="Number of the first room"/>
+   </properties>
+  </object>
+  <object id="75" type="Coin" gid="22" x="1110.5" y="1780.5" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="76" type="ShieldKit" gid="21" x="1659.17" y="1777.83" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="77" type="ShieldKit" gid="21" x="2884.5" y="222.5" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="78" type="EnemyPosition" x="489" y="1345.67" rotation="62.8919">
+   <properties>
+    <property name="type" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+  <object id="79" type="Box" gid="23" x="701.5" y="1503.5" width="111" height="111">
+   <properties>
+    <property name="health" type="int" value="100"/>
+   </properties>
+  </object>
+  <object id="80" type="HealthKit" gid="20" x="2887.83" y="2000.5" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="15"/>
+   </properties>
+  </object>
+  <object id="81" type="Door" gid="24" x="2885.9" y="1554.46" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+    <property name="isActivate" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="82" type="BatteryStructure" gid="12" x="2776.06" y="1553.95" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="0"/>
+    <property name="numBatteries" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="83" type="Coin" gid="22" x="2884.5" y="2109.83" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="84" type="Door" gid="24" x="2441.97" y="1221.3" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="1"/>
+    <property name="isActivate" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="85" type="Battery" gid="19" x="211.167" y="1323.29" width="111" height="111"/>
+  <object id="86" type="Battery" gid="19" x="1120.26" y="441.47" width="111" height="111"/>
+  <object id="87" type="Battery" gid="19" x="2344.5" y="228.5" width="111" height="111"/>
+  <object id="88" type="EnemyPosition" x="950" y="410" rotation="62.8919">
+   <properties>
+    <property name="type" type="int" value="0"/>
+   </properties>
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

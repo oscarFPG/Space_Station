@@ -8,7 +8,7 @@ export default class Health extends Object {
     static AUMENTO_VIDA = 5;
 
     constructor(scene, x, y) {
-        super(scene, x, y, Builder.OBJ_BATERIA)
+        super(scene, x, y, Builder.OBJ_VIDA)
         this.body.setSize(65, 65)
         this.body.setOffset(27, 27)
         
