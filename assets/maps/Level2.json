@@ -1158,6 +1158,42 @@
                  "width":111,
                  "x":1116.5,
                  "y":980.5
+                }, 
+                {
+                 "gid":68,
+                 "height":111,
+                 "id":102,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":1997.5,
+                 "y":1991.5
+                }, 
+                {
+                 "gid":68,
+                 "height":111,
+                 "id":103,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":456.5,
+                 "y":2144.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1166,7 +1202,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":102,
+ "nextobjectid":104,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -1175,6 +1211,19 @@
         {
          "columns":8,
          "firstgid":1,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":41,
          "image":"..\/blocks\/Tilemap2.png",
          "imageheight":555,
          "imagewidth":888,

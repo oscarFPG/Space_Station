@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
+import Object from '../base-game-objects/Object';
 
-export default class Door extends Phaser.GameObjects.Sprite {
+export default class Door extends Object {
     static OPEN_ANIMATION = 'doorsAnimation';
+    static ACTIVATION_DISTANCE = 200
+    static OPENING_DELAY = 800
+    static CLOSING_DELAY = 800
 
     constructor(scene, x, y, active, doorID) {
         super(scene, x, y, Door.OPEN_ANIMATION);
-        scene.add.existing(this);
-        scene.physics.add.existing(this); // Hacer que el cuerpo sea estático
         this.setPipeline('Light2D');
         this.body.setImmovable(true);
         this.body.setAllowGravity(false)
@@ -26,11 +28,6 @@ export default class Door extends Phaser.GameObjects.Sprite {
         this._isPlayerNearby = false; // Para evitar múltiples reproducciones de animación
     }
 
-     configure(player) {
-        this._player = player;
-        
-      }
-
     config_animacion(animKey, animName, start, end, frameRate) {
         if (!this.scene.anims.exists(animKey)) {
             this.scene.anims.create({
@@ -49,7 +46,7 @@ export default class Door extends Phaser.GameObjects.Sprite {
                 this._player.x, this._player.y, this.x, this.y
             );
 
-            if (distance < 200) { // Ajusta el rango según sea necesario
+            if (distance < Door.ACTIVATION_DISTANCE) { // Ajusta el rango según sea necesario
                 if (!this._isPlayerNearby) {
                     this._isPlayerNearby = true; 
                     this.activarPuerta();
@@ -66,14 +63,14 @@ export default class Door extends Phaser.GameObjects.Sprite {
     }
     activarPuerta() {
         this.play('open_doors'); 
-        this.scene.time.delayedCall(800, () => {
+        this.scene.time.delayedCall(Door.OPENING_DELAY, () => {
             this.setFrame(4); 
         });
     }
 
     cerrarPuerta() {
         this.play('close_doors'); 
-        this.scene.time.delayedCall(800, () => {
+        this.scene.time.delayedCall(Door.CLOSING_DELAY, () => {
             this.setFrame(0); 
         });
     }

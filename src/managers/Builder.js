@@ -4,9 +4,16 @@ export default class Builder {
     // Escenas
     static ESCENA_TUTORIAL = 'tutorial'
 
-    // Animaciones
-    static ANIM_CAMINAR_PLAYER = ''
+    // Animaciones del personaje principal
+    static IDLE_ANIMATION = 'playerIdle'
+    static RUNNING_ANIMATION = 'playerRunning'
 
+    // Animaciones de enemigos 
+    static BASE_ENEMY_TEXTURE = 'enemyIdle';
+    static ENEMY2_TEXTURE = '2enemyIdle';
+    static BASE_TURRET_TEXTURE = 'turretBase';
+   
+   
     // Armas
     static WEAPON_OLD_COLT = 'weaponOldColt'
     static WEAPON_PISTOLA_BASE = 'weapon1'
@@ -20,6 +27,7 @@ export default class Builder {
     // Proyectiles
     static AMMO_BASE = 'municionBase'
     static AMMO_ENEMY_BASE = 'municionEnemigoBase'
+    static AMMO_ENEMY_MACHINE_GUN = 'municionEnemigoAmetralladora'
     static AMMO_TURRET = 'municionTorreta'
 
     // Mapas
@@ -30,6 +38,7 @@ export default class Builder {
     static OBJ_ESCUDO = 'objEscudo'
     static OBJ_BATERIA = 'objBateria'
     static OBJ_NOTA = 'objNota'
+    static OBJ_AMMO_BOX_BASE = 'objAmmoBoxBase'
     static OBJ_LASER_VERTICAL = 'objLaserVertical'
     static OBJ_LASER_HORIZONTAL = 'objLaserHorizontal'
 

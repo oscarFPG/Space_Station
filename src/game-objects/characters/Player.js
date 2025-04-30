@@ -2,13 +2,9 @@ import Phaser from 'phaser'
 import PlayerUI from '../../UI/PlayerUI.js'
 import BaseActor from '../base-game-objects/BaseActor.js'
 import WeaponFactory from '../../factories/WeaponFactory.js';
-import WeaponObject from '../objects/WeaponObject.js';
+import Builder from '../../managers/Builder.js';
 
 export default class Player extends BaseActor {
-  
-	// Player animation names
-	static IDLE_ANIMATION = 'playerIdle'
-	static RUNNING_ANIMATION = 'playerRunning'
 
 	static VIDA_INICIAL = 20
 	static ESCUDO_INICIAL = 15
@@ -19,7 +15,7 @@ export default class Player extends BaseActor {
 	static WEAPON_OFFSET = { x: 39, y: 54 }
 
 	constructor(scene, x, y) {
-		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)
+		super(scene, x, y, {texture: Builder.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)
 		
 		this.body.setSize(66, 73)
 		this.body.setCollideWorldBounds(true)
@@ -42,8 +38,8 @@ export default class Player extends BaseActor {
 		this.#config_iluminacion()
 
 		// Configuracion de animaciones
-		this.config_animacion('player_idle', Player.IDLE_ANIMATION, 0, 2, 6)
-		this.config_animacion('player_running', Player.RUNNING_ANIMATION, 0, 3, 10)
+		this.config_animacion('player_idle', Builder.IDLE_ANIMATION, 0, 2, 6)
+		this.config_animacion('player_running', Builder.RUNNING_ANIMATION, 0, 3, 10)
 		this._sprite.play('player_idle')
 
 		// Registrar los métodos update y postupdate

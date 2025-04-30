@@ -9,6 +9,7 @@ import Laser from '../game-objects/objects/Laser.js'
 import Health from '../game-objects/objects/Health.js'
 import Shield from '../game-objects/objects/Shield.js'
 import Coin from '../game-objects/objects/Coin.js'
+import AmmoBoxBaseBullet from '../game-objects/objects/AmmoBoxBaseBullet.js'
 import Box from '../game-objects/objects/Box.js'
 import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
@@ -49,6 +50,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaEscudos = []
         this.listaVidas = []
         this.listaBaterias = []
+        this.listaMunicionBase = []
 
 
         // Capas de todos los niveles
@@ -129,6 +131,9 @@ export default class BaseScene extends Phaser.Scene {
         this.listaNotas.forEach(nota => {
             nota.update(time);
         });
+        this.listaMunicionBase.forEach(ammo => {
+            ammo.update(time);
+        });
     }
 
     crear_objetos(map) {
@@ -207,6 +212,11 @@ export default class BaseScene extends Phaser.Scene {
             else if(object.type == 'ShieldKit'){
                 const shieldObject = new Shield(this, object.x + 55, object.y - 55)
                 this.listaEscudos.push(shieldObject);
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
+            else if(object.type == 'AmmoBox'){
+                const ammoObject = new AmmoBoxBaseBullet(this, object.x + 55, object.y - 55)
+                this.listaMunicionBase.push(ammoObject);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type === '' /* TODO - Incluir tipo para la tienda */){

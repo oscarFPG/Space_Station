@@ -1,6 +1,6 @@
 import Builder from '../../managers/Builder.js';
 import RangeWeapon from '../base-game-objects/RangeWeapon.js'
-import BasePistolBullet from '../bullets/BasePistolBullet.js';
+import MachineGunBullet from '../bullets/MachineGunBullet.js';
 
 export default class MachineGunEnemy extends RangeWeapon {
     
@@ -18,7 +18,7 @@ export default class MachineGunEnemy extends RangeWeapon {
         this._specs.canDrill = false;
         this._specs.fireRate = 2.15;
         this._specs.reloadTime = 2;
-        this._specs.sprite = Builder.AMMO_ENEMY_BASE;
+        this._specs.sprite = Builder.AMMO_ENEMY_MACHINE_GUN;
         this._specs.weight = 1;
         
         this._ammo.type = 'pistola'
@@ -27,7 +27,7 @@ export default class MachineGunEnemy extends RangeWeapon {
     }
 
     createBullet(bulletX, bulletY){
-            return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_ENEMY_BASE, this.colorLightBullet)
+            return new MachineGunBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_ENEMY_MACHINE_GUN, this.colorLightBullet)
     }
 
 }

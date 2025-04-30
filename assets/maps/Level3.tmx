@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="20" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="28" height="20" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="96">
  <editorsettings>
   <export target="Level3.json" format="json"/>
  </editorsettings>
@@ -210,7 +210,7 @@
     <property name="isHorizontal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="35" type="EnemyPosition" gid="30" x="1908.62" y="373.591" width="111" height="111">
+  <object id="35" type="EnemyPosition" gid="30" x="496.62" y="837.591" width="111" height="111">
    <properties>
     <property name="type" type="int" value="1"/>
    </properties>
@@ -427,5 +427,7 @@
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
+  <object id="93" type="AmmoBox" gid="28" x="2776.5" y="219.5" width="111" height="111"/>
+  <object id="94" type="AmmoBox" gid="28" x="1212.91" y="437.773" width="111" height="111"/>
  </objectgroup>
 </map>

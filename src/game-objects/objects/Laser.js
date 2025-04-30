@@ -3,6 +3,7 @@ import Object from '../base-game-objects/Object.js'
 import Builder from '../../managers/Builder.js'
 
 export default class Laser extends Object {
+    static DEFAULT_DAMAGE = 5
 
     constructor(scene, x, y, ID, isHorizontal, isStatic) {
         var texture = (!isHorizontal) ? Builder.OBJ_LASER_VERTICAL: Builder.OBJ_LASER_HORIZONTAL;
@@ -18,7 +19,7 @@ export default class Laser extends Object {
     }
 
     accion(player) {    
-        player.quitarVida(5);
+        player.quitarVida(Laser.DEFAULT_DAMAGE);
     
         //Dirección opuesta a la actual
         const direction = new Phaser.Math.Vector2(player.body.velocity.x, player.body.velocity.y);
@@ -43,7 +44,10 @@ export default class Laser extends Object {
             alpha: 0,
             yoyo: true,
             repeat: 2,
-            duration: 100
+            duration: 100,
+            onComplete: () => {
+                player.setAlpha(1);
+            }
         });
     }
     

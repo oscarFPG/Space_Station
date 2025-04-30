@@ -1,20 +1,18 @@
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 import ClassIA from '../../factories/ClassIA.js';
+import Builder from '../../managers/Builder.js';
 import WeaponFactory from '../../factories/WeaponFactory.js';
 
 export default class ExtendedEnemy extends BasedEnemy {
-
-    static BASE_ENEMY_TEXTURE = 'enemyIdle';
 
     static VIDA = 25
     static SPEED = 10
 
     constructor(scene, x, y){
-        super(scene, x, y, {texture: ExtendedEnemy.BASE_ENEMY_TEXTURE, x: 30, y: 30}, ExtendedEnemy.VIDA, ExtendedEnemy.SPEED)
+        super(scene, x, y, {texture: Builder.BASE_ENEMY_TEXTURE, x: 30, y: 30}, ExtendedEnemy.VIDA, ExtendedEnemy.SPEED)
 
-        this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
+        this.config_animacion('enemy_idle', Builder.BASE_ENEMY_TEXTURE, 0, 2, 6)
         this._sprite.play('enemy_idle')
-
 
         // Propiedades de la IA
         this._enemyParameters.state = 'patrol';
