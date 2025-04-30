@@ -14,9 +14,9 @@ export default class Player extends BaseActor {
 	static ESCUDO_INICIAL = 15
 	static DINERO_INICIAL = 0
 	static BATERIA_INICIAL = 0
-	static SPEED = 300
+	static SPEED = 200
 
-	static WEAPON_OFFSET = { x: 39, y: 54 }
+	static WEAPON_OFFSET = { x: 35, y: 54 }
 
 	constructor(scene, x, y) {
 		super(scene, x, y, {texture: Player.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)

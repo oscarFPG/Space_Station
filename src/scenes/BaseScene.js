@@ -92,7 +92,7 @@ export default class BaseScene extends Phaser.Scene {
             })
         }
 
-        this.scene.launch('')
+        //this.scene.launch('')
     }
 
     update(time, delta){

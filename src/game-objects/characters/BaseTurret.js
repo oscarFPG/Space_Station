@@ -59,6 +59,6 @@ export default class BaseTurret extends BasedEnemy {
     }
 
     add_weapon(){
-        return null
+        return WeaponFactory.crearArma(WeaponFactory.BASE_TURRET_WEAPON, this.scene, {x: 40, y: 50})
     }
 }

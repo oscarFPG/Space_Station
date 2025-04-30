@@ -27,8 +27,8 @@ export default class BasePistol extends RangeWeapon {
         this._ammo.currentClipAmmo = this._ammo.clipSize;
     }
 
-    createBullet(){
-        return new BasePistolBullet(this.scene, this.x, this.y, this._specs.damage, Builder.AMMO_BASE)
+    createBullet(bulletX, bulletY){
+        return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_BASE, this.colorLightBullet)
     }
 
     eliminateBulletFromClip(){ /* No quitar balas de este arma */ }

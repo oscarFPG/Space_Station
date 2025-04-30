@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import Object from '../base-game-objects/Object';
 import Options from '../../managers/Options.js';
 
-
+//
 export default class Console extends Object {
 
 	static TEXTURE = 'consoleBlocked'
