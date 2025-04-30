@@ -8,17 +8,20 @@ import BaseScene from './BaseScene.js'
 import CharacterIdle from '../../assets/sprites/idle_player_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
+import TwoEnemyIdle from '../../assets/sprites/idle_2enemy_new.png'
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
 
 // Armas
 import OLD_COLT from '../../assets/weapons/OldColt.png'
 import ENEMY_WEAPON from '../../assets/weapons/weapon1_enemy.png'
+import ENEMY_2WEAPON from '../../assets/weapons/weapon2_enemy.png'
 import PISTOLA_BASE from '../../assets/weapons/weapon1.png'
 import WEAPON_2 from '../../assets/weapons/weapon2.png'
 import WEAPON_3 from '../../assets/weapons/weapon3.png'
 import WEAPON_4 from '../../assets/weapons/weapon4.png'
 import BASE_BULLET from '../../assets/bullets/bullet1.png'
+import MACHINE_GUN_BULLET from '../../assets/bullets/bullet_enemy_machine_gun.png'
 import BASE_BULLET_ENEMY from '../../assets/bullets/bullet1_enemy.png'
 import BULLET_TURRET from '../../assets/bullets/bullet1_turret.png'
 import Explode from '../../assets/effects/explode.png'
@@ -38,6 +41,7 @@ import laserUp from '../../assets/objects/laser_2.png'
 import laserDown from '../../assets/objects/laser_1.png'
 import HEALTH from '../../assets/objects/healthItem.png'
 import SHIELD from '../../assets/objects/shieldItem.png'
+import AMMO_BOX_BASE_PISTOL from '../../assets/objects/basePistolAmmoBox.png'
 import BATTERY from '../../assets/objects/batteryItem.png'
 import BATTERY_STRUCTURE_FULL from '../../assets/objects/full_dispensator.png'
 import BATTERY_STRUCTURE_LOW from '../../assets/objects/low_dispensator.png'
@@ -71,12 +75,12 @@ export default class Boot extends BaseScene {
         super('boot')
     }
 
-    
     preload(){
 
         // Armas
         this.load.image(Builder.WEAPON_OLD_COLT, OLD_COLT)
         this.load.image(Builder.ENEMY_WEAPON_PISTOLA_BASE, ENEMY_WEAPON)
+        this.load.image(Builder.ENEMY_WEAPON_MACHINE_GUN, ENEMY_2WEAPON)
         this.load.image(Builder.WEAPON_PISTOLA_BASE, PISTOLA_BASE)
         this.load.image(Builder.WEAPON_2, WEAPON_2)
         this.load.image(Builder.WEAPON_3, WEAPON_3)
@@ -86,11 +90,13 @@ export default class Boot extends BaseScene {
         // Proyectiles
         this.load.image(Builder.AMMO_BASE, BASE_BULLET)
         this.load.image(Builder.AMMO_ENEMY_BASE, BASE_BULLET_ENEMY)
+        this.load.image(Builder.AMMO_ENEMY_MACHINE_GUN, MACHINE_GUN_BULLET)
         this.load.image(Builder.AMMO_TURRET, BULLET_TURRET)
 
         // Objetos
         this.load.image(Builder.OBJ_VIDA, HEALTH)
         this.load.image(Builder.OBJ_ESCUDO, SHIELD)
+        this.load.image(Builder.OBJ_AMMO_BOX_BASE, AMMO_BOX_BASE_PISTOL)
         this.load.image(Builder.OBJ_BATERIA, BATTERY)
         this.load.image(Builder.OBJ_NOTA, Note)
         this.load.image(Builder.OBJ_LASER_VERTICAL, laserUp)
@@ -130,6 +136,7 @@ export default class Boot extends BaseScene {
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 })
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('2enemyIdle', TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC)
@@ -173,7 +180,7 @@ export default class Boot extends BaseScene {
 
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
-            this.scene.switch('Level3', 'boot')
+            this.scene.switch('Level2', 'boot')
         }   
     }
 

@@ -9,6 +9,7 @@ import Laser from '../game-objects/objects/Laser.js'
 import Health from '../game-objects/objects/Health.js'
 import Shield from '../game-objects/objects/Shield.js'
 import Coin from '../game-objects/objects/Coin.js'
+import AmmoBoxBaseBullet from '../game-objects/objects/AmmoBoxBaseBullet.js'
 import Box from '../game-objects/objects/Box.js'
 import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
@@ -44,7 +45,13 @@ export default class BaseScene extends Phaser.Scene {
         this.listaPuertas = []
         this.listaEstructuraBaterias = []
         this.listaTorretas = []
+        this.listaNotas = []
         this._listaEnemigos = []
+        this.listaEscudos = []
+        this.listaVidas = []
+        this.listaBaterias = []
+        this.listaMunicionBase = []
+
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)
@@ -106,6 +113,27 @@ export default class BaseScene extends Phaser.Scene {
                 this.scene.switch(this._nextScene, { player: this._player })
             }
         }
+        this.listaPuertas.forEach(door => {
+            door.update();
+        });
+        this._listaEnemigos.forEach(enemigo => {
+            enemigo.update();
+        });
+        this.listaVidas.forEach(healthItem => {
+            healthItem.update(time);
+        });
+        this.listaEscudos.forEach(shieldItem => {
+            shieldItem.update(time);
+        });
+        this.listaBaterias.forEach(batteryItem => {
+            batteryItem.update(time);
+        });
+        this.listaNotas.forEach(nota => {
+            nota.update(time);
+        });
+        this.listaMunicionBase.forEach(ammo => {
+            ammo.update(time);
+        });
     }
 
     crear_objetos(map) {
@@ -139,7 +167,7 @@ export default class BaseScene extends Phaser.Scene {
                 this._finalPosition = { x: object.x, y: object.y }
             }
             else if(object.type === 'BlueLightPoint') {
-                this.lights.addLight(object.x, object.y, 250, 0x8888ff, 0.5)
+                this.lights.addLight(object.x, object.y, 1250, 0xFFFFFF, 1.75)
             }
             else if(object.type === 'Console'){
                 const laserID = object.properties[0].value
@@ -149,12 +177,15 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type === 'Laser'){
                 const laserID = object.properties[1].value
-                let laser = new Laser(this, object.x + 55, object.y - 55, laserID)
+                const isHorizontal = object.properties[2].value
+                const isStatic = object.properties[3].value
+                let laser = new Laser(this, object.x + 55, object.y - 55, laserID, isHorizontal, isStatic)
                 this.listaLaseres.push(laser)
             }
             else if(object.type === 'Note'){
                 const text = object.properties[0].value
                 let note = new Note(this, object.x + 55, object.y - 55, text)
+                this.listaNotas.push(note)
             }
             else if(object.type === 'Door'){
                 const doorID = object.properties[0].value
@@ -170,14 +201,22 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type == 'Battery'){
                 const bateria = new Battery(this, object.x + 55, object.y - 55)
+                this.listaBaterias.push(bateria);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type == 'HealthKit'){
                 const healthObject = new Health(this, object.x + 55, object.y - 55)
+                this.listaVidas.push(healthObject);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type == 'ShieldKit'){
-                const healthObject = new Shield(this, object.x + 55, object.y - 55)
+                const shieldObject = new Shield(this, object.x + 55, object.y - 55)
+                this.listaEscudos.push(shieldObject);
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
+            else if(object.type == 'AmmoBox'){
+                const ammoObject = new AmmoBoxBaseBullet(this, object.x + 55, object.y - 55)
+                this.listaMunicionBase.push(ammoObject);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type === '' /* TODO - Incluir tipo para la tienda */){
@@ -248,10 +287,21 @@ export default class BaseScene extends Phaser.Scene {
         })
     }
 
-    gameOver(){
-       console.log('Game over')
-       this.scene.restart()
+    gameOver() {
+        console.log('Game over');
+    
+        // Desenfocar usando el BlurPostFX si está disponible
+        const blurPipeline = this.cameras.main.postFX.addBlur(4); // intensidad 4 (puedes ajustar)
+    
+        // También puedes añadir un pequeño fundido a negro si deseas
+        this.cameras.main.fadeOut(500, 0, 0, 0);
+    
+        // Espera 1 segundo antes de reiniciar la escena
+        this.time.delayedCall(400, () => {
+            this.scene.restart();
+        });
     }
+    
 
     get_player(){
         return this._player

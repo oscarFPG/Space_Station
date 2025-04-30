@@ -481,6 +481,11 @@
                          "value":1
                         }, 
                         {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -512,6 +517,11 @@
                          "name":"ID",
                          "type":"int",
                          "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"isStatic",
@@ -547,6 +557,11 @@
                          "value":1
                         }, 
                         {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -578,6 +593,11 @@
                          "name":"ID",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"isStatic",
@@ -858,8 +878,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":2388.75,
-                 "y":1277
+                 "x":2385.75,
+                 "y":830
                 }, 
                 {
                  "gid":22,
@@ -914,6 +934,24 @@
                  "width":111,
                  "x":2732.5,
                  "y":695.166666666667
+                }, 
+                {
+                 "gid":68,
+                 "height":111,
+                 "id":64,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":1211.16666666667,
+                 "y":1985.83333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -922,7 +960,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":64,
+ "nextobjectid":65,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -932,12 +970,25 @@
          "columns":8,
          "firstgid":1,
          "image":"..\/blocks\/Tilemap2.png",
-         "imageheight":444,
+         "imageheight":555,
          "imagewidth":888,
          "margin":0,
          "name":"Tilemap2",
          "spacing":0,
-         "tilecount":32,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":41,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
          "tileheight":111,
          "tilewidth":111
         }],

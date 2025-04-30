@@ -26,14 +26,14 @@ export default class Level1 extends BaseScene {
 
     activar_todos_los_laseres(){
         this.listaLaseres.forEach(laser => {
-            if(laser.get_laser_ID() != 0)
+            if(!laser.get_laser_isStatic())
                 laser.activate_laser()
         })
     }
 
     desactivar_todos_los_laseres(){
         this.listaLaseres.forEach(laser => {
-            if(laser.get_laser_ID() != 0)
+            if(!laser.get_laser_isStatic())
                 laser.disable_laser()
         })
     }

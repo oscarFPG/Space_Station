@@ -28,7 +28,6 @@ export default class RangeWeapon extends Weapon {
     constructor(scene, x, y, texture, color){
         super(scene, x, y, texture)
         this.colorLightBullet = color;
-        this.scene.add.existing(this);
     }
 
     createBullet(){

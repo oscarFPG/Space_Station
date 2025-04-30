@@ -27,6 +27,7 @@ export default class BaseEnemy extends BaseActor {
         this.body.setCollideWorldBounds(true)
 
         this._enemyParameters.weapon = this.add_weapon()
+        this._enemyParameters.weapon.setPipeline('Light2D');
         this.add(this._enemyParameters.weapon)
     }
 
