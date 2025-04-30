@@ -35,6 +35,7 @@ export default class Builder {
 
     // Objetos
     static OBJ_VIDA = 'objVida'
+    static OBJ_MONEDA = 'objMoneda'
     static OBJ_ESCUDO = 'objEscudo'
     static OBJ_BATERIA = 'objBateria'
     static OBJ_NOTA = 'objNota'

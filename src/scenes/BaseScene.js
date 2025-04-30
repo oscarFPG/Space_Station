@@ -167,7 +167,7 @@ export default class BaseScene extends Phaser.Scene {
                 this._finalPosition = { x: object.x, y: object.y }
             }
             else if(object.type === 'BlueLightPoint') {
-                this.lights.addLight(object.x, object.y, 1250, 0xFFFFFF, 1.75)
+                this.lights.addLight(object.x, object.y, 1250, 0xFFFFFF, 1.35)
             }
             else if(object.type === 'Console'){
                 const laserID = object.properties[0].value

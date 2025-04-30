@@ -29,6 +29,7 @@ import Explode from '../../assets/effects/explode.png'
 // Mapas
 import TilemapImage from '../../assets/blocks/Tilemap2.png'
 import Map from '../../assets/maps/map1.json'
+import LobbyMap from '../../assets/maps/lobby.json'
 import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 import Level1Map from '../../assets/maps/Level1.json'
 import Level2Map from '../../assets/maps/Level2.json'
@@ -41,6 +42,7 @@ import laserUp from '../../assets/objects/laser_2.png'
 import laserDown from '../../assets/objects/laser_1.png'
 import HEALTH from '../../assets/objects/healthItem.png'
 import SHIELD from '../../assets/objects/shieldItem.png'
+import COIN from '../../assets/objects/coin.png'
 import AMMO_BOX_BASE_PISTOL from '../../assets/objects/basePistolAmmoBox.png'
 import BATTERY from '../../assets/objects/batteryItem.png'
 import BATTERY_STRUCTURE_FULL from '../../assets/objects/full_dispensator.png'
@@ -96,6 +98,7 @@ export default class Boot extends BaseScene {
         // Objetos
         this.load.image(Builder.OBJ_VIDA, HEALTH)
         this.load.image(Builder.OBJ_ESCUDO, SHIELD)
+        this.load.image(Builder.OBJ_MONEDA, COIN)
         this.load.image(Builder.OBJ_AMMO_BOX_BASE, AMMO_BOX_BASE_PISTOL)
         this.load.image(Builder.OBJ_BATERIA, BATTERY)
         this.load.image(Builder.OBJ_NOTA, Note)
@@ -121,6 +124,7 @@ export default class Boot extends BaseScene {
         
         // Mapas
         this.load.tilemapTiledJSON('map', Map)
+        this.load.tilemapTiledJSON('map_lobby', LobbyMap)
         this.load.tilemapTiledJSON('map_tutorial', TutorialMap)
         this.load.tilemapTiledJSON('map_level_1', Level1Map)
         this.load.tilemapTiledJSON('map_level_2', Level2Map)
@@ -180,7 +184,7 @@ export default class Boot extends BaseScene {
 
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
-            this.scene.switch('Level2', 'boot')
+            this.scene.switch('Lobby', 'boot')
         }   
     }
 

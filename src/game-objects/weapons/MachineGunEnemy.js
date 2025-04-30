@@ -12,7 +12,7 @@ export default class MachineGunEnemy extends RangeWeapon {
         // Gun config
         this._specs.name = 'Red pistol'
         this._specs.damage = MachineGunEnemy.MACHINE_GUN_DAMAGE;
-        this._specs.bulletSpeed = 666;
+        this._specs.bulletSpeed = 620;
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;

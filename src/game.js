@@ -1,6 +1,7 @@
 import Boot from './scenes/boot.js'
 import Settings from './scenes/Settings.js';
 import Store from './scenes/store.js';
+import Lobby from './scenes/Lobby.js'
 import Tutorial from './scenes/tutorial.js'
 import Level1 from './scenes/Level1.js'
 import Level2 from './scenes/Level2.js'
@@ -19,7 +20,7 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ Boot, Tutorial, Level1, Level2, Level3, Store, Settings,VolumeSettings],
+    scene: [ Boot, Tutorial, Level1, Level2, Level3, Lobby, Store, Settings,VolumeSettings],
     physics: {
         default: 'arcade',
         arcade: {

@@ -151,8 +151,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":45.6363,
-                 "y":365.818
+                 "x":93.6363000000001,
+                 "y":409.818
                 }, 
                 {
                  "height":53.5624,
@@ -1676,8 +1676,8 @@
                  "type":"AmmoBox",
                  "visible":true,
                  "width":111,
-                 "x":2776.5,
-                 "y":219.5
+                 "x":2772.5,
+                 "y":231.5
                 }, 
                 {
                  "gid":28,
@@ -1696,6 +1696,24 @@
                  "width":111,
                  "x":1212.90909090909,
                  "y":437.772727272727
+                }, 
+                {
+                 "gid":20,
+                 "height":111,
+                 "id":96,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"HealthKit",
+                 "visible":true,
+                 "width":111,
+                 "x":2670.5,
+                 "y":224.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1704,7 +1722,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":96,
+ "nextobjectid":97,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

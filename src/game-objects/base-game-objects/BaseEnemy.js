@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import BaseActor from './BaseActor';
 
-
 export default class BaseEnemy extends BaseActor {
      
     // Atributos
