@@ -11,6 +11,7 @@ export default class Builder {
     static WEAPON_OLD_COLT = 'weaponOldColt'
     static WEAPON_PISTOLA_BASE = 'weapon1'
     static ENEMY_WEAPON_PISTOLA_BASE = 'weapon1Enemy'
+    static ENEMY_WEAPON_MACHINE_GUN = 'weapon2Enemy'
     static WEAPON_2 = 'weapon2'
     static WEAPON_3 = 'weapon3'
     static WEAPON_4 = 'weapon4'

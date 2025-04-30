@@ -481,6 +481,11 @@
                          "value":1
                         }, 
                         {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -512,6 +517,11 @@
                          "name":"ID",
                          "type":"int",
                          "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"isStatic",
@@ -547,6 +557,11 @@
                          "value":1
                         }, 
                         {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -578,6 +593,11 @@
                          "name":"ID",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"isStatic",
@@ -858,8 +878,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":2388.75,
-                 "y":1277
+                 "x":2385.75,
+                 "y":830
                 }, 
                 {
                  "gid":22,
@@ -932,12 +952,12 @@
          "columns":8,
          "firstgid":1,
          "image":"..\/blocks\/Tilemap2.png",
-         "imageheight":444,
+         "imageheight":555,
          "imagewidth":888,
          "margin":0,
          "name":"Tilemap2",
          "spacing":0,
-         "tilecount":32,
+         "tilecount":40,
          "tileheight":111,
          "tilewidth":111
         }],

@@ -4,7 +4,7 @@ import Object from "../base-game-objects/Object";
 
 export default class Shield extends Object {
 
-    static AUMENTO_ESCUDO = 5
+    static AUMENTO_ESCUDO = 7.5;
 
     constructor(scene, x, y) {
         super(scene, x, y, Builder.OBJ_ESCUDO)

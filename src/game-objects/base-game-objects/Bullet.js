@@ -1,6 +1,4 @@
 import Phaser from 'phaser';
-import Options from '../../managers/Options.js';
-
 
 export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
@@ -58,8 +56,10 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     fire(x, y, angle, speed) {
 
-        const options = Options.get_instance();
-        options.playSound(this.scene, 'gun_sound', { isMusic: false, volume: 1.0 });
+        const gunSound = this.scene.sound.add('gun_sound');
+        gunSound.setVolume(0.1);
+        gunSound.play();
+
         this.setPosition(x, y);
         this.setRotation(angle);
         this.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
@@ -68,6 +68,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     // Sobrescribimos preUpdate para actualizar la posición de la luz
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
+
         if (this.light) {
             this.light.x = this.x;
             this.light.y = this.y;

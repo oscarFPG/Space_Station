@@ -170,7 +170,7 @@ export default class Player extends BaseActor {
 				alpha: 0,
 				duration: 500,
 				onComplete: () => {
-				  this.scene.scene.restart()	// TODO - Modificar a: llevar al lobby
+				  this.scene.gameOver()	// TODO - Modificar a: llevar al lobby
 				}
 			  });	
 		}

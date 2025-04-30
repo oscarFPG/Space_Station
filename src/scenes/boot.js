@@ -8,12 +8,14 @@ import BaseScene from './BaseScene.js'
 import CharacterIdle from '../../assets/sprites/idle_player_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
+import TwoEnemyIdle from '../../assets/sprites/idle_2enemy_new.png'
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
 
 // Armas
 import OLD_COLT from '../../assets/weapons/OldColt.png'
 import ENEMY_WEAPON from '../../assets/weapons/weapon1_enemy.png'
+import ENEMY_2WEAPON from '../../assets/weapons/weapon2_enemy.png'
 import PISTOLA_BASE from '../../assets/weapons/weapon1.png'
 import WEAPON_2 from '../../assets/weapons/weapon2.png'
 import WEAPON_3 from '../../assets/weapons/weapon3.png'
@@ -77,6 +79,7 @@ export default class Boot extends BaseScene {
         // Armas
         this.load.image(Builder.WEAPON_OLD_COLT, OLD_COLT)
         this.load.image(Builder.ENEMY_WEAPON_PISTOLA_BASE, ENEMY_WEAPON)
+        this.load.image(Builder.ENEMY_WEAPON_MACHINE_GUN, ENEMY_2WEAPON)
         this.load.image(Builder.WEAPON_PISTOLA_BASE, PISTOLA_BASE)
         this.load.image(Builder.WEAPON_2, WEAPON_2)
         this.load.image(Builder.WEAPON_3, WEAPON_3)
@@ -130,6 +133,7 @@ export default class Boot extends BaseScene {
         this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 })
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('2enemyIdle', TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC)
@@ -173,7 +177,7 @@ export default class Boot extends BaseScene {
 
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
-            this.scene.switch('Level3', 'boot')
+            this.scene.switch('Level1', 'boot')
         }   
     }
 

@@ -2,26 +2,25 @@ import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 import ClassIA from '../../factories/ClassIA.js';
 import WeaponFactory from '../../factories/WeaponFactory.js';
 
-export default class ExtendedEnemy extends BasedEnemy {
+export default class Extended2Enemy extends BasedEnemy {
 
-    static BASE_ENEMY_TEXTURE = 'enemyIdle';
+    static BASE_ENEMY_TEXTURE = '2enemyIdle';
 
-    static VIDA = 25
-    static SPEED = 10
+    static VIDA = 60
+    static SPEED = 8
 
     constructor(scene, x, y){
-        super(scene, x, y, {texture: ExtendedEnemy.BASE_ENEMY_TEXTURE, x: 30, y: 30}, ExtendedEnemy.VIDA, ExtendedEnemy.SPEED)
+        super(scene, x, y, {texture: Extended2Enemy.BASE_ENEMY_TEXTURE, x: 30, y: 30}, Extended2Enemy.VIDA, Extended2Enemy.SPEED)
 
-        this.config_animacion('enemy_idle', ExtendedEnemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
-        this._sprite.play('enemy_idle')
-
+        this.config_animacion('enemy_2idle', Extended2Enemy.BASE_ENEMY_TEXTURE, 0, 2, 6)
+        this._sprite.play('enemy_2idle')
 
         // Propiedades de la IA
         this._enemyParameters.state = 'patrol';
 
         this._enemyParameters.minDistance = 150; 
-        this._enemyParameters.visionRange = 900          
-        this._enemyParameters.shootingRange = 740;             
+        this._enemyParameters.visionRange = 2400          
+        this._enemyParameters.shootingRange = 850;             
         this._enemyParameters.direction = new Phaser.Math.Vector2(1, 0); 
 
         // Propiedades para el dodge(IA)
@@ -36,7 +35,7 @@ export default class ExtendedEnemy extends BasedEnemy {
     }
 
     add_weapon(){
-        return WeaponFactory.crearArma(WeaponFactory.BASE_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
+        return WeaponFactory.crearArma(WeaponFactory.MACHINE_GUN_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
     }
 
 }
