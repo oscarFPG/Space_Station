@@ -90,5 +90,8 @@ export default class RangeWeapon extends Weapon {
     getBulletsFromClip(){
         return this._ammo.currentClipAmmo
     }
+    setAmmo(ammo){
+        this._ammo.currentClipAmmo = ammo
+    }
 
 }

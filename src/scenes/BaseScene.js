@@ -15,6 +15,7 @@ import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
 import EnemyFactory from '../factories/EnemyFactory.js';
+import WeaponFactory from '../factories/WeaponFactory.js';
 import Battery from '../game-objects/objects/Battery.js'
 
 
@@ -34,6 +35,16 @@ export default class BaseScene extends Phaser.Scene {
 
     // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
     // SIEMPRE esta funcion con super.create()
+
+    init(data) {
+        this.playerHealth   = data.health;
+        this.playerShield   = data.shield;
+        this.playerMoney    = data.money;
+        this.playerWeapon1  = data.weapon1;
+        this.playerWeapon2  = data.weapon2;
+
+        this._isTransitioning = false;
+    }
     create(map, tileset, nextScene){
 
         if(map == null || tileset == null)
@@ -50,6 +61,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaEscudos = []
         this.listaVidas = []
         this.listaBaterias = []
+        this.listaMonedas = []
         this.listaMunicionBase = []
 
 
@@ -98,7 +110,8 @@ export default class BaseScene extends Phaser.Scene {
                 repeat: 0
             })
         }
-
+        this.cameras.main
+            .fadeIn(700, 0, 0, 0);
         //this.scene.launch('')
     }
 
@@ -110,7 +123,13 @@ export default class BaseScene extends Phaser.Scene {
                 this._finalPosition.x, this._finalPosition.y
             )
             if (distance < 100 && this._nextScene) { 
-                this.scene.switch(this._nextScene, { player: this._player })
+                const status = this._player.getPlayerStatus()
+                this.scene.start(this._nextScene, status);
+                //Efecto 
+                this.cameras.main.once('camerafadeoutcomplete', () => {
+                    this.scene.start(this._nextScene, status);
+                });
+                this.cameras.main.fadeOut(700, 0, 0, 0);
             }
         }
         this.listaPuertas.forEach(door => {
@@ -141,7 +160,23 @@ export default class BaseScene extends Phaser.Scene {
         // Se obtiene el jugador que proviene del Manager
         const objectLayer = map.getObjectLayer('objects')
         const playerRespawnPosition = objectLayer.objects.find(objecto => objecto.type === 'PlayerRespawn')
-        this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y)
+        this.firstWeapon = null
+        if (this.playerWeapon1) {
+            this.firstWeapon = WeaponFactory.crearArma(this.playerWeapon1.key, this, this.playerWeapon1.offset);
+            this.firstWeapon.setAmmo(this.playerWeapon1.ammo);
+        }
+        this.secondWeapon = null;
+        if (this.playerWeapon2) {
+            this.secondWeapon = WeaponFactory.crearArma(this.playerWeapon2.key, this, this.playerWeapon2.offset);
+            this.secondWeapon.setAmmo(this.playerWeapon2.ammo);
+        }
+        this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y,
+            this.playerHealth,
+            this.playerShield,
+            this.playerMoney,
+            this.firstWeapon,
+            this.secondWeapon
+        )
         this.crearColliderConSuelo(this._player)
         this.crearColliderConPared(this._player)
 
@@ -217,6 +252,11 @@ export default class BaseScene extends Phaser.Scene {
             else if(object.type == 'AmmoBox'){
                 const ammoObject = new AmmoBoxBaseBullet(this, object.x + 55, object.y - 55)
                 this.listaMunicionBase.push(ammoObject);
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
+            else if(object.type == 'Coin'){
+                const coinObject = new Coin(this, object.x + 55, object.y - 55, null)
+                this.listaMonedas.push(coinObject);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type === '' /* TODO - Incluir tipo para la tienda */){
@@ -307,9 +347,9 @@ export default class BaseScene extends Phaser.Scene {
         return this._player
     }
 
-    config_jugador(x, y) {
+    config_jugador(x, y, health, shield, money, firstWeapon, secondaryWeapon) {
 
-        var player = new Player(this, x, y)
+        var player = new Player(this, x, y, health, shield, money, firstWeapon, secondaryWeapon)
         player.body.setCollideWorldBounds(true)
         player.body.setImmovable(true)
         return player

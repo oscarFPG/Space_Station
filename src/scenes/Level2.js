@@ -12,7 +12,6 @@ export default class Level2 extends BaseScene {
         var map = this.make.tilemap({ key: 'map_level_2', tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
         super.create(map, tileset, 'Level3')
-        //this._nextScene = 'Level2';
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
             delay: 2000,

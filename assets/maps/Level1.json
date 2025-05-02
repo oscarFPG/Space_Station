@@ -1255,6 +1255,24 @@
                  "width":111,
                  "x":2328.66666666667,
                  "y":3220.33333333333
+                }, 
+                {
+                 "gid":23,
+                 "height":111,
+                 "id":78,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":100
+                        }],
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":111,
+                 "x":495.166666666666,
+                 "y":300.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1263,7 +1281,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":78,
+ "nextobjectid":79,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

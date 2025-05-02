@@ -22,7 +22,8 @@ export default class Builder {
     static WEAPON_2 = 'weapon2'
     static WEAPON_3 = 'weapon3'
     static WEAPON_4 = 'weapon4'
-    static WEAPON_TURRENT = 'weaponTurret'
+    static WEAPON_TURRET = 'weaponTurret'
+    static WEAPON_SLOWED_TURRET = 'weaponSlowedTurret'
 
     // Proyectiles
     static AMMO_BASE = 'municionBase'
