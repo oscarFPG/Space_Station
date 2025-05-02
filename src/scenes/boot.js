@@ -11,6 +11,7 @@ import BaseScene from './BaseScene.js'
 import CharacterIdle from '../../assets/sprites/idle_player_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
+import SellerIdle from '../../assets/sprites/idle_ia_seller.png'
 import TwoEnemyIdle from '../../assets/sprites/idle_2enemy_new.png'
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
@@ -152,6 +153,7 @@ export default class Boot extends BaseScene {
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
         this.load.spritesheet('2enemyIdle', TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('sellerIdle', SellerIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC)
@@ -202,7 +204,7 @@ export default class Boot extends BaseScene {
                 weapon1: null,
                 weapon2: null
               };
-            this.scene.switch('tutorial', status)
+            this.scene.switch('Lobby', status)
         }   
     }
 }

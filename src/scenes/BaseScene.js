@@ -6,6 +6,7 @@ import BaseGroup from '../game-objects/objects/BaseGroup.js'
 import Note from '../game-objects/objects/Note.js'
 import Console from '../game-objects/objects/Console.js'
 import Laser from '../game-objects/objects/Laser.js'
+import Seller from '../game-objects/objects/Seller.js'
 import Health from '../game-objects/objects/Health.js'
 import Shield from '../game-objects/objects/Shield.js'
 import Coin from '../game-objects/objects/Coin.js'
@@ -63,6 +64,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaBaterias = []
         this.listaMonedas = []
         this.listaMunicionBase = []
+        this.listaVendedores = []
 
 
         // Capas de todos los niveles
@@ -132,6 +134,9 @@ export default class BaseScene extends Phaser.Scene {
                 this.cameras.main.fadeOut(700, 0, 0, 0);
             }
         }
+        this.listaVendedores.forEach(vendedor => {
+            vendedor.update();
+        });
         this.listaPuertas.forEach(door => {
             door.update();
         });
@@ -257,6 +262,11 @@ export default class BaseScene extends Phaser.Scene {
             else if(object.type == 'Coin'){
                 const coinObject = new Coin(this, object.x + 55, object.y - 55, null)
                 this.listaMonedas.push(coinObject);
+                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
+            }
+            else if(object.type == 'Seller'){
+                const seller = new Seller(this, object.x + 55, object.y - 55, null)
+                this.listaVendedores.push(seller);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
             else if(object.type === '' /* TODO - Incluir tipo para la tienda */){

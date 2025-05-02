@@ -78,7 +78,6 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         else{
 			this._sprite.setTintFill(0xff2020)	// Rojo
         }
-
         this.scene.time.delayedCall(80, () => {
 			this._sprite.clearTint();
 		});

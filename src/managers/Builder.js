@@ -12,7 +12,9 @@ export default class Builder {
     static BASE_ENEMY_TEXTURE = 'enemyIdle';
     static ENEMY2_TEXTURE = '2enemyIdle';
     static BASE_TURRET_TEXTURE = 'turretBase';
-   
+
+    // Animacion del vendedor
+    static SELLER_IDLE_ANIMATION = 'sellerIdle'
    
     // Armas
     static WEAPON_OLD_COLT = 'weaponOldColt'
