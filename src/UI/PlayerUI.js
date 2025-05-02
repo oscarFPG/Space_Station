@@ -16,23 +16,26 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
     static POS_Y_VIDA = 46;
     static POS_Y_ESCUDO = 14;
     static POS_X_MONEDAS = 32;
-    static POS_Y_MONEDAS = 75;
+    static POS_Y_MONEDAS = 80;
+    static POS_X_BATERIAS = 42;
+    static POS_Y_BATERIAS = 120;
+    
     static POS_X_BALAS = 30;
     static POS_Y_BALAS = 700;
 
-    static COLOR_BARRA_VIDA = 0xff0000;
-    static COLOR_BARRA_ESCUDO = 0x00007a;
+    static COLOR_BARRA_VIDA = 0xffffff; 
+    static COLOR_BARRA_ESCUDO = 0x00ffff;
     static COLOR_BARRA_VACIA = 0xffffff;
 
     static DIMENSION_TEXTO = 25;
 
 
-    constructor(scene, maxHealth, maxEscudo, dineroInicial){
+    constructor(scene, maxHealth, maxEscudo, dineroInicial, bateriasIniciales){
 
         super(scene, 0, 0)
         this.scene.add.existing(this);
         this.setPosition(PlayerUI.UI_MARGIN_X, PlayerUI.UI_MARGIN_Y)
-        this.setDepth(11)
+        this.setDepth(1)
 
         this._MAX_VIDA = maxHealth;
         this._MAX_ESCUDO = maxEscudo;
@@ -43,6 +46,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         this._puntosDeVida = this.crear_barra_vida()
         this._puntosDeEscudo = this.crear_barra_escudo()
+        this._contadorBaterias = this.crear_contador_baterias(bateriasIniciales)
         this._contadorMonedas = this.crear_contador_monedas(dineroInicial)
         this._contadorBalas = this.crear_contador_balas()
         
@@ -85,18 +89,35 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
     crear_contador_monedas(dineroInicial){
 
-        const offsetX = 35
-        const offsetY = 8
+        const offsetX = 37.75
+        const offsetY = 12
 
         const monedas = this.scene.add.container(PlayerUI.POS_X_MONEDAS, PlayerUI.POS_Y_MONEDAS)
-        const cantidad = this.scene.add.text(0, 0, dineroInicial)
-        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'coinIcon').setScale(0.8).setOrigin(1.1, 0.55)
+        const cantidad = this.scene.add.text(-8, -3, dineroInicial)
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'coinIcon').setScale(0.72).setOrigin(1.1, 0.55)
 
         monedas.setScrollFactor(0)
         monedas.addAt(cantidad, 0)
         monedas.addAt(sprite, 1)
 
         return monedas
+    }
+
+    crear_contador_baterias(bateriasIniciales){
+
+        const offsetX = 35.75
+        const offsetY = 15
+
+        const baterias = this.scene.add.container(PlayerUI.POS_X_BATERIAS, PlayerUI.POS_Y_BATERIAS)
+        const cantidad = this.scene.add.text(-17.75, -5, bateriasIniciales)
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'batteryIcon').setScale(0.55).setOrigin(1.1, 0.55)
+
+        baterias.setScrollFactor(0)
+        baterias.addAt(cantidad, 0)
+        baterias.addAt(sprite, 1)
+        baterias.setDepth(11)
+
+        return baterias
     }
 
     crear_contador_balas(){
@@ -122,25 +143,28 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return balas
     }
 
-    actualizar_UI(vidaActual, escudoActual, dineroActual, balasCargador, balasReserva){
+    actualizar_UI(vidaActual, escudoActual, dineroActual, bateriasActuales, balasCargador, balasReserva){
 
         const porcentajeVida = Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1)
         const porcentajeEscudo = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
-        const cantidad = this.scene.add.text(0, 0, dineroActual)
-        
         // Vida y escudo
         this._puntosDeVida.scaleX = porcentajeVida
         this._puntosDeEscudo.scaleX = porcentajeEscudo
 
-        // Monedas
+                // Monedas
         this._contadorMonedas.getAt(0).destroy()
-        this._contadorMonedas.addAt(cantidad, 0)
+        const cantidadMonedas = this.scene.add.text(-2, 0, `${dineroActual} $`)
+        this._contadorMonedas.addAt(cantidadMonedas, 0)
+
+        // Baterías
+        this._contadorBaterias.getAt(0).destroy()
+        const cantidadBaterias = this.scene.add.text(-1.8, -0, `${bateriasActuales} Cells`)
+        this._contadorBaterias.addAt(cantidadBaterias, 0)
 
         // Balas
         this._contadorBalas.getFirst().destroy()
         this._contadorBalas.getFirst().destroy()
         this._contadorBalas.getFirst().destroy()
-
 
 
         const cargador = this.scene.add.text(0, 0, balasCargador)

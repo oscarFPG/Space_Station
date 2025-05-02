@@ -66,6 +66,9 @@ export default class BaseScene extends Phaser.Scene {
         this.listaMunicionBase = []
         this.listaVendedores = []
 
+        //Capa de todos los textos del nivel
+        this.uiLayer = this.add.layer();
+        this.uiLayer.setDepth(1000); // Profundidad muy alta
 
         // Capas de todos los niveles
         this._layerSuelo = map.createLayer(BaseScene.LAYER_SUELO, tileset, 0, 0)

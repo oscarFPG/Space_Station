@@ -61,6 +61,7 @@ import TURRET_BASE from '../../assets/objects/turret_base_.png'
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
 import COIN_ICON from '../../assets/objects/Coin.png'
+import BATTERY_ICON from '../../assets/objects/BatteryItem.png'
 
 // Imagenes
 import FRONT from '../../assets/images/portada.png'
@@ -132,6 +133,7 @@ export default class Boot extends BaseScene {
         // UI
         this.load.image('playerUI', PlayerHealth)
         this.load.image('coinIcon', COIN_ICON)
+        this.load.image('batteryIcon', BATTERY_ICON)
         
         // Mapas
         this.load.tilemapTiledJSON('map', Map)
@@ -204,7 +206,7 @@ export default class Boot extends BaseScene {
                 weapon1: null,
                 weapon2: null
               };
-            this.scene.switch('Lobby', status)
+            this.scene.switch('tutorial', status)
         }   
     }
 }

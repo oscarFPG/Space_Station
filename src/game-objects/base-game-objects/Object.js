@@ -33,7 +33,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         this._textoInteraccion.setDepth(12)
         this._textoInteraccion.setVisible(false)
 
-        this.scene.add.existing(this._textoInteraccion)
+        this.scene.add.text(0, 0, this._textoInteraccion)
     }
 
 

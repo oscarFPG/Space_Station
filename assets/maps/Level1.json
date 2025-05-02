@@ -461,7 +461,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"Number 9 in binary"
+                         "value":"The code is the number 9 in binary.(Example: number 4 in binary is 100)"
                         }],
                  "rotation":0,
                  "type":"Note",

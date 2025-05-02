@@ -94,7 +94,7 @@ export default class Console extends Object {
 			.text(panelX + 120, panelY - 100, 'X', {
 			fontSize: '24px',
 			fill: '#fff',
-			backgroundColor: '#aa0000'
+			backgroundColor: '#009c9c'
 			})
 			.setPadding(5)
 			.setOrigin(0.5)
@@ -151,7 +151,7 @@ export default class Console extends Object {
 			.text(panelX - 50, panelY + 140, 'Delete', {
 			fontSize: '20px',
 			fill: '#fff',
-			backgroundColor: '#aa0000'
+			backgroundColor: '#777'
 			})
 			.setPadding(10)
 			.setOrigin(0.5)
@@ -168,7 +168,7 @@ export default class Console extends Object {
 			.text(panelX + 50, panelY + 140, 'Enter', {
 			fontSize: '20px',
 			fill: '#fff',
-			backgroundColor: '#00aa00'
+			backgroundColor: '#009c9c'
 			})
 			.setPadding(10)
 			.setOrigin(0.5)

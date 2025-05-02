@@ -47,7 +47,7 @@ export default class Player extends BaseActor {
 		this.scene.events.on('postupdate', this.updateWeapon, this)
 
 		// Interfaz del personaje
-		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL)
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL, Player.BATERIA_INICIAL)
 
 		// Añadir al container
 		this.add(this._weapon)
@@ -116,6 +116,7 @@ export default class Player extends BaseActor {
 			this._atributos.vida, 
 			this._escudo, 
 			this._dinero, 
+			this._baterias,
 			this._weapon.getBulletsFromClip(),
 			this.getCountAmmoType(this._armaEquipada._ammo.type)
 		)
