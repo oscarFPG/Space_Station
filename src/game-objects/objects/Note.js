@@ -52,16 +52,15 @@ export default class Note extends Object {
 			windowX, windowY, 
 			this._noteText,
 			{ fontSize: '14px', fill: '#fff', wordWrap: { width: 200 } }
-		)
+		) 
 		noteText.setOrigin(0.5)
-
 		// Guardar llamada de cerrado automatico
 		this.delayedClose = this.scene.time.delayedCall(Note.AUTO_CLOSING_TIME, () => {
 			this.closeNoteWindow()
 		})
-
 		
 		this.noteElements = [windowBg, noteText]
+		this.scene.uiLayer.add(this.noteElements);
 	}
 
 	closeNoteWindow() {

@@ -22,9 +22,6 @@ export default class AmmoBoxBaseBullet extends Object {
 
         this._textoInteraccion.setVisible(true)
         this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
-
-        if(player.isFullHealth())
-            return
         
         this.accion(player)
     }

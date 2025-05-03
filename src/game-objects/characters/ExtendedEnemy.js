@@ -2,11 +2,13 @@ import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 import ClassIA from '../../factories/ClassIA.js';
 import Builder from '../../managers/Builder.js';
 import WeaponFactory from '../../factories/WeaponFactory.js';
+import Coin from '../objects/Coin.js'
 
 export default class ExtendedEnemy extends BasedEnemy {
 
-    static VIDA = 25
+    static VIDA = 30
     static SPEED = 10
+    static VALUE_COIN_DROPPED = 25
 
     constructor(scene, x, y){
         super(scene, x, y, {texture: Builder.BASE_ENEMY_TEXTURE, x: 30, y: 30}, ExtendedEnemy.VIDA, ExtendedEnemy.SPEED)
@@ -32,9 +34,13 @@ export default class ExtendedEnemy extends BasedEnemy {
     preUpdate(time, delta) {
         ClassIA.buscaJugador(time, this, this.scene._player);
     }
-
+    
     add_weapon(){
         return WeaponFactory.crearArma(WeaponFactory.BASE_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
+    }
+
+    dropCoin() {
+        return new Coin(this.scene, this.x + 25 , this.y + 25, ExtendedEnemy.VALUE_COIN_DROPPED)
     }
 
 }

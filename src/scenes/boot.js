@@ -1,6 +1,9 @@
 import Phaser from 'phaser'
 import Builder from '../managers/Builder.js'
 
+//Personaje Principal
+import Player from '../game-objects/characters/Player.js'
+
 // Escenas
 import BaseScene from './BaseScene.js'
 
@@ -8,6 +11,7 @@ import BaseScene from './BaseScene.js'
 import CharacterIdle from '../../assets/sprites/idle_player_new.png'
 import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
+import SellerIdle from '../../assets/sprites/idle_ia_seller.png'
 import TwoEnemyIdle from '../../assets/sprites/idle_2enemy_new.png'
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
@@ -29,10 +33,12 @@ import Explode from '../../assets/effects/explode.png'
 // Mapas
 import TilemapImage from '../../assets/blocks/Tilemap2.png'
 import Map from '../../assets/maps/map1.json'
+import LobbyMap from '../../assets/maps/lobby.json'
 import TutorialMap from '../../assets/maps/tutorial_mapa.json'
 import Level1Map from '../../assets/maps/Level1.json'
 import Level2Map from '../../assets/maps/Level2.json'
 import Level3Map from '../../assets/maps/Level3.json'
+import Level4Map from '../../assets/maps/Level4.json'
 
 // Objetos 
 import Note from '../../assets/objects/paper.png'
@@ -41,6 +47,7 @@ import laserUp from '../../assets/objects/laser_2.png'
 import laserDown from '../../assets/objects/laser_1.png'
 import HEALTH from '../../assets/objects/healthItem.png'
 import SHIELD from '../../assets/objects/shieldItem.png'
+import COIN from '../../assets/objects/coin.png'
 import AMMO_BOX_BASE_PISTOL from '../../assets/objects/basePistolAmmoBox.png'
 import BATTERY from '../../assets/objects/batteryItem.png'
 import BATTERY_STRUCTURE_FULL from '../../assets/objects/full_dispensator.png'
@@ -54,6 +61,7 @@ import TURRET_BASE from '../../assets/objects/turret_base_.png'
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
 import COIN_ICON from '../../assets/objects/Coin.png'
+import BATTERY_ICON from '../../assets/objects/BatteryItem.png'
 
 // Imagenes
 import FRONT from '../../assets/images/portada.png'
@@ -70,6 +78,11 @@ import SUCCESS from '../../audio/effects/acierto.mp3'
 
 
 export default class Boot extends BaseScene {
+    static PLAYER_VIDA_INICIAL = 20
+	static PLAYER_ESCUDO_INICIAL = 15
+	static PLAYER_DINERO_INICIAL = 0
+	static PLAYER_BATERIA_INICIAL = 0
+	static PLAYER_SPEED = 200
 
     constructor(){
         super('boot')
@@ -85,7 +98,8 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.WEAPON_2, WEAPON_2)
         this.load.image(Builder.WEAPON_3, WEAPON_3)
         this.load.image(Builder.WEAPON_4, WEAPON_4)
-        this.load.image(Builder.WEAPON_TURRENT, TURRET_WEAPON)
+        this.load.image(Builder.WEAPON_TURRET, TURRET_WEAPON)
+        this.load.image(Builder.WEAPON_SLOWED_TURRET, TURRET_WEAPON)
 
         // Proyectiles
         this.load.image(Builder.AMMO_BASE, BASE_BULLET)
@@ -96,6 +110,7 @@ export default class Boot extends BaseScene {
         // Objetos
         this.load.image(Builder.OBJ_VIDA, HEALTH)
         this.load.image(Builder.OBJ_ESCUDO, SHIELD)
+        this.load.image(Builder.OBJ_MONEDA, COIN)
         this.load.image(Builder.OBJ_AMMO_BOX_BASE, AMMO_BOX_BASE_PISTOL)
         this.load.image(Builder.OBJ_BATERIA, BATTERY)
         this.load.image(Builder.OBJ_NOTA, Note)
@@ -118,14 +133,17 @@ export default class Boot extends BaseScene {
         // UI
         this.load.image('playerUI', PlayerHealth)
         this.load.image('coinIcon', COIN_ICON)
+        this.load.image('batteryIcon', BATTERY_ICON)
         
         // Mapas
         this.load.tilemapTiledJSON('map', Map)
+        this.load.tilemapTiledJSON('map_lobby', LobbyMap)
         this.load.tilemapTiledJSON('map_tutorial', TutorialMap)
         this.load.tilemapTiledJSON('map_level_1', Level1Map)
         this.load.tilemapTiledJSON('map_level_2', Level2Map)
         this.load.tilemapTiledJSON('map_level_3', Level3Map)
-        
+        this.load.tilemapTiledJSON('map_level_4', Level4Map)
+
         // Tilesets
         this.load.image('tiles', TilemapImage)
 
@@ -137,6 +155,7 @@ export default class Boot extends BaseScene {
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
         this.load.spritesheet('2enemyIdle', TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('sellerIdle', SellerIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
         this.load.audio('mainMenuMusic', MAINMENU_MUSIC)
@@ -180,8 +199,14 @@ export default class Boot extends BaseScene {
 
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
-            this.scene.switch('Level2', 'boot')
+            const status = {
+                health:  Boot.PLAYER_VIDA_INICIAL,
+                shield: Boot.PLAYER_ESCUDO_INICIAL,
+                money: Boot.PLAYER_DINERO_INICIAL,
+                weapon1: null,
+                weapon2: null
+              };
+            this.scene.switch('tutorial', status)
         }   
     }
-
 }

@@ -14,22 +14,22 @@ export default class Player extends BaseActor {
 
 	static WEAPON_OFFSET = { x: 35, y: 54 }
 
-	constructor(scene, x, y) {
-		super(scene, x, y, {texture: Builder.IDLE_ANIMATION, x: 30, y: 30}, Player.VIDA_INICIAL, Player.SPEED)
+	constructor(scene, x, y, health, shield, money, firstWeapon, secondaryWeapon) {
+		super(scene, x, y, {texture: Builder.IDLE_ANIMATION, x: 30, y: 30}, health, Player.SPEED)
 		
 		this.body.setSize(66, 73)
 		this.body.setCollideWorldBounds(true)
         this.body.setImmovable(true)
 
 		// Atributos del jugador
-		this._escudo = Player.ESCUDO_INICIAL
-		this._dinero = Player.DINERO_INICIAL
+		this._escudo = shield
+		this._dinero = money
 		this._baterias = Player.BATERIA_INICIAL
 
 		// Configuracion del arma
-		this._weapon = this.#config_arma()
-		this._armaEquipada = this._weapon
-		this._secondaryWeapon = null
+		this._weapon = (firstWeapon == null) ? this.#config_arma(WeaponFactory.BASE_WEAPON): firstWeapon
+		this._secondaryWeapon = secondaryWeapon
+		this._armaEquipada = this._weapon 
 		
 		// Configuracion de controles
 		this.#config_controles()
@@ -47,12 +47,15 @@ export default class Player extends BaseActor {
 		this.scene.events.on('postupdate', this.updateWeapon, this)
 
 		// Interfaz del personaje
-		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL)
+		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL, Player.BATERIA_INICIAL)
 
 		// Añadir al container
 		this.add(this._weapon)
+		if (this._secondaryWeapon) {
+			this._secondaryWeapon.setVisible(false);
+			this.add(this._secondaryWeapon);
+		  }
 	}
-
 
 	update(time, delta) {
 
@@ -113,6 +116,7 @@ export default class Player extends BaseActor {
 			this._atributos.vida, 
 			this._escudo, 
 			this._dinero, 
+			this._baterias,
 			this._weapon.getBulletsFromClip(),
 			this.getCountAmmoType(this._armaEquipada._ammo.type)
 		)
@@ -241,21 +245,14 @@ export default class Player extends BaseActor {
 	getPlayerStatus(){
 
 		const status = {
-			vida: this._atributos.vida,
-			escudo: this._escudo,
-			dinero: this._dinero,
-			velocidad: this._atributos.speed,
-			armaBase: { /* Guardar aquí las mejoras u otros atributos */ },
-			armaSecundaria: { /* Guardar aquí las mejoras, municion, etc... */ },
-			municion: 
-				{ 
-					pistola: NONE,
-					subfusil: NONE,
-					rifle: NONE,
-					escopeta: NONE,
-					sniper: NONE
-				}
-		}
+			health: this._atributos.vida,
+			shield: this._escudo,
+			money: this._dinero,
+			weapon1: { key: this._weapon._specs.sprite, ammo: this._weapon.getBulletsFromClip(), offset: Player.WEAPON_OFFSET},
+			weapon2: this._secondaryWeapon
+					  ? { key: this._secondaryWeapon._specs.sprite, ammo: this._secondaryWeapon.getBulletsFromClip(), offset: Player.WEAPON_OFFSET}
+					  : null
+		  };
 
 		return status
 	}
@@ -308,9 +305,9 @@ export default class Player extends BaseActor {
 		}, this)
 	}
 
-	#config_arma() {
+	#config_arma(texturaArma) {
 
-		var weapon = WeaponFactory.crearArma(WeaponFactory.BASE_WEAPON, this.scene, Player.WEAPON_OFFSET)
+		var weapon = WeaponFactory.crearArma(texturaArma, this.scene, Player.WEAPON_OFFSET)
 		weapon.setOrigin(0.5, 0.5)
 		weapon.setPipeline('Light2D')
 
@@ -325,8 +322,27 @@ export default class Player extends BaseActor {
 		//this._weapon.setPipeline('')
 	}
 
-	
+	getFirstWeapon() {
+		return this._weapon
+	}
+	getSecondWeapon() {
+		return this._secondaryWeapon
+	}
+	getShield() {
+		return this._escudo
+	}
+	getHealth() {
+		return this._atributos.vida
+	}
+	getSpeed() {
+		return this._atributos.speed
+	}
+	getMoney() { return this._dinero }
 	getBatteries() { return this._baterias }
+	getMoneyDefault() { return Player.DINERO_INICIAL}
+	getShieldDefault() { return Player.ESCUDO_INICIAL }
+	getHealthDefault() { return Player.VIDA_INICIAL }
+	getSpeedDefault() { return Player.SPEED }
 	isFullHealth() { return this._atributos.vida === Player.VIDA_INICIAL }
 	isFullShield() { return this._escudo === Player.ESCUDO_INICIAL }
 	isUseKeyJustPressed(){ return Phaser.Input.Keyboard.JustDown(this.controles.use) }

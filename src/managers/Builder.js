@@ -12,7 +12,9 @@ export default class Builder {
     static BASE_ENEMY_TEXTURE = 'enemyIdle';
     static ENEMY2_TEXTURE = '2enemyIdle';
     static BASE_TURRET_TEXTURE = 'turretBase';
-   
+
+    // Animacion del vendedor
+    static SELLER_IDLE_ANIMATION = 'sellerIdle'
    
     // Armas
     static WEAPON_OLD_COLT = 'weaponOldColt'
@@ -22,7 +24,8 @@ export default class Builder {
     static WEAPON_2 = 'weapon2'
     static WEAPON_3 = 'weapon3'
     static WEAPON_4 = 'weapon4'
-    static WEAPON_TURRENT = 'weaponTurret'
+    static WEAPON_TURRET = 'weaponTurret'
+    static WEAPON_SLOWED_TURRET = 'weaponSlowedTurret'
 
     // Proyectiles
     static AMMO_BASE = 'municionBase'
@@ -35,6 +38,7 @@ export default class Builder {
 
     // Objetos
     static OBJ_VIDA = 'objVida'
+    static OBJ_MONEDA = 'objMoneda'
     static OBJ_ESCUDO = 'objEscudo'
     static OBJ_BATERIA = 'objBateria'
     static OBJ_NOTA = 'objNota'

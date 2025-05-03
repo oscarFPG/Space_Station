@@ -103,9 +103,9 @@
                     },
                  "type":"Text",
                  "visible":true,
-                 "width":450,
-                 "x":-55,
-                 "y":590.052133333333
+                 "width":140,
+                 "x":135.667,
+                 "y":590.719
                 }, 
                 {
                  "height":53.5624,
@@ -123,9 +123,9 @@
                     },
                  "type":"Text",
                  "visible":true,
-                 "width":450,
-                 "x":-44,
-                 "y":368.885466666667
+                 "width":144,
+                 "x":139.333,
+                 "y":365.552
                 }, 
                 {
                  "height":53.5624,
@@ -143,9 +143,9 @@
                     },
                  "type":"Text",
                  "visible":true,
-                 "width":450,
-                 "x":1680.33333333333,
-                 "y":382.2188
+                 "width":131.333,
+                 "x":1819.66,
+                 "y":368.886
                 }, 
                 {
                  "gid":40,
@@ -153,11 +153,11 @@
                  "id":7,
                  "name":"",
                  "rotation":0,
-                 "type":"",
+                 "type":"Seller",
                  "visible":true,
                  "width":111,
-                 "x":1009.66666666667,
-                 "y":413.666666666667
+                 "x":1009.33666666667,
+                 "y":406.333666666667
                 }, 
                 {
                  "height":0,
@@ -167,7 +167,7 @@
                  "type":"FinalPosition",
                  "visible":true,
                  "width":0,
-                 "x":1948.0647,
+                 "x":1948.06,
                  "y":491.947
                 }, 
                 {
@@ -179,8 +179,32 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":28,
-                 "y":499.5
+                 "x":30,
+                 "y":469.5
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":833.333,
+                 "y":383.333
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":1392,
+                 "y":381
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -189,7 +213,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":10,
+ "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
