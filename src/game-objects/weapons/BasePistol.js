@@ -22,6 +22,8 @@ export default class BasePistol extends RangeWeapon {
         this._specs.sprite = Builder.WEAPON_PISTOLA_BASE;
         this._specs.weight = 1;
         this._specs.isEnemyWeapon = false;
+        this._specs.laserVision = false;
+        
         
         this._ammo.type = 'pistol'
         this._ammo.clipSize = 25;

@@ -14,7 +14,8 @@ export default class RangeWeapon extends Weapon {
         canBounce: undefined,   // Bool para indicar si las balas rebotan
         canDrill: undefined,    // Bool para indicar si las balas penetrar objetivos
         muzzleOffset: undefined, // Posicion relativa del cañon
-        isEnemyWeapon:undefined
+        isEnemyWeapon:undefined,
+        laserVision: undefined
     }
 
     _ammo = {
@@ -120,7 +121,10 @@ export default class RangeWeapon extends Weapon {
         return this._specs.sprite
     }
     getReloadTime() {
-        return this._specs.reloadTime;
+        return this._specs.reloadTime
+    }
+    getLaserVision() {
+        return this._specs.laserVision
     }
     setCurrentAmmo(ammo){
         this._ammo.currentClipAmmo = ammo

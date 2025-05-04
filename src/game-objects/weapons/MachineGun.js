@@ -21,6 +21,7 @@ export default class MachineGun extends RangeWeapon {
         this._specs.sprite = Builder.WEAPON_MACHINE_GUN;
         this._specs.weight = 1;
         this._specs.isEnemyWeapon = false;
+        this._specs.laserVision = false;
         
         this._ammo.type = 'machine gun'
         this._ammo.clipSize = 30;

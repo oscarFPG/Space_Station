@@ -20,6 +20,7 @@ export default class BaseTurretWeapon extends RangeWeapon {
         this._specs.sprite = Builder.WEAPON_TURRET;
         this._specs.weight = 1;
         this._specs.isEnemyWeapon = true;
+        this._specs.laserVision = false;
         
         this._ammo.type = 'machine gun'
         this._ammo.clipSize = 20;

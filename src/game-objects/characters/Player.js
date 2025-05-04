@@ -59,6 +59,7 @@ export default class Player extends BaseActor {
 
 		//Se crean texto para informar al jugador de recargar o cambiar arma
 		// Texto “Recargar [R]”
+
 		this.reloadText = scene.add.text(30, -50, 'Reload [R]', {
 			fontSize: '18px',
 			color: '#ffffff',
@@ -193,6 +194,27 @@ export default class Player extends BaseActor {
 			this._sprite.setX(34)
 		}
 		this._sprite.setFlipX(shouldFlip)
+		// Si el arma tiene laser vision activado
+		if (this._armaEquipada.getLaserVision()) {
+			// Dibujar el laser (como línea roja)
+			if (!this._laserGraphics) {
+			  this._laserGraphics = this.scene.add.graphics();
+			  this._laserGraphics.setDepth(10); // Aseguramos que el laser se dibuje sobre otros objetos
+			}
+			this._laserGraphics.clear();
+			this._laserGraphics.lineStyle(1, 0xff0000, 1);
+		
+			// Definir un largo para el laser (puedes ajustar este valor)
+			const laserLength = 700;
+			const laserEndX = weaponWorldX + Math.cos(angle) * laserLength;
+			const laserEndY = weaponWorldY + Math.sin(angle) * laserLength;
+			this._laserGraphics.strokeLineShape(new Phaser.Geom.Line(weaponWorldX, weaponWorldY, laserEndX, laserEndY));	  
+		  } else {
+			// Si el arma no tiene laser vision, se limpia (o se oculta) la gráfica del laser si existe
+			if (this._laserGraphics) {
+			  this._laserGraphics.clear();
+			}
+		  }
 	}
 
 	quitarVida(cantidad){
@@ -400,8 +422,9 @@ export default class Player extends BaseActor {
 
 		// Disparo mediante el click izquierdo del ratón
 		this.scene.input.on('pointerdown', (pointer) => {	// Disparar(click izquierdo)
-			if(this._atributos.activo && !this._armaEquipada.getIsReloading())
+			if(this._atributos.activo && !this._armaEquipada.getIsReloading()) {
 				this._armaEquipada.shot(pointer.worldX, pointer.worldY)
+			}
 		}, this)
 	}
 

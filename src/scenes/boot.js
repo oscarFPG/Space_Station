@@ -22,12 +22,13 @@ import ENEMY_WEAPON from '../../assets/weapons/weapon1_enemy.png'
 import ENEMY_2WEAPON from '../../assets/weapons/weapon2_enemy.png'
 import PISTOLA_BASE from '../../assets/weapons/weapon1.png'
 import MACHINE_GUN from '../../assets/weapons/weapon2.png'
-import WEAPON_3 from '../../assets/weapons/weapon3.png'
+import SNIPER from '../../assets/weapons/weapon3.png'
 import WEAPON_4 from '../../assets/weapons/weapon4.png'
 
 //Balas
 import BASE_BULLET from '../../assets/bullets/bullet1.png'
 import BASE_MACHINE_GUN_BULLET from '../../assets/bullets/bullet_machine_gun.png'
+import BASE_SNIPER_BULLET from '../../assets/bullets/bullet_sniper.png'
 import MACHINE_GUN_BULLET from '../../assets/bullets/bullet_enemy_machine_gun.png'
 import BASE_BULLET_ENEMY from '../../assets/bullets/bullet1_enemy.png'
 import BULLET_TURRET from '../../assets/bullets/bullet1_turret.png'
@@ -53,6 +54,7 @@ import SHIELD from '../../assets/objects/shieldItem.png'
 import COIN from '../../assets/objects/coin.png'
 import AMMO_BOX_BASE_PISTOL from '../../assets/objects/basePistolAmmoBox.png'
 import AMMO_BOX_MACHINE_GUN from '../../assets/objects/baseMachineGunAmmoBox.png'
+import AMMO_BOX_SNIPER from '../../assets/objects/baseSniperAmmoBox.png'
 import BATTERY from '../../assets/objects/batteryItem.png'
 import BATTERY_STRUCTURE_FULL from '../../assets/objects/full_dispensator.png'
 import BATTERY_STRUCTURE_LOW from '../../assets/objects/low_dispensator.png'
@@ -100,7 +102,7 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.ENEMY_WEAPON_MACHINE_GUN, ENEMY_2WEAPON)
         this.load.image(Builder.WEAPON_PISTOLA_BASE, PISTOLA_BASE)
         this.load.image(Builder.WEAPON_MACHINE_GUN, MACHINE_GUN)
-        this.load.image(Builder.WEAPON_3, WEAPON_3)
+        this.load.image(Builder.WEAPON_SNIPER, SNIPER)
         this.load.image(Builder.WEAPON_4, WEAPON_4)
         this.load.image(Builder.WEAPON_TURRET, TURRET_WEAPON)
         this.load.image(Builder.WEAPON_SLOWED_TURRET, TURRET_WEAPON)
@@ -108,6 +110,7 @@ export default class Boot extends BaseScene {
         // Proyectiles
         this.load.image(Builder.AMMO_BASE, BASE_BULLET)
         this.load.image(Builder.AMMO_BASE_MACHINE_GUN, BASE_MACHINE_GUN_BULLET)
+        this.load.image(Builder.AMMO_SNIPER, BASE_SNIPER_BULLET)
         this.load.image(Builder.AMMO_ENEMY_BASE, BASE_BULLET_ENEMY)
         this.load.image(Builder.AMMO_ENEMY_MACHINE_GUN, MACHINE_GUN_BULLET)
         this.load.image(Builder.AMMO_TURRET, BULLET_TURRET)
@@ -118,6 +121,7 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.OBJ_MONEDA, COIN)
         this.load.image(Builder.OBJ_AMMO_BOX_BASE, AMMO_BOX_BASE_PISTOL)
         this.load.image(Builder.OBJ_AMMO_BOX_MACHINE_GUN, AMMO_BOX_MACHINE_GUN)
+        this.load.image(Builder.OBJ_AMMO_BOX_SNIPER, AMMO_BOX_SNIPER)
         this.load.image(Builder.OBJ_BATERIA, BATTERY)
         this.load.image(Builder.OBJ_NOTA, Note)
         this.load.image(Builder.OBJ_LASER_VERTICAL, laserUp)
