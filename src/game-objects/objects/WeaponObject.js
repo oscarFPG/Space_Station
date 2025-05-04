@@ -6,7 +6,7 @@ import WeaponFactory from '../../factories/WeaponFactory.js'
 export default class WeaponObject extends Object {
 
     constructor(scene, x, y, weaponTexture){
-        super(scene, x, y, weaponTexture)
+        super(scene, x, y, weaponTexture, true)
 
         this._texturaArma = weaponTexture
         this._arma = WeaponFactory.crearArma(weaponTexture, scene, {x: 0, y: 0})
@@ -29,5 +29,5 @@ export default class WeaponObject extends Object {
         this._textoInteraccion.destroy()
         this.destroy()
     }
-
+    getIsInteractive() { return true}
 }

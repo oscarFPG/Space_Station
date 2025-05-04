@@ -16,14 +16,16 @@ export default class BasePistolEnemy extends RangeWeapon {
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;
-        this._specs.fireRate = 1.15;
+        this._specs.fireRate = 1.25;
         this._specs.reloadTime = 1.5;
         this._specs.sprite = Builder.ENEMY_WEAPON_PISTOLA_BASE;
         this._specs.weight = 1;
+        this._specs.isEnemyWeapon = true;
         
-        this._ammo.type = 'pistola'
+        this._ammo.type = 'pistol'
         this._ammo.clipSize = 20;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
+        this._ammo.reserveAmmo = this._ammo.clipSize
     }
 
     createBullet(bulletX, bulletY){

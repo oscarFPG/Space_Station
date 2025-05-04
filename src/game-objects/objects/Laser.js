@@ -7,7 +7,7 @@ export default class Laser extends Object {
 
     constructor(scene, x, y, ID, isHorizontal, isStatic) {
         var texture = (!isHorizontal) ? Builder.OBJ_LASER_VERTICAL: Builder.OBJ_LASER_HORIZONTAL;
-        super(scene, x, y, texture)
+        super(scene, x, y, texture, false)
         this.body.setOffset(0, 0)
         if (!isHorizontal)
             this.body.setSize(20, 110)
@@ -74,5 +74,4 @@ export default class Laser extends Object {
 
     get_laser_ID(){ return this._laserID }
     get_laser_isStatic(){ return this.isStatic }
-
 }

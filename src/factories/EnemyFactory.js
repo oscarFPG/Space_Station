@@ -16,9 +16,9 @@ export default class EnemyFactory {
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');
     }
 
-    static createEnemy(enemmyName, scene, x, y){
+    static createEnemy(enemmyID, scene, x, y){
 
-        switch(enemmyName){
+        switch(enemmyID){
         case EnemyFactory.BASE_ENEMY_ID:
             return new ExtendedEnemy(scene, x, y) 
         case EnemyFactory.BASE_TURRET_ID:
@@ -29,7 +29,7 @@ export default class EnemyFactory {
             return new SlowTurret(scene, x, y) 
             
         default:
-            throw new Error(`Objeto \'Weapon\' con identificador ${enemy} no encontrado`)
+            throw new Error(`Objeto \'Weapon\' con identificador ${enemmyID} no encontrado`)
         }
     }
 }

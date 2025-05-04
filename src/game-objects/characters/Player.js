@@ -48,13 +48,38 @@ export default class Player extends BaseActor {
 
 		// Interfaz del personaje
 		this._playerUI = new PlayerUI(this.scene, Player.VIDA_INICIAL, Player.ESCUDO_INICIAL, Player.DINERO_INICIAL, Player.BATERIA_INICIAL)
-
+		this.scene.uiLayer.add(this._playerUI);
 		// Añadir al container
 		this.add(this._weapon)
 		if (this._secondaryWeapon) {
 			this._secondaryWeapon.setVisible(false);
 			this.add(this._secondaryWeapon);
 		  }
+
+		// Texto “Recargar [R]”
+		this.reloadText = scene.add.text(30, -50, 'Recargar [R]', {
+			fontSize: '18px',
+			color: '#ffffff',
+			backgroundColor: '#000000aa',
+			padding: { x: 8, y: 4 }
+		  })
+		  .setOrigin(0.5)
+		  .setDepth(20)
+		  .setScrollFactor(1)
+		  .setVisible(false);
+		  this.add(this.reloadText);
+	  
+		  // Spinner de recarga
+		  this.reloadSpinner = scene.add.graphics({ x: 30, y: -40 });
+		  this.reloadSpinner.lineStyle(4, 0x00AADD, 1);
+		  this.reloadSpinner.strokeCircle(0, 0, 16);
+		  this.reloadSpinner.strokeCircle(0, 0, 12);
+		  this.reloadSpinner
+			.setDepth(20)
+			.setScrollFactor(1)
+			.setVisible(false);
+		  this.add(this.reloadSpinner);
+  
 	}
 
 	update(time, delta) {
@@ -111,15 +136,21 @@ export default class Player extends BaseActor {
 		if (this.light) {
 			this.light.setPosition(this.x + offsetX, this.y);
 		}
-
+		
 		this._playerUI.actualizar_UI(
 			this._atributos.vida, 
 			this._escudo, 
 			this._dinero, 
 			this._baterias,
-			this._weapon.getBulletsFromClip(),
-			this.getCountAmmoType(this._armaEquipada._ammo.type)
-		)
+			this._armaEquipada.getBulletsFromClip(),
+			this._armaEquipada.getBulletsFromReserve(),
+			this._armaEquipada.getClipSize()
+		) 
+		// Indicador de recarga o texto
+		const ammo = this._armaEquipada.getBulletsFromClip()
+		const reloading = this._armaEquipada.getIsReloading()
+		const empty = ammo === 0;
+		this.DibujaRecarga(reloading, empty)
 	}
 
 	updateWeapon() {
@@ -151,14 +182,14 @@ export default class Player extends BaseActor {
 
 	quitarVida(cantidad){
 
-        if(this._escudo > 0) {
-			if (this._escudo - cantidad <= 0)
-				this._escudo = 0;
-			else
-				this._escudo -= cantidad
+        if (this._escudo >= cantidad) {
+			this._escudo -= cantidad;
+		} else {
+			const leftover = cantidad - this._escudo;
+			this._escudo = 0;
+			this._atributos.vida -= leftover;
 		}
-		else
-			this._atributos.vida -= cantidad
+		
 
 		// Animacion de daño respecto a la vida restante
         this.actualizar_color_efecto(this._atributos.vida / Player.VIDA_INICIAL)
@@ -212,10 +243,10 @@ export default class Player extends BaseActor {
 	getCountAmmoType(weaponAmmo){
 		
 		switch(weaponAmmo){
-			case 'pistola':
+			case 'pistol':
 				return 0
 		
-			case 'subfusil':
+			case 'machine gun':
 				return 0
 
 			case 'fusil':
@@ -248,13 +279,22 @@ export default class Player extends BaseActor {
 			health: this._atributos.vida,
 			shield: this._escudo,
 			money: this._dinero,
-			weapon1: { key: this._weapon._specs.sprite, ammo: this._weapon.getBulletsFromClip(), offset: Player.WEAPON_OFFSET},
+			weapon1: { key: this._weapon._specs.sprite, CurrentAmmo: this._weapon.getBulletsFromClip(), ReserveAmmo: this._weapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET},
 			weapon2: this._secondaryWeapon
-					  ? { key: this._secondaryWeapon._specs.sprite, ammo: this._secondaryWeapon.getBulletsFromClip(), offset: Player.WEAPON_OFFSET}
+					  ? { key: this._secondaryWeapon._specs.sprite, CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET}
 					  : null
 		  };
 
 		return status
+	}
+
+	pickAmmo(ammoType, ammo) {
+		
+		if (this._weapon.getBulletsType() == ammoType) 
+			this._weapon.boostAmmo(ammo)
+		else if (this._secondaryWeapon.getBulletsType() == ammoType)
+			this._secondaryWeapon.boostAmmo(ammo)
+		return this._weapon.getBulletsType() == ammoType || this._secondaryWeapon.getBulletsType() == ammoType
 	}
 
 	#config_controles(){
@@ -276,8 +316,14 @@ export default class Player extends BaseActor {
 		}
 
 		this.controles.reload.on('down', () => {	// Recargar
-			if(this._atributos.activo)
-				this._armaEquipada.reload()
+			if (!this._atributos.activo) return;
+			
+			this._armaEquipada.reload();
+
+			const reloadTime = this._armaEquipada.getReloadTime();
+			this._playerUI.showReloadSpinner(reloadTime);
+
+			this.reloadText.setVisible(true);
 		})
 
 		this.controles.switchWeapon.on('down', () => {	// Cambiar de arma
@@ -300,7 +346,7 @@ export default class Player extends BaseActor {
 
 		// Disparo mediante el click izquierdo del ratón
 		this.scene.input.on('pointerdown', (pointer) => {	// Disparar(click izquierdo)
-			if(this._atributos.activo)
+			if(this._atributos.activo && !this._armaEquipada.getIsReloading())
 				this._armaEquipada.shot(pointer.worldX, pointer.worldY)
 		}, this)
 	}
@@ -320,6 +366,85 @@ export default class Player extends BaseActor {
 		this.light = this.scene.lights.addLight(this.x, this.y, 650, 0xffffff, 1.5);
 		this._sprite.setPipeline('Light2D');
 		//this._weapon.setPipeline('')
+	}
+
+	DibujaRecarga(reloading, empty) {
+		if (reloading) {
+			// Oculta el texto, ya que se mostrará el spinner animado
+			this.reloadText.setVisible(false);
+			
+			// Tween para el giro del spinner (rotación continua)
+			if (!this.reloadSpinner._tween) {
+				this.reloadSpinner._tween = this.scene.tweens.add({
+				targets: this.reloadSpinner,
+				angle: 360, // gira 360 grados
+				duration: this._armaEquipada.getReloadTime() * 1000,
+				repeat: -1,
+				ease: 'Linear'
+				});
+			}
+			// Tween para un efecto de pulso (escala) en el spinner
+			if (!this.reloadSpinner._scaleTween) {
+				this.reloadSpinner._scaleTween = this.scene.tweens.add({
+				targets: this.reloadSpinner,
+				scale: { from: 0.8, to: 1.2 },
+				duration: 500,
+				yoyo: true,
+				repeat: -1,
+				ease: 'Sine.easeInOut'
+				});
+			}
+			// Tween adicional para animar levemente el arma (efecto de "bounce" o sacudida)
+			if (!this._armaEquipada._reloadEffectTween) {
+				this._armaEquipada._reloadEffectTween = this.scene.tweens.add({
+				targets: this._armaEquipada,
+				y: this._armaEquipada.y - 8, // mueve el arma 10 pixeles hacia arriba
+				duration: (this._armaEquipada.getReloadTime() * 1000) / 2,
+				yoyo: true,
+				repeat: -1,
+				ease: 'Quad.easeInOut'
+				});
+			}
+			// Aseguramos que el spinner sea visible
+			this.reloadSpinner.setVisible(true);
+
+			} else if (empty) {
+			// Si no hay munición y no se está recargando, mostramos el texto de recarga
+			if (this.reloadSpinner._tween) {
+				this.reloadSpinner._tween.stop();
+				delete this.reloadSpinner._tween;
+			}
+			if (this.reloadSpinner._scaleTween) {
+				this.reloadSpinner._scaleTween.stop();
+				delete this.reloadSpinner._scaleTween;
+			}
+			if (this._armaEquipada._reloadEffectTween) {
+				this._armaEquipada._reloadEffectTween.stop();
+				delete this._armaEquipada._reloadEffectTween;
+			}
+			this.reloadSpinner.setVisible(false);
+			this.reloadSpinner.angle = 0;
+			this.reloadText.setVisible(true);
+
+			} else {
+			// Caso normal, cuando no se está recargando
+			this.reloadText.setVisible(false);
+			if (this.reloadSpinner._tween) {
+				this.reloadSpinner._tween.stop();
+				delete this.reloadSpinner._tween;
+			}
+			if (this.reloadSpinner._scaleTween) {
+				this.reloadSpinner._scaleTween.stop();
+				delete this.reloadSpinner._scaleTween;
+			}
+			if (this._armaEquipada._reloadEffectTween) {
+				this._armaEquipada._reloadEffectTween.stop();
+				delete this._armaEquipada._reloadEffectTween;
+			}
+			this.reloadSpinner.setVisible(false);
+			this.reloadSpinner.angle = 0;
+		}
+
 	}
 
 	getFirstWeapon() {

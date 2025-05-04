@@ -8,7 +8,7 @@ export default class Door extends Object {
     static CLOSING_DELAY = 800
 
     constructor(scene, x, y, active, doorID) {
-        super(scene, x, y, Door.OPEN_ANIMATION);
+        super(scene, x, y, Door.OPEN_ANIMATION, false);
         this.setPipeline('Light2D');
         this.body.setImmovable(true);
         this.body.setAllowGravity(false)

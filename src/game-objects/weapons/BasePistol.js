@@ -17,20 +17,21 @@ export default class BasePistol extends RangeWeapon {
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;
-        this._specs.fireRate = 2.5;
+        this._specs.fireRate = 2.25;
         this._specs.reloadTime = 1.5;
         this._specs.sprite = Builder.WEAPON_PISTOLA_BASE;
         this._specs.weight = 1;
+        this._specs.isEnemyWeapon = false;
         
-        this._ammo.type = 'pistola'
-        this._ammo.clipSize = 12;
-        this._ammo.currentClipAmmo = this._ammo.clipSize;
+        this._ammo.type = 'pistol'
+        this._ammo.clipSize = 20;
+        this._ammo.currentClipAmmo = 5;
+        this._ammo.reserveAmmo = this._ammo.clipSize
+        this._ammo.maxReserveAmmo = 30
     }
 
     createBullet(bulletX, bulletY){
         return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_BASE, this.colorLightBullet)
     }
-
-    eliminateBulletFromClip(){ /* No quitar balas de este arma */ }
 
 }

@@ -17,6 +17,7 @@ import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
 import EnemyFactory from '../factories/EnemyFactory.js';
 import WeaponFactory from '../factories/WeaponFactory.js';
+import AmmoFactory from '../factories/AmmoFactory.js';
 import Battery from '../game-objects/objects/Battery.js'
 
 
@@ -63,7 +64,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaVidas = []
         this.listaBaterias = []
         this.listaMonedas = []
-        this.listaMunicionBase = []
+        this.listaMuniciones = []
         this.listaVendedores = []
 
         //Capa de todos los textos del nivel
@@ -158,7 +159,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaNotas.forEach(nota => {
             nota.update(time);
         });
-        this.listaMunicionBase.forEach(ammo => {
+        this.listaMuniciones.forEach(ammo => {
             ammo.update(time);
         });
     }
@@ -171,12 +172,14 @@ export default class BaseScene extends Phaser.Scene {
         this.firstWeapon = null
         if (this.playerWeapon1) {
             this.firstWeapon = WeaponFactory.crearArma(this.playerWeapon1.key, this, this.playerWeapon1.offset);
-            this.firstWeapon.setAmmo(this.playerWeapon1.ammo);
+            this.firstWeapon.setCurrentAmmo(this.playerWeapon1.CurrentAmmo);
+            this.firstWeapon.setReserveAmmo(this.playerWeapon1.ReserveAmmo);
         }
         this.secondWeapon = null;
         if (this.playerWeapon2) {
             this.secondWeapon = WeaponFactory.crearArma(this.playerWeapon2.key, this, this.playerWeapon2.offset);
-            this.secondWeapon.setAmmo(this.playerWeapon2.ammo);
+            this.secondWeapon.setCurrentAmmo(this.playerWeapon2.CurrentAmmo);
+            this.secondWeapon.setReserveAmmo(this.playerWeapon2.ReserveAmmo);
         }
         this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y,
             this.playerHealth,
@@ -205,6 +208,11 @@ export default class BaseScene extends Phaser.Scene {
                 const type = object.properties[0].value
                 const enemigo = this.addEnemy(type, object.x, object.y)
                 this._listaEnemigos.push(enemigo)
+            }
+            else if(object.type == 'AmmoBox'){
+                const type = object.properties[0].value
+                const ammo = this.addAmmoBox(type, object.x, object.y)
+                this.listaMuniciones.push(ammo);
             }
             else if(object.type === 'FinalPosition') {
                 this._finalPosition = { x: object.x, y: object.y }
@@ -257,11 +265,6 @@ export default class BaseScene extends Phaser.Scene {
                 this.listaEscudos.push(shieldObject);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
-            else if(object.type == 'AmmoBox'){
-                const ammoObject = new AmmoBoxBaseBullet(this, object.x + 55, object.y - 55)
-                this.listaMunicionBase.push(ammoObject);
-                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
-            }
             else if(object.type == 'Coin'){
                 const coinObject = new Coin(this, object.x + 55, object.y - 55, null)
                 this.listaMonedas.push(coinObject);
@@ -280,8 +283,8 @@ export default class BaseScene extends Phaser.Scene {
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
-        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'boxHard' })
+        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'objCaja' })
+        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'objCaja2' })
 
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
         this.listaPuertas.forEach(door => {
@@ -316,6 +319,10 @@ export default class BaseScene extends Phaser.Scene {
 
     addEnemy(enemyType, x, y){
         return EnemyFactory.createEnemy(enemyType, this, x, y)
+    }
+
+    addAmmoBox(ammoType, x, y){
+        return AmmoFactory.createAmmoBox(ammoType, this, x, y)
     }
 
     activar_laseres(laserID){

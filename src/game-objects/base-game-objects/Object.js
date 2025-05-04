@@ -7,7 +7,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
     _offsetX = 0
     _offsetY = 0
 
-    constructor(scene, x, y, texture){
+    constructor(scene, x, y, texture, isInteractive){
         super(scene, x, y, texture)
         this.scene.add.existing(this)
         this.scene.physics.add.existing(this)
@@ -19,23 +19,24 @@ export default class Object extends Phaser.GameObjects.Sprite {
             return new Error('La clase necesita una previa referencia al Player')
         
         //this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
-		this.on('overlapstart', () => {
-            this.player_overlaps(player)
-        })
-        this.on('overlapend', () => {
-            this.player_end_overlaps(player)
+        this.on('overlapstart', () => {
+            this.player_overlaps(player, isInteractive)
         })
         this.scene.physics.add.overlap(this, player)
+        if (isInteractive) {
+            this.on('overlapend', () => {
+                this.player_end_overlaps(player)
+            })
 
-        // Cuadro de texto
-        this._noteText = ""
-        this._textoInteraccion = this.config_helperText()
-        this._textoInteraccion.setDepth(12)
-        this._textoInteraccion.setVisible(false)
+            // Cuadro de texto
+            this._noteText = ""
+            this._textoInteraccion = this.config_helperText()
+            this._textoInteraccion.setDepth(12)
+            this._textoInteraccion.setVisible(false)
 
-        this.scene.add.text(0, 0, this._textoInteraccion)
+            this.scene.add.existing(this._textoInteraccion)
+        }
     }
-
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
@@ -53,10 +54,11 @@ export default class Object extends Phaser.GameObjects.Sprite {
             this.emit('overlapend')
 	}
 
-    player_overlaps(player){
-
-        this._textoInteraccion.setVisible(true)
-		this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+    player_overlaps(player, isInteractive){
+        if (isInteractive) {
+            this._textoInteraccion.setVisible(true)
+            this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
+        }
         this.accion(player)
     }
 

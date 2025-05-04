@@ -19,10 +19,12 @@ export default class SlowedTurretWeapon extends RangeWeapon {
         this._specs.reloadTime = 2;
         this._specs.sprite = Builder.WEAPON_SLOWED_TURRET;
         this._specs.weight = 1;
+        this._specs.isEnemyWeapon = true;
         
-        this._ammo.type = 'ametralladora'
+        this._ammo.type = 'machine gun'
         this._ammo.clipSize = 20;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
+        this._ammo.reserveAmmo = this._ammo.clipSize
     }
     createBullet(bulletX, bulletY){
             return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_TURRET, this.colorLightBullet)
