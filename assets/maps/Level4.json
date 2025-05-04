@@ -1118,7 +1118,7 @@
                         {
                          "name":"numBatteries",
                          "type":"int",
-                         "value":3
+                         "value":4
                         }],
                  "rotation":0,
                  "type":"BatteryStructure",
@@ -1150,24 +1150,6 @@
                  "width":111,
                  "x":2120.5,
                  "y":2890.5
-                }, 
-                {
-                 "gid":28,
-                 "height":111,
-                 "id":68,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"AmmoBox",
-                 "visible":true,
-                 "width":111,
-                 "x":220.258,
-                 "y":2671.77
                 }, 
                 {
                  "gid":28,
@@ -1456,6 +1438,64 @@
                  "width":209,
                  "x":2562.17,
                  "y":698.885
+                }, 
+                {
+                 "gid":19,
+                 "height":111,
+                 "id":85,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Battery",
+                 "visible":true,
+                 "width":111,
+                 "x":310.5,
+                 "y":2558.5
+                }, 
+                {
+                 "gid":27,
+                 "height":111,
+                 "id":86,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":666.712121212121,
+                 "y":456.833333333333
+                }, 
+                {
+                 "gid":39,
+                 "height":111,
+                 "id":87,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Name",
+                         "type":"string",
+                         "value":"weapon1"
+                        }, 
+                        {
+                         "name":"ReserveAmmo",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"currentAmmo",
+                         "type":"int",
+                         "value":12
+                        }],
+                 "rotation":0,
+                 "type":"Weapon",
+                 "visible":true,
+                 "width":111,
+                 "x":208.257575757576,
+                 "y":2696.37878787879
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1464,7 +1504,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":85,
+ "nextobjectid":88,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

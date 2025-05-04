@@ -10,7 +10,7 @@ import Seller from '../game-objects/objects/Seller.js'
 import Health from '../game-objects/objects/Health.js'
 import Shield from '../game-objects/objects/Shield.js'
 import Coin from '../game-objects/objects/Coin.js'
-import AmmoBoxBaseBullet from '../game-objects/objects/AmmoBoxBaseBullet.js'
+import WeaponObject from '../game-objects/objects/WeaponObject.js'
 import Box from '../game-objects/objects/Box.js'
 import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
@@ -66,6 +66,7 @@ export default class BaseScene extends Phaser.Scene {
         this.listaMonedas = []
         this.listaMuniciones = []
         this.listaVendedores = []
+        this.listaObjetosArmas = []
 
         //Capa de todos los textos del nivel
         this.uiLayer = this.add.layer();
@@ -162,6 +163,10 @@ export default class BaseScene extends Phaser.Scene {
         this.listaMuniciones.forEach(ammo => {
             ammo.update(time);
         });
+        this.listaObjetosArmas.forEach(arma => {
+            arma.update(time);
+        });
+        
     }
 
     crear_objetos(map) {
@@ -211,8 +216,15 @@ export default class BaseScene extends Phaser.Scene {
             }
             else if(object.type == 'AmmoBox'){
                 const type = object.properties[0].value
-                const ammo = this.addAmmoBox(type, object.x, object.y)
+                const ammo = this.addAmmoBox(type, object.x + 55, object.y - 55)
                 this.listaMuniciones.push(ammo);
+            }
+            else if(object.type == 'Weapon'){
+                const type = object.properties[0].value
+                const reserveAmmo = object.properties[1].value
+                const currentAmmo = object.properties[2].value
+                let weaponObject = new WeaponObject(this, object.x + 55, object.y - 55, type, currentAmmo, reserveAmmo)
+                this.listaObjetosArmas.push(weaponObject);
             }
             else if(object.type === 'FinalPosition') {
                 this._finalPosition = { x: object.x, y: object.y }
@@ -350,13 +362,10 @@ export default class BaseScene extends Phaser.Scene {
     gameOver() {
         console.log('Game over');
     
-        // Desenfocar usando el BlurPostFX si está disponible
-        const blurPipeline = this.cameras.main.postFX.addBlur(4); // intensidad 4 (puedes ajustar)
+        const blurPipeline = this.cameras.main.postFX.addBlur(4); 
     
-        // También puedes añadir un pequeño fundido a negro si deseas
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
-        // Espera 1 segundo antes de reiniciar la escena
         this.time.delayedCall(400, () => {
             this.scene.restart();
         });

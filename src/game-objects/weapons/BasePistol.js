@@ -11,7 +11,7 @@ export default class BasePistol extends RangeWeapon {
         super(scene, x, y, Builder.WEAPON_PISTOLA_BASE, 0x87CEFA);
 
         // Gun config
-        this._specs.name = 'Pistola base'
+        this._specs.name = 'pistol V2'
         this._specs.damage = BasePistol.BASE_PISTOL_DAMAGE;
         this._specs.bulletSpeed = 666;
         this._specs.muzzleOffset = 42;
@@ -24,8 +24,8 @@ export default class BasePistol extends RangeWeapon {
         this._specs.isEnemyWeapon = false;
         
         this._ammo.type = 'pistol'
-        this._ammo.clipSize = 20;
-        this._ammo.currentClipAmmo = 5;
+        this._ammo.clipSize = 25;
+        this._ammo.currentClipAmmo = 12;
         this._ammo.reserveAmmo = this._ammo.clipSize
         this._ammo.maxReserveAmmo = 30
     }

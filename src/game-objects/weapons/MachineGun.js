@@ -10,7 +10,7 @@ export default class MachineGun extends RangeWeapon {
         super(scene, x, y, Builder.WEAPON_MACHINE_GUN, 0x00FF22);
 
         // Gun config
-        this._specs.name = 'Machine gun'
+        this._specs.name = 'Machine gun V4'
         this._specs.damage = MachineGun.MACHINE_GUN_DAMAGE;
         this._specs.bulletSpeed = 645;
         this._specs.muzzleOffset = 42;
@@ -23,9 +23,9 @@ export default class MachineGun extends RangeWeapon {
         this._specs.isEnemyWeapon = false;
         
         this._ammo.type = 'machine gun'
-        this._ammo.clipSize = 40;
-        this._ammo.currentClipAmmo = 20;
-        this._ammo.reserveAmmo = this._ammo.clipSize 
+        this._ammo.clipSize = 30;
+        this._ammo.currentClipAmmo = 6;
+        this._ammo.reserveAmmo = 0 
         this._ammo.maxReserveAmmo = 60
     }
 

@@ -16,7 +16,7 @@ export default class AmmoBoxBaseBullet extends Object {
         this._displayHelperText = true
         this._interactiveDistance = 110
         this.setText("Pick up PISTOL AMMO")
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xFFFFFF, 0.7);
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x00DDDD, 0.7);
     }
 
     player_overlaps(player) {

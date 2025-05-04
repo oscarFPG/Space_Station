@@ -116,6 +116,9 @@ export default class RangeWeapon extends Weapon {
     getClipSize() {
         return this._ammo.clipSize
     }
+    getWeaponSprite() { 
+        return this._specs.sprite
+    }
     getReloadTime() {
         return this._specs.reloadTime;
     }
@@ -127,7 +130,11 @@ export default class RangeWeapon extends Weapon {
     }
     boostAmmo(ammo){
         const newReserve = this._ammo.reserveAmmo + ammo
-        const finalReserve = Math.min(newReserve, this._ammo.maxReserveAmmo)
-        this._ammo.reserveAmmo = finalReserve
+        if (newReserve > this._ammo.maxReserveAmmo)
+            return false
+        else {
+            this._ammo.reserveAmmo = newReserve
+            return true
+        }
     }
 }

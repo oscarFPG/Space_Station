@@ -1694,8 +1694,8 @@
                  "type":"AmmoBox",
                  "visible":true,
                  "width":111,
-                 "x":1212.91,
-                 "y":437.773
+                 "x":336.91,
+                 "y":427.773
                 }, 
                 {
                  "gid":20,
@@ -1750,6 +1750,80 @@
                  "width":111,
                  "x":2018,
                  "y":980.25
+                }, 
+                {
+                 "gid":27,
+                 "height":111,
+                 "id":100,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":872.5,
+                 "y":1550.5
+                }, 
+                {
+                 "gid":39,
+                 "height":111,
+                 "id":101,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Name",
+                         "type":"string",
+                         "value":"weapon2"
+                        }, 
+                        {
+                         "name":"ReserveAmmo",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"currentAmmo",
+                         "type":"int",
+                         "value":12
+                        }],
+                 "rotation":0,
+                 "type":"Weapon",
+                 "visible":true,
+                 "width":111,
+                 "x":2532.74242424242,
+                 "y":1652.80303030303
+                }, 
+                {
+                 "gid":39,
+                 "height":111,
+                 "id":102,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Name",
+                         "type":"string",
+                         "value":"weapon2"
+                        }, 
+                        {
+                         "name":"ReserveAmmo",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"currentAmmo",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"Weapon",
+                 "visible":true,
+                 "width":111,
+                 "x":547.833333333333,
+                 "y":982.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1758,7 +1832,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":99,
+ "nextobjectid":103,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

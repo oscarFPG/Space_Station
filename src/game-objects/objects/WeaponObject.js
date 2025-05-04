@@ -5,13 +5,14 @@ import WeaponFactory from '../../factories/WeaponFactory.js'
 
 export default class WeaponObject extends Object {
 
-    constructor(scene, x, y, weaponTexture){
+    constructor(scene, x, y, weaponTexture, currentAmmo, reserveAmmo){
         super(scene, x, y, weaponTexture, true)
 
         this._texturaArma = weaponTexture
         this._arma = WeaponFactory.crearArma(weaponTexture, scene, {x: 0, y: 0})
+        this._currentAmmo = currentAmmo
+		this._reserveAmmo = reserveAmmo
         this.setText(`Pick up ${this._arma._specs.name}`)
-
         this._arma.destroy()
     }
 
@@ -19,9 +20,19 @@ export default class WeaponObject extends Object {
         
         if(!player.isUseKeyJustPressed())
             return
-
-        player.recogerArma(this._texturaArma)
+        if (!player.getIsActiveSecondaryWeapon())
+            player.recogerArma(this._texturaArma, this._currentAmmo, this._reserveAmmo)
+        else 
+            player.intercambiarArma(this.x, this.y, this._texturaArma, this._currentAmmo, this._reserveAmmo)
         this.destroyObject()
+    }
+
+    setCurrentAmmo(ammo) {
+        this._arma.setCurrentAmmo(ammo)
+    }
+
+    setReserveAmmo(ammo) {
+        this._arma.setReserveAmmo(ammo)
     }
 
     destroyObject(){

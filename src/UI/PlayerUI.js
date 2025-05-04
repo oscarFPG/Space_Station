@@ -55,34 +55,6 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this.add(this._puntosDeEscudo)
         this.add(this._contadorMonedas)
         this.add(this._contadorBalas)
-
-            // Texto de recarga
-        this._reloadText = scene.add.text(
-            PlayerUI.POS_X_BALAS,
-            PlayerUI.POS_Y_BALAS - 40,
-            'Recargar [R]',
-            { fontSize: '18px', color: '#ffffff', backgroundColor: '#000000aa' }
-        )
-        .setOrigin(0.5)
-        .setScrollFactor(0)
-        .setDepth(21)
-        .setVisible(false);
-        scene.add.existing(this._reloadText);
-    
-        // Spinner de recarga
-        this._reloadSpinner = scene.add.graphics({
-            x: PlayerUI.POS_X_BALAS,
-            y: PlayerUI.POS_Y_BALAS - 20
-        });
-        this._reloadSpinner.lineStyle(4, 0xffffff, 1);
-        this._reloadSpinner.strokeCircle(0, 0, 20);
-        this._reloadSpinner.strokeCircle(0, 0, 16);
-        this._reloadSpinner
-            .setScrollFactor(0)
-            .setDepth(21)
-            .setVisible(false);
-        scene.add.existing(this._reloadSpinner);
-        
     }
 
 
@@ -212,7 +184,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         const porcentajeBalas = balasCargador / balasMaximas;
 
-        if (porcentajeBalas <= 0.1) {
+        if (porcentajeBalas <= 0.15) {
             cargador.setTint(0xff0000)
             separador.setTint(0xff0000)
             reserva.setTint(0xff0000)
@@ -226,43 +198,4 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._contadorBalas.add(separador)
         this._contadorBalas.add(reserva)
     }
-
-    updateReloadIndicator(state) {
-        const { empty, reloading } = state;
-    
-        if (reloading) {
-          this._reloadText.setVisible(false);
-          // Arranca tween si no existe
-          if (!this._reloadSpinner._tween) {
-            this._reloadSpinner._tween = this.scene.tweens.add({
-              targets: this._reloadSpinner,
-              angle: 360,
-              duration: 800,
-              repeat: -1,
-              ease: 'Linear'
-            });
-          }
-          this._reloadSpinner.setVisible(true);
-        }
-        else if (empty) {
-          // Solo texto
-          if (this._reloadSpinner._tween) {
-            this._reloadSpinner._tween.stop();
-            delete this._reloadSpinner._tween;
-            this._reloadSpinner.angle = 0;
-          }
-          this._reloadSpinner.setVisible(false);
-          this._reloadText.setVisible(true);
-        }
-        else {
-          // Nada
-          this._reloadText.setVisible(false);
-          if (this._reloadSpinner._tween) {
-            this._reloadSpinner._tween.stop();
-            delete this._reloadSpinner._tween;
-            this._reloadSpinner.angle = 0;
-          }
-          this._reloadSpinner.setVisible(false);
-        }
-      }
 }

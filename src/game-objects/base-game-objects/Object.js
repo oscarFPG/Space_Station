@@ -90,7 +90,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
         if (this._textoInteraccion) {
             // Actualiza el texto existente
             let tecla = 'E' 
-            this._textoInteraccion.setText(`${this._text}[${tecla}]`);
+            this._textoInteraccion.setText(`${this._text} [${tecla}]`);
         }
     }
 

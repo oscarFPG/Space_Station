@@ -16,7 +16,6 @@ export default class Tutorial extends BaseScene {
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
         super.create(map, tileset, 'Level1')
 
-        const arma = new WeaponObject(this, 600, 400, WeaponFactory.BASE_MACHINE_GUN_WEAPON)
     }
 
 }
