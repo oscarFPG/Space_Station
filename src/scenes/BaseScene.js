@@ -454,7 +454,7 @@ export default class BaseScene extends Phaser.Scene {
         this._grupoBalas = this.physics.add.group()
         const onBulletCollision = (obj1, obj2) => {
             this.ambient = this.sound.add('impact_shot') 
-            this.ambient.setVolume(0.15)
+            this.ambient.setVolume(0.12)
             this.ambient.play()
             let bullet = obj1 instanceof Bullet ? obj1 : obj2
             let target = bullet === obj1 ? obj2 : obj1
@@ -523,7 +523,7 @@ export default class BaseScene extends Phaser.Scene {
     config_musica(){
         this.sound.stopAll();
         this.ambient = (this.scene.key == 'Level5_2') ? this.sound.add('final boss') : this.sound.add('ambiente')
-        this.ambient.setVolume(0.5)
+        this.ambient.setVolume(0.3)
         this.ambient.play()
     }
 
@@ -545,7 +545,7 @@ export default class BaseScene extends Phaser.Scene {
     putFinalTheme(value) { 
         this.sound.stopAll();
         this.ambient = this.sound.add('final game')
-        this.ambient.setVolume(0.5)
+        this.ambient.setVolume(0.3)
         this.ambient.play()
     }
 }

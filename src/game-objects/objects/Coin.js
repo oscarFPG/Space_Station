@@ -1,5 +1,6 @@
 import Builder from "../../managers/Builder";
 import Object from '../base-game-objects/Object.js'
+import Options from '../../managers/Options.js';
 
 
 export default class Coin extends Object {
@@ -19,6 +20,8 @@ export default class Coin extends Object {
     player_overlaps(player){
         
         player.receiveMoney(this.value)
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'pick_up_coin', { isMusic: false, volume: 1.0 });
         this.removeLight();
         this.destroyObject()
     }

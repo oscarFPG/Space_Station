@@ -1082,6 +1082,24 @@
                  "width":111,
                  "x":3548.5,
                  "y":882.5
+                }, 
+                {
+                 "gid":27,
+                 "height":111,
+                 "id":76,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":2105.10606060606,
+                 "y":541.469696969697
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1090,7 +1108,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":76,
+ "nextobjectid":77,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
