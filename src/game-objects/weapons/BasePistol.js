@@ -25,10 +25,10 @@ export default class BasePistol extends RangeWeapon {
         this._specs.laserVision = false;
         
         this._ammo.type = 'pistol'
-        this._ammo.clipSize = 25;
-        this._ammo.currentClipAmmo = 15;
-        this._ammo.reserveAmmo = this._ammo.clipSize
-        this._ammo.maxReserveAmmo = 35
+        this._ammo.clipSize = 8;
+        this._ammo.currentClipAmmo = 8;
+        this._ammo.reserveAmmo = 16
+        this._ammo.maxReserveAmmo = 45
     }
 
     createBullet(bulletX, bulletY){

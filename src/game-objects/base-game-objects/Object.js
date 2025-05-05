@@ -117,7 +117,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
             if (modTime < blinkPeriod / 2) {
             this.light.intensity = 0.85; // intensidad encendida
             } else {
-            this.light.intensity = 0.2; // apagada
+            this.light.intensity = 0; // apagada
             }
         }
     }

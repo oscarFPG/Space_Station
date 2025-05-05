@@ -222,7 +222,7 @@ export default class Boot extends BaseScene {
                 weapon1: null,
                 weapon2: null
               };
-            this.scene.switch('Level5_2', status)
+            this.scene.switch('Level5_1', status)
         }   
     }
 }

@@ -12,11 +12,11 @@ export default class FinalBossWeapon extends RangeWeapon {
         // Gun config
         this._specs.name = 'FINAL PISTOL V8'
         this._specs.damage = FinalBossWeapon.BASE_PISTOL_DAMAGE;
-        this._specs.bulletSpeed = 680;
+        this._specs.bulletSpeed = 820;
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;
-        this._specs.fireRate = 1.25;
+        this._specs.fireRate = 1.35;
         this._specs.reloadTime = 2.5;
         this._specs.sprite = Builder.FINAL_WEAPON;
         this._specs.weight = 1;

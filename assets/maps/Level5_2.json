@@ -131,7 +131,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -142,8 +142,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1118.12166666667,
-                 "y":507.155166666667
+                 "x":1118.12,
+                 "y":507.155
                 }, 
                 {
                  "gid":17,
@@ -169,7 +169,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -180,8 +180,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1229.12166666667,
-                 "y":507.155166666667
+                 "x":1229.12,
+                 "y":507.155
                 }, 
                 {
                  "gid":17,
@@ -207,7 +207,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -218,116 +218,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1340.21166666667,
-                 "y":507.178166666667
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":33,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":378.5,
-                 "y":841.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":34,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":322.5,
-                 "y":1438.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":35,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":314.5,
-                 "y":1340.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":36,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":283.5,
-                 "y":1244.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":38,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":206.5,
-                 "y":1188.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":39,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":303.166666666667,
-                 "y":1124.5
+                 "x":1340.21,
+                 "y":507.178
                 }, 
                 {
                  "gid":29,
@@ -338,8 +230,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1431.83333333333,
-                 "y":1341.16666666667
+                 "x":1431.83,
+                 "y":1341.17
                 }, 
                 {
                  "gid":29,
@@ -350,8 +242,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1430.83333333333,
-                 "y":1227.83333333333
+                 "x":1430.83,
+                 "y":1227.83
                 }, 
                 {
                  "gid":29,
@@ -362,8 +254,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1442.16666666667,
-                 "y":1111.83333333333
+                 "x":1442.17,
+                 "y":1111.83
                 }, 
                 {
                  "gid":29,
@@ -374,8 +266,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1432.83333333333,
-                 "y":1445.16666666667
+                 "x":1432.83,
+                 "y":1445.17
                 }, 
                 {
                  "gid":29,
@@ -386,8 +278,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1787.83333333333,
-                 "y":1095.16666666667
+                 "x":1787.83,
+                 "y":1095.17
                 }, 
                 {
                  "gid":29,
@@ -399,7 +291,7 @@
                  "visible":true,
                  "width":103,
                  "x":1541.5,
-                 "y":1093.83333333333
+                 "y":1093.83
                 }, 
                 {
                  "gid":29,
@@ -410,8 +302,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1631.83333333333,
-                 "y":1090.16666666667
+                 "x":1631.83,
+                 "y":1090.17
                 }, 
                 {
                  "gid":29,
@@ -422,8 +314,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1706.16666666667,
-                 "y":1092.16666666667
+                 "x":1706.17,
+                 "y":1092.17
                 }, 
                 {
                  "gid":29,
@@ -434,10 +326,9 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":451.166666666667,
+                 "x":451.167,
                  "y":216.5
-                },
-            
+                }, 
                 {
                  "gid":29,
                  "height":111,
@@ -448,7 +339,7 @@
                  "visible":true,
                  "width":111,
                  "x":452.5,
-                 "y":315.166666666666
+                 "y":315.167
                 }, 
                 {
                  "gid":29,
@@ -459,7 +350,7 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":453.833333333333,
+                 "x":453.833,
                  "y":416.5
                 }, 
                 {
@@ -471,8 +362,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":455.833333333333,
-                 "y":513.833333333333
+                 "x":455.833,
+                 "y":513.833
                 }, 
                 {
                  "gid":29,
@@ -495,7 +386,7 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":301.833333333333,
+                 "x":301.833,
                  "y":576.5
                 }, 
                 {
@@ -507,9 +398,10 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":199.166666666667,
-                 "y":575.166666666667
-                }, 
+                 "x":199.167,
+                 "y":575.167
+                },
+            
                 {
                  "gid":29,
                  "height":111,
@@ -531,8 +423,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":993.166666666666,
-                 "y":238.166666666667
+                 "x":993.167,
+                 "y":238.167
                 }, 
                 {
                  "gid":29,
@@ -543,7 +435,7 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":992.833333333333,
+                 "x":992.833,
                  "y":358.5
                 }, 
                 {
@@ -555,8 +447,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":989.166666666667,
-                 "y":487.833333333333
+                 "x":989.167,
+                 "y":487.833
                 }, 
                 {
                  "gid":29,
@@ -567,7 +459,7 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1317.16666666667,
+                 "x":1317.17,
                  "y":572.5
                 }, 
                 {
@@ -579,8 +471,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1061.83333333333,
-                 "y":562.833333333333
+                 "x":1061.83,
+                 "y":562.833
                 }, 
                 {
                  "gid":29,
@@ -591,7 +483,7 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1152.16666666667,
+                 "x":1152.17,
                  "y":567.5
                 }, 
                 {
@@ -603,8 +495,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1233.83333333333,
-                 "y":566.166666666667
+                 "x":1233.83,
+                 "y":566.167
                 }, 
                 {
                  "gid":16,
@@ -641,7 +533,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":395.1665,
+                 "x":395.167,
                  "y":221.833
                 }, 
                 {
@@ -679,7 +571,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":395.1665,
+                 "x":395.167,
                  "y":332.25
                 }, 
                 {
@@ -706,7 +598,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -717,7 +609,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":395.8335,
+                 "x":395.834,
                  "y":441.167
                 }, 
                 {
@@ -744,7 +636,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -756,9 +648,8 @@
                  "visible":true,
                  "width":111,
                  "x":112.455,
-                 "y":503.821333333333
-                },
-            
+                 "y":503.821
+                }, 
                 {
                  "gid":17,
                  "height":111,
@@ -783,7 +674,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -795,7 +686,7 @@
                  "visible":true,
                  "width":111,
                  "x":223.455,
-                 "y":503.821333333333
+                 "y":503.821
                 }, 
                 {
                  "gid":17,
@@ -821,7 +712,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -833,7 +724,7 @@
                  "visible":true,
                  "width":111,
                  "x":334.545,
-                 "y":503.845333333333
+                 "y":503.845
                 }, 
                 {
                  "gid":16,
@@ -870,8 +761,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1058.83316666667,
-                 "y":222.166333333333
+                 "x":1058.83,
+                 "y":222.166
                 }, 
                 {
                  "gid":1073741840,
@@ -908,8 +799,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1058.83316666667,
-                 "y":332.583333333333
+                 "x":1058.83,
+                 "y":332.583
                 }, 
                 {
                  "gid":16,
@@ -935,7 +826,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -946,8 +837,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1059.50016666667,
-                 "y":441.500333333333
+                 "x":1059.5,
+                 "y":441.5
                 }, 
                 {
                  "gid":29,
@@ -958,9 +849,10 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":1399.16666666667,
+                 "x":1399.17,
                  "y":572.5
-                }, 
+                },
+            
                 {
                  "gid":1073741840,
                  "height":111,
@@ -985,7 +877,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -997,7 +889,7 @@
                  "visible":true,
                  "width":111,
                  "x":1488.17,
-                 "y":1229.50333333333
+                 "y":1229.5
                 }, 
                 {
                  "gid":16,
@@ -1035,7 +927,7 @@
                  "visible":true,
                  "width":111,
                  "x":1488.83,
-                 "y":1338.41333333333
+                 "y":1338.41
                 }, 
                 {
                  "gid":1073741840,
@@ -1073,7 +965,7 @@
                  "visible":true,
                  "width":111,
                  "x":1488.83,
-                 "y":1446.16333333333
+                 "y":1446.16
                 }, 
                 {
                  "gid":17,
@@ -1099,7 +991,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -1110,8 +1002,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1552.12166666667,
-                 "y":1161.82333333333
+                 "x":1552.12,
+                 "y":1161.82
                 }, 
                 {
                  "gid":17,
@@ -1137,7 +1029,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -1148,8 +1040,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1663.12166666667,
-                 "y":1161.82333333333
+                 "x":1663.12,
+                 "y":1161.82
                 }, 
                 {
                  "gid":17,
@@ -1175,7 +1067,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -1186,8 +1078,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1774.21166666667,
-                 "y":1161.84333333333
+                 "x":1774.21,
+                 "y":1161.84
                 }, 
                 {
                  "gid":17,
@@ -1213,7 +1105,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -1224,8 +1116,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":112.455,
-                 "y":327.488
+                 "x":109.121666666667,
+                 "y":387.488
                 }, 
                 {
                  "gid":17,
@@ -1262,8 +1154,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":223.455,
-                 "y":327.488
+                 "x":220.121666666667,
+                 "y":387.488
                 }, 
                 {
                  "gid":17,
@@ -1300,8 +1192,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":334.545,
-                 "y":327.512
+                 "x":331.211666666667,
+                 "y":387.512
                 }, 
                 {
                  "gid":17,
@@ -1338,8 +1230,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1110.455,
-                 "y":327.154666666667
+                 "x":1112.45,
+                 "y":384.488333333333
                 }, 
                 {
                  "gid":17,
@@ -1376,8 +1268,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1221.455,
-                 "y":327.154666666667
+                 "x":1223.45,
+                 "y":384.488333333333
                 }, 
                 {
                  "gid":17,
@@ -1403,7 +1295,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -1414,10 +1306,9 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1332.545,
-                 "y":327.178666666667
-                },
-            
+                 "x":1334.54,
+                 "y":384.512333333333
+                }, 
                 {
                  "gid":17,
                  "height":111,
@@ -1453,8 +1344,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1554.12166666667,
-                 "y":1333.82333333333
+                 "x":1554.12,
+                 "y":1260.82
                 }, 
                 {
                  "gid":17,
@@ -1491,8 +1382,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1665.12166666667,
-                 "y":1333.82333333333
+                 "x":1665.12,
+                 "y":1260.82
                 }, 
                 {
                  "gid":17,
@@ -1518,7 +1409,7 @@
                         {
                          "name":"isStatic",
                          "type":"bool",
-                         "value":false
+                         "value":true
                         }, 
                         {
                          "name":"isStoppable",
@@ -1529,8 +1420,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1776.21166666667,
-                 "y":1333.84333333333
+                 "x":1776.21,
+                 "y":1260.84
                 }, 
                 {
                  "gid":28,
@@ -1547,8 +1438,8 @@
                  "type":"AmmoBox",
                  "visible":true,
                  "width":111,
-                 "x":222.5,
-                 "y":241.5
+                 "x":136,
+                 "y":241
                 }, 
                 {
                  "gid":39,
@@ -1575,8 +1466,8 @@
                  "type":"Weapon",
                  "visible":true,
                  "width":111,
-                 "x":312.5,
-                 "y":224.5
+                 "x":278,
+                 "y":228
                 }, 
                 {
                  "gid":39,
@@ -1604,8 +1495,9 @@
                  "visible":true,
                  "width":111,
                  "x":1324.5,
-                 "y":199.166666666667
-                }, 
+                 "y":199.167
+                },
+            
                 {
                  "gid":39,
                  "height":111,
@@ -1631,8 +1523,8 @@
                  "type":"Weapon",
                  "visible":true,
                  "width":111,
-                 "x":1757.83333333333,
-                 "y":1433.83333333333
+                 "x":1757.83,
+                 "y":1433.83
                 }, 
                 {
                  "gid":28,
@@ -1649,134 +1541,8 @@
                  "type":"AmmoBox",
                  "visible":true,
                  "width":111,
-                 "x":1133.83333333333,
-                 "y":225.833333333333
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":105,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":720.5,
-                 "y":1246.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":106,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":861.5,
-                 "y":1239.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":107,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":1041.5,
-                 "y":1221.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":108,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":1411.5,
-                 "y":784.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":109,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":1424.5,
-                 "y":891.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":110,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":675.5,
-                 "y":524.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
-                 "id":111,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":772.5,
-                 "y":529.5
+                 "x":1176.83,
+                 "y":234.833
                 }, 
                 {
                  "gid":24,
@@ -1798,8 +1564,8 @@
                  "type":"Door",
                  "visible":true,
                  "width":111,
-                 "x":1665.09151515152,
-                 "y":665.278712121212
+                 "x":1665.09,
+                 "y":665.279
                 }, 
                 {
                  "gid":12,
@@ -1821,28 +1587,9 @@
                  "type":"BatteryStructure",
                  "visible":true,
                  "width":111,
-                 "x":1776.97805555556,
-                 "y":665.971666666667
+                 "x":1776.98,
+                 "y":665.972
                 }, 
-                {
-                 "gid":28,
-                 "height":111,
-                 "id":115,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }],
-                 "rotation":0,
-                 "type":"AmmoBox",
-                 "visible":true,
-                 "width":111,
-                 "x":1231.16666666667,
-                 "y":420.5
-                },
-            
                 {
                  "gid":28,
                  "height":111,
@@ -1858,8 +1605,8 @@
                  "type":"AmmoBox",
                  "visible":true,
                  "width":111,
-                 "x":1655.16666666667,
-                 "y":1421.83333333333
+                 "x":1655.17,
+                 "y":1421.83
                 }, 
                 {
                  "ellipse":true,
@@ -1876,7 +1623,7 @@
                  "type":"EnemyPosition",
                  "visible":true,
                  "width":0,
-                 "x":871.666666666667,
+                 "x":871.667,
                  "y":831
                 }, 
                 {
@@ -1887,8 +1634,8 @@
                  "type":"FinalPosition",
                  "visible":true,
                  "width":0,
-                 "x":1721.31666666667,
-                 "y":35.8486666666667
+                 "x":1721.32,
+                 "y":35.8487
                 }, 
                 {
                  "height":0,
@@ -1901,6 +1648,241 @@
                  "width":0,
                  "x":164,
                  "y":1516
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":120,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":1287.0625,
+                 "y":461.333333333333
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":121,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":446.333333333333,
+                 "y":437.166666666667
+                }, 
+                {
+                 "ellipse":true,
+                 "height":0,
+                 "id":122,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BlueLightPoint",
+                 "visible":true,
+                 "width":0,
+                 "x":1720.66666666667,
+                 "y":1112.33333333333
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":123,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":1532.5,
+                 "y":876.5
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":124,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":1571.16666666667,
+                 "y":1445.83333333333
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":125,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":322.5,
+                 "y":310.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":126,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":211.166666666667,
+                 "y":1213.83333333333
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":127,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":284.5,
+                 "y":1252.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":128,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":307.166666666667,
+                 "y":1355.16666666667
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":129,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":309.833333333333,
+                 "y":1455.16666666667
+                },
+            
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":130,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":390.5,
+                 "y":901.166666666667
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":131,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":700.5,
+                 "y":1260.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":132,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":854.5,
+                 "y":1240.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":133,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":1020.5,
+                 "y":1202.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":134,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":693.5,
+                 "y":532.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":135,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":764.5,
+                 "y":539.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":136,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":1367.5,
+                 "y":807.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":137,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":1391.5,
+                 "y":907.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1909,7 +1891,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":120,
+ "nextobjectid":138,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

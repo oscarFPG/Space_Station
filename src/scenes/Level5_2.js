@@ -14,7 +14,7 @@ export default class Level5_2 extends BaseScene {
         super.create(map, tileset, 'tutorial')
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
-            delay: 2000,
+            delay: 2200,
             callbackScope: this,
             callback: this.permutar_laseres,
             loop: true

@@ -5,7 +5,7 @@ import Builder from "../../managers/Builder";
 
 export default class AmmoBoxMachineGunBullet extends Object {
 
-    static NUM_BULLETS = 30;
+    static NUM_BULLETS = 20;
     static AMMO_WEAPON_NAME = 'machine gun'
 
     constructor(scene, x, y) {

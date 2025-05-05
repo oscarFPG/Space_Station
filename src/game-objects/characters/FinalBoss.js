@@ -6,7 +6,7 @@ import Battery from '../objects/Battery.js'
 
 export default class FinalBoss extends BasedEnemy {
 
-    static VIDA = 420
+    static VIDA = 400
     static SPEED = 5
     static VALUE_COIN_DROPPED = 25
 
