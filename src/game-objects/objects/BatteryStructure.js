@@ -8,7 +8,7 @@ export default class BatteryStructure extends Object {
 	static OPENING_TIME = 2000
 
 	constructor(scene, x, y, doorsID, numBaterias) {
-		super(scene, x, y, BatteryStructure.TEXTURE_ON_LOW)
+		super(scene, x, y, BatteryStructure.TEXTURE_ON_LOW, false)
 		this.body.setSize(160, 160)
 		this.body.setOffset(-10, -20)
 
@@ -100,7 +100,6 @@ export default class BatteryStructure extends Object {
 	}
 
 	destroyObject(){
-		this._textoInteraccion.destroy()
 		this.closeNoteWindow()
 		this.destroy()
 	}
@@ -109,5 +108,4 @@ export default class BatteryStructure extends Object {
 		this.delayedClose.remove()
 		this.delayedClose = null
 	}
-
 }

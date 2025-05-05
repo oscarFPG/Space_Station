@@ -4,10 +4,10 @@ import Object from "../base-game-objects/Object";
 
 export default class Shield extends Object {
 
-    static AUMENTO_ESCUDO = 5
+    static AUMENTO_ESCUDO = 7.5;
 
     constructor(scene, x, y) {
-        super(scene, x, y, Builder.OBJ_ESCUDO)
+        super(scene, x, y, Builder.OBJ_ESCUDO, true)
         this.body.setSize(65, 65)
         this.body.setOffset(27, 27)
 
@@ -38,5 +38,5 @@ export default class Shield extends Object {
         player.shieldBoost(Shield.AUMENTO_ESCUDO)
         this.destroyObject()
     }
-
+    getIsInteractive() { return true}
 }

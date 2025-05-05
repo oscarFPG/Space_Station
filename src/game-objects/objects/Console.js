@@ -8,7 +8,7 @@ export default class Console extends Object {
 	static TEXTURE = 'consoleBlocked'
 
 	constructor(scene, x, y, password, laserID) {
-		super(scene, x, y, Console.TEXTURE);
+		super(scene, x, y, Console.TEXTURE, true);
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
 
@@ -94,7 +94,7 @@ export default class Console extends Object {
 			.text(panelX + 120, panelY - 100, 'X', {
 			fontSize: '24px',
 			fill: '#fff',
-			backgroundColor: '#aa0000'
+			backgroundColor: '#009c9c'
 			})
 			.setPadding(5)
 			.setOrigin(0.5)
@@ -151,7 +151,7 @@ export default class Console extends Object {
 			.text(panelX - 50, panelY + 140, 'Delete', {
 			fontSize: '20px',
 			fill: '#fff',
-			backgroundColor: '#aa0000'
+			backgroundColor: '#777'
 			})
 			.setPadding(10)
 			.setOrigin(0.5)
@@ -168,7 +168,7 @@ export default class Console extends Object {
 			.text(panelX + 50, panelY + 140, 'Enter', {
 			fontSize: '20px',
 			fill: '#fff',
-			backgroundColor: '#00aa00'
+			backgroundColor: '#009c9c'
 			})
 			.setPadding(10)
 			.setOrigin(0.5)
@@ -230,5 +230,5 @@ export default class Console extends Object {
 	desactivar_laseres(){
 		this.scene.desactivar_laseres(this._laserId)
 	}
-
+	getIsInteractive() { return true}
 }

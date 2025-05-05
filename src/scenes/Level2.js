@@ -12,7 +12,6 @@ export default class Level2 extends BaseScene {
         var map = this.make.tilemap({ key: 'map_level_2', tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
         super.create(map, tileset, 'Level3')
-        //this._nextScene = 'Level2';
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
             delay: 2000,
@@ -24,14 +23,14 @@ export default class Level2 extends BaseScene {
 
     activar_todos_los_laseres(){
         this.listaLaseres.forEach(laser => {
-            if(laser.get_laser_ID() != 0)
+            if(!laser.get_laser_isStatic())
                 laser.activate_laser()
         })
     }
 
     desactivar_todos_los_laseres(){
         this.listaLaseres.forEach(laser => {
-            if(laser.get_laser_ID() != 0)
+            if(!laser.get_laser_isStatic())
                 laser.disable_laser()
         })
     }

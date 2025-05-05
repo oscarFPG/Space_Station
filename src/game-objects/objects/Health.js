@@ -5,10 +5,10 @@ import Builder from "../../managers/Builder";
 
 export default class Health extends Object {
 
-    static AUMENTO_VIDA = 5;
+    static AUMENTO_VIDA = 7.5;
 
     constructor(scene, x, y) {
-        super(scene, x, y, Builder.OBJ_VIDA)
+        super(scene, x, y, Builder.OBJ_VIDA, true)
         this.body.setSize(65, 65)
         this.body.setOffset(27, 27)
         
@@ -39,5 +39,5 @@ export default class Health extends Object {
         player.healthBoost(Health.AUMENTO_VIDA)
         this.destroyObject()
     }
-
+    getIsInteractive() { return true}
 }

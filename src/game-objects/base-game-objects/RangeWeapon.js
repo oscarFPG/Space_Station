@@ -13,14 +13,19 @@ export default class RangeWeapon extends Weapon {
         sprite: undefined,      // Sprite del arma
         canBounce: undefined,   // Bool para indicar si las balas rebotan
         canDrill: undefined,    // Bool para indicar si las balas penetrar objetivos
-        muzzleOffset: undefined // Posicion relativa del cañon
+        muzzleOffset: undefined, // Posicion relativa del cañon
+        isEnemyWeapon:undefined,
+        laserVision: undefined
     }
 
     _ammo = {
-        type: undefined,            // Tipo de municion: 'pistola', 'subfusil', 'fusil', 'escopeta', 'sniper'
-        currentClipAmmo: undefined, // Municion del cargador actual
-        clipSize: undefined         // Municion maxima de los cargadores
+        type: undefined,              // Tipo de munición (pistola, escopeta, etc.)
+        currentClipAmmo: undefined,   // Balas actualmente en el cargador
+        clipSize: undefined,          // Tamaño del cargador
+        reserveAmmo: undefined,       // Munición extra para recargar
+        maxReserveAmmo: undefined     // Máximo de munición que puedes llevar
     }
+    
 
     #_isReloading = false
     _lastShotTime = 0; // Guarda el tiempo del último disparo
@@ -28,7 +33,6 @@ export default class RangeWeapon extends Weapon {
     constructor(scene, x, y, texture, color){
         super(scene, x, y, texture)
         this.colorLightBullet = color;
-        this.scene.add.existing(this);
     }
 
     createBullet(){
@@ -36,16 +40,16 @@ export default class RangeWeapon extends Weapon {
     }
 
     shot(targetX, targetY) {
-
+        if (this.#_isReloading) return
         console.log(`${this._specs.name} shooting`)
 
-        if(this._ammo.currentClipAmmo <= 0)
+        if (this._ammo.currentClipAmmo <= 0)
             return
 
         const now = this.scene.time.now
 
         // Comprobar si puede volver a disparar(cadencia de disparo) y si tiene municion
-        if(now - this._lastShotTime < (1 / this._specs.fireRate) * 1000 || this._ammo.currentClipAmmo <= 0)
+        if (now - this._lastShotTime < (1 / this._specs.fireRate) * 1000 || this._ammo.currentClipAmmo <= 0)
             return
 
         this._lastShotTime = now
@@ -71,25 +75,70 @@ export default class RangeWeapon extends Weapon {
         this.eliminateBulletFromClip()    
     }
 
-    reload(){
-        
-        if(this.#_isReloading || this._ammo.currentClipAmmo == this._ammo.clipSize)
-            return
-
-        this.#_isReloading = true
+    reload() {
+        if (this.#_isReloading || this._ammo.currentClipAmmo === this._ammo.clipSize || this._ammo.reserveAmmo <= 0)
+            return;
+    
+        this.#_isReloading = true;
+    
         this.scene.time.delayedCall(this._specs.reloadTime * 1000, () => {
-            var bulletsUsed = Math.abs(this._ammo.clipSize - this._ammo.currentClipAmmo)
-            this._ammo.currentClipAmmo = this._ammo.clipSize
-            this.#_isReloading = false
-        }, null)
-    }
+            if (!this._specs.isEnemyWeapon) {
+                const needed = this._ammo.clipSize - this._ammo.currentClipAmmo
+                const bulletsToLoad = Math.min(needed, this._ammo.reserveAmmo)
+        
+                this._ammo.currentClipAmmo += bulletsToLoad
+                this._ammo.reserveAmmo -= bulletsToLoad
+            } 
+            else 
+                this._ammo.currentClipAmmo = this._ammo.clipSize
 
+                this.#_isReloading = false
+        });
+
+    }
+    
     eliminateBulletFromClip(){
         this._ammo.currentClipAmmo--
+    }
+
+    getIsReloading(){
+        return this.#_isReloading
     }
 
     getBulletsFromClip(){
         return this._ammo.currentClipAmmo
     }
-
+    getBulletsFromReserve(){
+        return this._ammo.reserveAmmo
+    }
+    getBulletsType() {
+        return this._ammo.type
+    }
+    getClipSize() {
+        return this._ammo.clipSize
+    }
+    getWeaponSprite() { 
+        return this._specs.sprite
+    }
+    getReloadTime() {
+        return this._specs.reloadTime
+    }
+    getLaserVision() {
+        return this._specs.laserVision
+    }
+    setCurrentAmmo(ammo){
+        this._ammo.currentClipAmmo = ammo
+    }
+    setReserveAmmo(ammo){
+        this._ammo.reserveAmmo = ammo
+    }
+    boostAmmo(ammo){
+        const newReserve = this._ammo.reserveAmmo + ammo
+        if (newReserve > this._ammo.maxReserveAmmo)
+            return false
+        else {
+            this._ammo.reserveAmmo = newReserve
+            return true
+        }
+    }
 }

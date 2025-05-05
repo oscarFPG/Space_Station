@@ -68,7 +68,7 @@
          "data":[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
             15, 7, 7, 7, 7, 7, 7, 7, 7, 15, 15, 15, 15, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15,
             15, 1, 7, 7, 7, 7, 7, 7, 1, 15, 15, 15, 15, 7, 7, 7, 7, 7, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15,
-            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 15, 15,
+            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 7, 7, 7, 15, 15, 15, 15, 0, 15, 15, 15, 15, 15, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 1, 7, 7,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 0,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 15, 0, 0, 0, 0, 15,
@@ -481,6 +481,11 @@
                          "value":1
                         }, 
                         {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -512,6 +517,11 @@
                          "name":"ID",
                          "type":"int",
                          "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"isStatic",
@@ -547,6 +557,11 @@
                          "value":1
                         }, 
                         {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
                          "name":"isStatic",
                          "type":"bool",
                          "value":true
@@ -578,6 +593,11 @@
                          "name":"ID",
                          "type":"int",
                          "value":0
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
                         }, 
                         {
                          "name":"isStatic",
@@ -808,8 +828,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":304.198039681912,
-                 "y":429.419037806135
+                 "x":307.228342712215,
+                 "y":444.57055295765
                 }, 
                 {
                  "ellipse":true,
@@ -858,8 +878,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":2388.75,
-                 "y":1277
+                 "x":2385.75,
+                 "y":830
                 }, 
                 {
                  "gid":22,
@@ -914,6 +934,154 @@
                  "width":111,
                  "x":2732.5,
                  "y":695.166666666667
+                }, 
+                {
+                 "gid":68,
+                 "height":111,
+                 "id":64,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":0
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":1211.16666666667,
+                 "y":1985.83333333333
+                }, 
+                {
+                 "gid":39,
+                 "height":111,
+                 "id":68,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Name",
+                         "type":"string",
+                         "value":"weapon2"
+                        }, 
+                        {
+                         "name":"ReserveAmmo",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"currentAmmo",
+                         "type":"int",
+                         "value":8
+                        }],
+                 "rotation":0,
+                 "type":"Weapon",
+                 "visible":true,
+                 "width":111,
+                 "x":2204.83333333333,
+                 "y":333.166666666667
+                }, 
+                {
+                 "height":41.5,
+                 "id":69,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#ffffff",
+                     "fontfamily":"Nirmala UI",
+                     "pixelsize":27,
+                     "text":"Q",
+                     "wrap":true
+                    },
+                 "type":"Text",
+                 "visible":true,
+                 "width":44.5,
+                 "x":2611.40166666667,
+                 "y":365
+                }, 
+                {
+                 "height":48.6225,
+                 "id":70,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#aaff00",
+                     "fontfamily":"Seven Segment",
+                     "pixelsize":34,
+                     "text":"CHANGE WEAPON",
+                     "wrap":true
+                    },
+                 "type":"Text",
+                 "visible":true,
+                 "width":255,
+                 "x":2352.68166666667,
+                 "y":368.416
+                }, 
+                {
+                 "gid":39,
+                 "height":111,
+                 "id":72,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Name",
+                         "type":"string",
+                         "value":"weapon2"
+                        }, 
+                        {
+                         "name":"ReserveAmmo",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"currentAmmo",
+                         "type":"int",
+                         "value":10
+                        }],
+                 "rotation":0,
+                 "type":"Weapon",
+                 "visible":true,
+                 "width":111,
+                 "x":3548.5,
+                 "y":756.5
+                }, 
+                {
+                 "gid":23,
+                 "height":111,
+                 "id":73,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"health",
+                         "type":"int",
+                         "value":100
+                        }],
+                 "rotation":0,
+                 "type":"Box",
+                 "visible":true,
+                 "width":111,
+                 "x":3655.16666666667,
+                 "y":677.833333333333
+                }, 
+                {
+                 "gid":27,
+                 "height":111,
+                 "id":75,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":3548.5,
+                 "y":882.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -922,7 +1090,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":64,
+ "nextobjectid":76,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -932,12 +1100,64 @@
          "columns":8,
          "firstgid":1,
          "image":"..\/blocks\/Tilemap2.png",
-         "imageheight":444,
+         "imageheight":555,
          "imagewidth":888,
          "margin":0,
          "name":"Tilemap2",
          "spacing":0,
-         "tilecount":32,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":41,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":81,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":121,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":161,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
          "tileheight":111,
          "tilewidth":111
         }],

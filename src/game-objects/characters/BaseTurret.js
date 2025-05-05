@@ -1,19 +1,15 @@
 import BasedEnemy from '../base-game-objects/BaseEnemy.js'
 import ClassIA from '../../factories/ClassIA.js';
+import Builder from '../../managers/Builder.js';
 import WeaponFactory from '../../factories/WeaponFactory.js';
 
 export default class BaseTurret extends BasedEnemy {
-
-    static BASE_ENEMY_WEAPON = 'turretWeapon';
-    static BASE_ENEMY_TEXTURE = 'turretBase';
 
     static VIDA = 25
     static SPEED = 10
 
     constructor(scene, x, y){
-        super(scene, x, y, {texture: BaseTurret.BASE_ENEMY_TEXTURE, x: 30, y: 30}, BaseTurret.VIDA, BaseTurret.SPEED)
-
-        this.add_weapon()
+        super(scene, x, y, {texture: Builder.BASE_TURRET_TEXTURE, x: 30, y: 30}, BaseTurret.VIDA, BaseTurret.SPEED)
         this._enemyParameters.weapon.rotation = Phaser.Math.DegToRad(90); // Rota 90 grados
 
         this.body.setSize(80, 78);

@@ -7,7 +7,7 @@ export default class BaseTurretWeapon extends RangeWeapon {
     static TURRET_DAMAGE = 10;
 
     constructor(scene, x, y){
-        super(scene, x, y, Builder.WEAPON_TURRENT, 880088);
+        super(scene, x, y, Builder.WEAPON_TURRET, 880088);
 
         // Gun config
         this._specs.damage = BaseTurretWeapon.TURRET_DAMAGE;
@@ -17,15 +17,18 @@ export default class BaseTurretWeapon extends RangeWeapon {
         this._specs.canDrill = false;
         this._specs.fireRate = 1;
         this._specs.reloadTime = 2;
-        this._specs.sprite = Builder.WEAPON_TURRENT;
+        this._specs.sprite = Builder.WEAPON_TURRET;
         this._specs.weight = 1;
+        this._specs.isEnemyWeapon = true;
+        this._specs.laserVision = false;
         
-        this._ammo.type = 'pistola'
+        this._ammo.type = 'machine gun'
         this._ammo.clipSize = 20;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
+        this._ammo.reserveAmmo = this._ammo.clipSize
     }
     createBullet(bulletX, bulletY){
-                return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_TURRET, this.colorLightBullet)
+            return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_TURRET, this.colorLightBullet)
     }
 
 }
