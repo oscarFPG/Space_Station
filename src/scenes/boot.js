@@ -80,10 +80,19 @@ import STORE from '../../assets/store/example.png'
 import MAINMENU_MUSIC from '../../audio/music/SpaceStation-Menu.mp3'
 import ClickSOund from '../../audio/effects/posibleClickSound.mp3'
 import GUN_SOUND from '../../audio/effects/gunSound.mp3'
+import IMPACT_BULLET_SOUND from '../../audio/effects/impact_shot.mp3'
+import PLAYER_DEAD from '../../audio/effects/Player_dead_sound.mp3'
 import CONSOLE_SOUND from '../../audio/effects/consoleSoundmp3.mp3'
-import AMBIENTE from '../../audio/music/ambiente.mp3'  
+import BOX_BREAKING from '../../audio/effects/box_breaking.mp3'
+import PICK_UP_HEALTH from '../../audio/effects/pick_up_health.mp3'
+import PICK_UP_GUN from '../../audio/effects/pick_up_gun.mp3'
+import RELOADING_WEAPON from '../../audio/effects/reloading_weapon.mp3'
+import AMBIENTE from '../../audio/music/Escape_station_ambient.mp3'  
+import FINAL_BOSS_THEME from '../../audio/music/FinalBossMusic.mp3'  
+import FINAL_GAME_THEME from '../../audio/music/Final_theme_Escape_Station.mp3'  
 import ERROR from  '../../audio/effects/error1.mp3'
 import SUCCESS from '../../audio/effects/acierto.mp3'
+
 
 
 export default class Boot extends BaseScene {
@@ -178,7 +187,17 @@ export default class Boot extends BaseScene {
         this.load.audio('ClickSOund', ClickSOund)
         this.load.audio('gun_sound',GUN_SOUND)
         this.load.audio('console_sound', CONSOLE_SOUND)
+        this.load.audio('box_breaking', BOX_BREAKING)
+
+        this.load.audio('pick_up_health', PICK_UP_HEALTH)
+        this.load.audio('pick_up_gun', PICK_UP_GUN)
+        this.load.audio('reloading_gun', RELOADING_WEAPON)
+
         this.load.audio('ambiente', AMBIENTE)
+        this.load.audio('player_dead', PLAYER_DEAD)
+        this.load.audio('impact_shot', IMPACT_BULLET_SOUND)
+        this.load.audio('final boss', FINAL_BOSS_THEME)
+        this.load.audio('final game', FINAL_GAME_THEME)
         this.load.audio('error',ERROR)
         this.load.audio('success',SUCCESS)
     }

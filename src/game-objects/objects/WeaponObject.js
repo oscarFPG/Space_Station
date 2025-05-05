@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import Object from '../base-game-objects/Object.js'
 import WeaponFactory from '../../factories/WeaponFactory.js'
+import Options from '../../managers/Options.js';
 
 
 export default class WeaponObject extends Object {
@@ -24,6 +25,8 @@ export default class WeaponObject extends Object {
             player.recogerArma(this._texturaArma, this._currentAmmo, this._reserveAmmo)
         else 
             player.intercambiarArma(this.x, this.y, this._texturaArma, this._currentAmmo, this._reserveAmmo)
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'pick_up_gun', { isMusic: false, volume: 1.0 });
         this.destroyObject()
     }
 

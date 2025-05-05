@@ -139,33 +139,59 @@ export default class BaseScene extends Phaser.Scene {
                 this.cameras.main.fadeOut(700, 0, 0, 0);
             }
         }
-        this.listaVendedores.forEach(vendedor => {
-            vendedor.update();
-        });
-        this.listaPuertas.forEach(door => {
-            door.update();
-        });
-        this._listaEnemigos.forEach(enemigo => {
-            enemigo.update();
-        });
-        this.listaVidas.forEach(healthItem => {
-            healthItem.update(time);
-        });
-        this.listaEscudos.forEach(shieldItem => {
-            shieldItem.update(time);
-        });
-        this.listaBaterias.forEach(batteryItem => {
-            batteryItem.update(time);
-        });
-        this.listaNotas.forEach(nota => {
-            nota.update(time);
-        });
-        this.listaMuniciones.forEach(ammo => {
-            ammo.update(time);
-        });
-        this.listaObjetosArmas.forEach(arma => {
-            arma.update(time);
-        });
+        if(this.listaVendedores) {
+            this.listaVendedores.forEach(vendedor => {
+                vendedor.update();
+            });
+        }
+
+        if (this.listaPuertas) {
+            this.listaPuertas.forEach(door => {
+                door.update();
+            });
+        }
+        
+        if (this._listaEnemigos) {
+            this._listaEnemigos.forEach(enemigo => {
+                enemigo.update();
+            });
+        }
+        
+        if (this.listaVidas) {
+            this.listaVidas.forEach(healthItem => {
+                healthItem.update(time);
+            });
+        }
+        
+        if (this.listaEscudos) {
+            this.listaEscudos.forEach(shieldItem => {
+                shieldItem.update(time);
+            });
+        }
+        
+        if (this.listaBaterias) {
+            this.listaBaterias.forEach(batteryItem => {
+                batteryItem.update(time);
+            });
+        }
+        
+        if (this.listaNotas) {
+            this.listaNotas.forEach(nota => {
+                nota.update(time);
+            });
+        }
+        
+        if (this.listaMuniciones) {
+            this.listaMuniciones.forEach(ammo => {
+                ammo.update(time);
+            });
+        }
+        
+        if (this.listaObjetosArmas) {
+            this.listaObjetosArmas.forEach(arma => {
+                arma.update(time);
+            });
+        }        
         
     }
 
@@ -361,9 +387,11 @@ export default class BaseScene extends Phaser.Scene {
 
     gameOver() {
         console.log('Game over');
-    
+        this.ambient = this.sound.add('player_dead') 
+        this.ambient.setVolume(0.5)
+        this.ambient.play()
         const blurPipeline = this.cameras.main.postFX.addBlur(4); 
-    
+        
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
         this.time.delayedCall(400, () => {
@@ -375,6 +403,7 @@ export default class BaseScene extends Phaser.Scene {
     get_player(){
         return this._player
     }
+
 
     config_jugador(x, y, health, shield, money, firstWeapon, secondaryWeapon) {
 
@@ -424,7 +453,9 @@ export default class BaseScene extends Phaser.Scene {
         // Crear el grupo global de balas
         this._grupoBalas = this.physics.add.group()
         const onBulletCollision = (obj1, obj2) => {
-
+            this.ambient = this.sound.add('impact_shot') 
+            this.ambient.setVolume(0.15)
+            this.ambient.play()
             let bullet = obj1 instanceof Bullet ? obj1 : obj2
             let target = bullet === obj1 ? obj2 : obj1
             // Si es un objeto que recibe daño -> Aplicar daño de la bala
@@ -490,11 +521,10 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     config_musica(){
-
-        //this.ambient = this.sound.add('ambiente')
-        //const ambient = this.sound.add('ambiente')
-        //this.ambient.setVolume(0.5)
-        //this.ambient.play()
+        this.sound.stopAll();
+        this.ambient = (this.scene.key == 'Level5_2') ? this.sound.add('final boss') : this.sound.add('ambiente')
+        this.ambient.setVolume(0.5)
+        this.ambient.play()
     }
 
     config_efectos_sonido(){
@@ -512,5 +542,10 @@ export default class BaseScene extends Phaser.Scene {
     crearColliderConObjetos(gameobject){
         this.physics.add.collider(gameobject, this._layerObjeto)
     }
-
+    putFinalTheme(value) { 
+        this.sound.stopAll();
+        this.ambient = this.sound.add('final game')
+        this.ambient.setVolume(0.5)
+        this.ambient.play()
+    }
 }

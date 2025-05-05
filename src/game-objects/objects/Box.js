@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import Builder from "../../managers/Builder";
 import Object from '../base-game-objects/Object.js'
+import Options from '../../managers/Options.js';
 
 export default class Box extends Object {
     
@@ -34,11 +35,14 @@ export default class Box extends Object {
 			this.clearTint();
 		})
 
-		if(this._vida <= 0)
+		if(this._vida <= 0) {
             this.destroyObject()
+        }
     }
 
     destroyObject(){
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'box_breaking', { isMusic: false, volume: 1.0 });
         this.play('broken_box')
         this.body.checkCollision.none = true;
     }
