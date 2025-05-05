@@ -20,10 +20,13 @@ export default class MachineGunEnemy extends RangeWeapon {
         this._specs.reloadTime = 2;
         this._specs.sprite = Builder.ENEMY_WEAPON_MACHINE_GUN;
         this._specs.weight = 1;
+        this._specs.isEnemyWeapon = true;
+        this._specs.laserVision = false;
         
-        this._ammo.type = 'pistola'
+        this._ammo.type = 'machine gun'
         this._ammo.clipSize = 25;
         this._ammo.currentClipAmmo = this._ammo.clipSize;
+        this._ammo.reserveAmmo = this._ammo.clipSize
     }
 
     createBullet(bulletX, bulletY){

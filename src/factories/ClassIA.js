@@ -78,7 +78,7 @@ export default class ClassIA {
         if (distanceToPlayer <= enemy._enemyParameters.shootingRange) {
             if(enemy._enemyParameters.weapon._ammo.currentClipAmmo <= 0)
                 enemy._enemyParameters.weapon.reload();
-            else
+            else if(!enemy.getIsDead())
                 enemy._enemyParameters.weapon.shot(player.x, player.y);
         }
         enemy._enemyParameters.weapon.setRotation(chaseAngle);
@@ -106,7 +106,7 @@ export default class ClassIA {
         if (distanceToPlayer <= enemy._enemyParameters.shootingRange) {
             if(enemy._enemyParameters.weapon._ammo.currentClipAmmo <= 0)
                 enemy._enemyParameters.weapon.reload();
-            else
+            else if(!enemy.getIsDead())
                 enemy._enemyParameters.weapon.shot(player.x, player.y);
         }
         enemy._enemyParameters.weapon.setRotation(chaseAngle);

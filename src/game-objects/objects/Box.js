@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import Builder from "../../managers/Builder";
 import Object from '../base-game-objects/Object.js'
 
 export default class Box extends Object {
@@ -7,7 +8,7 @@ export default class Box extends Object {
     static VIDA_INICIAL = 10;
 
     constructor(scene, x, y) {
-        super(scene, x, y);
+        super(scene, x, y, Builder.OBJ_CAJA, false);
         this.body.setImmovable(true);
         this.body.setAllowGravity(false)
         this.body.setSize(60, 90);	

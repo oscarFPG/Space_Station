@@ -3,7 +3,7 @@ import Box from './Box.js'
 export default class BoxHard extends Box {
     
     constructor(scene, x, y) {
-        super(scene, x, y)
+        super(scene, x, y, Builder.OBJ_CAJA2, false)
         this._vida += Box.VIDA_INICIAL;
     }
 

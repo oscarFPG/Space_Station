@@ -39,10 +39,13 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         this._atributos.vida -= cantidad
         this.actualizar_color_efecto(this._atributos.vida / BaseActor.MAX_VIDA)
 
-        if(this._atributos.vida <= 0) {
-            this.dropCoin()
+        if(this.getIsDead()) {
+            this.dropObject()
             this.eliminar()
         }
+    }
+    getIsDead() {
+        return this._atributos.vida <= 0
     }
 
     eliminar(){
@@ -56,7 +59,7 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         this.scene.tweens.add({
             targets: this,        
             alpha: 0,             // hasta transparente
-            duration: 300,        // medio segundo (ajusta a tu gusto)
+            duration: 350,        // medio segundo (ajusta a tu gusto)
             ease: 'Quad.easeOut',
             onComplete: () => {
                 super.destroy(true)
@@ -64,8 +67,8 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         })
     }
 
-    dropCoin(){
-        throw new Error('El metodo `dropCoin` debe sobreescribirse para crear monedas');
+    dropObject(){
+        throw new Error('El metodo `dropObject` debe sobreescribirse para crear objetos');
     }
     actualizar_color_efecto(porcentaje){
 

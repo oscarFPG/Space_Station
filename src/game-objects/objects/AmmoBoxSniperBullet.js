@@ -3,20 +3,20 @@ import Object from "../base-game-objects/Object";
 import Builder from "../../managers/Builder";
 
 
-export default class AmmoBoxBaseBullet extends Object {
+export default class AmmoBoxSniperBullet extends Object {
 
-    static NUM_BULLETS = 20;
-    static AMMO_WEAPON_NAME = 'pistol'
+    static NUM_BULLETS = 5;
+    static AMMO_WEAPON_NAME = 'sniper'
 
     constructor(scene, x, y) {
-        super(scene, x, y, Builder.OBJ_AMMO_BOX_BASE, true)
+        super(scene, x, y, Builder.OBJ_AMMO_BOX_SNIPER, true)
         this.body.setSize(65, 65)
         this.body.setOffset(27, 27)
         
         this._displayHelperText = true
         this._interactiveDistance = 110
-        this.setText("Pick up PISTOL AMMO")
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x00DDDD, 0.7);
+        this.setText("Pick up SNIPER AMMO")
+        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xDD2255, 0.7);
     }
 
     player_overlaps(player) {
@@ -27,12 +27,11 @@ export default class AmmoBoxBaseBullet extends Object {
         this.accion(player)
     }
 
-
     accion(player){
 
         if(!player.isUseKeyJustPressed())
             return       
-        if (player.pickAmmo(AmmoBoxBaseBullet.AMMO_WEAPON_NAME, AmmoBoxBaseBullet.NUM_BULLETS)) {
+        if (player.pickAmmo(AmmoBoxSniperBullet.AMMO_WEAPON_NAME, AmmoBoxSniperBullet.NUM_BULLETS)) {
             this.removeLight();
             this.destroyObject()
         }

@@ -5,7 +5,7 @@ import Object from "../base-game-objects/Object.js"
 export default class Battery extends Object {
     
     constructor(scene, x, y) {
-        super(scene, x, y, Builder.OBJ_BATERIA)
+        super(scene, x, y, Builder.OBJ_BATERIA, true)
         this.body.setSize(65, 65)
         this.body.setOffset(27, 27)
         this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffff00, 0.7);
@@ -27,5 +27,6 @@ export default class Battery extends Object {
         player.pickBattery()
         this.destroyObject()
     }
+    getIsInteractive() { return true}
 
 }

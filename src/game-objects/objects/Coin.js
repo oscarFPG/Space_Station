@@ -9,7 +9,7 @@ export default class Coin extends Object {
     static DEFAULT_VALUE = 15
 
     constructor(scene, x, y, value) {
-        super(scene, x, y, Builder.OBJ_MONEDA)
+        super(scene, x, y, Builder.OBJ_MONEDA, true)
         this.body.setSize(80, 80)
         this.body.setOffset(20, 20)
         this.value = (value == null) ? Coin.DEFAULT_VALUE : value
@@ -22,5 +22,5 @@ export default class Coin extends Object {
         this.removeLight();
         this.destroyObject()
     }
-
+    getIsInteractive() { return true}
 }

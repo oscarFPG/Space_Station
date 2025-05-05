@@ -8,7 +8,7 @@ export default class Console extends Object {
 	static TEXTURE = 'consoleBlocked'
 
 	constructor(scene, x, y, password, laserID) {
-		super(scene, x, y, Console.TEXTURE);
+		super(scene, x, y, Console.TEXTURE, true);
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
 
@@ -230,5 +230,5 @@ export default class Console extends Object {
 	desactivar_laseres(){
 		this.scene.desactivar_laseres(this._laserId)
 	}
-
+	getIsInteractive() { return true}
 }

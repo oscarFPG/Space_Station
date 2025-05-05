@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="32" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="85">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="32" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="93">
  <editorsettings>
   <export target="Level4.json" format="json"/>
  </editorsettings>
@@ -174,13 +174,12 @@
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
-  <object id="13" type="ShieldKit" gid="21" x="1560.17" y="1003.33" width="111" height="111">
+  <object id="13" type="ShieldKit" gid="21" x="1568.56" y="999.33" width="111" height="111">
    <properties>
     <property name="value" type="int" value="15"/>
    </properties>
   </object>
   <object id="14" type="Battery" gid="19" x="661.167" y="1332.83" width="111" height="111"/>
-  <object id="15" type="AmmoBox" gid="28" x="1652.83" y="1005" width="111" height="111"/>
   <object id="17" type="HealthKit" gid="20" x="663.833" y="1224" width="111" height="111">
    <properties>
     <property name="value" type="int" value="15"/>
@@ -391,18 +390,12 @@
   <object id="65" type="BatteryStructure" gid="12" x="2332" y="776.913" width="111" height="111">
    <properties>
     <property name="ID" type="int" value="0"/>
-    <property name="numBatteries" type="int" value="3"/>
+    <property name="numBatteries" type="int" value="4"/>
    </properties>
   </object>
   <object id="66" type="Battery" gid="19" x="214.5" y="2216.5" width="111" height="111"/>
   <object id="67" type="Battery" gid="19" x="2120.5" y="2890.5" width="111" height="111"/>
-  <object id="68" type="AmmoBox" gid="28" x="220.258" y="2671.77" width="111" height="111"/>
   <object id="69" type="AmmoBox" gid="28" x="2542.5" y="1992.5" width="111" height="111"/>
-  <object id="70" type="ShieldKit" gid="21" x="333" y="2664" width="111" height="111">
-   <properties>
-    <property name="value" type="int" value="15"/>
-   </properties>
-  </object>
   <object id="71" type="Coin" gid="22" x="658.5" y="3428.5" width="111" height="111">
    <properties>
     <property name="value" type="int" value="10"/>
@@ -466,6 +459,31 @@
   </object>
   <object id="84" name="teclas tutorial" type="Text" x="2562.17" y="698.885" width="209" height="53.5624">
    <text fontfamily="Seven Segment" pixelsize="45" wrap="1" color="#55ffff" halign="center">Room 2</text>
+  </object>
+  <object id="85" type="Battery" gid="19" x="335.833" y="2629.17" width="111" height="111"/>
+  <object id="86" type="AmmoBox" gid="27" x="666.712" y="456.833" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="87" type="Weapon" gid="39" x="208.258" y="2696.38" width="111" height="111">
+   <properties>
+    <property name="Name" value="weapon3"/>
+    <property name="ReserveAmmo" type="int" value="0"/>
+    <property name="currentAmmo" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="89" type="AmmoBox" gid="28" x="364.5" y="2754.5" width="111" height="111">
+   <properties>
+    <property name="ID" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="91" type="Weapon" gid="39" x="1655.5" y="996.5" width="111" height="111">
+   <properties>
+    <property name="Name" value="weapon1"/>
+    <property name="ReserveAmmo" type="int" value="0"/>
+    <property name="currentAmmo" type="int" value="12"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

@@ -5,11 +5,11 @@ import Builder from '../../managers/Builder'
 
 export default class Note extends Object {
   
-	static AUTO_CLOSING_TIME = 3000
+	static AUTO_CLOSING_TIME = 4000
 
 
 	constructor(scene, x, y, text) {
-		super(scene, x, y, Builder.OBJ_NOTA)
+		super(scene, x, y, Builder.OBJ_NOTA, true)
 		this.body.setSize(90, 90)
 		this.body.setOffset(15, 15)
 		this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7)
@@ -77,4 +77,5 @@ export default class Note extends Object {
 		this.noteElements = null
 		this.windowOpen = false
 	}
+	getIsInteractive() { return true}
 }

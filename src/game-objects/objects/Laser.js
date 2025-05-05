@@ -7,7 +7,7 @@ export default class Laser extends Object {
 
     constructor(scene, x, y, ID, isHorizontal, isStatic) {
         var texture = (!isHorizontal) ? Builder.OBJ_LASER_VERTICAL: Builder.OBJ_LASER_HORIZONTAL;
-        super(scene, x, y, texture)
+        super(scene, x, y, texture, false)
         this.body.setOffset(0, 0)
         if (!isHorizontal)
             this.body.setSize(20, 110)
@@ -54,16 +54,11 @@ export default class Laser extends Object {
     
 
     activate_laser(){
-        this.light = this.scene.lights.addLight(this.x, this.y, 300, 0xffffff, 0.7);
         this.body.checkCollision.none = false
         this.setAlpha(1)
     }   
 
     disable_laser(){
-        if (this.light) {
-            this.scene.lights.removeLight(this.light);
-            this.light = null; 
-        }
         this.body.checkCollision.none = true
         this.scene.tweens.add({
             targets: this,
@@ -74,5 +69,4 @@ export default class Laser extends Object {
 
     get_laser_ID(){ return this._laserID }
     get_laser_isStatic(){ return this.isStatic }
-
 }

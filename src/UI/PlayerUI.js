@@ -48,7 +48,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._puntosDeEscudo = this.crear_barra_escudo()
         this._contadorBaterias = this.crear_contador_baterias(bateriasIniciales)
         this._contadorMonedas = this.crear_contador_monedas(dineroInicial)
-        this._contadorBalas = this.crear_contador_balas()
+        this._contadorBalas = this.crear_contador_balas(null, null)
         
         this.add(this._barraVida)
         this.add(this._puntosDeVida)
@@ -56,6 +56,8 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this.add(this._contadorMonedas)
         this.add(this._contadorBalas)
     }
+
+
 
     crear_barra_vida(){
 
@@ -120,10 +122,10 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return baterias
     }
 
-    crear_contador_balas(){
+    crear_contador_balas(currentBullets, reserveBullets){
 
         const balas = this.scene.add.container(PlayerUI.POS_X_BALAS, PlayerUI.POS_Y_BALAS)
-        const cargador = this.scene.add.text(0, 0, '-')
+        const cargador = this.scene.add.text(0, 0, currentBullets)
         cargador.setFontSize(PlayerUI.DIMENSION_TEXTO);
         cargador.setOrigin(1, 0.5)  // Importante -> crece el texto hacia la izquierda, no a la derecha
 
@@ -131,7 +133,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         separador.setFontSize(PlayerUI.DIMENSION_TEXTO);
         separador.setOrigin(1, 0.5)
 
-        const reserva = this.scene.add.text(separador.x + 2, 0, '-')
+        const reserva = this.scene.add.text(separador.x + 2, 0, reserveBullets)
         reserva.setFontSize(PlayerUI.DIMENSION_TEXTO);
         reserva.setOrigin(0, 0.5)
 
@@ -143,7 +145,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         return balas
     }
 
-    actualizar_UI(vidaActual, escudoActual, dineroActual, bateriasActuales, balasCargador, balasReserva){
+    actualizar_UI(vidaActual, escudoActual, dineroActual, bateriasActuales, balasCargador, balasReserva, balasMaximas){
 
         const porcentajeVida = Math.min(Math.max(vidaActual / this._MAX_VIDA, 0), 1)
         const porcentajeEscudo = Math.min(Math.max(escudoActual / this._MAX_ESCUDO, 0), 1)
@@ -180,11 +182,16 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
             .setFontSize(PlayerUI.DIMENSION_TEXTO);
 
 
-        // MUY PROVISIONAL
-        if(balasCargador < 8){
+        const porcentajeBalas = balasCargador / balasMaximas;
+
+        if (porcentajeBalas <= 0.15) {
             cargador.setTint(0xff0000)
             separador.setTint(0xff0000)
             reserva.setTint(0xff0000)
+        } else {
+            cargador.clearTint();
+            separador.clearTint();
+            reserva.clearTint();
         }
 
         this._contadorBalas.add(cargador)

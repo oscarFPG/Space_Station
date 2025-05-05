@@ -10,13 +10,14 @@ import Seller from '../game-objects/objects/Seller.js'
 import Health from '../game-objects/objects/Health.js'
 import Shield from '../game-objects/objects/Shield.js'
 import Coin from '../game-objects/objects/Coin.js'
-import AmmoBoxBaseBullet from '../game-objects/objects/AmmoBoxBaseBullet.js'
+import WeaponObject from '../game-objects/objects/WeaponObject.js'
 import Box from '../game-objects/objects/Box.js'
 import BoxHard from '../game-objects/objects/BoxHard.js'
 import BatteryStructure from '../game-objects/objects/BatteryStructure.js'
 import Door from '../game-objects/objects/Door.js'
 import EnemyFactory from '../factories/EnemyFactory.js';
 import WeaponFactory from '../factories/WeaponFactory.js';
+import AmmoFactory from '../factories/AmmoFactory.js';
 import Battery from '../game-objects/objects/Battery.js'
 
 
@@ -63,8 +64,9 @@ export default class BaseScene extends Phaser.Scene {
         this.listaVidas = []
         this.listaBaterias = []
         this.listaMonedas = []
-        this.listaMunicionBase = []
+        this.listaMuniciones = []
         this.listaVendedores = []
+        this.listaObjetosArmas = []
 
         //Capa de todos los textos del nivel
         this.uiLayer = this.add.layer();
@@ -158,9 +160,13 @@ export default class BaseScene extends Phaser.Scene {
         this.listaNotas.forEach(nota => {
             nota.update(time);
         });
-        this.listaMunicionBase.forEach(ammo => {
+        this.listaMuniciones.forEach(ammo => {
             ammo.update(time);
         });
+        this.listaObjetosArmas.forEach(arma => {
+            arma.update(time);
+        });
+        
     }
 
     crear_objetos(map) {
@@ -171,12 +177,14 @@ export default class BaseScene extends Phaser.Scene {
         this.firstWeapon = null
         if (this.playerWeapon1) {
             this.firstWeapon = WeaponFactory.crearArma(this.playerWeapon1.key, this, this.playerWeapon1.offset);
-            this.firstWeapon.setAmmo(this.playerWeapon1.ammo);
+            this.firstWeapon.setCurrentAmmo(this.playerWeapon1.CurrentAmmo);
+            this.firstWeapon.setReserveAmmo(this.playerWeapon1.ReserveAmmo);
         }
         this.secondWeapon = null;
         if (this.playerWeapon2) {
             this.secondWeapon = WeaponFactory.crearArma(this.playerWeapon2.key, this, this.playerWeapon2.offset);
-            this.secondWeapon.setAmmo(this.playerWeapon2.ammo);
+            this.secondWeapon.setCurrentAmmo(this.playerWeapon2.CurrentAmmo);
+            this.secondWeapon.setReserveAmmo(this.playerWeapon2.ReserveAmmo);
         }
         this._player = this.config_jugador(playerRespawnPosition.x, playerRespawnPosition.y,
             this.playerHealth,
@@ -205,6 +213,18 @@ export default class BaseScene extends Phaser.Scene {
                 const type = object.properties[0].value
                 const enemigo = this.addEnemy(type, object.x, object.y)
                 this._listaEnemigos.push(enemigo)
+            }
+            else if(object.type == 'AmmoBox'){
+                const type = object.properties[0].value
+                const ammo = this.addAmmoBox(type, object.x + 55, object.y - 55)
+                this.listaMuniciones.push(ammo);
+            }
+            else if(object.type == 'Weapon'){
+                const type = object.properties[0].value
+                const reserveAmmo = object.properties[1].value
+                const currentAmmo = object.properties[2].value
+                let weaponObject = new WeaponObject(this, object.x + 55, object.y - 55, type, currentAmmo, reserveAmmo)
+                this.listaObjetosArmas.push(weaponObject);
             }
             else if(object.type === 'FinalPosition') {
                 this._finalPosition = { x: object.x, y: object.y }
@@ -257,11 +277,6 @@ export default class BaseScene extends Phaser.Scene {
                 this.listaEscudos.push(shieldObject);
                 // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
             }
-            else if(object.type == 'AmmoBox'){
-                const ammoObject = new AmmoBoxBaseBullet(this, object.x + 55, object.y - 55)
-                this.listaMunicionBase.push(ammoObject);
-                // No se coloca en la posicion del tiled si no se le suma o resta. Ni idea, pero NO QUITAR O CAMBIAR !!!
-            }
             else if(object.type == 'Coin'){
                 const coinObject = new Coin(this, object.x + 55, object.y - 55, null)
                 this.listaMonedas.push(coinObject);
@@ -280,8 +295,8 @@ export default class BaseScene extends Phaser.Scene {
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'box' })
-        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'boxHard' })
+        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'objCaja' })
+        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'objCaja2' })
 
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
         this.listaPuertas.forEach(door => {
@@ -318,6 +333,10 @@ export default class BaseScene extends Phaser.Scene {
         return EnemyFactory.createEnemy(enemyType, this, x, y)
     }
 
+    addAmmoBox(ammoType, x, y){
+        return AmmoFactory.createAmmoBox(ammoType, this, x, y)
+    }
+
     activar_laseres(laserID){
         this.listaLaseres.forEach(laser => {
             if(laserID === laser.get_laser_ID())
@@ -343,13 +362,10 @@ export default class BaseScene extends Phaser.Scene {
     gameOver() {
         console.log('Game over');
     
-        // Desenfocar usando el BlurPostFX si está disponible
-        const blurPipeline = this.cameras.main.postFX.addBlur(4); // intensidad 4 (puedes ajustar)
+        const blurPipeline = this.cameras.main.postFX.addBlur(4); 
     
-        // También puedes añadir un pequeño fundido a negro si deseas
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
-        // Espera 1 segundo antes de reiniciar la escena
         this.time.delayedCall(400, () => {
             this.scene.restart();
         });

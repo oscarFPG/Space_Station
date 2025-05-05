@@ -8,7 +8,7 @@ export default class Seller extends Object {
     static ACTIVATION_DISTANCE = 170
 
     constructor(scene, x, y) {
-        super(scene, x, y, Builder.SELLER_IDLE_ANIMATION)
+        super(scene, x, y, Builder.SELLER_IDLE_ANIMATION, true)
         this.body.setSize(65, 65)
         this.body.setOffset(27, 27)
         
@@ -52,5 +52,5 @@ export default class Seller extends Object {
 			});
     	}
     }
-
+    getIsInteractive() { return true}
 }
