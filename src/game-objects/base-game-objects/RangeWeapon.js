@@ -40,10 +40,8 @@ export default class RangeWeapon extends Weapon {
     }
 
     shot(targetX, targetY) {
-        if (this.#_isReloading) return
-        console.log(`${this._specs.name} shooting`)
 
-        if (this._ammo.currentClipAmmo <= 0)
+        if (this.#_isReloading || this._ammo.currentClipAmmo <= 0)
             return
 
         const now = this.scene.time.now
@@ -76,24 +74,24 @@ export default class RangeWeapon extends Weapon {
     }
 
     reload() {
+
         if (this.#_isReloading || this._ammo.currentClipAmmo === this._ammo.clipSize || this._ammo.reserveAmmo <= 0)
             return;
     
         this.#_isReloading = true;
-    
         this.scene.time.delayedCall(this._specs.reloadTime * 1000, () => {
             if (!this._specs.isEnemyWeapon) {
+
                 const needed = this._ammo.clipSize - this._ammo.currentClipAmmo
                 const bulletsToLoad = Math.min(needed, this._ammo.reserveAmmo)
-        
                 this._ammo.currentClipAmmo += bulletsToLoad
                 this._ammo.reserveAmmo -= bulletsToLoad
             } 
             else 
                 this._ammo.currentClipAmmo = this._ammo.clipSize
 
-                this.#_isReloading = false
-        });
+            this.#_isReloading = false
+        })
 
     }
     
@@ -133,6 +131,7 @@ export default class RangeWeapon extends Weapon {
         this._ammo.reserveAmmo = ammo
     }
     boostAmmo(ammo){
+        
         const newReserve = this._ammo.reserveAmmo + ammo
         if (newReserve > this._ammo.maxReserveAmmo)
             return false

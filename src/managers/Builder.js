@@ -2,17 +2,28 @@
 export default class Builder {
 
     // Escenas
+    static ESCENA_BOOT = 'boot'
+    static ESCENA_AJUSTES = 'ajustes'
+    static ESCENA_VOLUMEN = 'volumen'
     static ESCENA_TUTORIAL = 'tutorial'
+    static ESCENA_TIENDA = 'store'
+    static ESCENA_NIVEL1 = 'nivel1'
+    static ESCENA_NIVEL2 = 'nivel2'
+    static ESCENA_NIVEL3 = 'nivel3'
+    static ESCENA_NIVEL4 = 'nivel4'
+    static ESCENA_NIVEL5_1 = 'nivel5_1'
+    static ESCENA_NIVEL5_2 = 'nivel5_2'
+    static ESCENA_LOBBY = 'lobby'
 
     // Animaciones del personaje principal
     static IDLE_ANIMATION = 'playerIdle'
     static RUNNING_ANIMATION = 'playerRunning'
 
     // Animaciones de enemigos 
-    static BASE_ENEMY_TEXTURE = 'enemyIdle';
-    static ENEMY2_TEXTURE = '2enemyIdle';
-    static FINAL_BOSS_TEXTURE = 'bossIdle';
-    static BASE_TURRET_TEXTURE = 'turretBase';
+    static BASE_ENEMY_TEXTURE = 'enemyIdle'
+    static ENEMY2_TEXTURE = '2enemyIdle'
+    static FINAL_BOSS_TEXTURE = 'bossIdle'
+    static BASE_TURRET_TEXTURE = 'turretBase'
 
     // Animacion del vendedor
     static SELLER_IDLE_ANIMATION = 'sellerIdle'
@@ -36,9 +47,6 @@ export default class Builder {
     static AMMO_ENEMY_MACHINE_GUN = 'municionEnemigoAmetralladora'
     static AMMO_TURRET = 'municionTorreta'
 
-    // Mapas
-    static MAPA_PRIMER_NIVEL_1 = ''
-
     // Objetos
     static OBJ_VIDA = 'objVida'
     static OBJ_MONEDA = 'objMoneda'
@@ -52,6 +60,7 @@ export default class Builder {
     static OBJ_AMMO_BOX_SNIPER = 'objAmmoBoxSniper'
     static OBJ_LASER_VERTICAL = 'objLaserVertical'
     static OBJ_LASER_HORIZONTAL = 'objLaserHorizontal'
+    static OBJ_TIENDA = 'objTienda'
 
     // Interfaces
     static INTERFAZ_PLAYER = ''

@@ -1,7 +1,6 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
-import WeaponObject from '../game-objects/objects/WeaponObject.js'
-import WeaponFactory from '../factories/WeaponFactory.js'
+import StoreObject from '../game-objects/objects/StoreObject.js'
 
 
 export default class Tutorial extends BaseScene {
@@ -16,6 +15,10 @@ export default class Tutorial extends BaseScene {
         var tileset = map.addTilesetImage('Tilemap2', 'tiles')
         super.create(map, tileset, 'Level1')
 
+        const tienda = new StoreObject(this, 500, 500)
+
     }
+
+    
 
 }

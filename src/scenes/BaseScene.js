@@ -47,6 +47,7 @@ export default class BaseScene extends Phaser.Scene {
 
         this._isTransitioning = false;
     }
+    
     create(map, tileset, nextScene){
 
         if(map == null || tileset == null)
@@ -481,10 +482,11 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     config_eventos() {
+
         this.input.keyboard.on(Options.TECLA_PAUSA, () => {
-           //para pausar el juego
+            //  Pausar el juego
             this.scene.pause(this.scene.key)
-            // lanza la escena de ajustes
+            // Lanzar la escena de ajustes
             this.scene.launch('settings', { previousScene: this.scene.key })
         }, this)
     }

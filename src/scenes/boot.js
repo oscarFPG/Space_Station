@@ -87,6 +87,7 @@ import SUCCESS from '../../audio/effects/acierto.mp3'
 
 
 export default class Boot extends BaseScene {
+    
     static PLAYER_VIDA_INICIAL = 20
 	static PLAYER_ESCUDO_INICIAL = 15
 	static PLAYER_DINERO_INICIAL = 0
@@ -222,7 +223,7 @@ export default class Boot extends BaseScene {
                 weapon1: null,
                 weapon2: null
               };
-            this.scene.switch('Level5_1', status)
+            this.scene.switch(Builder.ESCENA_TUTORIAL, status)
         }   
     }
 }
