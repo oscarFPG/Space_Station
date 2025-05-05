@@ -1883,6 +1883,24 @@
                  "width":111,
                  "x":1391.5,
                  "y":907.5
+                }, 
+                {
+                 "gid":11,
+                 "height":111,
+                 "id":138,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"title",
+                         "type":"string",
+                         "value":"If anybody is reading this, we will be waiting outside for one day for any survivors to be rescued"
+                        }],
+                 "rotation":0,
+                 "type":"Note",
+                 "visible":true,
+                 "width":111,
+                 "x":1657.16666666667,
+                 "y":433.833333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1891,7 +1909,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":138,
+ "nextobjectid":139,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

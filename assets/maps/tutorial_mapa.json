@@ -936,24 +936,6 @@
                  "y":695.166666666667
                 }, 
                 {
-                 "gid":68,
-                 "height":111,
-                 "id":64,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"AmmoBox",
-                 "visible":true,
-                 "width":111,
-                 "x":1211.16666666667,
-                 "y":1985.83333333333
-                }, 
-                {
                  "gid":39,
                  "height":111,
                  "id":68,
