@@ -1676,8 +1676,8 @@
                  "type":"AmmoBox",
                  "visible":true,
                  "width":111,
-                 "x":2772.5,
-                 "y":231.5
+                 "x":339.651515151515,
+                 "y":539.015151515152
                 }, 
                 {
                  "gid":28,
@@ -1688,7 +1688,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"AmmoBox",
@@ -1783,7 +1783,7 @@
                         {
                          "name":"ReserveAmmo",
                          "type":"int",
-                         "value":0
+                         "value":5
                         }, 
                         {
                          "name":"currentAmmo",
@@ -1806,7 +1806,7 @@
                         {
                          "name":"Name",
                          "type":"string",
-                         "value":"weapon2"
+                         "value":"weapon3"
                         }, 
                         {
                          "name":"ReserveAmmo",
@@ -1816,7 +1816,7 @@
                         {
                          "name":"currentAmmo",
                          "type":"int",
-                         "value":15
+                         "value":3
                         }],
                  "rotation":0,
                  "type":"Weapon",
@@ -1824,6 +1824,78 @@
                  "width":111,
                  "x":547.833333333333,
                  "y":982.5
+                }, 
+                {
+                 "gid":28,
+                 "height":111,
+                 "id":103,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":2556.5,
+                 "y":236.5
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":104,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":348.136363636364,
+                 "y":623.045454545455
+                }, 
+                {
+                 "gid":20,
+                 "height":111,
+                 "id":105,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"HealthKit",
+                 "visible":true,
+                 "width":111,
+                 "x":1426.31818181818,
+                 "y":977.833333333333
+                }, 
+                {
+                 "gid":11,
+                 "height":111,
+                 "id":106,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"title",
+                         "type":"string",
+                         "value":"I am the last survivor, i need water..."
+                        }],
+                 "rotation":0,
+                 "type":"Note",
+                 "visible":true,
+                 "width":111,
+                 "x":2870.5,
+                 "y":1428.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1832,7 +1904,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":103,
+ "nextobjectid":107,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

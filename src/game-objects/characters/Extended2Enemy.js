@@ -39,7 +39,7 @@ export default class Extended2Enemy extends BasedEnemy {
         return WeaponFactory.crearArma(WeaponFactory.MACHINE_GUN_WEAPON_ENEMY, this.scene, {x: 40, y: 50})
     }
 
-    dropCoin() {
+    dropObject() {
         return new Coin(this.scene, this.x + 25 , this.y + 25, Extended2Enemy.VALUE_COIN_DROPPED)
     }
 

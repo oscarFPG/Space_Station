@@ -40,7 +40,7 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         this.actualizar_color_efecto(this._atributos.vida / BaseActor.MAX_VIDA)
 
         if(this.getIsDead()) {
-            this.dropCoin()
+            this.dropObject()
             this.eliminar()
         }
     }
@@ -67,8 +67,8 @@ export default class BaseActor extends Phaser.GameObjects.Container {
         })
     }
 
-    dropCoin(){
-        throw new Error('El metodo `dropCoin` debe sobreescribirse para crear monedas');
+    dropObject(){
+        throw new Error('El metodo `dropObject` debe sobreescribirse para crear objetos');
     }
     actualizar_color_efecto(porcentaje){
 

@@ -11,6 +11,7 @@ export default class Builder {
     // Animaciones de enemigos 
     static BASE_ENEMY_TEXTURE = 'enemyIdle';
     static ENEMY2_TEXTURE = '2enemyIdle';
+    static FINAL_BOSS_TEXTURE = 'bossIdle';
     static BASE_TURRET_TEXTURE = 'turretBase';
 
     // Animacion del vendedor
@@ -23,9 +24,7 @@ export default class Builder {
     static WEAPON_SNIPER = 'weapon3'
     static ENEMY_WEAPON_PISTOLA_BASE = 'weapon1Enemy'
     static ENEMY_WEAPON_MACHINE_GUN = 'weapon2Enemy'
-    static WEAPON_2 = 'weapon2'
-    static WEAPON_3 = 'weapon3'
-    static WEAPON_4 = 'weapon4'
+    static FINAL_WEAPON = 'weapon4'
     static WEAPON_TURRET = 'weaponTurret'
     static WEAPON_SLOWED_TURRET = 'weaponSlowedTurret'
 

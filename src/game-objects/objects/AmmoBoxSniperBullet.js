@@ -5,7 +5,7 @@ import Builder from "../../managers/Builder";
 
 export default class AmmoBoxSniperBullet extends Object {
 
-    static NUM_BULLETS = 3;
+    static NUM_BULLETS = 5;
     static AMMO_WEAPON_NAME = 'sniper'
 
     constructor(scene, x, y) {

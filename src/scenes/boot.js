@@ -13,6 +13,7 @@ import CharacterRunning from '../../assets/sprites/running_new.png'
 import EnemyIdle from '../../assets/sprites/idle_enemy_new.png'
 import SellerIdle from '../../assets/sprites/idle_ia_seller.png'
 import TwoEnemyIdle from '../../assets/sprites/idle_2enemy_new.png'
+import BossIdle from '../../assets/sprites/idle_boss_enemy.png'
 import boxBroken from '../../assets/objects/box_broken.png'
 import doorsOpen from '../../assets/objects/doors_open.png'
 
@@ -23,7 +24,7 @@ import ENEMY_2WEAPON from '../../assets/weapons/weapon2_enemy.png'
 import PISTOLA_BASE from '../../assets/weapons/weapon1.png'
 import MACHINE_GUN from '../../assets/weapons/weapon2.png'
 import SNIPER from '../../assets/weapons/weapon3.png'
-import WEAPON_4 from '../../assets/weapons/weapon4.png'
+import FINAL_WEAPON from '../../assets/weapons/weapon4.png'
 
 //Balas
 import BASE_BULLET from '../../assets/bullets/bullet1.png'
@@ -32,7 +33,7 @@ import BASE_SNIPER_BULLET from '../../assets/bullets/bullet_sniper.png'
 import MACHINE_GUN_BULLET from '../../assets/bullets/bullet_enemy_machine_gun.png'
 import BASE_BULLET_ENEMY from '../../assets/bullets/bullet1_enemy.png'
 import BULLET_TURRET from '../../assets/bullets/bullet1_turret.png'
-import Explode from '../../assets/effects/explode.png'
+import Explode from '../../assets/effects/explode0.png'
 
 // Mapas
 import TilemapImage from '../../assets/blocks/Tilemap2.png'
@@ -43,6 +44,8 @@ import Level1Map from '../../assets/maps/Level1.json'
 import Level2Map from '../../assets/maps/Level2.json'
 import Level3Map from '../../assets/maps/Level3.json'
 import Level4Map from '../../assets/maps/Level4.json'
+import Level5_1Map from '../../assets/maps/Level5_1.json'
+import Level5_2Map from '../../assets/maps/Level5_2.json'
 
 // Objetos 
 import Note from '../../assets/objects/paper.png'
@@ -103,7 +106,7 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.WEAPON_PISTOLA_BASE, PISTOLA_BASE)
         this.load.image(Builder.WEAPON_MACHINE_GUN, MACHINE_GUN)
         this.load.image(Builder.WEAPON_SNIPER, SNIPER)
-        this.load.image(Builder.WEAPON_4, WEAPON_4)
+        this.load.image(Builder.FINAL_WEAPON, FINAL_WEAPON)
         this.load.image(Builder.WEAPON_TURRET, TURRET_WEAPON)
         this.load.image(Builder.WEAPON_SLOWED_TURRET, TURRET_WEAPON)
 
@@ -153,7 +156,9 @@ export default class Boot extends BaseScene {
         this.load.tilemapTiledJSON('map_level_2', Level2Map)
         this.load.tilemapTiledJSON('map_level_3', Level3Map)
         this.load.tilemapTiledJSON('map_level_4', Level4Map)
-
+        this.load.tilemapTiledJSON('map_level_5_1', Level5_1Map)
+        this.load.tilemapTiledJSON('map_level_5_2', Level5_2Map)
+        
         // Tilesets
         this.load.image('tiles', TilemapImage)
 
@@ -165,6 +170,7 @@ export default class Boot extends BaseScene {
         this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
         this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
         this.load.spritesheet('2enemyIdle', TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet('bossIdle', BossIdle, { frameWidth: 155 , frameHeight: 151 })
         this.load.spritesheet('sellerIdle', SellerIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
@@ -216,7 +222,7 @@ export default class Boot extends BaseScene {
                 weapon1: null,
                 weapon2: null
               };
-            this.scene.switch('tutorial', status)
+            this.scene.switch('Level5_2', status)
         }   
     }
 }

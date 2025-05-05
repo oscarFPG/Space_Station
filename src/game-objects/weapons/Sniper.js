@@ -28,7 +28,7 @@ export default class Sniper extends RangeWeapon {
         this._ammo.clipSize = 1;
         this._ammo.currentClipAmmo = 3;
         this._ammo.reserveAmmo = 0
-        this._ammo.maxReserveAmmo = 3
+        this._ammo.maxReserveAmmo = 10
     }
 
     createBullet(bulletX, bulletY){

@@ -284,8 +284,8 @@
                  "type":"ShieldKit",
                  "visible":true,
                  "width":111,
-                 "x":1560.17,
-                 "y":1003.33
+                 "x":1568.56393939394,
+                 "y":999.33
                 }, 
                 {
                  "gid":19,
@@ -298,24 +298,6 @@
                  "width":111,
                  "x":661.167,
                  "y":1332.83
-                }, 
-                {
-                 "gid":28,
-                 "height":111,
-                 "id":15,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"AmmoBox",
-                 "visible":true,
-                 "width":111,
-                 "x":1652.83,
-                 "y":1005
                 }, 
                 {
                  "gid":20,
@@ -622,8 +604,7 @@
                  "width":111,
                  "x":1772.5,
                  "y":2014.5
-                },
-            
+                }, 
                 {
                  "gid":23,
                  "height":111,
@@ -641,7 +622,8 @@
                  "width":111,
                  "x":1854.5,
                  "y":2058.5
-                }, 
+                },
+            
                 {
                  "gid":23,
                  "height":111,
@@ -1102,8 +1084,7 @@
                  "width":111,
                  "x":2444.88,
                  "y":778.228
-                },
-            
+                }, 
                 {
                  "gid":12,
                  "height":111,
@@ -1126,7 +1107,8 @@
                  "width":111,
                  "x":2332,
                  "y":776.913
-                }, 
+                },
+            
                 {
                  "gid":19,
                  "height":111,
@@ -1168,24 +1150,6 @@
                  "width":111,
                  "x":2542.5,
                  "y":1992.5
-                }, 
-                {
-                 "gid":21,
-                 "height":111,
-                 "id":70,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"value",
-                         "type":"int",
-                         "value":15
-                        }],
-                 "rotation":0,
-                 "type":"ShieldKit",
-                 "visible":true,
-                 "width":111,
-                 "x":333,
-                 "y":2664
                 }, 
                 {
                  "gid":22,
@@ -1448,8 +1412,8 @@
                  "type":"Battery",
                  "visible":true,
                  "width":111,
-                 "x":310.5,
-                 "y":2558.5
+                 "x":335.833333333333,
+                 "y":2629.16666666667
                 }, 
                 {
                  "gid":27,
@@ -1478,6 +1442,52 @@
                         {
                          "name":"Name",
                          "type":"string",
+                         "value":"weapon3"
+                        }, 
+                        {
+                         "name":"ReserveAmmo",
+                         "type":"int",
+                         "value":0
+                        }, 
+                        {
+                         "name":"currentAmmo",
+                         "type":"int",
+                         "value":3
+                        }],
+                 "rotation":0,
+                 "type":"Weapon",
+                 "visible":true,
+                 "width":111,
+                 "x":208.257575757576,
+                 "y":2696.37878787879
+                }, 
+                {
+                 "gid":28,
+                 "height":111,
+                 "id":89,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":2
+                        }],
+                 "rotation":0,
+                 "type":"AmmoBox",
+                 "visible":true,
+                 "width":111,
+                 "x":364.5,
+                 "y":2754.5
+                }, 
+                {
+                 "gid":39,
+                 "height":111,
+                 "id":91,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Name",
+                         "type":"string",
                          "value":"weapon1"
                         }, 
                         {
@@ -1494,8 +1504,8 @@
                  "type":"Weapon",
                  "visible":true,
                  "width":111,
-                 "x":208.257575757576,
-                 "y":2696.37878787879
+                 "x":1655.5,
+                 "y":996.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1504,7 +1514,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":88,
+ "nextobjectid":93,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

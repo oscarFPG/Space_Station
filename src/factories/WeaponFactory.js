@@ -4,6 +4,7 @@ import BaseTurretWeapon from '../game-objects/weapons/BaseTurretWeapon.js'
 import MachineGunEnemy from '../game-objects/weapons/MachineGunEnemy.js';
 import MachineGun from '../game-objects/weapons/MachineGun.js';
 import Sniper from '../game-objects/weapons/Sniper.js';
+import FinalBossWeapon from '../game-objects/weapons/FinalBossWeapon.js';
 import SlowedTurretWeapon from '../game-objects/weapons/SlowedTurretWeapon.js';
 import Builder from '../managers/Builder.js';
 
@@ -17,6 +18,8 @@ export default class WeaponFactory {
     static BASE_TURRET_WEAPON = Builder.WEAPON_TURRET
     static MACHINE_GUN_WEAPON_ENEMY = Builder.ENEMY_WEAPON_MACHINE_GUN
     static SLOWED_TURRET_WEAPON = Builder.WEAPON_SLOWED_TURRET
+    static FINAL_WEAPON = Builder.FINAL_WEAPON
+    
 
     constructor(){
         throw new Error('La clase \'WeaponFactory\' no se puede y no se debe instanciar');
@@ -45,6 +48,8 @@ export default class WeaponFactory {
                 return new MachineGun(scene, x, y);
             case WeaponFactory.SNIPER_WEAPON:
                 return new Sniper(scene, x, y);
+            case WeaponFactory.FINAL_WEAPON:
+                return new FinalBossWeapon(scene, x, y);
             // SUBFUSILES
 
             // RIFLES
