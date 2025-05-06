@@ -80,10 +80,25 @@ import STORE from '../../assets/store/example.png'
 import MAINMENU_MUSIC from '../../audio/music/SpaceStation-Menu.mp3'
 import ClickSOund from '../../audio/effects/posibleClickSound.mp3'
 import GUN_SOUND from '../../audio/effects/gunSound.mp3'
+import IMPACT_BULLET_SOUND from '../../audio/effects/impact_shot.mp3'
+import PLAYER_DEAD from '../../audio/effects/Player_dead_sound.mp3'
 import CONSOLE_SOUND from '../../audio/effects/consoleSoundmp3.mp3'
-import AMBIENTE from '../../audio/music/ambiente.mp3'  
+import BOX_BREAKING from '../../audio/effects/box_breaking.mp3'
+import PICK_UP_HEALTH from '../../audio/effects/pick_up_health.mp3'
+import PICK_UP_GUN from '../../audio/effects/pick_up_gun.mp3'
+import PICK_UP_BATTERY from '../../audio/effects/pick_up_battery.mp3'
+import PICK_UP_AMMO from '../../audio/effects/pick_up_ammo.mp3'
+import PICK_UP_COIN from '../../audio/effects/pick_up_coin.mp3'
+import DOORS_OPEN from '../../audio/effects/doors_open.mp3'
+import DOORS_CLOSED from '../../audio/effects/doors_closed.mp3'
+import RELOADING_WEAPON from '../../audio/effects/reloading_weapon.mp3'
+import ACTIVATE_NOTE from '../../audio/effects/activate_note.mp3'
+import AMBIENTE from '../../audio/music/Escape_station_ambient.mp3'  
+import FINAL_BOSS_THEME from '../../audio/music/FinalBossMusic.mp3'  
+import FINAL_GAME_THEME from '../../audio/music/Final_theme_Escape_Station.mp3'  
 import ERROR from  '../../audio/effects/error1.mp3'
 import SUCCESS from '../../audio/effects/acierto.mp3'
+
 
 
 export default class Boot extends BaseScene {
@@ -178,7 +193,25 @@ export default class Boot extends BaseScene {
         this.load.audio('ClickSOund', ClickSOund)
         this.load.audio('gun_sound',GUN_SOUND)
         this.load.audio('console_sound', CONSOLE_SOUND)
+        this.load.audio('box_breaking', BOX_BREAKING)
+
+        this.load.audio('pick_up_health', PICK_UP_HEALTH)
+        this.load.audio('pick_up_gun', PICK_UP_GUN)
+        this.load.audio('pick_up_ammo', PICK_UP_AMMO)
+        this.load.audio('pick_up_coin', PICK_UP_COIN)
+        this.load.audio('pick_up_battery', PICK_UP_BATTERY)
+        this.load.audio('reloading_gun', RELOADING_WEAPON)
+
+        this.load.audio('doors_open', DOORS_OPEN)
+        this.load.audio('doors_closed', DOORS_CLOSED)
+        
+
         this.load.audio('ambiente', AMBIENTE)
+        this.load.audio('player_dead', PLAYER_DEAD)
+        this.load.audio('impact_shot', IMPACT_BULLET_SOUND)
+        this.load.audio('activate_note', ACTIVATE_NOTE)
+        this.load.audio('final boss', FINAL_BOSS_THEME)
+        this.load.audio('final game', FINAL_GAME_THEME)
         this.load.audio('error',ERROR)
         this.load.audio('success',SUCCESS)
     }
@@ -187,7 +220,8 @@ export default class Boot extends BaseScene {
         
         // Background image
         this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'front-page').setOrigin(0.5);
-
+        this._nextScene = 'tutorial'
+        this._previousScene = 'boot'
         // Footer text
         this.add.text(this.game.config.width / 2, this.game.config.height / 2 + 100, 'Press ENTER to start the game...', {
             fontSize: 20,
@@ -220,9 +254,10 @@ export default class Boot extends BaseScene {
                 shield: Boot.PLAYER_ESCUDO_INICIAL,
                 money: Boot.PLAYER_DINERO_INICIAL,
                 weapon1: null,
-                weapon2: null
+                weapon2: null,
+                previousScene: this._previousScene
               };
-            this.scene.switch('Level5_1', status)
+            this.scene.switch(this._nextScene, status)
         }   
     }
 }

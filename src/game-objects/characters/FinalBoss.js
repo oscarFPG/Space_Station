@@ -39,6 +39,7 @@ export default class FinalBoss extends BasedEnemy {
         return WeaponFactory.crearArma(WeaponFactory.FINAL_WEAPON, this.scene, {x: 40, y: 50})
     }
     dropObject() {
-            return new Battery(this.scene, this.x + 25 , this.y + 25)
+        this.scene.putFinalTheme()
+        return new Battery(this.scene, this.x + 25 , this.y + 25)
     }
 }

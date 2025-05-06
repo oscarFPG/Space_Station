@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import Object from '../base-game-objects/Object'
 import Builder from '../../managers/Builder'
+import Options from '../../managers/Options.js';
 
 
 export default class Note extends Object {
@@ -36,7 +37,10 @@ export default class Note extends Object {
 			this.closeNoteWindow()
 			return
 		}
-			
+		
+		const options = Options.get_instance();
+		options.playSound(this.scene, 'activate_note', { isMusic: false, volume: 1.0 });
+
 		const windowX = this.x + 100
 		const windowY = this.y - 100
 

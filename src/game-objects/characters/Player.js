@@ -4,6 +4,7 @@ import BaseActor from '../base-game-objects/BaseActor.js'
 import WeaponFactory from '../../factories/WeaponFactory.js';
 import WeaponObject from '../objects/WeaponObject.js'
 import Builder from '../../managers/Builder.js';
+import Options from '../../managers/Options.js';
 
 export default class Player extends BaseActor {
 
@@ -205,7 +206,7 @@ export default class Player extends BaseActor {
 			this._laserGraphics.lineStyle(1, 0xff0000, 1);
 		
 			// Definir un largo para el laser (puedes ajustar este valor)
-			const laserLength = 700;
+			const laserLength = 1700;
 			const laserEndX = weaponWorldX + Math.cos(angle) * laserLength;
 			const laserEndY = weaponWorldY + Math.sin(angle) * laserLength;
 			this._laserGraphics.strokeLineShape(new Phaser.Geom.Line(weaponWorldX, weaponWorldY, laserEndX, laserEndY));	  
@@ -308,7 +309,7 @@ export default class Player extends BaseActor {
 		}
 		this._armaEquipada = this._secondaryWeapon
 		this._weapon.setVisible(false)
-
+		
 		this.add(this._secondaryWeapon)
 	}
 
@@ -345,7 +346,7 @@ export default class Player extends BaseActor {
 	
 
 	// Objeto para preservar el estado actual del jugador(vida, monedas, armas, etc...) entre niveles o partidas
-	getPlayerStatus(){
+	getPlayerStatus(_previousScene){
 
 		const status = {
 			health: this._atributos.vida,
@@ -354,7 +355,8 @@ export default class Player extends BaseActor {
 			weapon1: { key: this._weapon._specs.sprite, CurrentAmmo: this._weapon.getBulletsFromClip(), ReserveAmmo: this._weapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET},
 			weapon2: this._secondaryWeapon
 					  ? { key: this._secondaryWeapon._specs.sprite, CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET}
-					  : null
+					  : null,
+			previousScene : _previousScene
 		  };
 
 		return status
@@ -394,12 +396,7 @@ export default class Player extends BaseActor {
 
 		this.controles.reload.on('down', () => {	// Recargar
 			if (!this._atributos.activo) return;
-			
 			this._armaEquipada.reload();
-
-			const reloadTime = this._armaEquipada.getReloadTime();
-			this._playerUI.showReloadSpinner(reloadTime);
-
 			this.reloadText.setVisible(true);
 		})
 
@@ -407,7 +404,8 @@ export default class Player extends BaseActor {
 
 			if(this._secondaryWeapon == null)
 				return
-
+			const options = Options.get_instance();
+			options.playSound(this.scene, 'pick_up_gun', { isMusic: false, volume: 1.0 });
 			if(this._armaEquipada == this._weapon){
 				this._weapon.setVisible(false)
 				this._secondaryWeapon.setVisible(true)

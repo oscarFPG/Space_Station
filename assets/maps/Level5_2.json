@@ -53,14 +53,14 @@
          "y":0
         }, 
         {
-         "data":[15, 15, 15, 15, 15, 1, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 15,
+         "data":[15, 15, 15, 15, 15, 1, 15, 15, 15, 15, 0, 15, 15, 15, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 7, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
-            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
+            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
@@ -1116,7 +1116,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":109.121666666667,
+                 "x":109.122,
                  "y":387.488
                 }, 
                 {
@@ -1154,7 +1154,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":220.121666666667,
+                 "x":220.122,
                  "y":387.488
                 }, 
                 {
@@ -1192,7 +1192,7 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":331.211666666667,
+                 "x":331.212,
                  "y":387.512
                 }, 
                 {
@@ -1231,7 +1231,7 @@
                  "visible":true,
                  "width":111,
                  "x":1112.45,
-                 "y":384.488333333333
+                 "y":384.488
                 }, 
                 {
                  "gid":17,
@@ -1269,7 +1269,7 @@
                  "visible":true,
                  "width":111,
                  "x":1223.45,
-                 "y":384.488333333333
+                 "y":384.488
                 }, 
                 {
                  "gid":17,
@@ -1307,7 +1307,7 @@
                  "visible":true,
                  "width":111,
                  "x":1334.54,
-                 "y":384.512333333333
+                 "y":384.512
                 }, 
                 {
                  "gid":17,
@@ -1646,8 +1646,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":164,
-                 "y":1516
+                 "x":165.333,
+                 "y":1493.33
                 }, 
                 {
                  "ellipse":true,
@@ -1658,8 +1658,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":1287.0625,
-                 "y":461.333333333333
+                 "x":1287.06,
+                 "y":461.333
                 }, 
                 {
                  "ellipse":true,
@@ -1670,8 +1670,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":446.333333333333,
-                 "y":437.166666666667
+                 "x":446.333,
+                 "y":437.167
                 }, 
                 {
                  "ellipse":true,
@@ -1682,8 +1682,8 @@
                  "type":"BlueLightPoint",
                  "visible":true,
                  "width":0,
-                 "x":1720.66666666667,
-                 "y":1112.33333333333
+                 "x":1720.67,
+                 "y":1112.33
                 }, 
                 {
                  "gid":21,
@@ -1718,8 +1718,8 @@
                  "type":"ShieldKit",
                  "visible":true,
                  "width":111,
-                 "x":1571.16666666667,
-                 "y":1445.83333333333
+                 "x":1571.17,
+                 "y":1445.83
                 }, 
                 {
                  "gid":21,
@@ -1748,8 +1748,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":211.166666666667,
-                 "y":1213.83333333333
+                 "x":211.167,
+                 "y":1213.83
                 }, 
                 {
                  "gid":29,
@@ -1772,8 +1772,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":307.166666666667,
-                 "y":1355.16666666667
+                 "x":307.167,
+                 "y":1355.17
                 }, 
                 {
                  "gid":29,
@@ -1784,8 +1784,8 @@
                  "type":"BoxHard",
                  "visible":true,
                  "width":111,
-                 "x":309.833333333333,
-                 "y":1455.16666666667
+                 "x":309.833,
+                 "y":1455.17
                 },
             
                 {
@@ -1798,7 +1798,7 @@
                  "visible":true,
                  "width":111,
                  "x":390.5,
-                 "y":901.166666666667
+                 "y":901.167
                 }, 
                 {
                  "gid":29,
@@ -1883,6 +1883,118 @@
                  "width":111,
                  "x":1391.5,
                  "y":907.5
+                }, 
+                {
+                 "gid":11,
+                 "height":111,
+                 "id":138,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"title",
+                         "type":"string",
+                         "value":"If anybody is reading this, we will be waiting outside for one day for any survivors to be rescued"
+                        }],
+                 "rotation":0,
+                 "type":"Note",
+                 "visible":true,
+                 "width":111,
+                 "x":1657.17,
+                 "y":433.833
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":139,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":703.5,
+                 "y":1369.5
+                }, 
+                {
+                 "gid":17,
+                 "height":111,
+                 "id":141,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Damage",
+                         "type":"int",
+                         "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isStatic",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"Laser",
+                 "visible":true,
+                 "width":111,
+                 "x":1110.25757575758,
+                 "y":111.287878787879
+                }, 
+                {
+                 "gid":16,
+                 "height":111,
+                 "id":142,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Damage",
+                         "type":"int",
+                         "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isStatic",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"Laser",
+                 "visible":true,
+                 "width":111,
+                 "x":1885.40909090909,
+                 "y":886.742424242424
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1891,7 +2003,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":138,
+ "nextobjectid":143,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

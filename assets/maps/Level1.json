@@ -85,7 +85,7 @@
          "y":0
         }, 
         {
-         "data":[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+         "data":[15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 15, 0, 0, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0,
             15, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 15, 0, 0, 15, 15, 15, 15, 15, 0, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 15, 0, 0, 15, 15, 15, 0, 0, 0, 0, 0, 0, 15,
@@ -1329,7 +1329,7 @@
                         {
                          "name":"currentAmmo",
                          "type":"int",
-                         "value":12
+                         "value":8
                         }],
                  "rotation":0,
                  "type":"Weapon",
@@ -1337,6 +1337,62 @@
                  "width":111,
                  "x":2376.56060606061,
                  "y":3191.59090909091
+                }, 
+                {
+                 "gid":11,
+                 "height":111,
+                 "id":85,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"title",
+                         "type":"string",
+                         "value":"The station has been attacked, everything is gone"
+                        }],
+                 "rotation":0,
+                 "type":"Note",
+                 "visible":true,
+                 "width":111,
+                 "x":2399.28787878788,
+                 "y":1753.22727272727
+                }, 
+                {
+                 "gid":297,
+                 "height":111,
+                 "id":86,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Damage",
+                         "type":"int",
+                         "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isStatic",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"Laser",
+                 "visible":true,
+                 "width":111,
+                 "x":1442.83333333333,
+                 "y":111.583333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1345,7 +1401,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":85,
+ "nextobjectid":87,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
@@ -1432,6 +1488,19 @@
         {
          "columns":8,
          "firstgid":241,
+         "image":"..\/blocks\/Tilemap2.png",
+         "imageheight":555,
+         "imagewidth":888,
+         "margin":0,
+         "name":"Tilemap2",
+         "spacing":0,
+         "tilecount":40,
+         "tileheight":111,
+         "tilewidth":111
+        }, 
+        {
+         "columns":8,
+         "firstgid":281,
          "image":"..\/blocks\/Tilemap2.png",
          "imageheight":555,
          "imagewidth":888,

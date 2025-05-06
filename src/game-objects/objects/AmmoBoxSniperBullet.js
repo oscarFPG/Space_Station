@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Object from "../base-game-objects/Object";
 import Builder from "../../managers/Builder";
+import Options from '../../managers/Options.js';
 
 
 export default class AmmoBoxSniperBullet extends Object {
@@ -32,6 +33,8 @@ export default class AmmoBoxSniperBullet extends Object {
         if(!player.isUseKeyJustPressed())
             return       
         if (player.pickAmmo(AmmoBoxSniperBullet.AMMO_WEAPON_NAME, AmmoBoxSniperBullet.NUM_BULLETS)) {
+            const options = Options.get_instance();
+            options.playSound(this.scene, 'pick_up_ammo', { isMusic: false, volume: 1.0 });
             this.removeLight();
             this.destroyObject()
         }

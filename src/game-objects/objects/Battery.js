@@ -1,5 +1,6 @@
 import Builder from "../../managers/Builder.js";
 import Object from "../base-game-objects/Object.js"
+import Options from '../../managers/Options.js';
 
 
 export default class Battery extends Object {
@@ -19,10 +20,11 @@ export default class Battery extends Object {
 
 
     accion(player){
-
+        
         if(!player.isUseKeyJustPressed())
 			return
-
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'pick_up_battery', { isMusic: false, volume: 1.0 });
         this.removeLight()
         player.pickBattery()
         this.destroyObject()

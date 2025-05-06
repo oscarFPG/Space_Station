@@ -1,5 +1,6 @@
 import Weapon from './Weapon.js'
 import Bullet from './Bullet.js';
+import Options from '../../managers/Options.js';
 
 export default class RangeWeapon extends Weapon {
 
@@ -78,7 +79,8 @@ export default class RangeWeapon extends Weapon {
     reload() {
         if (this.#_isReloading || this._ammo.currentClipAmmo === this._ammo.clipSize || this._ammo.reserveAmmo <= 0)
             return;
-    
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'reloading_gun', { isMusic: false, volume: 1.0 });
         this.#_isReloading = true;
     
         this.scene.time.delayedCall(this._specs.reloadTime * 1000, () => {
