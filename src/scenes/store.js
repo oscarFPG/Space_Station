@@ -20,10 +20,12 @@ export default class Store extends BaseScene {
     Y_COMANDO
 
 
+    _contadorComandos
     _storeElements = []
     _historialComandos = []
     _comandoActual = ''
     _comandoActualText
+
 
     constructor(){
         super(Builder.ESCENA_TIENDA)
@@ -37,10 +39,13 @@ export default class Store extends BaseScene {
 
         this.X_COMANDO = this.X_BACKGROUND / 2 + 15
         this.Y_COMANDO = 575
+
+        this._contadorComandos = 0
     }
     
     init(data) {
         this._previousScene = data.previousScene
+        this._monedas = data.playerData.monedas
     }
 
     create(){
@@ -63,13 +68,13 @@ export default class Store extends BaseScene {
             this.X_COMANDO, this.Y_COMANDO - this.ESPACIO_ENTRE_LINEA,
             'Ejecute el comando \'help\' para obtener mas ayuda'
         )
-        this._historialComandos.push(mensajeAyuda)
+        this._historialComandos.push( mensajeAyuda )
 
         const guiaComando = this.add.text(          // Simbolo para indicar donde aparece el comando introducido
             this.X_COMANDO, this.Y_COMANDO,
             '>'
         )
-        this._historialComandos.push(guiaComando)
+        this._storeElements.push( guiaComando )
 
         this._comandoActualText = this.add.text(    // Elemento en el que se escribe el comando introducido para que el usuario lo pueda visualizar
             this.X_COMANDO + 15, this.Y_COMANDO,
@@ -115,35 +120,111 @@ export default class Store extends BaseScene {
         const comando = comandoCompleto[0]
         const parametros = comandoCompleto.slice(1)
 
-        console.log(comando)
-        console.log(parametros)
-
-        this._historialComandos.push(comandoActual) // Guardar comando ejecutado
-
+        this.addTextToConsole(comandoActual)
+        
         switch(comando){
-
         case 'exit':    // Salir de la tienda
-            this._storeElements.forEach( element => {
-                element.destroy()               // Eliminar todo lo incluido a la escena
-            })
-
-            this._historialComandos = []        // Eliminar historial de comandos
-            this._comandoActualText.destroy()   // Eliminar texto de comando
-
-            // Reanudar escena anterior
-            this.scene.pause(this.scene.key)
-            this.scene.resume(this._previousScene, null)
+            this.exit()
             return
 
         case 'help':    // Ver ayuda
-            
+            this.mensaje_ayuda()
+            return
+        
+        case 'money':
+            this.consultar_dinero()
+            return
+
+        case 'catalog':
+            this.consultar_catalogo()
+            return
+
+        case 'buy':
+            this.comprar_objetos(parametros)
+            return
+
+        case 'clear':
+            this.limpiar_terminal()
             return
 
         case '':
         default:
-            console.log('Comando no encontrado')
+            this.addTextToConsole(`No se ha encontrado el comando '${comandoActual}'`)
             return
         }
+    }
+
+    // Metodos para cada tipo de comando
+    exit(){
+
+        this._storeElements.forEach(element => {
+            element.destroy()               // Eliminar todo lo incluido a la escena
+        })
+
+        this.limpiar_terminal()
+        this._comandoActualText.destroy()   // Eliminar texto de comando
+
+        // Reanudar escena anterior
+        this.scene.pause(this.scene.key)
+        this.scene.resume(this._previousScene, null)
+    }
+
+    mensaje_ayuda(){
+
+        const message = []
+        message.push("Puedes ejecutar los siguientes comandos:")
+        message.push("'buy -nombre' para comprar el objeto 'nombre'")
+        message.push("'exit' para salir de la tienda")
+        message.push("'money' para consultar cuantas monedas tienes")
+        message.push("'catalog' para ver que productos puedes comprar")
+        message.push("'clear' para limpiar el terminal")
+
+        message.forEach(m => {
+            this.addTextToConsole(m)
+        })
+    }
+
+    consultar_dinero(){
+        this.addTextToConsole(`Tienes ${this._monedas}$ disponibles!`)
+    }
+
+    consultar_catalogo(){
+
+        const message = []
+        message.push("Objeto -- Precio -- Descripcion")
+        message.push("Vida   -- 20     -- Objeto para recuperar puntos de vida")
+
+        message.forEach(m => {
+            this.addTextToConsole(m)
+        })
+    }
+
+    comprar_objetos(objetos){
+
+    }
+
+    limpiar_terminal(){
+
+        this._historialComandos.forEach(command => {
+            command.destroy()
+        })
+        this._historialComandos = []
+
+    }
+    // Metodos para cada tipo de comando
+
+    addTextToConsole(command){
+
+        this._historialComandos.forEach(comando => {
+            comando.setPosition(comando.x, comando.y - this.ESPACIO_ENTRE_LINEA)
+        })
+
+        const comandoText = this.add.text(
+            this.X_COMANDO, 
+            this.Y_COMANDO - this.ESPACIO_ENTRE_LINEA, 
+            command
+        )
+        this._historialComandos.push(comandoText)
     }
 
     update(){}
