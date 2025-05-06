@@ -19,6 +19,7 @@ import EnemyFactory from '../factories/EnemyFactory.js';
 import WeaponFactory from '../factories/WeaponFactory.js';
 import AmmoFactory from '../factories/AmmoFactory.js';
 import Battery from '../game-objects/objects/Battery.js'
+import Builder from '../managers/Builder.js'
 
 
 export default class BaseScene extends Phaser.Scene {
@@ -39,12 +40,12 @@ export default class BaseScene extends Phaser.Scene {
     // SIEMPRE esta funcion con super.create()
 
     init(data) {
-        this.playerHealth   = data.health
-        this.playerShield   = data.shield
-        this.playerMoney    = data.money
+        this.playerHealth   = (data.health == undefined) ? Player.VIDA_INICIAL : data.health
+        this.playerShield   = (data.shield == undefined) ? Player.ESCUDO_INICIAL : data.shield
+        this.playerMoney    = (data.money  == undefined) ? 0 : data.money
         this.playerWeapon1  = data.weapon1
         this.playerWeapon2  = data.weapon2
-        this._previousScene = data.previousScene
+        this._previousScene = (data.previousScene == undefined) ? Player.VIDA_INICIAL : data.previousScene
 
         this._isTransitioning = false;
     }
@@ -388,7 +389,8 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     gameOver() {
-        console.log('Game over');
+
+        console.log('Game over')
         this.ambient = this.sound.add('player_dead') 
         this.ambient.setVolume(0.5)
         this.ambient.play()
@@ -397,7 +399,7 @@ export default class BaseScene extends Phaser.Scene {
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
         this.time.delayedCall(400, () => {
-            this.scene.restart();
+            this.scene.launch(Builder.ESCENA_LOBBY)
         });
     }
     

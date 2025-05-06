@@ -139,7 +139,7 @@ export default class Store extends BaseScene {
             this.consultar_catalogo()
             return
 
-        case 'buy':
+        case 'buy':   
             this.comprar_objetos(parametros)
             return
 
@@ -173,11 +173,11 @@ export default class Store extends BaseScene {
 
         const message = []
         message.push("Puedes ejecutar los siguientes comandos:")
-        message.push("'buy -nombre' para comprar el objeto 'nombre'")
-        message.push("'exit' para salir de la tienda")
-        message.push("'money' para consultar cuantas monedas tienes")
-        message.push("'catalog' para ver que productos puedes comprar")
-        message.push("'clear' para limpiar el terminal")
+        message.push("'buy -nombre' : para comprar el objeto 'nombre'")
+        message.push("'exit' : para salir de la tienda")
+        message.push("'money' : para consultar cuantas monedas tienes")
+        message.push("'catalog' : para ver que productos puedes comprar")
+        message.push("'clear' : para limpiar el terminal")
 
         message.forEach(m => {
             this.addTextToConsole(m)
@@ -192,7 +192,8 @@ export default class Store extends BaseScene {
 
         const message = []
         message.push("Objeto -- Precio -- Descripcion")
-        message.push("Vida   -- 20     -- Objeto para recuperar puntos de vida")
+        message.push("Vida   --   50   -- Objeto para recuperar puntos de vida")
+        message.push("Escudo --   30   -- Objeto para recuperar escudo")
 
         message.forEach(m => {
             this.addTextToConsole(m)
@@ -201,6 +202,29 @@ export default class Store extends BaseScene {
 
     comprar_objetos(objetos){
 
+        var hayArticulo = false
+        objetos.forEach(obj => {
+            
+            hayArticulo = true
+            switch(obj){
+            case '-v':
+            case '-vida':
+                this.addTextToConsole(`Has comprado una cura de 20 puntos de vida por ${50}$`)
+                break
+
+            case '-e':
+            case '-escudo':
+                this.addTextToConsole(`Has comprado una cura de 20 puntos de escudo por ${30}$`)
+                break
+
+            default:
+                this.addTextToConsole('No se encontró el articulo para comprar')
+                break
+            }
+        })
+
+        if(!hayArticulo)
+            this.addTextToConsole('Especifique un articulo para comprar')
     }
 
     limpiar_terminal(){
@@ -215,16 +239,19 @@ export default class Store extends BaseScene {
 
     addTextToConsole(command){
 
-        this._historialComandos.forEach(comando => {
-            comando.setPosition(comando.x, comando.y - this.ESPACIO_ENTRE_LINEA)
-        })
+        if(this._historialComandos.length != 23){   // Evitar que nuevos comandos se salgan de la terminal
 
-        const comandoText = this.add.text(
-            this.X_COMANDO, 
-            this.Y_COMANDO - this.ESPACIO_ENTRE_LINEA, 
-            command
-        )
-        this._historialComandos.push(comandoText)
+            this._historialComandos.forEach(comando => {
+                comando.setPosition(comando.x, comando.y - this.ESPACIO_ENTRE_LINEA)
+            })
+    
+            const comandoText = this.add.text(
+                this.X_COMANDO, 
+                this.Y_COMANDO - this.ESPACIO_ENTRE_LINEA, 
+                command
+            )
+            this._historialComandos.push(comandoText)
+        }
     }
 
     update(){}

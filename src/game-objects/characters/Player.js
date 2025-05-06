@@ -302,6 +302,7 @@ export default class Player extends BaseActor {
     }
 
 	recogerArma(texturaArma, currentAmmo, reserveAmmo){
+		
 		this._secondaryWeapon = WeaponFactory.crearArma(texturaArma, this.scene, Player.WEAPON_OFFSET)
 		if(currentAmmo != null && reserveAmmo != null) {
 			this._secondaryWeapon.setCurrentAmmo(currentAmmo)
@@ -352,12 +353,24 @@ export default class Player extends BaseActor {
 			health: this._atributos.vida,
 			shield: this._escudo,
 			money: this._dinero,
-			weapon1: { key: this._weapon._specs.sprite, CurrentAmmo: this._weapon.getBulletsFromClip(), ReserveAmmo: this._weapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET},
-			weapon2: this._secondaryWeapon
-					  ? { key: this._secondaryWeapon._specs.sprite, CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET}
-					  : null,
+			weapon1: 
+				{ 
+					key: this._weapon._specs.sprite, 
+					CurrentAmmo: this._weapon.getBulletsFromClip(), 
+					ReserveAmmo: this._weapon.getBulletsFromReserve(), 
+					offset: Player.WEAPON_OFFSET
+				},
+			weapon2: this._secondaryWeapon ? 
+				{
+					key: this._secondaryWeapon._specs.sprite, 
+					CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), 
+					ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), 
+					offset: Player.WEAPON_OFFSET
+				}
+				: 
+				null,
 			previousScene : _previousScene
-		  };
+		  }
 
 		return status
 	}
@@ -444,7 +457,9 @@ export default class Player extends BaseActor {
 	}
 
 	DibujaInformacion(reloading, empty, emptyReserve, secondayWeaponAvailable) {
+
 		if (reloading) {
+
 			// Oculta el texto, ya que se mostrará el spinner animado
 			this.reloadText.setVisible(false);
 			this.changeWeaponText.setVisible(false);
