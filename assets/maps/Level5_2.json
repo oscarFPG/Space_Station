@@ -53,14 +53,14 @@
          "y":0
         }, 
         {
-         "data":[15, 15, 15, 15, 15, 1, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 15,
+         "data":[15, 15, 15, 15, 15, 1, 15, 15, 15, 15, 0, 15, 15, 15, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 7, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
-            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
+            15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15,
@@ -1646,8 +1646,8 @@
                  "type":"PlayerRespawn",
                  "visible":true,
                  "width":0,
-                 "x":165.333333333333,
-                 "y":1493.33333333333
+                 "x":165.333,
+                 "y":1493.33
                 }, 
                 {
                  "ellipse":true,
@@ -1919,6 +1919,82 @@
                  "width":111,
                  "x":703.5,
                  "y":1369.5
+                }, 
+                {
+                 "gid":17,
+                 "height":111,
+                 "id":141,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Damage",
+                         "type":"int",
+                         "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isStatic",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"Laser",
+                 "visible":true,
+                 "width":111,
+                 "x":1110.25757575758,
+                 "y":111.287878787879
+                }, 
+                {
+                 "gid":16,
+                 "height":111,
+                 "id":142,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"Damage",
+                         "type":"int",
+                         "value":100
+                        }, 
+                        {
+                         "name":"ID",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"isHorizontal",
+                         "type":"bool",
+                         "value":false
+                        }, 
+                        {
+                         "name":"isStatic",
+                         "type":"bool",
+                         "value":true
+                        }, 
+                        {
+                         "name":"isStoppable",
+                         "type":"bool",
+                         "value":false
+                        }],
+                 "rotation":0,
+                 "type":"Laser",
+                 "visible":true,
+                 "width":111,
+                 "x":1885.40909090909,
+                 "y":886.742424242424
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1927,7 +2003,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":141,
+ "nextobjectid":143,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

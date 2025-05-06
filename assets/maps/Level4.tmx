@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="32" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="32" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="96">
  <editorsettings>
   <export target="Level4.json" format="json"/>
  </editorsettings>
@@ -86,11 +86,11 @@
 15,15,15,15,15,15,15,15,15,15,15,15,0,0,15,15,15,15,15,15,15,15,0,15,15,
 15,15,15,15,15,15,15,15,15,15,15,15,0,0,15,15,15,15,15,15,15,15,0,7,7,
 15,0,0,0,0,0,0,15,15,15,15,15,0,0,15,15,15,0,0,0,0,0,0,0,15,
-15,0,0,0,0,0,0,7,7,7,0,0,0,0,0,0,15,0,0,0,0,0,0,0,15,
+15,0,0,0,0,0,0,7,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,
 15,0,0,0,0,0,0,15,15,15,0,15,0,0,15,15,15,0,0,0,0,0,0,0,15,
 15,0,0,0,0,0,0,1,0,0,0,15,0,0,15,15,15,0,0,0,0,0,0,0,15,
 15,0,0,0,0,0,0,0,0,0,0,15,0,0,15,15,15,0,0,0,0,0,0,0,15,
-15,0,0,0,0,0,0,7,0,0,0,15,0,0,15,15,15,0,0,0,0,0,0,0,15,
+15,0,0,0,0,0,0,7,0,0,0,15,0,0,15,15,15,0,0,0,0,0,0,0,0,
 15,0,0,0,0,0,0,15,0,0,0,15,15,15,15,15,0,0,0,0,0,0,0,0,15,
 15,0,0,0,0,0,0,15,0,0,0,15,15,15,15,15,0,0,0,0,15,15,15,15,15,
 15,15,15,15,15,15,15,15,15,15,0,7,7,7,15,15,0,0,0,0,0,0,0,0,15,
@@ -282,22 +282,22 @@
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
-  <object id="42" type="Box" gid="23" x="1869.5" y="1498.5" width="111" height="111">
+  <object id="42" type="Box" gid="23" x="1892.17" y="1507.17" width="111" height="111">
    <properties>
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
-  <object id="43" type="Box" gid="23" x="1951.5" y="1542.5" width="111" height="111">
+  <object id="43" type="Box" gid="23" x="1970.17" y="1552.5" width="111" height="111">
    <properties>
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
-  <object id="44" type="Box" gid="23" x="2033.5" y="1578.5" width="111" height="111">
+  <object id="44" type="Box" gid="23" x="2048.17" y="1583.83" width="111" height="111">
    <properties>
     <property name="health" type="int" value="100"/>
    </properties>
   </object>
-  <object id="45" type="Box" gid="23" x="2111.5" y="1594.5" width="111" height="111">
+  <object id="45" type="Box" gid="23" x="2122.17" y="1601.17" width="111" height="111">
    <properties>
     <property name="health" type="int" value="100"/>
    </properties>
@@ -489,6 +489,24 @@
     <property name="Name" value="weapon2"/>
     <property name="ReserveAmmo" type="int" value="0"/>
     <property name="currentAmmo" type="int" value="12"/>
+   </properties>
+  </object>
+  <object id="94" type="Laser" gid="16" x="1774.86" y="997.682" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="1"/>
+    <property name="isHorizontal" type="bool" value="false"/>
+    <property name="isStatic" type="bool" value="true"/>
+    <property name="isStoppable" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="95" type="Laser" gid="16" x="2662.56" y="1442.32" width="111" height="111">
+   <properties>
+    <property name="Damage" type="int" value="100"/>
+    <property name="ID" type="int" value="1"/>
+    <property name="isHorizontal" type="bool" value="false"/>
+    <property name="isStatic" type="bool" value="true"/>
+    <property name="isStoppable" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>
