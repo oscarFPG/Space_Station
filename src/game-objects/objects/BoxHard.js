@@ -20,9 +20,4 @@ export default class BoxHard extends Box {
 		if(this._vida <= 0)
             this.destroyObject()
     }
-
-    destroyObject(){
-        this.play('broken_box')
-        this.body.checkCollision.none = true;
-    }
 }

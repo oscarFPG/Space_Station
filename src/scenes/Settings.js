@@ -37,11 +37,15 @@ export default class Settings extends BaseScene {
         }).setOrigin(0.5)
     
         // Lista de botones con su etiqueta y callback
-		const botones = [
-			{ text: 'Ajustes de Volumen',   onClick: () => this.onVolumeSettings() },
-			{ text: 'Ajustes de Controles', onClick: () => this.onControlSettings() },
-			{ text: 'Reiniciar Nivel',      onClick: () => this.onRestartLevel() }
-		]
+        const botones = [
+          { text: 'Ajustes de Volumen',   onClick: () => this.onVolumeSettings() },
+          { text: 'Ajustes de Controles', onClick: () => this.onControlSettings() },
+          { text: 'Reiniciar Nivel', onClick: () => {
+            this.scene.stop(this._previousScene)
+            this.scene.start(this._previousScene)
+            this.scene.stop() // cerrar ajustes
+          }}
+        ]
     
         // Espaciado vertical
         const startY = panelY + 80

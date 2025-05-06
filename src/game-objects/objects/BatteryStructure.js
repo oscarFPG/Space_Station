@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Object from '../base-game-objects/Object'
+import Options from '../../managers/Options.js';
 
 export default class BatteryStructure extends Object {
 
@@ -50,6 +51,8 @@ export default class BatteryStructure extends Object {
 
 		if(!this._alreadyCompleted && this._numBateriasActuales == this._numBaterias){
 			this._alreadyCompleted = true
+			const options = Options.get_instance();
+			options.playSound(this.scene, 'success', { isMusic: false, volume: 1.0 });
 			this.activarObjetos(this._doorsID)
 			return;
 		}

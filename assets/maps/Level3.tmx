@@ -463,8 +463,8 @@
   <object id="102" type="Weapon" gid="39" x="547.833" y="982.5" width="111" height="111">
    <properties>
     <property name="Name" value="weapon3"/>
-    <property name="ReserveAmmo" type="int" value="0"/>
-    <property name="currentAmmo" type="int" value="3"/>
+    <property name="ReserveAmmo" type="int" value="2"/>
+    <property name="currentAmmo" type="int" value="1"/>
    </properties>
   </object>
   <object id="103" type="AmmoBox" gid="28" x="2556.5" y="236.5" width="111" height="111">

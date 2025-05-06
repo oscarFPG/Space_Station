@@ -1,6 +1,6 @@
 import Builder from "../../managers/Builder";
 import Object from "../base-game-objects/Object";
-
+import Options from '../../managers/Options.js';
 
 export default class Shield extends Object {
 
@@ -25,7 +25,6 @@ export default class Shield extends Object {
         
         if(player.isFullShield())
             return
-
         this.accion(player)
     }
 
@@ -33,7 +32,8 @@ export default class Shield extends Object {
 
         if(!player.isUseKeyJustPressed())
 			return
-
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'pick_up_health', { isMusic: false, volume: 1.0 });
         this.removeLight()
         player.shieldBoost(Shield.AUMENTO_ESCUDO)
         this.destroyObject()

@@ -24,7 +24,7 @@ export default class SlowTurret extends BasedEnemy {
 
         this._enemyParameters.minDistance = 150; 
         this._enemyParameters.visionRange = 1400          
-        this._enemyParameters.shootingRange = 1400;             
+        this._enemyParameters.shootingRange = 1150;             
         this._enemyParameters.direction = new Phaser.Math.Vector2(1, 0); 
 
         // Propiedades para el dodge(IA)

@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import Object from "../base-game-objects/Object";
 import Builder from "../../managers/Builder";
-
+import Options from '../../managers/Options.js';
 
 export default class Health extends Object {
 
@@ -25,7 +25,6 @@ export default class Health extends Object {
 
         if(player.isFullHealth())
             return
-        
         this.accion(player)
     }
 
@@ -34,7 +33,8 @@ export default class Health extends Object {
 
         if(!player.isUseKeyJustPressed())
 			return
-        
+        const options = Options.get_instance();
+        options.playSound(this.scene, 'pick_up_health', { isMusic: false, volume: 1.0 });
         this.removeLight();
         player.healthBoost(Health.AUMENTO_VIDA)
         this.destroyObject()

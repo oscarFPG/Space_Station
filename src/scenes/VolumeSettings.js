@@ -15,8 +15,6 @@ export default class VolumeSettings extends BaseScene {
 	create() {
 		const { width, height } = this.scale;
 
-		this.input.mouse.disableContextMenu(); // esto lo he puesto porque al darle click derecho me abria cosas del navegador
-
 		// Crear el fondo
 		this.createBackground(width, height);
 
@@ -30,10 +28,7 @@ export default class VolumeSettings extends BaseScene {
 		this.createVolumeButtons(width, panel.y);
 
 		// Crear botón "Volver"
-		this.createBackButton(panel.x + panel.width / 2, panel.y + panel.height - 20);
-
-		// Crear botón "Guardar" (comentado para futuro)
-		/*this.createSaveButton(panel.x + panel.width - 20, panel.y + panel.height - 20);*/
+		this.createBackButton(width / 2, panel.y + panel.height - 20);
 
 		// esto es para que cuando este en VolumeSettings pueda salir con los cambios guardados directamente presionando "ESC"
 		this.input.keyboard.on(Options.TECLA_PAUSA, () => {
@@ -51,7 +46,7 @@ export default class VolumeSettings extends BaseScene {
 	// Panel central donde estarán los controles de volumen
 	createPanel(width, height) {
 		const panelW = 360;//Ancho del Panel
-		const panelH = 240;//Altura del Panel
+		const panelH = 270;//Altura del Panel
 		const panelX = (width - panelW) / 2;
 		const panelY = (height - panelH) / 2;
 
@@ -73,38 +68,23 @@ export default class VolumeSettings extends BaseScene {
 	// Función para crear los botones de volumen
 	createVolumeButtons(width, panelY) {
 		const options = Options.get_instance();
-
-		const opciones = [
-			{ text: `Volumen General: ${Math.round(options.get_volumen_general() * 100)}%`, action: 'general' },
-			{ text: `Volumen Música: ${Math.round(options.get_volumen_musica() * 100)}%`, action: 'musica' },
-			{ text: `Efectos de Sonido: ${Math.round(options.get_volumen_efectos_sonido() * 100)}%`, action: 'efectos' }
-		];
-
 		const startY = panelY + 80;
-		const spacing = 45;
-
-		opciones.forEach((opt, i) => {
-			this.createVolumeButton(width, startY + i * spacing, opt);
+		const spacing = 60;
+	
+		const sliders = [
+			{ type: 'general', label: 'Volumen General', value: options.get_volumen_general() },
+			{ type: 'musica', label: 'Volumen Música', value: options.get_volumen_musica() },
+			{ type: 'efectos', label: 'Efectos de Sonido', value: options.get_volumen_efectos_sonido() }
+		];
+	
+		sliders.forEach((opt, i) => {
+			const label = this.add.text(width / 2, startY + i * spacing - 20, opt.label, {
+				fontSize: '20px',
+				color: '#ffffff'
+			}).setOrigin(0.5);
+			
+			this.createSlider(width / 2, startY + i * spacing, opt.type, opt.value);
 		});
-	}
-
-	// Función para crear un solo botón de volumen
-	createVolumeButton(width, y, opt) {
-		const btn = this.add.text(width / 2, y, opt.text, {
-			fontSize: '24px',
-			color: '#ffffff'
-		}).setOrigin(0.5)
-			.setInteractive({ useHandCursor: true })
-			.on('pointerover', () => btn.setColor('#7DF9FF'))
-			.on('pointerout', () => btn.setColor('#ffffff'))
-			.on('pointerdown', (pointer) => {
-                //he agregado esto para hacer que cuando pulse boton click izquierdo y derecho hagan cosas distintas
-				if (pointer.button === 0) {//click izquierdo suma
-					this.onVolumeChange(opt.action, +0.1);
-				} else if (pointer.button === 2) {//click derecho resta
-					this.onVolumeChange(opt.action, -0.1);
-				}
-		    });
 	}
 
 	// Función para crear el botón "Volver"
@@ -122,46 +102,52 @@ export default class VolumeSettings extends BaseScene {
 				this.scene.launch('settings', { previousScene: this._previousScene }); // Reabrir ajustes
 			});
 	}
-
-	// Función para crear el botón "Guardar" (comentado para futuro)
-	/*createSaveButton(x, y) {
-		const saveBtn = this.add.text(x, y, 'Guardar', {
-			fontSize: '20px',
-			color: '#7DF9FF'
-		})
-			.setOrigin(1, 1)
-			.setInteractive({ useHandCursor: true })
-			.on('pointerover', () => saveBtn.setColor('#ffffff'))
-			.on('pointerout', () => saveBtn.setColor('#7DF9FF'))
-			.on('pointerdown', () => {
-				console.log('Cambios guardados');
-				// añadir lógica para guardar cambios
-			});
-	}*/
-
-	// Función para cambiar el volumen
-	onVolumeChange(type, botonIzDer) { //ahora le tengo que pasar el delta
+	//funcion para crear la barra y la bolita
+	createSlider(x,y,type,valorActual){
 		const options = Options.get_instance();
-		switch (type) {
-			case 'general':
-				let newGeneralVolume = options.get_volumen_general() + botonIzDer;
-				newGeneralVolume = Phaser.Math.Clamp(newGeneralVolume, 0, 1);/*esta funcion solamente hace que no pase tanto por arriba
-                como por abajo, por ejemplo no puedo poner un volumen negativo, y tampoco puedo poner un volumen de mas del 100% */
-				options.cambiar_volumen_general(newGeneralVolume);
-				break;
-			case 'musica':
-				let newMusicVolume = options.get_volumen_musica() + botonIzDer;
-				newMusicVolume = Phaser.Math.Clamp(newMusicVolume, 0, 1);
-				options.cambiar_volumen_musica(newMusicVolume);
-				break;
-			case 'efectos':
-				let newEfectoVolume = options.get_volumen_efectos_sonido() + botonIzDer;
-				newEfectoVolume = Phaser.Math.Clamp(newEfectoVolume, 0, 1);
-				options.cambiar_volumen_efectos(newEfectoVolume);
-				break;
-			default:
-				break;
-		}
-		this.scene.restart(); // Para que los cambios se reflejen inmediatamente
+		const barWidth = 200;
+		const barHeight= 6;
+		const ballRadio=10;
+		//creo el rectangulo
+		const bar= this.add.rectangle(x,y,barWidth,barHeight,0xffffff).setOrigin(0.5,0.5);
+
+		//posicion de la bola segun el parametro de volumen actual que paso
+		const ballX = x - barWidth / 2 + valorActual * barWidth;
+		//creo la bolita
+		/*en este paso es muu importante porque hago que sea interactiva la pelota, y anyado la opcion de que sea "draggeable" 
+		para que se pueda arrastrar despues*/
+		const ball =this.add.circle(x - barWidth / 2 + barWidth * valorActual, y, ballRadio, 0x7DF9FF).setInteractive({ useHandCursor: true, draggable: true });
+		// Crear texto de porcentaje
+		const percentText = this.add.text(x + barWidth / 2 + 10, y, `${Math.round(valorActual * 100)}%`, {
+		fontSize: '18px',
+		color: '#ffffff'
+	}).setOrigin(0, 0.5); // izquierda centrado verticalmente
+		
+		ball.on('drag', (pointer, dragX) => {
+			const minX = x - barWidth / 2;
+			const maxX = x + barWidth / 2;
+			const clampedX = Phaser.Math.Clamp(dragX, minX, maxX);
+			ball.x = clampedX;
+
+			// Calcular nuevo valor y actualizar
+			const newValue = (clampedX - minX) / barWidth;
+
+			// Actualizar el texto tambien en proporcion al porcentaje
+			percentText.setText(`${Math.round(newValue * 100)}%`);
+
+			// Aplicar cambio según tipo
+			const options = Options.get_instance();
+			switch (type) {
+				case 'general':
+					options.cambiar_volumen_general(newValue);
+					break;
+				case 'musica':
+					options.cambiar_volumen_musica(newValue);
+					break;
+				case 'efectos':
+					options.cambiar_volumen_efectos(newValue);
+					break;
+			}
+		});
 	}
 }

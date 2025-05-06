@@ -153,9 +153,9 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
         this._puntosDeVida.scaleX = porcentajeVida
         this._puntosDeEscudo.scaleX = porcentajeEscudo
 
-                // Monedas
+        // Monedas
         this._contadorMonedas.getAt(0).destroy()
-        const cantidadMonedas = this.scene.add.text(-2, 0, `${dineroActual} $`)
+        const cantidadMonedas = this.scene.add.text(-2, 0, `${dineroActual} Score`)
         this._contadorMonedas.addAt(cantidadMonedas, 0)
 
         // Baterías
