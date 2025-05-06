@@ -41,7 +41,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
             scene.physics.world.overlap(this, scene.boxesHard, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene.doors, checkOverlapAndDestroy);
             scene.physics.world.overlap(this, scene._paredColliders, checkOverlapAndDestroy);
-        });
+        })
 
         // Listener para cuando la bala toca los límites del mundo
         this.body.world.on('worldbounds', (body) => {

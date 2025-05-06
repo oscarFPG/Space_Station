@@ -1,9 +1,8 @@
 import Phaser from 'phaser'
 
+
 export default class Object extends Phaser.GameObjects.Sprite {
 
-    _displayHelperText = false
-    _interactiveDistance = 10
     _offsetX = 0
     _offsetY = 0
 
@@ -18,11 +17,12 @@ export default class Object extends Phaser.GameObjects.Sprite {
         if(!player)
             return new Error('La clase necesita una previa referencia al Player')
         
-        //this.scene.physics.add.overlap(player, this, this.player_overlaps, null, this)
+
         this.on('overlapstart', () => {
             this.player_overlaps(player, isInteractive)
         })
         this.scene.physics.add.overlap(this, player)
+
         if (isInteractive) {
             this.on('overlapend', () => {
                 this.player_end_overlaps(player)
@@ -39,7 +39,8 @@ export default class Object extends Phaser.GameObjects.Sprite {
     }
 
     preUpdate(time, delta){
-        super.preUpdate(time, delta);
+
+        super.preUpdate(time, delta)
 		const player = this.scene.get_player()
         if(!player)
             return
@@ -55,6 +56,7 @@ export default class Object extends Phaser.GameObjects.Sprite {
 	}
 
     player_overlaps(player, isInteractive){
+
         if (isInteractive) {
             this._textoInteraccion.setVisible(true)
             this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)

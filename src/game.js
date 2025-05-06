@@ -24,7 +24,7 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [ Boot, Tutorial, Level1, Level2, Level3, Level4, Level5_1, Level5_2, CreditsScene, Lobby, Store, Settings,VolumeSettings],
+    scene: [ Boot, Tutorial, Level1, Level2, Level3, Level4, Level5_1, Level5_2, CreditsScene, Lobby, Store, Settings, VolumeSettings],
     physics: {
         default: 'arcade',
         arcade: {

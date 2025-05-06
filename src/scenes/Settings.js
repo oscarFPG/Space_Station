@@ -4,12 +4,12 @@ import Options from '../managers/Options.js'
 
 export default class Settings extends BaseScene {
 
-    constructor(){
-        super('settings')
-    }
+	constructor(){
+		super('settings')
+	}
 
-    init(data){
-        this._previousScene = data.previousScene
+	init(data){
+		this._previousScene = data.previousScene
     }
 
     create() {
@@ -27,13 +27,13 @@ export default class Settings extends BaseScene {
         const panelY = (height - panelH) / 2
     
         const panel = this.add.rectangle(panelX, panelY, panelW, panelH,0x222222, 0.9) //los dos ultimos son para el relleno del rectangulo y la opacidad
-          .setOrigin(0)
-          .setStrokeStyle(4, 0x7DF9FF)//el setStroke hace un rectangulo asi por fuera, solo como decoracion
+			.setOrigin(0)
+			.setStrokeStyle(4, 0x7DF9FF)//el setStroke hace un rectangulo asi por fuera, solo como decoracion
     
         // Título
         this.add.text(width/2, panelY + 30, 'PAUSA', {
-          fontSize: '36px',
-          color: '#7DF9FF'
+			fontSize: '36px',
+			color: '#7DF9FF'
         }).setOrigin(0.5)
     
         // Lista de botones con su etiqueta y callback
@@ -52,43 +52,44 @@ export default class Settings extends BaseScene {
         const spacing =  50 //distancia entre cada opcion
     
         botones.forEach((btn, i) => { //hacemos el bucle para cada boton y para dibujarlo
-          const y = startY + i * spacing
-          // fondo para cada boton
-          const bg = this.add.rectangle(width/2, y, panelW - 40,  45, 0x444444, 1)//el 40 
-            .setOrigin(0.5)
-            .setInteractive({ useHandCursor: true }) /*esta funcion la vi en un ejemplo, no se que tal funcionara la verdad
-            de momento, lo hace clicable y el raton es una mano para darle.*/
-            .on('pointerover',  () => bg.setFillStyle(0x666666)) //esto hace que cambie de color cuando el raton esta en cima
-            .on('pointerout',   () => bg.setFillStyle(0x444444))//cuando el raton no esta mas en cima se va y vuelve a su color.
-            .on('pointerdown',  btn.onClick)
-    
-          // Texto
-          this.add.text(width/2, y, btn.text, {
-            fontSize: '24px',
-            color: '#7DF9FF'
-          }).setOrigin(0.5)
+			const y = startY + i * spacing
+			// fondo para cada boton
+			const bg = this.add.rectangle(width/2, y, panelW - 40,  45, 0x444444, 1)//el 40 
+			.setOrigin(0.5)
+			.setInteractive({ useHandCursor: true }) /*esta funcion la vi en un ejemplo, no se que tal funcionara la verdad
+			de momento, lo hace clicable y el raton es una mano para darle.*/
+			.on('pointerover',  () => bg.setFillStyle(0x666666)) //esto hace que cambie de color cuando el raton esta en cima
+			.on('pointerout',   () => bg.setFillStyle(0x444444))//cuando el raton no esta mas en cima se va y vuelve a su color.
+			.on('pointerdown',  btn.onClick)
+
+			// Texto
+			this.add.text(width/2, y, btn.text, {
+			fontSize: '24px',
+			color: '#7DF9FF'
+			}).setOrigin(0.5)
         })
     
         // Configuramos ESC para volver
         this.config_eventos()
-      }
+	}
 
     update(time, delta){
 
     }
 
     config_eventos() {
-        // Reemplazamos el switch por stop+resume
-        this.input.keyboard.on(Options.TECLA_PAUSA, () => {
-            // 1) Cerramos la escena de settings
-            this.scene.stop()
-            // 2) Reanudamos la escena del juego
-            this.scene.resume(this._previousScene)
-        }, this)
+		// Reemplazamos el switch por stop+resume
+		this.input.keyboard.on(Options.TECLA_PAUSA, () => {
+			// 1) Cerramos la escena de settings
+			this.scene.stop()
+			// 2) Reanudamos la escena del juego
+			this.scene.resume(this._previousScene)
+		}, this)
     }
-    onVolumeSettings() {
-        this.scene.pause(); // Cerramos settings
-        this.scene.launch('volumeSettings', { previousScene: this._previousScene });
-      }
+
+	onVolumeSettings() {
+		this.scene.pause(); // Cerramos settings
+		this.scene.launch('volumeSettings', { previousScene: this._previousScene });
+	}
 
 }
