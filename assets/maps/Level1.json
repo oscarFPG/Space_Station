@@ -1329,7 +1329,7 @@
                         {
                          "name":"currentAmmo",
                          "type":"int",
-                         "value":12
+                         "value":8
                         }],
                  "rotation":0,
                  "type":"Weapon",
@@ -1337,6 +1337,24 @@
                  "width":111,
                  "x":2376.56060606061,
                  "y":3191.59090909091
+                }, 
+                {
+                 "gid":11,
+                 "height":111,
+                 "id":85,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"title",
+                         "type":"string",
+                         "value":"The station has been attacked, everything is gone"
+                        }],
+                 "rotation":0,
+                 "type":"Note",
+                 "visible":true,
+                 "width":111,
+                 "x":2399.28787878788,
+                 "y":1753.22727272727
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1345,7 +1363,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":85,
+ "nextobjectid":86,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

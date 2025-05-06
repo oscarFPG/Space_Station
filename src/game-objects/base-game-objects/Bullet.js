@@ -59,7 +59,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     fire(x, y, angle, speed) {
 
         const options = Options.get_instance();
-        options.playSound(this.scene, 'gun_sound', { isMusic: false, volume: 0.6 });
+        options.playSound(this.scene, 'gun_sound', { isMusic: false, volume: 0.4 });
         this.setPosition(x, y);
         this.setRotation(angle);
 

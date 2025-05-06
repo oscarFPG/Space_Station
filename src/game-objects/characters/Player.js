@@ -206,7 +206,7 @@ export default class Player extends BaseActor {
 			this._laserGraphics.lineStyle(1, 0xff0000, 1);
 		
 			// Definir un largo para el laser (puedes ajustar este valor)
-			const laserLength = 700;
+			const laserLength = 1700;
 			const laserEndX = weaponWorldX + Math.cos(angle) * laserLength;
 			const laserEndY = weaponWorldY + Math.sin(angle) * laserLength;
 			this._laserGraphics.strokeLineShape(new Phaser.Geom.Line(weaponWorldX, weaponWorldY, laserEndX, laserEndY));	  
@@ -346,7 +346,7 @@ export default class Player extends BaseActor {
 	
 
 	// Objeto para preservar el estado actual del jugador(vida, monedas, armas, etc...) entre niveles o partidas
-	getPlayerStatus(){
+	getPlayerStatus(_previousScene){
 
 		const status = {
 			health: this._atributos.vida,
@@ -355,7 +355,8 @@ export default class Player extends BaseActor {
 			weapon1: { key: this._weapon._specs.sprite, CurrentAmmo: this._weapon.getBulletsFromClip(), ReserveAmmo: this._weapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET},
 			weapon2: this._secondaryWeapon
 					  ? { key: this._secondaryWeapon._specs.sprite, CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET}
-					  : null
+					  : null,
+			previousScene : _previousScene
 		  };
 
 		return status

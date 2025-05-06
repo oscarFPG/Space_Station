@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="32" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="32" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="94">
  <editorsettings>
   <export target="Level4.json" format="json"/>
  </editorsettings>
@@ -395,7 +395,6 @@
   </object>
   <object id="66" type="Battery" gid="19" x="214.5" y="2216.5" width="111" height="111"/>
   <object id="67" type="Battery" gid="19" x="2120.5" y="2890.5" width="111" height="111"/>
-  <object id="69" type="AmmoBox" gid="28" x="2542.5" y="1992.5" width="111" height="111"/>
   <object id="71" type="Coin" gid="22" x="658.5" y="3428.5" width="111" height="111">
    <properties>
     <property name="value" type="int" value="10"/>
@@ -469,8 +468,8 @@
   <object id="87" type="Weapon" gid="39" x="208.258" y="2696.38" width="111" height="111">
    <properties>
     <property name="Name" value="weapon3"/>
-    <property name="ReserveAmmo" type="int" value="0"/>
-    <property name="currentAmmo" type="int" value="3"/>
+    <property name="ReserveAmmo" type="int" value="2"/>
+    <property name="currentAmmo" type="int" value="1"/>
    </properties>
   </object>
   <object id="89" type="AmmoBox" gid="28" x="364.5" y="2754.5" width="111" height="111">
@@ -481,6 +480,13 @@
   <object id="91" type="Weapon" gid="39" x="1655.5" y="996.5" width="111" height="111">
    <properties>
     <property name="Name" value="weapon1"/>
+    <property name="ReserveAmmo" type="int" value="0"/>
+    <property name="currentAmmo" type="int" value="8"/>
+   </properties>
+  </object>
+  <object id="93" type="Weapon" gid="39" x="2446.5" y="1975.5" width="111" height="111">
+   <properties>
+    <property name="Name" value="weapon2"/>
     <property name="ReserveAmmo" type="int" value="0"/>
     <property name="currentAmmo" type="int" value="12"/>
    </properties>

@@ -39,11 +39,12 @@ export default class BaseScene extends Phaser.Scene {
     // SIEMPRE esta funcion con super.create()
 
     init(data) {
-        this.playerHealth   = data.health;
-        this.playerShield   = data.shield;
-        this.playerMoney    = data.money;
-        this.playerWeapon1  = data.weapon1;
-        this.playerWeapon2  = data.weapon2;
+        this.playerHealth   = data.health
+        this.playerShield   = data.shield
+        this.playerMoney    = data.money
+        this.playerWeapon1  = data.weapon1
+        this.playerWeapon2  = data.weapon2
+        this._previousScene = data.previousScene
 
         this._isTransitioning = false;
     }
@@ -130,7 +131,7 @@ export default class BaseScene extends Phaser.Scene {
                 this._finalPosition.x, this._finalPosition.y
             )
             if (distance < 100 && this._nextScene) { 
-                const status = this._player.getPlayerStatus()
+                const status = this._player.getPlayerStatus(this._previousScene)
                 this.scene.start(this._nextScene, status);
                 //Efecto 
                 this.cameras.main.once('camerafadeoutcomplete', () => {
@@ -454,7 +455,7 @@ export default class BaseScene extends Phaser.Scene {
         this._grupoBalas = this.physics.add.group()
         const onBulletCollision = (obj1, obj2) => {
             this.ambient = this.sound.add('impact_shot') 
-            this.ambient.setVolume(0.12)
+            this.ambient.setVolume(0.08)
             this.ambient.play()
             let bullet = obj1 instanceof Bullet ? obj1 : obj2
             let target = bullet === obj1 ? obj2 : obj1
@@ -522,8 +523,8 @@ export default class BaseScene extends Phaser.Scene {
 
     config_musica(){
         this.sound.stopAll();
-        this.ambient = (this.scene.key == 'Level5_2') ? this.sound.add('final boss') : this.sound.add('ambiente')
-        this.ambient.setVolume(0.3)
+        this.ambient = (this.scene.key == 'Level5_2') ? this.sound.add('final boss', 
+            { volume: 0.3, loop: true }) : this.sound.add('ambiente', { volume: 0.3, loop: true })
         this.ambient.play()
     }
 
@@ -544,8 +545,7 @@ export default class BaseScene extends Phaser.Scene {
     }
     putFinalTheme(value) { 
         this.sound.stopAll();
-        this.ambient = this.sound.add('final game')
-        this.ambient.setVolume(0.3)
+        this.ambient = this.sound.add('final game',{ volume: 0.3, loop: true })
         this.ambient.play()
     }
 }

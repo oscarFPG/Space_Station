@@ -220,7 +220,8 @@ export default class Boot extends BaseScene {
         
         // Background image
         this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'front-page').setOrigin(0.5);
-
+        this._nextScene = 'tutorial'
+        this._previousScene = 'boot'
         // Footer text
         this.add.text(this.game.config.width / 2, this.game.config.height / 2 + 100, 'Press ENTER to start the game...', {
             fontSize: 20,
@@ -253,9 +254,10 @@ export default class Boot extends BaseScene {
                 shield: Boot.PLAYER_ESCUDO_INICIAL,
                 money: Boot.PLAYER_DINERO_INICIAL,
                 weapon1: null,
-                weapon2: null
+                weapon2: null,
+                previousScene: this._previousScene
               };
-            this.scene.switch('tutorial', status)
+            this.scene.switch(this._nextScene, status)
         }   
     }
 }
