@@ -403,11 +403,9 @@ export default class BaseScene extends Phaser.Scene {
         });
     }
     
-
     get_player(){
         return this._player
     }
-
 
     config_jugador(x, y, health, shield, money, firstWeapon, secondaryWeapon) {
 
@@ -547,6 +545,7 @@ export default class BaseScene extends Phaser.Scene {
     crearColliderConObjetos(gameobject){
         this.physics.add.collider(gameobject, this._layerObjeto)
     }
+    
     putFinalTheme(value) { 
         this.sound.stopAll();
         this.ambient = this.sound.add('final game',{ volume: 0.3, loop: true })

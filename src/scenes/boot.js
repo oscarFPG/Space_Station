@@ -66,6 +66,7 @@ import BOX from '../../assets/objects/box.png'
 import HARD_BOX from '../../assets/objects/box_hard.png'
 import TURRET_WEAPON from '../../assets/objects/turret_default_.png'
 import TURRET_BASE from '../../assets/objects/turret_base_.png'
+import TERMINAL from '../../assets/objects/terminal.png'
 
 // Interfaces
 import PlayerHealth from '../../assets/ui/HealthBar.png'
@@ -147,6 +148,7 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.OBJ_LASER_HORIZONTAL, laserDown)
         this.load.image(Builder.OBJ_CAJA, BOX)
         this.load.image(Builder.OBJ_CAJA2, HARD_BOX)
+        this.load.image(Builder.OBJ_TERMINAL, TERMINAL)
 
         // Resto (Por clasificar) - TODO
         this.load.image('batteryStructLow', BATTERY_STRUCTURE_LOW)
@@ -213,16 +215,16 @@ export default class Boot extends BaseScene {
         this.load.audio('activate_note', ACTIVATE_NOTE)
         this.load.audio('final boss', FINAL_BOSS_THEME)
         this.load.audio('final game', FINAL_GAME_THEME)
-        this.load.audio('error',ERROR)
-        this.load.audio('success',SUCCESS)
+        this.load.audio('error', ERROR)
+        this.load.audio('success', SUCCESS)
     }
     
     create(){
         
         // Background image
         this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'front-page').setOrigin(0.5);
-        this._nextScene = 'tutorial'
-        this._previousScene = 'boot'
+        this._nextScene = Builder.ESCENA_NIVEL1
+        this._previousScene = Builder.ESCENA_BOOT
         // Footer text
         this.add.text(this.game.config.width / 2, this.game.config.height / 2 + 100, 'Press ENTER to start the game...', {
             fontSize: 20,

@@ -138,7 +138,7 @@ export default class Store extends BaseScene {
         case 'catalog':
             this.consultar_catalogo()
             return
-
+            
         case 'buy':   
             this.comprar_objetos(parametros)
             return

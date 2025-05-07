@@ -56,45 +56,44 @@ export default class Player extends BaseActor {
 		if (this._secondaryWeapon) {
 			this._secondaryWeapon.setVisible(false);
 			this.add(this._secondaryWeapon);
-		  }
+		}
 
-		//Se crean texto para informar al jugador de recargar o cambiar arma
+		// Se crean texto para informar al jugador de recargar o cambiar arma
 		// Texto “Recargar [R]”
-
 		this.reloadText = scene.add.text(30, -50, 'Reload [R]', {
 			fontSize: '18px',
 			color: '#ffffff',
 			backgroundColor: '#000000aa',
 			padding: { x: 8, y: 4 }
-		  })
-		  .setOrigin(0.5)
-		  .setDepth(20)
-		  .setScrollFactor(1)
-		  .setVisible(false);
-		  this.add(this.reloadText);
+		})
+			.setOrigin(0.5)
+			.setDepth(20)
+			.setScrollFactor(1)
+			.setVisible(false);
+		this.add(this.reloadText);
 
 		this.changeWeaponText = scene.add.text(30, -50, 'Change weapon [Q]', {
 			fontSize: '18px',
 			color: '#ffffff',
 			backgroundColor: '#000000aa',
 			padding: { x: 8, y: 4 }
-		  })
-		  .setOrigin(0.5)
-		  .setDepth(20)
-		  .setScrollFactor(1)
-		  .setVisible(false);
-		  this.add(this.changeWeaponText);
-	  
-		  // Spinner de recarga
-		  this.reloadSpinner = scene.add.graphics({ x: 30, y: -40 });
-		  this.reloadSpinner.lineStyle(4, 0x00AADD, 1);
-		  this.reloadSpinner.strokeCircle(0, 0, 16);
-		  this.reloadSpinner.strokeCircle(0, 0, 12);
-		  this.reloadSpinner
+		})
+			.setOrigin(0.5)
 			.setDepth(20)
 			.setScrollFactor(1)
 			.setVisible(false);
-		  this.add(this.reloadSpinner);
+		this.add(this.changeWeaponText);
+	  
+		// Spinner de recarga
+		this.reloadSpinner = scene.add.graphics({ x: 30, y: -40 });
+		this.reloadSpinner.lineStyle(4, 0x00AADD, 1);
+		this.reloadSpinner.strokeCircle(0, 0, 16);
+		this.reloadSpinner.strokeCircle(0, 0, 12);
+		this.reloadSpinner
+			.setDepth(20)
+			.setScrollFactor(1)
+			.setVisible(false);
+		this.add(this.reloadSpinner);
   
 	}
 
@@ -102,6 +101,7 @@ export default class Player extends BaseActor {
 
 		if(!this.scene || !this._atributos.activo)
 			return
+
 
 		// Actualiza la posición del container usando la posición del body
 		this.setPosition(this.body.x, this.body.y);
@@ -381,6 +381,7 @@ export default class Player extends BaseActor {
 			return this._weapon.boostAmmo(ammo)
 		else if (this._secondaryWeapon && this._secondaryWeapon.getBulletsType() == ammoType)
 			return this._secondaryWeapon.boostAmmo(ammo)
+		
 		return this._weapon.getBulletsType() == ammoType || (this._secondaryWeapon && this._secondaryWeapon.getBulletsType() == ammoType)
 	}
 
