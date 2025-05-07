@@ -20,6 +20,7 @@ export default class AmmoBoxBaseBullet extends Object {
         this.light = this.scene.lights.addLight(this.x, this.y, 300, 0x00DDDD, 0.7);
     }
 
+
     player_overlaps(player) {
 
         this._textoInteraccion.setVisible(true)
@@ -28,11 +29,12 @@ export default class AmmoBoxBaseBullet extends Object {
         this.accion(player)
     }
 
-
     accion(player){
 
         if(!player.isUseKeyJustPressed())
-            return       
+            return
+
+
         if (player.pickAmmo(AmmoBoxBaseBullet.AMMO_WEAPON_NAME, AmmoBoxBaseBullet.NUM_BULLETS)) {
             const options = Options.get_instance();
             options.playSound(this.scene, 'pick_up_ammo', { isMusic: false, volume: 1.0 });
@@ -40,6 +42,7 @@ export default class AmmoBoxBaseBullet extends Object {
             this.destroyObject()
         }
     }
-    getIsInteractive() { return true}
+
+    getIsInteractive() { return true }
 
 }

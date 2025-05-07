@@ -6,7 +6,8 @@ import Object from '../base-game-objects/Object.js'
 export default class StoreObject extends Object {
 
     constructor(scene, x, y){
-        super(scene, x, y, Builder.OBJ_TIENDA, true)
+        super(scene, x, y, Builder.OBJ_TERMINAL, true)
+        this.setScale(0.15)
         
         this.setText('Abrir tienda')
     }

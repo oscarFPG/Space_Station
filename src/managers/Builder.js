@@ -60,7 +60,7 @@ export default class Builder {
     static OBJ_AMMO_BOX_SNIPER = 'objAmmoBoxSniper'
     static OBJ_LASER_VERTICAL = 'objLaserVertical'
     static OBJ_LASER_HORIZONTAL = 'objLaserHorizontal'
-    static OBJ_TIENDA = 'objTienda'
+    static OBJ_TERMINAL = 'terminal'
 
     // Interfaces
     static INTERFAZ_PLAYER = ''
