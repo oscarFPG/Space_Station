@@ -5,7 +5,6 @@ import Options from '../../managers/Options.js';
 
 export default class Box extends Object {
     
-    static BROKEN_ANIMATION = 'boxAnimation';
     static VIDA_INICIAL = 10;
 
     constructor(scene, x, y) {
@@ -17,7 +16,7 @@ export default class Box extends Object {
 
         this._vida = Box.VIDA_INICIAL;
         
-        this.#config_animacion('broken_box', Box.BROKEN_ANIMATION, 1, 4, 6);
+        this.#config_animacion('broken_box', Builder.OBJ_BOX_ANIMATION, 1, 4, 6);
 
         // Evento para detectar cuando termina la animación
         this.on('animationcomplete', (animation) => {

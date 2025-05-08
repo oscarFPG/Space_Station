@@ -1,14 +1,13 @@
 import Phaser from 'phaser';
 import Object from '../base-game-objects/Object';
 import Options from '../../managers/Options.js';
+import Builder from '../../managers/Builder.js';
 
 //
 export default class Console extends Object {
 
-	static TEXTURE = 'consoleBlocked'
-
 	constructor(scene, x, y, password, laserID) {
-		super(scene, x, y, Console.TEXTURE, true);
+		super(scene, x, y, Builder.OBJ_CONSOLE_BLOCK, true);
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
 

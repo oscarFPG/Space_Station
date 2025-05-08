@@ -1,15 +1,14 @@
 import Phaser from 'phaser'
 import Object from '../base-game-objects/Object'
 import Options from '../../managers/Options.js';
+import Builder from '../../managers/Builder.js';
 
 export default class BatteryStructure extends Object {
 
-	static TEXTURE_ON_LOW = 'batteryStructLow'
-	static TEXTURE_ON_FULL = 'batteryStructLFull'
 	static OPENING_TIME = 2000
 
 	constructor(scene, x, y, doorsID, numBaterias) {
-		super(scene, x, y, BatteryStructure.TEXTURE_ON_LOW, false)
+		super(scene, x, y, Builder.OBJ_BATTERY_LOW, false)
 		this.body.setSize(160, 160)
 		this.body.setOffset(-10, -20)
 

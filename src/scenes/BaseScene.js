@@ -115,7 +115,7 @@ export default class BaseScene extends Phaser.Scene {
         if (!this.anims.exists('spark')) {
             this.anims.create({
                 key: 'spark',
-                frames: this.anims.generateFrameNumbers('explode', { start: 0, end: 7 }),
+                frames: this.anims.generateFrameNumbers(Builder.EXPLODE, { start: 0, end: 7 }),
                 frameRate: 30,
                 repeat: 0
             })
@@ -324,8 +324,8 @@ export default class BaseScene extends Phaser.Scene {
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'objCaja' })
-        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'objCaja2' })
+        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: Builder.OBJ_CAJA })
+        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: Builder.OBJ_CAJA2 })
 
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
         this.listaPuertas.forEach(door => {
