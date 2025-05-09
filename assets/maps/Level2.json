@@ -1059,24 +1059,6 @@
                 {
                  "gid":23,
                  "height":111,
-                 "id":93,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"health",
-                         "type":"int",
-                         "value":100
-                        }],
-                 "rotation":0,
-                 "type":"Box",
-                 "visible":true,
-                 "width":111,
-                 "x":1544.5,
-                 "y":1218.5
-                }, 
-                {
-                 "gid":23,
-                 "height":111,
                  "id":94,
                  "name":"",
                  "properties":[
@@ -1127,8 +1109,7 @@
                  "width":111,
                  "x":2733.83333333333,
                  "y":2012.5
-                },
-            
+                }, 
                 {
                  "gid":30,
                  "height":111,
@@ -1146,7 +1127,8 @@
                  "width":111,
                  "x":1217,
                  "y":1566.66666666667
-                }, 
+                },
+            
                 {
                  "gid":29,
                  "height":111,
@@ -1294,6 +1276,48 @@
                  "width":111,
                  "x":352.5,
                  "y":2314.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":109,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":1379.5,
+                 "y":1242.5
+                }, 
+                {
+                 "gid":29,
+                 "height":111,
+                 "id":110,
+                 "name":"",
+                 "rotation":0,
+                 "type":"BoxHard",
+                 "visible":true,
+                 "width":111,
+                 "x":1487.5,
+                 "y":1264.5
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":111,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":1576.5,
+                 "y":1231.16666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1302,7 +1326,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":109,
+ "nextobjectid":112,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
