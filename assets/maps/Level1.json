@@ -172,24 +172,6 @@
          "name":"objects",
          "objects":[
                 {
-                 "ellipse":true,
-                 "height":0,
-                 "id":5,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"type",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"EnemyPosition",
-                 "visible":true,
-                 "width":0,
-                 "x":444.003333333334,
-                 "y":2916.73066666667
-                }, 
-                {
                  "height":0,
                  "id":6,
                  "name":"",
@@ -680,8 +662,7 @@
                  "width":111,
                  "x":217,
                  "y":3202
-                },
-            
+                }, 
                 {
                  "gid":23,
                  "height":111,
@@ -699,7 +680,8 @@
                  "width":111,
                  "x":1099,
                  "y":3226
-                }, 
+                },
+            
                 {
                  "gid":23,
                  "height":111,
@@ -1094,24 +1076,6 @@
                  "y":2660
                 }, 
                 {
-                 "ellipse":true,
-                 "height":0,
-                 "id":61,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"type",
-                         "type":"int",
-                         "value":0
-                        }],
-                 "rotation":0,
-                 "type":"EnemyPosition",
-                 "visible":true,
-                 "width":0,
-                 "x":384,
-                 "y":2496
-                }, 
-                {
                  "gid":11,
                  "height":111,
                  "id":62,
@@ -1128,8 +1092,7 @@
                  "width":111,
                  "x":2323,
                  "y":441
-                },
-            
+                }, 
                 {
                  "gid":23,
                  "height":111,
@@ -1165,7 +1128,8 @@
                  "width":111,
                  "x":1092.5,
                  "y":361.833333333333
-                }, 
+                },
+            
                 {
                  "gid":23,
                  "height":111,
