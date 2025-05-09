@@ -1258,6 +1258,42 @@
                  "width":111,
                  "x":1197.4696969697,
                  "y":802.075757575758
+                }, 
+                {
+                 "gid":20,
+                 "height":111,
+                 "id":107,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"HealthKit",
+                 "visible":true,
+                 "width":111,
+                 "x":348.5,
+                 "y":2228.5
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":108,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":352.5,
+                 "y":2314.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1266,7 +1302,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":107,
+ "nextobjectid":109,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

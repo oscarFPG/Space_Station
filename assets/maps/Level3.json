@@ -74,7 +74,7 @@
             15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 0, 15, 15,
             15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15,
             15, 15, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 15, 15, 15, 15,
-            15, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 0, 15, 15, 15, 15, 15,
+            15, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1610612751, 1, 1610612751, 1610612751, 1610612751, 1, 1610612751, 1610612751, 0, 15, 15, 15, 15, 15,
             15, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 15, 15, 15, 15, 15,
             15, 0, 0, 0, 0, 0, 0, 7, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0,
             15, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 15, 15, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 15,
@@ -405,234 +405,6 @@
                 {
                  "gid":17,
                  "height":111,
-                 "id":17,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":1445.85,
-                 "y":1045.89
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
-                 "id":18,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":1556.85,
-                 "y":1045.89
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
-                 "id":19,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":1667.94,
-                 "y":1045.91
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
-                 "id":20,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":1778.98,
-                 "y":1045.95
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
-                 "id":21,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":1890.12,
-                 "y":1045.91
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
-                 "id":22,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":2001.12,
-                 "y":1045.91
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
                  "id":23,
                  "name":"",
                  "properties":[
@@ -745,82 +517,6 @@
                  "y":815.304
                 }, 
                 {
-                 "gid":17,
-                 "height":111,
-                 "id":29,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":2112.18,
-                 "y":1045.93
-                }, 
-                {
-                 "gid":17,
-                 "height":111,
-                 "id":30,
-                 "name":"",
-                 "properties":[
-                        {
-                         "name":"Damage",
-                         "type":"int",
-                         "value":100
-                        }, 
-                        {
-                         "name":"ID",
-                         "type":"int",
-                         "value":1
-                        }, 
-                        {
-                         "name":"isHorizontal",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStatic",
-                         "type":"bool",
-                         "value":true
-                        }, 
-                        {
-                         "name":"isStoppable",
-                         "type":"bool",
-                         "value":false
-                        }],
-                 "rotation":0,
-                 "type":"Laser",
-                 "visible":true,
-                 "width":111,
-                 "x":2223.18,
-                 "y":1045.93
-                }, 
-                {
                  "gid":30,
                  "height":111,
                  "id":35,
@@ -928,7 +624,7 @@
                  "visible":true,
                  "width":111,
                  "x":1665.84,
-                 "y":880.25
+                 "y":885.25
                 }, 
                 {
                  "gid":1073741840,
@@ -966,7 +662,7 @@
                  "visible":true,
                  "width":111,
                  "x":1665.84,
-                 "y":988
+                 "y":993
                 }, 
                 {
                  "gid":16,
@@ -1004,7 +700,7 @@
                  "visible":true,
                  "width":111,
                  "x":2110.84,
-                 "y":881.958
+                 "y":888.958
                 }, 
                 {
                  "gid":1073741840,
@@ -1042,9 +738,8 @@
                  "visible":true,
                  "width":111,
                  "x":2110.84,
-                 "y":989.708
-                },
-            
+                 "y":996.708
+                }, 
                 {
                  "gid":23,
                  "height":111,
@@ -1188,7 +883,8 @@
                  "width":0,
                  "x":1667.42,
                  "y":1650.08
-                }, 
+                },
+            
                 {
                  "ellipse":true,
                  "height":0,
@@ -1587,8 +1283,7 @@
                  "width":111,
                  "x":211.167,
                  "y":1323.29
-                },
-            
+                }, 
                 {
                  "gid":19,
                  "height":111,
@@ -1714,7 +1409,8 @@
                  "width":111,
                  "x":2670.5,
                  "y":224.5
-                }, 
+                },
+            
                 {
                  "gid":23,
                  "height":111,
@@ -1896,6 +1592,24 @@
                  "width":111,
                  "x":2870.5,
                  "y":1428.5
+                }, 
+                {
+                 "gid":20,
+                 "height":111,
+                 "id":107,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"HealthKit",
+                 "visible":true,
+                 "width":111,
+                 "x":348.5,
+                 "y":768.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1904,7 +1618,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":107,
+ "nextobjectid":108,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

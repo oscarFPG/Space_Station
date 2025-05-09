@@ -6,7 +6,7 @@ import Coin from '../objects/Coin.js'
 
 export default class Extended2Enemy extends BasedEnemy {
 
-    static VIDA = 50
+    static VIDA = 40
     static SPEED = 8
     static VALUE_COIN_DROPPED = 50
 

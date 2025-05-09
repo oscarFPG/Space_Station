@@ -675,8 +675,8 @@
                  "type":"Box",
                  "visible":true,
                  "width":111,
-                 "x":1892.16666666667,
-                 "y":1507.16666666667
+                 "x":1892.17,
+                 "y":1507.17
                 }, 
                 {
                  "gid":23,
@@ -693,7 +693,7 @@
                  "type":"Box",
                  "visible":true,
                  "width":111,
-                 "x":1970.16666666667,
+                 "x":1970.17,
                  "y":1552.5
                 }, 
                 {
@@ -711,8 +711,8 @@
                  "type":"Box",
                  "visible":true,
                  "width":111,
-                 "x":2048.16666666667,
-                 "y":1583.83333333333
+                 "x":2048.17,
+                 "y":1583.83
                 }, 
                 {
                  "gid":23,
@@ -729,8 +729,8 @@
                  "type":"Box",
                  "visible":true,
                  "width":111,
-                 "x":2122.16666666667,
-                 "y":1601.16666666667
+                 "x":2122.17,
+                 "y":1601.17
                 }, 
                 {
                  "gid":23,
@@ -1552,8 +1552,8 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":1774.86363636364,
-                 "y":997.681818181818
+                 "x":1774.86,
+                 "y":997.682
                 }, 
                 {
                  "gid":16,
@@ -1590,8 +1590,26 @@
                  "type":"Laser",
                  "visible":true,
                  "width":111,
-                 "x":2662.56060606061,
-                 "y":1442.31818181818
+                 "x":2662.56,
+                 "y":1442.32
+                }, 
+                {
+                 "gid":21,
+                 "height":111,
+                 "id":96,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"value",
+                         "type":"int",
+                         "value":15
+                        }],
+                 "rotation":0,
+                 "type":"ShieldKit",
+                 "visible":true,
+                 "width":111,
+                 "x":226.5,
+                 "y":344.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1600,7 +1618,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":96,
+ "nextobjectid":97,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",
