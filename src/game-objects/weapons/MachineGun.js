@@ -16,7 +16,7 @@ export default class MachineGun extends RangeWeapon {
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;
-        this._specs.fireRate = 3.1;
+        this._specs.fireRate = 5.25;
         this._specs.reloadTime = 2;
         this._specs.sprite = Builder.WEAPON_MACHINE_GUN;
         this._specs.weight = 1;
@@ -32,6 +32,8 @@ export default class MachineGun extends RangeWeapon {
 
     createBullet(bulletX, bulletY){
             return new MachineGunBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_BASE_MACHINE_GUN, this.colorLightBullet)
+    }
+      eliminateBulletFromClip(){
     }
 
 }
