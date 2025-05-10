@@ -28,7 +28,7 @@ export default class Laser extends Object {
         } else {
             direction.normalize();
         }
-        const knockbackDistance = 100;
+        const knockbackDistance = 70;
         const knockbackDuration = 300;
     
         this.scene.tweens.add({
