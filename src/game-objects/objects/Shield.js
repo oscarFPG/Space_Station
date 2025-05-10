@@ -4,7 +4,7 @@ import Options from '../../managers/Options.js';
 
 export default class Shield extends Object {
 
-    static AUMENTO_ESCUDO = 7.5;
+    static AUMENTO_ESCUDO = 12.5;
 
     constructor(scene, x, y) {
         super(scene, x, y, Builder.OBJ_ESCUDO, true)

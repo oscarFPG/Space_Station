@@ -130,8 +130,8 @@
   <object id="26" type="Weapon" gid="39" x="140.5" y="557.5" width="111" height="111">
    <properties>
     <property name="Name" value="weapon1"/>
-    <property name="ReserveAmmo" type="int" value="0"/>
-    <property name="currentAmmo" type="int" value="12"/>
+    <property name="ReserveAmmo" type="int" value="5"/>
+    <property name="currentAmmo" type="int" value="8"/>
    </properties>
   </object>
  </objectgroup>

@@ -38,3 +38,67 @@ body {
 p {
   text-align: center;
 }
+
+.seccion-inferior {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 40px;
+  padding: 0 40px;
+  flex-wrap: wrap;
+}
+
+.video-section, .controles-section {
+  text-align: center;
+}
+
+.parpadeo {
+  font-family: 'Orbitron', sans-serif;
+  color: #0055aa;
+  text-shadow: 0 0 4px rgba(0, 85, 170, 0.8), 0 0 8px rgba(0, 85, 170, 0.6);
+  animation: blink 1s infinite alternate;
+}
+
+.controles-section ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1.2rem;
+  color: white;
+}
+
+
+.descripcion {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1rem;
+  box-shadow: 0 0 10px rgba(0, 85, 170, 0.6);
+}
+
+.descripcion h3 {
+  color: #0055aa;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 10px;
+  text-shadow: 0 0 4px rgba(0, 85, 170, 0.8);
+}
+ 
+.boton-video {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #0055aa;
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  text-decoration: none;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 85, 170, 0.7);
+  transition: background-color 0.3s;
+}
+
+.boton-video:hover {
+  background-color: #003f7d;
+}

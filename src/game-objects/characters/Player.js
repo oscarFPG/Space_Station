@@ -9,7 +9,7 @@ import Options from '../../managers/Options.js';
 export default class Player extends BaseActor {
 
 	static VIDA_INICIAL = 20
-	static ESCUDO_INICIAL = 15
+	static ESCUDO_INICIAL = 25
 	static DINERO_INICIAL = 0
 	static BATERIA_INICIAL = 0
 	static SPEED = 200

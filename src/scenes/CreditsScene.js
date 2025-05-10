@@ -95,7 +95,7 @@ export default class CreditsScene extends BaseScene {
       targets: container,
       y: - (lines.length * lineSpacing + 50),
       ease: 'Linear',
-      duration: 25000,
+      duration: 30000,
       onComplete: () => {
         // al terminar volvemos al menú (o a la escena anterior)
         const status = {
