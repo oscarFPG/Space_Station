@@ -51,7 +51,7 @@ export default class BatteryStructure extends Object {
 		if(!this._alreadyCompleted && this._numBateriasActuales == this._numBaterias){
 			this._alreadyCompleted = true
 			const options = Options.get_instance();
-			options.playSound(this.scene, 'success', { isMusic: false, volume: 1.0 });
+			options.playSound(this.scene, Builder.SOUND_SUCCESS, { isMusic: false, volume: 1.0 });
 			this.activarObjetos(this._doorsID)
 			return;
 		}

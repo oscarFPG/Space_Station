@@ -6,13 +6,13 @@ import Builder from '../managers/Builder.js'
 export default class Level2 extends BaseScene {
 
     constructor(){
-        super('Level2')
+        super(Builder.ESCENA_NIVEL2)
     }
     create(){
 
         var map = this.make.tilemap({ key: Builder.MAP_LEVEL_2, tileWidth: 111, tileHeight: 111 })
-        var tileset = map.addTilesetImage('Tilemap2', 'tiles')
-        super.create(map, tileset, 'Level3')
+        var tileset = map.addTilesetImage('Tilemap2', Builder.TILES)
+        super.create(map, tileset, Builder.ESCENA_NIVEL3)
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
             delay: 2000,

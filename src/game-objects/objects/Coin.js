@@ -21,7 +21,7 @@ export default class Coin extends Object {
         
         player.receiveMoney(this.value)
         const options = Options.get_instance();
-        options.playSound(this.scene, 'pick_up_coin', { isMusic: false, volume: 1.0 });
+        options.playSound(this.scene, Builder.SOUND_PICK_COIN, { isMusic: false, volume: 1.0 });
         this.removeLight();
         this.destroyObject()
     }

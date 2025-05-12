@@ -41,7 +41,7 @@ export default class Box extends Object {
 
     destroyObject(){
         const options = Options.get_instance();
-        options.playSound(this.scene, 'box_breaking', { isMusic: false, volume: 1.0 });
+        options.playSound(this.scene, Builder.SOUND_BOX_BREAKING, { isMusic: false, volume: 1.0 });
         this.play('broken_box')
         this.body.checkCollision.none = true;
     }

@@ -65,7 +65,7 @@ export default class Door extends Object {
     }
     activarPuerta() {
         const options = Options.get_instance();
-        options.playSound(this.scene, 'doors_open', { isMusic: false, volume: 1.0 });
+        options.playSound(this.scene, Builder.SOUND_DOOR_OPEN, { isMusic: false, volume: 1.0 });
         this.play('open_doors'); 
         this.scene.time.delayedCall(Door.OPENING_DELAY, () => {
             this.setFrame(4); 
@@ -78,7 +78,7 @@ export default class Door extends Object {
             this.setFrame(0); 
         });
         const options = Options.get_instance();
-        options.playSound(this.scene, 'doors_closed', { isMusic: false, volume: 1.0 });  
+        options.playSound(this.scene, Builder.SOUND_DOOR_CLOSED, { isMusic: false, volume: 1.0 });  
     }
     set_active(status){
         this.isActivate = status

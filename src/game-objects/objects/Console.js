@@ -59,7 +59,7 @@ export default class Console extends Object {
 
 
 		const options = Options.get_instance();
-		options.playSound(this.scene, 'console_sound', { isMusic: false, volume: 1.0 });
+		options.playSound(this.scene, Builder.SOUND_CONSOLE, { isMusic: false, volume: 1.0 });
 
 		/*const openSound = this.scene.sound.add('console_sound');
 		openSound.setVolume(1.5);  // Ajusta el volumen según prefieras
@@ -137,7 +137,7 @@ export default class Console extends Object {
 			.on('pointerdown', () => {
 				//poner la musica
 				const options = Options.get_instance();
-				options.playSound(this.scene, 'ClickSOund', { isMusic: false, volume: 1.0 }); /*aqui pongo isMusica false para indicar
+				options.playSound(this.scene, Builder.SOUND_CLICK, { isMusic: false, volume: 1.0 }); /*aqui pongo isMusica false para indicar
 				que es un efecto de sonido*/ 
 				if(enteredPassword.length < 4){
 					enteredPassword += key.label
@@ -185,7 +185,7 @@ export default class Console extends Object {
 
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
 					const options = Options.get_instance();
-					options.playSound(this.scene, 'success', { isMusic: false, volume: 1.0 });
+					options.playSound(this.scene, Builder.SOUND_SUCCESS, { isMusic: false, volume: 1.0 });
 
 
 					// Desactivar todos los laseres asociados a esta consola
@@ -199,7 +199,7 @@ export default class Console extends Object {
 
 					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
 					const options = Options.get_instance();
-					options.playSound(this.scene, 'error', { isMusic: false, volume: 1.0 });
+					options.playSound(this.scene, Builder.SOUND_FAIL, { isMusic: false, volume: 1.0 });
 					
 					passwordDisplay.setText('Contraseña incorrecta');
 					enteredPassword = "";

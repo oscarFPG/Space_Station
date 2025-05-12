@@ -5,12 +5,12 @@ import Builder from '../managers/Builder.js'
 export default class Level5_2 extends BaseScene {
 
     constructor(){
-        super('Level5_2')
+        super(Builder.ESCENA_NIVEL5_2)
     }
     create(){
 
         var map = this.make.tilemap({ key: Builder.MAP_LEVEL_5_2, tileWidth: 111, tileHeight: 111 })
-        var tileset = map.addTilesetImage('Tilemap2', 'tiles')
+        var tileset = map.addTilesetImage('Tilemap2', Builder.TILES)
         super.create(map, tileset, 'creditsScene')
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({

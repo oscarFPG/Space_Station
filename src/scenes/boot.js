@@ -237,7 +237,7 @@ export default class Boot extends BaseScene {
         this.enter_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         // Music
-        this._mainmenu_music = this.sound.add('mainMenuMusic')
+        this._mainmenu_music = this.sound.add(Builder.MUSIC_MENU_MUSIC)
         this._mainmenu_music.setVolume(0.2)
         this._mainmenu_music.play()
 

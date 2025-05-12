@@ -34,7 +34,7 @@ export default class Health extends Object {
         if(!player.isUseKeyJustPressed())
 			return
         const options = Options.get_instance();
-        options.playSound(this.scene, 'pick_up_health', { isMusic: false, volume: 1.0 });
+        options.playSound(this.scene, Builder.SOUND_PICK_HEALT, { isMusic: false, volume: 1.0 });
         this.removeLight();
         player.healthBoost(Health.AUMENTO_VIDA)
         this.destroyObject()

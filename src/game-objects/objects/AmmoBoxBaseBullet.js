@@ -37,7 +37,7 @@ export default class AmmoBoxBaseBullet extends Object {
 
         if (player.pickAmmo(AmmoBoxBaseBullet.AMMO_WEAPON_NAME, AmmoBoxBaseBullet.NUM_BULLETS)) {
             const options = Options.get_instance();
-            options.playSound(this.scene, 'pick_up_ammo', { isMusic: false, volume: 1.0 });
+            options.playSound(this.scene, Builder.SOUND_PICK_AMMO, { isMusic: false, volume: 1.0 });
             this.removeLight();
             this.destroyObject()
         }

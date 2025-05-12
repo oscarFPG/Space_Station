@@ -419,7 +419,7 @@ export default class Player extends BaseActor {
 			if(this._secondaryWeapon == null)
 				return
 			const options = Options.get_instance();
-			options.playSound(this.scene, 'pick_up_gun', { isMusic: false, volume: 1.0 });
+			options.playSound(this.scene, Builder.SOUND_PICK_GUN, { isMusic: false, volume: 1.0 });
 			if(this._armaEquipada == this._weapon){
 				this._weapon.setVisible(false)
 				this._secondaryWeapon.setVisible(true)
