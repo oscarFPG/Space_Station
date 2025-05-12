@@ -191,9 +191,9 @@ export default class Store extends BaseScene {
     consultar_catalogo(){
 
         const message = []
-        message.push("Objeto -- Precio -- Descripcion")
-        message.push("Vida   --   50   -- Objeto para recuperar puntos de vida")
-        message.push("Escudo --   30   -- Objeto para recuperar escudo")
+        message.push("Objeto     -- Precio -- Descripcion")
+        message.push("Vida (v)   --   50   -- Objeto para recuperar puntos de vida")
+        message.push("Escudo (e) --   30   -- Objeto para recuperar escudo")
 
         message.forEach(m => {
             this.addTextToConsole(m)

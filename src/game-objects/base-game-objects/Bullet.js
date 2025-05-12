@@ -1,10 +1,9 @@
 import Phaser from 'phaser';
 import Options from '../../managers/Options.js';
+import Builder from '../../managers/Builder.js';
 
 
 export default class Bullet extends Phaser.Physics.Arcade.Sprite {
-
-    static EXPLODE_ANIMATION = 'explode'; // Nombre de la animación
 
     constructor(scene, x, y, texture, damage, color) {
         super(scene, x, y, texture);
@@ -21,7 +20,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
         if (!scene.anims.exists('spark')) {
             scene.anims.create({
                 key: 'spark',
-                frames: scene.anims.generateFrameNumbers('explode', { start: 0, end: 7 }),
+                frames: scene.anims.generateFrameNumbers(Builder.EXPLODE, { start: 0, end: 7 }),
                 frameRate: 5,
                 repeat: 0
             });
@@ -59,7 +58,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
     fire(x, y, angle, speed) {
 
         const options = Options.get_instance();
-        options.playSound(this.scene, 'gun_sound', { isMusic: false, volume: 0.4 });
+        options.playSound(this.scene, Builder.SOUND_GUN, { isMusic: false, volume: 0.4 });
         this.setPosition(x, y);
         this.setRotation(angle);
 
@@ -94,7 +93,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite {
             return;
 
         // Usamos this.scene en lugar de this.scene
-        const spark = this.scene.add.sprite(x, y, 'explode');
+        const spark = this.scene.add.sprite(x, y, Builder.EXPLODE);
         spark.setOrigin(0.5, 0.5);
         // Asignar la rotación de la bala (o la que desees) al spark
         spark.setRotation(this.rotation);

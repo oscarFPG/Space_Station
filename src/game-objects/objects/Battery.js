@@ -24,7 +24,7 @@ export default class Battery extends Object {
         if(!player.isUseKeyJustPressed())
 			return
         const options = Options.get_instance();
-        options.playSound(this.scene, 'pick_up_battery', { isMusic: false, volume: 1.0 });
+        options.playSound(this.scene, Builder.SOUND_PICK_BATTERY, { isMusic: false, volume: 1.0 });
         this.removeLight()
         player.pickBattery()
         this.destroyObject()

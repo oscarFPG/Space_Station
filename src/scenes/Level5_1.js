@@ -1,17 +1,17 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
-
+import Builder from '../managers/Builder.js'
 
 export default class Level5_1 extends BaseScene {
 
     constructor(){
-        super('Level5_1')
+        super(Builder.ESCENA_NIVEL5_1)
     }
     create(){
 
-        var map = this.make.tilemap({ key: 'map_level_5_1', tileWidth: 111, tileHeight: 111 })
-        var tileset = map.addTilesetImage('Tilemap2', 'tiles')
-        super.create(map, tileset, 'Level5_2')
+        var map = this.make.tilemap({ key: Builder.MAP_LEVEL_5_1, tileWidth: 111, tileHeight: 111 })
+        var tileset = map.addTilesetImage('Tilemap2', Builder.TILES)
+        super.create(map, tileset, Builder.ESCENA_NIVEL5_2)
         this.laseresActivos = false
         this.laserTimer = this.time.addEvent({
             delay: 1500,

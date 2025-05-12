@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import BaseScene from './BaseScene.js';
+import Builder from '../managers/Builder.js';
 
 export default class CreditsScene extends BaseScene {
   constructor() {
@@ -9,7 +10,7 @@ export default class CreditsScene extends BaseScene {
   create() {
     const { width, height } = this.scale;
 
-    this._nextScene = 'tutorial'
+    this._nextScene = Builder.ESCENA_TUTORIAL
 
     this.createBackground(width, height);
 

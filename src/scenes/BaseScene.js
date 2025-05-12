@@ -115,7 +115,7 @@ export default class BaseScene extends Phaser.Scene {
         if (!this.anims.exists('spark')) {
             this.anims.create({
                 key: 'spark',
-                frames: this.anims.generateFrameNumbers('explode', { start: 0, end: 7 }),
+                frames: this.anims.generateFrameNumbers(Builder.EXPLODE, { start: 0, end: 7 }),
                 frameRate: 30,
                 repeat: 0
             })
@@ -324,8 +324,8 @@ export default class BaseScene extends Phaser.Scene {
         //Aqui se crean los textos del mapa que contienen informacion importante
         //y asi mismo los puntos de respawn del personaje principal, de los enemigos y la meta del mapa
         //Insercion del resto de objetos con sus respectivas clases
-        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: 'objCaja' })
-        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: 'objCaja2' })
+        this.boxes = map.createFromObjects('objects', { gid: 23, classType: Box, key: Builder.OBJ_CAJA })
+        this.boxesHard = map.createFromObjects('objects', { gid: 29, classType: BoxHard, key: Builder.OBJ_CAJA2 })
 
         // Se establecen las colisiones entre las cajas y las puertas con los personajes
         this.listaPuertas.forEach(door => {
@@ -391,7 +391,7 @@ export default class BaseScene extends Phaser.Scene {
     gameOver() {
 
         console.log('Game over')
-        this.ambient = this.sound.add('player_dead') 
+        this.ambient = this.sound.add(Builder.SOUND_DEAD_PLAYER) 
         this.ambient.setVolume(0.5)
         this.ambient.play()
         const blurPipeline = this.cameras.main.postFX.addBlur(4); 
@@ -455,7 +455,7 @@ export default class BaseScene extends Phaser.Scene {
         // Crear el grupo global de balas
         this._grupoBalas = this.physics.add.group()
         const onBulletCollision = (obj1, obj2) => {
-            this.ambient = this.sound.add('impact_shot') 
+            this.ambient = this.sound.add(Builder.SOUND_SHOT_IMPACT) 
             this.ambient.setVolume(0.08)
             this.ambient.play()
             let bullet = obj1 instanceof Bullet ? obj1 : obj2
@@ -525,8 +525,8 @@ export default class BaseScene extends Phaser.Scene {
 
     config_musica(){
         this.sound.stopAll();
-        this.ambient = (this.scene.key == 'Level5_2') ? this.sound.add('final boss', 
-            { volume: 0.3, loop: true }) : this.sound.add('ambiente', { volume: 0.3, loop: true })
+        this.ambient = (this.scene.key == Builder.ESCENA_NIVEL5_2) ? this.sound.add(Builder.SOUND_FINAL_BOSS, 
+            { volume: 0.3, loop: true }) : this.sound.add(Builder.MUSIC_FONDO, { volume: 0.3, loop: true })
         this.ambient.play()
     }
 
@@ -548,7 +548,7 @@ export default class BaseScene extends Phaser.Scene {
     
     putFinalTheme(value) { 
         this.sound.stopAll();
-        this.ambient = this.sound.add('final game',{ volume: 0.3, loop: true })
+        this.ambient = this.sound.add(Builder.SOUND_FINAL_GAME,{ volume: 0.3, loop: true })
         this.ambient.play()
     }
 }

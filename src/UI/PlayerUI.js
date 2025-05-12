@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import Player from '../game-objects/characters/Player';
+import Builder from '../managers/Builder';
 
 export default class PlayerUI extends Phaser.GameObjects.Container {
 
@@ -39,7 +40,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         this._MAX_VIDA = maxHealth;
         this._MAX_ESCUDO = maxEscudo;
-        this._barraVida = new Phaser.GameObjects.Sprite(scene, 0, 0, 'playerUI')
+        this._barraVida = new Phaser.GameObjects.Sprite(scene, 0, 0, Builder.UI_PLAYER_UI)
         this._barraVida.setScale(2)
         this._barraVida.setOrigin(0)
         this._barraVida.setScrollFactor(0)
@@ -96,7 +97,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         const monedas = this.scene.add.container(PlayerUI.POS_X_MONEDAS, PlayerUI.POS_Y_MONEDAS)
         const cantidad = this.scene.add.text(-8, -3, dineroInicial)
-        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'coinIcon').setScale(0.72).setOrigin(1.1, 0.55)
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, Builder.UI_COIN_ICON).setScale(0.72).setOrigin(1.1, 0.55)
 
         monedas.setScrollFactor(0)
         monedas.addAt(cantidad, 0)
@@ -112,7 +113,7 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         const baterias = this.scene.add.container(PlayerUI.POS_X_BATERIAS, PlayerUI.POS_Y_BATERIAS)
         const cantidad = this.scene.add.text(-17.75, -5, bateriasIniciales)
-        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, 'batteryIcon').setScale(0.55).setOrigin(1.1, 0.55)
+        const sprite = this.scene.add.image(cantidad.x + offsetX, cantidad.y + offsetY, Builder.UI_BATTERY_ICON).setScale(0.55).setOrigin(1.1, 0.55)
 
         baterias.setScrollFactor(0)
         baterias.addAt(cantidad, 0)

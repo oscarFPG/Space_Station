@@ -111,7 +111,7 @@ export default class Boot extends BaseScene {
 	static PLAYER_SPEED = 200
 
     constructor(){
-        super('boot')
+        super(Builder.ESCENA_BOOT)
     }
 
     preload(){
@@ -126,6 +126,7 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.FINAL_WEAPON, FINAL_WEAPON)
         this.load.image(Builder.WEAPON_TURRET, TURRET_WEAPON)
         this.load.image(Builder.WEAPON_SLOWED_TURRET, TURRET_WEAPON)
+        this.load.image(Builder.BASE_TURRET_TEXTURE, TURRET_BASE)
 
         // Proyectiles
         this.load.image(Builder.AMMO_BASE, BASE_BULLET)
@@ -149,80 +150,78 @@ export default class Boot extends BaseScene {
         this.load.image(Builder.OBJ_CAJA, BOX)
         this.load.image(Builder.OBJ_CAJA2, HARD_BOX)
         this.load.image(Builder.OBJ_TERMINAL, TERMINAL)
-
-        // Resto (Por clasificar) - TODO
-        this.load.image('batteryStructLow', BATTERY_STRUCTURE_LOW)
-        this.load.image('batteryStructFull', BATTERY_STRUCTURE_FULL)
-        this.load.image('door', DOOR)
-        this.load.image('consoleBlocked', CONSOLE)
-        this.load.image('turretBase', TURRET_BASE)
+        this.load.image(Builder.OBJ_BATTERY_LOW, BATTERY_STRUCTURE_LOW)
+        this.load.image(Builder.OBJ_BATTERY_FULL, BATTERY_STRUCTURE_FULL)
+        this.load.image(Builder.OBJ_DOOR, DOOR)
+        this.load.image(Builder.OBJ_CONSOLE_BLOCK, CONSOLE)
+        
         
         // Fondos
-        this.load.image('front-page', FRONT)
-        this.load.image('store-page', STORE)
+        this.load.image(Builder.IMG_FONDO_FRONT_PAGE, FRONT)
+        this.load.image(Builder.IMG_FONDO_STORE_PAGE, STORE)
 
         // UI
-        this.load.image('playerUI', PlayerHealth)
-        this.load.image('coinIcon', COIN_ICON)
-        this.load.image('batteryIcon', BATTERY_ICON)
+        this.load.image(Builder.UI_PLAYER_UI, PlayerHealth)
+        this.load.image(Builder.UI_COIN_ICON, COIN_ICON)
+        this.load.image(Builder.UI_BATTERY_ICON, BATTERY_ICON)
         
         // Mapas
-        this.load.tilemapTiledJSON('map', Map)
-        this.load.tilemapTiledJSON('map_lobby', LobbyMap)
-        this.load.tilemapTiledJSON('map_tutorial', TutorialMap)
-        this.load.tilemapTiledJSON('map_level_1', Level1Map)
-        this.load.tilemapTiledJSON('map_level_2', Level2Map)
-        this.load.tilemapTiledJSON('map_level_3', Level3Map)
-        this.load.tilemapTiledJSON('map_level_4', Level4Map)
-        this.load.tilemapTiledJSON('map_level_5_1', Level5_1Map)
-        this.load.tilemapTiledJSON('map_level_5_2', Level5_2Map)
+        this.load.tilemapTiledJSON(Builder.MAP, Map)
+        this.load.tilemapTiledJSON(Builder.MAP_LOBBY, LobbyMap)
+        this.load.tilemapTiledJSON(Builder.MAP_TUTORIAL, TutorialMap)
+        this.load.tilemapTiledJSON(Builder.MAP_LEVEL_1, Level1Map)
+        this.load.tilemapTiledJSON(Builder.MAP_LEVEL_2, Level2Map)
+        this.load.tilemapTiledJSON(Builder.MAP_LEVEL_3, Level3Map)
+        this.load.tilemapTiledJSON(Builder.MAP_LEVEL_4, Level4Map)
+        this.load.tilemapTiledJSON(Builder.MAP_LEVEL_5_1, Level5_1Map)
+        this.load.tilemapTiledJSON(Builder.MAP_LEVEL_5_2, Level5_2Map)
         
         // Tilesets
-        this.load.image('tiles', TilemapImage)
+        this.load.image(Builder.TILES, TilemapImage)
 
         // Spritesheets
-        this.load.spritesheet('boxAnimation', boxBroken, { frameWidth: 111 , frameHeight: 111 })
-        this.load.spritesheet('doorsAnimation', doorsOpen, { frameWidth: 111 , frameHeight: 111 })
-        this.load.spritesheet('playerIdle', CharacterIdle, { frameWidth: 111 , frameHeight: 108 })
-        this.load.spritesheet('playerRunning', CharacterRunning, { frameWidth: 111 , frameHeight: 108 })
-        this.load.spritesheet('explode', Explode, { frameWidth: 285 , frameHeight: 285 })
-        this.load.spritesheet('enemyIdle', EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
-        this.load.spritesheet('2enemyIdle', TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
-        this.load.spritesheet('bossIdle', BossIdle, { frameWidth: 155 , frameHeight: 151 })
-        this.load.spritesheet('sellerIdle', SellerIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet(Builder.OBJ_BOX_ANIMATION, boxBroken, { frameWidth: 111 , frameHeight: 111 })
+        this.load.spritesheet(Builder.OBJ_DOORS_ANIMATION, doorsOpen, { frameWidth: 111 , frameHeight: 111 })
+        this.load.spritesheet(Builder.IDLE_ANIMATION, CharacterIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet(Builder.RUNNING_ANIMATION, CharacterRunning, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet(Builder.EXPLODE, Explode, { frameWidth: 285 , frameHeight: 285 })
+        this.load.spritesheet(Builder.BASE_ENEMY_TEXTURE, EnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet(Builder.ENEMY2_TEXTURE, TwoEnemyIdle, { frameWidth: 111 , frameHeight: 108 })
+        this.load.spritesheet(Builder.FINAL_BOSS_TEXTURE, BossIdle, { frameWidth: 155 , frameHeight: 151 })
+        this.load.spritesheet(Builder.SELLER_IDLE_ANIMATION, SellerIdle, { frameWidth: 111 , frameHeight: 108 })
 
         // Audio
-        this.load.audio('mainMenuMusic', MAINMENU_MUSIC)
-        this.load.audio('ClickSOund', ClickSOund)
-        this.load.audio('gun_sound',GUN_SOUND)
-        this.load.audio('console_sound', CONSOLE_SOUND)
-        this.load.audio('box_breaking', BOX_BREAKING)
+        this.load.audio(Builder.MUSIC_MENU_MUSIC, MAINMENU_MUSIC)
+        this.load.audio(Builder.SOUND_CLICK, ClickSOund)
+        this.load.audio(Builder.SOUND_GUN,GUN_SOUND)
+        this.load.audio(Builder.SOUND_CONSOLE, CONSOLE_SOUND)
+        this.load.audio(Builder.SOUND_BOX_BREAKING, BOX_BREAKING)
 
-        this.load.audio('pick_up_health', PICK_UP_HEALTH)
-        this.load.audio('pick_up_gun', PICK_UP_GUN)
-        this.load.audio('pick_up_ammo', PICK_UP_AMMO)
-        this.load.audio('pick_up_coin', PICK_UP_COIN)
-        this.load.audio('pick_up_battery', PICK_UP_BATTERY)
-        this.load.audio('reloading_gun', RELOADING_WEAPON)
+        this.load.audio(Builder.SOUND_PICK_HEALT, PICK_UP_HEALTH)
+        this.load.audio(Builder.SOUND_PICK_GUN, PICK_UP_GUN)
+        this.load.audio(Builder.SOUND_PICK_AMMO, PICK_UP_AMMO)
+        this.load.audio(Builder.SOUND_PICK_COIN, PICK_UP_COIN)
+        this.load.audio(Builder.SOUND_PICK_BATTERY, PICK_UP_BATTERY)
+        this.load.audio(Builder.SOUND_RELOADING, RELOADING_WEAPON)
 
-        this.load.audio('doors_open', DOORS_OPEN)
-        this.load.audio('doors_closed', DOORS_CLOSED)
+        this.load.audio(Builder.SOUND_DOOR_OPEN, DOORS_OPEN)
+        this.load.audio(Builder.SOUND_DOOR_CLOSED, DOORS_CLOSED)
         
 
-        this.load.audio('ambiente', AMBIENTE)
-        this.load.audio('player_dead', PLAYER_DEAD)
-        this.load.audio('impact_shot', IMPACT_BULLET_SOUND)
-        this.load.audio('activate_note', ACTIVATE_NOTE)
-        this.load.audio('final boss', FINAL_BOSS_THEME)
-        this.load.audio('final game', FINAL_GAME_THEME)
-        this.load.audio('error', ERROR)
-        this.load.audio('success', SUCCESS)
+        this.load.audio(Builder.MUSIC_FONDO, AMBIENTE)
+        this.load.audio(Builder.SOUND_DEAD_PLAYER, PLAYER_DEAD)
+        this.load.audio(Builder.SOUND_SHOT_IMPACT, IMPACT_BULLET_SOUND)
+        this.load.audio(Builder.SOUND_ACTIVETE_NOTE, ACTIVATE_NOTE)
+        this.load.audio(Builder.SOUND_FINAL_BOSS, FINAL_BOSS_THEME)
+        this.load.audio(Builder.SOUND_FINAL_GAME, FINAL_GAME_THEME)
+        this.load.audio(Builder.SOUND_FAIL, ERROR)
+        this.load.audio(Builder.SOUND_SUCCESS, SUCCESS)
     }
     
     create(){
         
         // Background image
-        this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'front-page').setOrigin(0.5);
+        this.add.image(this.game.config.width / 2, this.game.config.height / 2, Builder.IMG_FONDO_FRONT_PAGE).setOrigin(0.5);
         this._nextScene = Builder.ESCENA_NIVEL1
         this._previousScene = Builder.ESCENA_BOOT
         // Footer text
@@ -238,7 +237,7 @@ export default class Boot extends BaseScene {
         this.enter_key = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
         // Music
-        this._mainmenu_music = this.sound.add('mainMenuMusic')
+        this._mainmenu_music = this.sound.add(Builder.MUSIC_MENU_MUSIC)
         this._mainmenu_music.setVolume(0.2)
         this._mainmenu_music.play()
 

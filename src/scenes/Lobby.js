@@ -11,8 +11,8 @@ export default class Lobby extends BaseScene {
 
     create(){
 
-        var map = this.make.tilemap({ key: 'map_lobby', tileWidth: 111, tileHeight: 111 })
-        var tileset = map.addTilesetImage('Tilemap2', 'tiles')
+        var map = this.make.tilemap({ key: Builder.MAP_LOBBY, tileWidth: 111, tileHeight: 111 })
+        var tileset = map.addTilesetImage('Tilemap2', Builder.TILES)
         super.create(map, tileset, Builder.ESCENA_NIVEL1)
         
         this.laseresActivos = false
