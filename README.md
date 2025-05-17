@@ -5,7 +5,6 @@
 - [Introducción](#2-introducion)
 - [Gameplay](#3-gameplay)
 - [Características principales](#4-características-principales)
-- [Ambientacion](#5-ambientación)
 
 # Features
 1. [x] Variedad de enemigos con diferentes armas
@@ -131,11 +130,3 @@ Los enemigos pueden ser: estáticos, móviles, de rango, cuerpo a cuerpo y suppo
 ⦁   Movimiento del personaje: Utilizando el el teclado con W / A / S / D
 
 ⦁   Movimiento del arma: Utilizando el ratón en cualquier dirección como puntero
-
-## 5. Ambientación
-En este apartado describiremos en detalle qué influencias artísticas y/o conceptuales hemos empleado para los distintos puntos:
-
-### Musical
-
-### Personajes
-
