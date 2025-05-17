@@ -1,15 +1,16 @@
 import Phaser from 'phaser';
 import Object from '../base-game-objects/Object';
 import Options from '../../managers/Options.js';
+import Builder from '../../managers/Builder.js';
 
 export default class Door extends Object {
-    static OPEN_ANIMATION = 'doorsAnimation';
+    
     static ACTIVATION_DISTANCE = 200
     static OPENING_DELAY = 700
     static CLOSING_DELAY = 700
 
     constructor(scene, x, y, active, doorID) {
-        super(scene, x, y, Door.OPEN_ANIMATION, false);
+        super(scene, x, y, Builder.OBJ_DOORS_ANIMATION, false);
         this.setPipeline('Light2D');
         this.body.setImmovable(true);
         this.body.setAllowGravity(false)
@@ -19,8 +20,8 @@ export default class Door extends Object {
         // Frame inicial de la puerta (cerrada)
         this.setFrame(0);
 
-        this.config_animacion('open_doors', Door.OPEN_ANIMATION, 0, 4, 8);
-        this.config_animacion('close_doors', Door.OPEN_ANIMATION, 4, 0, 8);
+        this.config_animacion('open_doors', Builder.OBJ_DOORS_ANIMATION, 0, 4, 8);
+        this.config_animacion('close_doors',  Builder.OBJ_DOORS_ANIMATION, 4, 0, 8);
 
         // Estado inicial
         this._player = this.scene.get_player()
@@ -64,7 +65,7 @@ export default class Door extends Object {
     }
     activarPuerta() {
         const options = Options.get_instance();
-        options.playSound(this.scene, 'doors_open', { isMusic: false, volume: 1.0 });
+        options.playSound(this.scene, Builder.SOUND_DOOR_OPEN, { isMusic: false, volume: 1.0 });
         this.play('open_doors'); 
         this.scene.time.delayedCall(Door.OPENING_DELAY, () => {
             this.setFrame(4); 
@@ -77,7 +78,7 @@ export default class Door extends Object {
             this.setFrame(0); 
         });
         const options = Options.get_instance();
-        options.playSound(this.scene, 'doors_closed', { isMusic: false, volume: 1.0 });  
+        options.playSound(this.scene, Builder.SOUND_DOOR_CLOSED, { isMusic: false, volume: 1.0 });  
     }
     set_active(status){
         this.isActivate = status

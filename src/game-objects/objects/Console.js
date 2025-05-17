@@ -1,14 +1,13 @@
 import Phaser from 'phaser';
 import Object from '../base-game-objects/Object';
 import Options from '../../managers/Options.js';
+import Builder from '../../managers/Builder.js';
 
-
+//
 export default class Console extends Object {
 
-	static TEXTURE = 'consoleBlocked'
-
 	constructor(scene, x, y, password, laserID) {
-		super(scene, x, y, Console.TEXTURE, true);
+		super(scene, x, y, Builder.OBJ_CONSOLE_BLOCK, true);
 		this.body.setSize(150, 150);
 		this.body.setOffset(-20, -15);
 
@@ -58,9 +57,13 @@ export default class Console extends Object {
 		let enteredPassword = "";
 		const elements = []
 
-		const openSound = this.scene.sound.add('console_sound');
+
+		const options = Options.get_instance();
+		options.playSound(this.scene, Builder.SOUND_CONSOLE, { isMusic: false, volume: 1.0 });
+
+		/*const openSound = this.scene.sound.add('console_sound');
 		openSound.setVolume(1.5);  // Ajusta el volumen según prefieras
-		openSound.play();
+		openSound.play();*/
 	
 		const overlay = this.scene.add
 			.rectangle(
@@ -134,7 +137,7 @@ export default class Console extends Object {
 			.on('pointerdown', () => {
 				//poner la musica
 				const options = Options.get_instance();
-				options.playSound(this.scene, 'ClickSOund', { isMusic: false, volume: 1.0 }); /*aqui pongo isMusica false para indicar
+				options.playSound(this.scene, Builder.SOUND_CLICK, { isMusic: false, volume: 1.0 }); /*aqui pongo isMusica false para indicar
 				que es un efecto de sonido*/ 
 				if(enteredPassword.length < 4){
 					enteredPassword += key.label
@@ -182,7 +185,7 @@ export default class Console extends Object {
 
 					// Contraseña correcta: Desactivar los láseres y ocultar la consola
 					const options = Options.get_instance();
-					options.playSound(this.scene, 'success', { isMusic: false, volume: 1.0 });
+					options.playSound(this.scene, Builder.SOUND_SUCCESS, { isMusic: false, volume: 1.0 });
 
 
 					// Desactivar todos los laseres asociados a esta consola
@@ -196,7 +199,7 @@ export default class Console extends Object {
 
 					// Contraseña incorrecta: Mostrar mensaje y reiniciar entrada
 					const options = Options.get_instance();
-					options.playSound(this.scene, 'error', { isMusic: false, volume: 1.0 });
+					options.playSound(this.scene, Builder.SOUND_FAIL, { isMusic: false, volume: 1.0 });
 					
 					passwordDisplay.setText('Contraseña incorrecta');
 					enteredPassword = "";

@@ -14,7 +14,7 @@ export default class Player extends BaseActor {
 	static BATERIA_INICIAL = 0
 	static SPEED = 200
 
-	static WEAPON_OFFSET = { x: 39, y: 54 }
+	static WEAPON_OFFSET = { x: 35, y: 54 }
 
 	constructor(scene, x, y, health, shield, money, firstWeapon, secondaryWeapon) {
 		super(scene, x, y, {texture: Builder.IDLE_ANIMATION, x: 30, y: 30}, health, Player.SPEED)
@@ -56,45 +56,44 @@ export default class Player extends BaseActor {
 		if (this._secondaryWeapon) {
 			this._secondaryWeapon.setVisible(false);
 			this.add(this._secondaryWeapon);
-		  }
+		}
 
-		//Se crean texto para informar al jugador de recargar o cambiar arma
+		// Se crean texto para informar al jugador de recargar o cambiar arma
 		// Texto “Recargar [R]”
-
 		this.reloadText = scene.add.text(30, -50, 'Reload [R]', {
 			fontSize: '18px',
 			color: '#ffffff',
 			backgroundColor: '#000000aa',
 			padding: { x: 8, y: 4 }
-		  })
-		  .setOrigin(0.5)
-		  .setDepth(20)
-		  .setScrollFactor(1)
-		  .setVisible(false);
-		  this.add(this.reloadText);
+		})
+			.setOrigin(0.5)
+			.setDepth(20)
+			.setScrollFactor(1)
+			.setVisible(false);
+		this.add(this.reloadText);
 
 		this.changeWeaponText = scene.add.text(30, -50, 'Change weapon [Q]', {
 			fontSize: '18px',
 			color: '#ffffff',
 			backgroundColor: '#000000aa',
 			padding: { x: 8, y: 4 }
-		  })
-		  .setOrigin(0.5)
-		  .setDepth(20)
-		  .setScrollFactor(1)
-		  .setVisible(false);
-		  this.add(this.changeWeaponText);
-	  
-		  // Spinner de recarga
-		  this.reloadSpinner = scene.add.graphics({ x: 30, y: -40 });
-		  this.reloadSpinner.lineStyle(4, 0x00AADD, 1);
-		  this.reloadSpinner.strokeCircle(0, 0, 16);
-		  this.reloadSpinner.strokeCircle(0, 0, 12);
-		  this.reloadSpinner
+		})
+			.setOrigin(0.5)
 			.setDepth(20)
 			.setScrollFactor(1)
 			.setVisible(false);
-		  this.add(this.reloadSpinner);
+		this.add(this.changeWeaponText);
+	  
+		// Spinner de recarga
+		this.reloadSpinner = scene.add.graphics({ x: 30, y: -40 });
+		this.reloadSpinner.lineStyle(4, 0x00AADD, 1);
+		this.reloadSpinner.strokeCircle(0, 0, 16);
+		this.reloadSpinner.strokeCircle(0, 0, 12);
+		this.reloadSpinner
+			.setDepth(20)
+			.setScrollFactor(1)
+			.setVisible(false);
+		this.add(this.reloadSpinner);
   
 	}
 
@@ -102,6 +101,7 @@ export default class Player extends BaseActor {
 
 		if(!this.scene || !this._atributos.activo)
 			return
+
 
 		// Actualiza la posición del container usando la posición del body
 		this.setPosition(this.body.x, this.body.y);
@@ -302,6 +302,7 @@ export default class Player extends BaseActor {
     }
 
 	recogerArma(texturaArma, currentAmmo, reserveAmmo){
+		
 		this._secondaryWeapon = WeaponFactory.crearArma(texturaArma, this.scene, Player.WEAPON_OFFSET)
 		if(currentAmmo != null && reserveAmmo != null) {
 			this._secondaryWeapon.setCurrentAmmo(currentAmmo)
@@ -352,12 +353,24 @@ export default class Player extends BaseActor {
 			health: this._atributos.vida,
 			shield: this._escudo,
 			money: this._dinero,
-			weapon1: { key: this._weapon._specs.sprite, CurrentAmmo: this._weapon.getBulletsFromClip(), ReserveAmmo: this._weapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET},
-			weapon2: this._secondaryWeapon
-					  ? { key: this._secondaryWeapon._specs.sprite, CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), offset: Player.WEAPON_OFFSET}
-					  : null,
+			weapon1: 
+				{ 
+					key: this._weapon._specs.sprite, 
+					CurrentAmmo: this._weapon.getBulletsFromClip(), 
+					ReserveAmmo: this._weapon.getBulletsFromReserve(), 
+					offset: Player.WEAPON_OFFSET
+				},
+			weapon2: this._secondaryWeapon ? 
+				{
+					key: this._secondaryWeapon._specs.sprite, 
+					CurrentAmmo: this._secondaryWeapon.getBulletsFromClip(), 
+					ReserveAmmo: this._secondaryWeapon.getBulletsFromReserve(), 
+					offset: Player.WEAPON_OFFSET
+				}
+				: 
+				null,
 			previousScene : _previousScene
-		  };
+		  }
 
 		return status
 	}
@@ -368,6 +381,7 @@ export default class Player extends BaseActor {
 			return this._weapon.boostAmmo(ammo)
 		else if (this._secondaryWeapon && this._secondaryWeapon.getBulletsType() == ammoType)
 			return this._secondaryWeapon.boostAmmo(ammo)
+		
 		return this._weapon.getBulletsType() == ammoType || (this._secondaryWeapon && this._secondaryWeapon.getBulletsType() == ammoType)
 	}
 
@@ -405,7 +419,7 @@ export default class Player extends BaseActor {
 			if(this._secondaryWeapon == null)
 				return
 			const options = Options.get_instance();
-			options.playSound(this.scene, 'pick_up_gun', { isMusic: false, volume: 1.0 });
+			options.playSound(this.scene, Builder.SOUND_PICK_GUN, { isMusic: false, volume: 1.0 });
 			if(this._armaEquipada == this._weapon){
 				this._weapon.setVisible(false)
 				this._secondaryWeapon.setVisible(true)
@@ -444,7 +458,9 @@ export default class Player extends BaseActor {
 	}
 
 	DibujaInformacion(reloading, empty, emptyReserve, secondayWeaponAvailable) {
+
 		if (reloading) {
+
 			// Oculta el texto, ya que se mostrará el spinner animado
 			this.reloadText.setVisible(false);
 			this.changeWeaponText.setVisible(false);

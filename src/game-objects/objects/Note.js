@@ -39,7 +39,7 @@ export default class Note extends Object {
 		}
 		
 		const options = Options.get_instance();
-		options.playSound(this.scene, 'activate_note', { isMusic: false, volume: 1.0 });
+		options.playSound(this.scene, Builder.SOUND_ACTIVETE_NOTE, { isMusic: false, volume: 1.0 });
 
 		const windowX = this.x + 100
 		const windowY = this.y - 100
