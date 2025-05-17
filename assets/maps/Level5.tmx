@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="18" height="14" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="143">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="18" height="14" tilewidth="111" tileheight="111" infinite="0" nextlayerid="6" nextobjectid="145">
  <editorsettings>
   <export target="Level5_2.json" format="json"/>
  </editorsettings>
@@ -413,6 +413,11 @@
     <property name="isHorizontal" type="bool" value="false"/>
     <property name="isStatic" type="bool" value="true"/>
     <property name="isStoppable" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="144" type="ShieldKit" gid="21" x="737.833" y="441.833" width="111" height="111">
+   <properties>
+    <property name="value" type="int" value="15"/>
    </properties>
   </object>
  </objectgroup>

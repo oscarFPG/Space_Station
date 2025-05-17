@@ -38,14 +38,12 @@
 
 ⦁   James Morocho Calero.
 
-### 1.3 Arte: 
-#### Diseño personajes
-⦁   Daniel Lafuente Bazo
-
+### 1.3 Arte y diseño: 
+#### Arte y diseño de mapas
 ⦁   Ignacio Lumbano Vivar
 
-#### Diseño Musical
-⦁   Óscar Fabián Pineda Germán
+#### Música
+⦁   Ignacio Lumbano Vivar
 
 ⦁   James Morocho Calero
 
