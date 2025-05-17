@@ -399,7 +399,7 @@ export default class BaseScene extends Phaser.Scene {
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
         this.time.delayedCall(400, () => {
-            this.scene.launch(Builder.ESCENA_LOBBY)
+            this.scene.restart();
         });
     }
     
