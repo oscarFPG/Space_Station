@@ -8,22 +8,22 @@
 - [Ambientacion](#5-ambientación)
 
 # Features
-1. [] Variedad de enemigos con diferentes armas
+1. [x] Variedad de enemigos con diferentes armas
 2. [] Tienda para mejoras de personaje permanentes
 3. [] Tienda para mejoras de arma base permanentes
-4. [] Mapas dividos en salas(estilo dungeon)
-5. [] Estructura videojuego 'Roguelike'
+4. [x] Mapas dividos en salas(estilo dungeon)
+5. [x] Estructura videojuego 'Roguelike'
 
-6. [] Objetos como monedas y utilidades(vida, escudo, etc...)
-7. [] Distintos tipos de armas adicionales a la arma base
-8. [] Elementos de puzzle
-9. [] Puzzles compuestos(notas-consola-laseres, etc...)
-10. [] Trampas(como láseres y otros tipos)
+6. [x] Objetos como monedas y utilidades(vida, escudo, etc...)
+7. [x] Distintos tipos de armas adicionales a la arma base
+8. [x] Elementos de puzzle
+9. [x] Puzzles compuestos(notas-consola-laseres, etc...)
+10. [x] Trampas(como láseres y otros tipos)
 
 11. [] Sala con temporizador/eliminar enemigos para salir
 12. [] Elementos que cuenten la historia oculta
-13. [] Bosses y mini-bosses
-14. [] Tienda de armas/objetos estilo comandos Linux
+13. [x] Bosses y mini-bosses
+14. [x] Tienda de armas/objetos estilo comandos Linux
 15. [] Elementos musicales que complementen el desarrollo de la historia/ambiente del juego(leitmotivs, banda sónora, etc...)
 
 # GDD: (nombre provisional) Escape Station
