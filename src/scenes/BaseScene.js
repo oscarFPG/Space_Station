@@ -40,6 +40,10 @@ export default class BaseScene extends Phaser.Scene {
     // SIEMPRE esta funcion con super.create()
 
     init(data) {
+
+        if(data == null)
+            return
+
         this.playerHealth   = (data.health == undefined) ? Player.VIDA_INICIAL : data.health
         this.playerShield   = (data.shield == undefined) ? Player.ESCUDO_INICIAL : data.shield
         this.playerMoney    = (data.money  == undefined) ? 0 : data.money
@@ -390,17 +394,16 @@ export default class BaseScene extends Phaser.Scene {
 
     gameOver() {
 
-        console.log('Game over')
         this.ambient = this.sound.add(Builder.SOUND_DEAD_PLAYER) 
         this.ambient.setVolume(0.5)
         this.ambient.play()
-        const blurPipeline = this.cameras.main.postFX.addBlur(4); 
         
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
         this.time.delayedCall(400, () => {
-            this.scene.launch(Builder.ESCENA_LOBBY)
-        });
+            this.scene.stop(this.scene.key) // Necesario para evitar ejecutar la escena en paralelo -> Causaba bug de restart constante porque morias en la escena anterior
+            this.scene.run(Builder.ESCENA_LOBBY)
+        })
     }
     
     get_player(){

@@ -239,7 +239,7 @@ export default class Player extends BaseActor {
 				alpha: 0,
 				duration: 500,
 				onComplete: () => {
-				  this.scene.gameOver()	// TODO - Modificar a: llevar al lobby
+					this.scene.gameOver()
 				}
 			  });	
 		}
@@ -259,6 +259,14 @@ export default class Player extends BaseActor {
 
 	receiveMoney(amount) {
 		this._dinero += amount;
+	}
+
+	removeMoney(amount){
+
+		if(this._dinero < amount)
+			amount = this._dinero
+
+		this._dinero -= amount
 	}
 
 	pickBattery() {
@@ -418,6 +426,8 @@ export default class Player extends BaseActor {
 
 			if(this._secondaryWeapon == null)
 				return
+
+			
 			const options = Options.get_instance();
 			options.playSound(this.scene, Builder.SOUND_PICK_GUN, { isMusic: false, volume: 1.0 });
 			if(this._armaEquipada == this._weapon){

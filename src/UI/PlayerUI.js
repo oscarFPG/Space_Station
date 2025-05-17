@@ -156,12 +156,12 @@ export default class PlayerUI extends Phaser.GameObjects.Container {
 
         // Monedas
         this._contadorMonedas.getAt(0).destroy()
-        const cantidadMonedas = this.scene.add.text(-2, 0, `${dineroActual} Score`)
+        const cantidadMonedas = this.scene.add.text(-2, 0, `${dineroActual} $`)
         this._contadorMonedas.addAt(cantidadMonedas, 0)
 
         // Baterías
         this._contadorBaterias.getAt(0).destroy()
-        const cantidadBaterias = this.scene.add.text(-1.8, -0, `${bateriasActuales} Cells`)
+        const cantidadBaterias = this.scene.add.text(-1.8, -0, `${bateriasActuales} baterias`)
         this._contadorBaterias.addAt(cantidadBaterias, 0)
 
         // Balas

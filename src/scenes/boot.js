@@ -104,11 +104,6 @@ import SUCCESS from '../../audio/effects/acierto.mp3'
 
 export default class Boot extends BaseScene {
     
-    static PLAYER_VIDA_INICIAL = 20
-	static PLAYER_ESCUDO_INICIAL = 15
-	static PLAYER_DINERO_INICIAL = 0
-	static PLAYER_BATERIA_INICIAL = 0
-	static PLAYER_SPEED = 200
 
     constructor(){
         super(Builder.ESCENA_BOOT)
@@ -252,13 +247,13 @@ export default class Boot extends BaseScene {
         // Cambiar escena
         if(Phaser.Input.Keyboard.JustDown(this.enter_key)){
             const status = {
-                health:  Boot.PLAYER_VIDA_INICIAL,
-                shield: Boot.PLAYER_ESCUDO_INICIAL,
-                money: Boot.PLAYER_DINERO_INICIAL,
+                health:  Player.VIDA_INICIAL,
+                shield: Player.ESCUDO_INICIAL,
+                money: Player.DINERO_INICIAL,
                 weapon1: null,
                 weapon2: null,
                 previousScene: this._previousScene
-              };
+            }
 
             this.scene.switch(this._nextScene, status)
         }   

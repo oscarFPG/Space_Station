@@ -18,16 +18,21 @@ export default class StoreObject extends Object {
         if(!player.isUseKeyJustPressed())
             return
     
+
         //  Pausar el juego
         this.scene.scene.pause(this.scene.key)
 
         // Informacion necesaria en la escena de la tienda
-        const data = { 
-            previousScene: this.scene.scene.key,
-            playerData: {
-                monedas: player.getMoney()
+        const data = {
+            previousScene : this.scene.scene.key,
+            monedas : player.getMoney(),
+            escena : this.scene,
+            posSocket : {
+                x: this.x + 10,
+                y: this.y + 50
             }
         }
+
         this.scene.scene.launch(Builder.ESCENA_TIENDA, data)    // Lanzar la escena de tienda
     }
 

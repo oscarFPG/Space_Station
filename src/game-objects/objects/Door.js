@@ -80,10 +80,11 @@ export default class Door extends Object {
         const options = Options.get_instance();
         options.playSound(this.scene, Builder.SOUND_DOOR_CLOSED, { isMusic: false, volume: 1.0 });  
     }
+    
     set_active(status){
         this.isActivate = status
-        console.log('Puerta activada')
     }
+
     getID(){
         return this._doorID
     }
