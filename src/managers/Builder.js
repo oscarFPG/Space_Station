@@ -14,6 +14,7 @@ export default class Builder {
     static ESCENA_NIVEL5_1 = 'nivel5_1'
     static ESCENA_NIVEL5_2 = 'nivel5_2'
     static ESCENA_LOBBY = 'lobby'
+    static ESCENA_CREDITOS = 'creditsScene'
 
     // Animaciones del personaje principal
     static IDLE_ANIMATION = 'playerIdle'
