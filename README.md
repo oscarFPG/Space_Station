@@ -73,7 +73,7 @@ Dentro del nivel nuestro objetivo será llegar a la salida. para ello nos veremo
 El juego termina cuando derrotas al boss final del último nivel.
 
 ### 3.2 Core Loop:
-![](Docs/CoreLoop.png)
+![](documentation/CoreLoop.png)
 
 
 ## 4. Características principales:
