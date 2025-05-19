@@ -27,8 +27,9 @@ export default class BaseTurretWeapon extends RangeWeapon {
         this._ammo.currentClipAmmo = this._ammo.clipSize;
         this._ammo.reserveAmmo = this._ammo.clipSize
     }
+
     createBullet(bulletX, bulletY){
-            return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_TURRET, this.colorLightBullet)
+        return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_TURRET, this.colorLightBullet)
     }
 
 }
