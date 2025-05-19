@@ -23,8 +23,11 @@ export default class Shield extends Object {
         this._textoInteraccion.setVisible(true)
 		this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
         
-        if(player.isFullShield())
+        if(player.isFullShield()){
+            this.setText('Ya tienes el escudo completo', false)
             return
+        }
+
         this.accion(player)
     }
 
@@ -32,6 +35,7 @@ export default class Shield extends Object {
 
         if(!player.isUseKeyJustPressed())
 			return
+
         const options = Options.get_instance();
         options.playSound(this.scene, Builder.SOUND_PICK_HEALT, { isMusic: false, volume: 1.0 });
         this.removeLight()

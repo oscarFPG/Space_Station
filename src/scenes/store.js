@@ -2,9 +2,14 @@ import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
 import Builder from '../managers/Builder.js'
 import Options from '../managers/Options.js'
+import Health from '../game-objects/objects/Health.js'
+import Shield from '../game-objects/objects/Shield.js'
 
 
 export default class Store extends BaseScene {
+
+    static PRECIO_VIDA = 30
+    static PRECIO_ESCUDO = 20
 
     // Background image
     X_BACKGROUND
@@ -45,7 +50,9 @@ export default class Store extends BaseScene {
     
     init(data) {
         this._previousScene = data.previousScene
-        this._monedas = data.playerData.monedas
+        this._monedas = data.monedas
+        this._escenaNivel = data.escena
+        this.pos = data.posSocket
     }
 
     create(){
@@ -86,7 +93,6 @@ export default class Store extends BaseScene {
     config_eventos_teclado(){
      
         this.input.keyboard.on('keydown', (tecla) => {
-            //console.log('Tecla presionada:', tecla.key, 'Código:', tecla.code)
 
             if(tecla.code === 'Backspace'){     // Borrar caracter
                 if(this._comandoActual.length > 0){
@@ -191,9 +197,9 @@ export default class Store extends BaseScene {
     consultar_catalogo(){
 
         const message = []
-        message.push("Objeto     -- Precio -- Descripcion")
-        message.push("Vida (v)   --   50   -- Objeto para recuperar puntos de vida")
-        message.push("Escudo (e) --   30   -- Objeto para recuperar escudo")
+        message.push("Objeto -- Comando -- Precio -- Descripcion")
+        message.push(`Vida   --   -v    -- ${Store.PRECIO_VIDA}   -- Objeto para recuperar puntos de vida`)
+        message.push(`Escudo --   -e    -- ${Store.PRECIO_ESCUDO}   -- Objeto para recuperar escudo`)
 
         message.forEach(m => {
             this.addTextToConsole(m)
@@ -202,6 +208,8 @@ export default class Store extends BaseScene {
 
     comprar_objetos(objetos){
 
+        let player = null
+        let cantidad = null
         var hayArticulo = false
         objetos.forEach(obj => {
             
@@ -209,12 +217,35 @@ export default class Store extends BaseScene {
             switch(obj){
             case '-v':
             case '-vida':
-                this.addTextToConsole(`Has comprado una cura de 20 puntos de vida por ${50}$`)
+                
+                player = this._escenaNivel.get_player()
+                cantidad = player.getMoney()
+                if(Store.PRECIO_VIDA <= cantidad){
+                    new Health(this._escenaNivel, this.pos.x, this.pos.y)
+                    player.removeMoney(Store.PRECIO_VIDA)
+                    this._monedas -= Store.PRECIO_VIDA
+                    this.addTextToConsole(`Has comprado una cura de 20 puntos de vida por ${Store.PRECIO_VIDA}$`)
+                }
+                else{
+                    this.addTextToConsole('No tienes dinero suficiente')
+                }
+                
                 break
 
             case '-e':
             case '-escudo':
-                this.addTextToConsole(`Has comprado una cura de 20 puntos de escudo por ${30}$`)
+
+                player = this._escenaNivel.get_player()
+                cantidad = player.getMoney()
+                if(Store.PRECIO_ESCUDO <= cantidad){
+                    new Shield(this._escenaNivel, this.pos.x, this.pos.y)
+                    player.removeMoney(Store.PRECIO_ESCUDO)
+                    this._monedas -= Store.PRECIO_ESCUDO
+                    this.addTextToConsole(`Has comprado un escudo de 20 puntos de escudo por ${Store.PRECIO_ESCUDO}$`)
+                }
+                else{
+                    this.addTextToConsole('No tienes dinero suficiente')
+                }
                 break
 
             default:

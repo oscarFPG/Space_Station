@@ -57,10 +57,11 @@ export default class Options {
         return this.#volumen_efectos_sonido;
     }   
     
-
-    playSound(scene, key, { isMusic = false, loop = false, volume = 1.0 } = {}) {/*aqui es importante una cosa, la verdad es que esta funcion 
-        hace que se creen los sonidos y todo lo configura desde aqui, recibe la escena, la clave, y despues tiene para saber si
-        es musica ocomo ambiental o solo es efecto del juego. El loop es por si mas adelante necesitamos hacer que se repita algo, aunque no creo.*/
+    /*aqui es importante una cosa, la verdad es que esta funcion 
+    hace que se creen los sonidos y todo lo configura desde aqui, recibe la escena, la clave, y despues tiene para saber si
+    es musica ocomo ambiental o solo es efecto del juego. El loop es por si mas adelante necesitamos hacer que se repita algo, aunque no creo.*/
+    playSound(scene, key, { isMusic = false, loop = false, volume = 1.0 } = {}) {
+        
         let baseVolume = isMusic
         if (isMusic) {
             baseVolume = this.#volumen_musica;
@@ -68,7 +69,7 @@ export default class Options {
             baseVolume = this.#volumen_efectos_sonido;
         }
 
-        const finalVolume = Phaser.Math.Clamp(baseVolume * this.#volumen_general * volume,0,Options.MAX_VOLUMEN);
+        const finalVolume = Phaser.Math.Clamp(baseVolume * this.#volumen_general * volume, 0, Options.MAX_VOLUMEN);
 
         const sound = scene.sound.add(key, { loop });
         sound.setVolume(finalVolume);

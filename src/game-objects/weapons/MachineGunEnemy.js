@@ -30,7 +30,7 @@ export default class MachineGunEnemy extends RangeWeapon {
     }
 
     createBullet(bulletX, bulletY){
-            return new MachineGunBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_ENEMY_MACHINE_GUN, this.colorLightBullet)
+        return new MachineGunBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_ENEMY_MACHINE_GUN, this.colorLightBullet)
     }
 
 }

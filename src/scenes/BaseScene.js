@@ -36,10 +36,12 @@ export default class BaseScene extends Phaser.Scene {
         super({ key: sceneKey })
     }
 
-    // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
-    // SIEMPRE esta funcion con super.create()
-
+    
     init(data) {
+
+        if(data == null)
+            return
+
         this.playerHealth   = (data.health == undefined) ? Player.VIDA_INICIAL : data.health
         this.playerShield   = (data.shield == undefined) ? Player.ESCUDO_INICIAL : data.shield
         this.playerMoney    = (data.money  == undefined) ? 0 : data.money
@@ -50,6 +52,8 @@ export default class BaseScene extends Phaser.Scene {
         this._isTransitioning = false;
     }
     
+    // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
+    // SIEMPRE esta funcion con super.create()
     create(map, tileset, nextScene){
 
         if(map == null || tileset == null)
@@ -390,11 +394,9 @@ export default class BaseScene extends Phaser.Scene {
 
     gameOver() {
 
-        console.log('Game over')
         this.ambient = this.sound.add(Builder.SOUND_DEAD_PLAYER) 
         this.ambient.setVolume(0.5)
         this.ambient.play()
-        const blurPipeline = this.cameras.main.postFX.addBlur(4); 
         
         this.cameras.main.fadeOut(500, 0, 0, 0);
     
@@ -519,14 +521,15 @@ export default class BaseScene extends Phaser.Scene {
             //  Pausar el juego
             this.scene.pause(this.scene.key)
             // Lanzar la escena de ajustes
-            this.scene.launch('settings', { previousScene: this.scene.key })
+            this.scene.launch(Builder.ESCENA_AJUSTES, { previousScene: this.scene.key })
         }, this)
     }
 
     config_musica(){
-        this.sound.stopAll();
+
+        this.sound.stopAll()
         this.ambient = (this.scene.key == Builder.ESCENA_NIVEL5_2) ? this.sound.add(Builder.SOUND_FINAL_BOSS, 
-            { volume: 0.3, loop: true }) : this.sound.add(Builder.MUSIC_FONDO, { volume: 0.3, loop: true })
+            { volume: 0.2, loop: true }) : this.sound.add(Builder.MUSIC_FONDO, { volume: 0.2, loop: true })
         this.ambient.play()
     }
 

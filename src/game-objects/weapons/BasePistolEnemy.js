@@ -30,7 +30,7 @@ export default class BasePistolEnemy extends RangeWeapon {
     }
 
     createBullet(bulletX, bulletY){
-            return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_ENEMY_BASE, this.colorLightBullet)
+        return new BasePistolBullet(this.scene, bulletX, bulletY, this._specs.damage, Builder.AMMO_ENEMY_BASE, this.colorLightBullet)
     }
 
 }

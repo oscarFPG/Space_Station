@@ -1,11 +1,13 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
 import Options from '../managers/Options.js'
+import Builder from '../managers/Builder.js'
+
 
 export default class VolumeSettings extends BaseScene {
 
 	constructor() {
-		super('volumeSettings');
+		super(Builder.ESCENA_VOLUMEN)
 	}
 
 	init(data) {
@@ -33,7 +35,7 @@ export default class VolumeSettings extends BaseScene {
 		// esto es para que cuando este en VolumeSettings pueda salir con los cambios guardados directamente presionando "ESC"
 		this.input.keyboard.on(Options.TECLA_PAUSA, () => {
 			this.scene.stop();
-			this.scene.stop('settings');
+			this.scene.stop(Builder.ESCENA_AJUSTES);
 			this.scene.resume(this._previousScene);
 		}, this);
 	}
@@ -45,6 +47,7 @@ export default class VolumeSettings extends BaseScene {
 
 	// Panel central donde estarán los controles de volumen
 	createPanel(width, height) {
+
 		const panelW = 360;//Ancho del Panel
 		const panelH = 270;//Altura del Panel
 		const panelX = (width - panelW) / 2;
@@ -99,29 +102,33 @@ export default class VolumeSettings extends BaseScene {
 			.on('pointerout', () => backBtn.setColor('#7DF9FF'))
 			.on('pointerdown', () => {
 				this.scene.stop(); // Cerramos VolumeSettings
-				this.scene.launch('settings', { previousScene: this._previousScene }); // Reabrir ajustes
+				this.scene.launch(Builder.ESCENA_AJUSTES, { previousScene: this._previousScene }); // Reabrir ajustes
 			});
 	}
 	//funcion para crear la barra y la bolita
 	createSlider(x,y,type,valorActual){
+
 		const options = Options.get_instance();
 		const barWidth = 200;
-		const barHeight= 6;
-		const ballRadio=10;
+		const barHeight = 6;
+		const ballRadio = 10;
+
 		//creo el rectangulo
-		const bar= this.add.rectangle(x,y,barWidth,barHeight,0xffffff).setOrigin(0.5,0.5);
+		const bar = this.add.rectangle(x,y,barWidth,barHeight,0xffffff).setOrigin(0.5,0.5);
 
 		//posicion de la bola segun el parametro de volumen actual que paso
-		const ballX = x - barWidth / 2 + valorActual * barWidth;
-		//creo la bolita
-		/*en este paso es muu importante porque hago que sea interactiva la pelota, y anyado la opcion de que sea "draggeable" 
+		const ballX = x - barWidth / 2 + valorActual * barWidth
+
+		/*en este paso es muy importante porque hago que sea interactiva la pelota, y anyado la opcion de que sea "draggeable" 
 		para que se pueda arrastrar despues*/
-		const ball =this.add.circle(x - barWidth / 2 + barWidth * valorActual, y, ballRadio, 0x7DF9FF).setInteractive({ useHandCursor: true, draggable: true });
+		// Creo la bolita
+		const ball =this.add.circle(x - barWidth / 2 + barWidth * valorActual, y, ballRadio, 0x7DF9FF).setInteractive({ useHandCursor: true, draggable: true })
+
 		// Crear texto de porcentaje
 		const percentText = this.add.text(x + barWidth / 2 + 10, y, `${Math.round(valorActual * 100)}%`, {
-		fontSize: '18px',
-		color: '#ffffff'
-	}).setOrigin(0, 0.5); // izquierda centrado verticalmente
+			fontSize: '18px',
+			color: '#ffffff'
+		}).setOrigin(0, 0.5); // izquierda centrado verticalmente
 		
 		ball.on('drag', (pointer, dragX) => {
 			const minX = x - barWidth / 2;
@@ -141,9 +148,11 @@ export default class VolumeSettings extends BaseScene {
 				case 'general':
 					options.cambiar_volumen_general(newValue);
 					break;
+
 				case 'musica':
 					options.cambiar_volumen_musica(newValue);
 					break;
+					
 				case 'efectos':
 					options.cambiar_volumen_efectos(newValue);
 					break;

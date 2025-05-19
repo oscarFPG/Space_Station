@@ -26,7 +26,6 @@ export default class Level1 extends BaseScene {
         })
 
         const terminal = new StoreObject(this, 2440, 2560)
-
     }
 
     activar_todos_los_laseres(){

@@ -23,8 +23,11 @@ export default class Health extends Object {
         this._textoInteraccion.setVisible(true)
 		this._textoInteraccion.setPosition(this.x + this._offsetX, this.y + this._offsetY)
 
-        if(player.isFullHealth())
+        if(player.isFullHealth()){
+            this.setText('Ya tienes la vida completa', false)
             return
+        }
+
         this.accion(player)
     }
 

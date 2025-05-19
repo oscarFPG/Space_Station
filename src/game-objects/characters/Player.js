@@ -5,6 +5,8 @@ import WeaponFactory from '../../factories/WeaponFactory.js';
 import WeaponObject from '../objects/WeaponObject.js'
 import Builder from '../../managers/Builder.js';
 import Options from '../../managers/Options.js';
+import StoreObject from '../objects/StoreObject.js';
+
 
 export default class Player extends BaseActor {
 
@@ -239,7 +241,7 @@ export default class Player extends BaseActor {
 				alpha: 0,
 				duration: 500,
 				onComplete: () => {
-				  this.scene.gameOver()	// TODO - Modificar a: llevar al lobby
+					this.scene.gameOver()
 				}
 			  });	
 		}
@@ -261,6 +263,14 @@ export default class Player extends BaseActor {
 		this._dinero += amount;
 	}
 
+	removeMoney(amount){
+
+		if(this._dinero < amount)
+			amount = this._dinero
+
+		this._dinero -= amount
+	}
+
 	pickBattery() {
 		this._baterias++;
 	}
@@ -277,29 +287,6 @@ export default class Player extends BaseActor {
 		this._baterias -= amount
 		this._baterias = (this._baterias < 0) ? 0 : this._baterias
 	}
-
-	getCountAmmoType(weaponAmmo){
-		
-		switch(weaponAmmo){
-			case 'pistol':
-				return 0
-		
-			case 'machine gun':
-				return 0
-
-			case 'fusil':
-				return 0
-
-			case 'escopeta':
-				return 0
-
-			case 'sniper':
-				return 0
-				
-			default:
-				return -1
-			}
-    }
 
 	recogerArma(texturaArma, currentAmmo, reserveAmmo){
 		
@@ -409,7 +396,9 @@ export default class Player extends BaseActor {
 		}
 
 		this.controles.reload.on('down', () => {	// Recargar
-			if (!this._atributos.activo) return;
+			if (!this._atributos.activo) 
+				return;
+			
 			this._armaEquipada.reload();
 			this.reloadText.setVisible(true);
 		})
@@ -418,6 +407,8 @@ export default class Player extends BaseActor {
 
 			if(this._secondaryWeapon == null)
 				return
+
+			
 			const options = Options.get_instance();
 			options.playSound(this.scene, Builder.SOUND_PICK_GUN, { isMusic: false, volume: 1.0 });
 			if(this._armaEquipada == this._weapon){
