@@ -527,9 +527,10 @@ export default class BaseScene extends Phaser.Scene {
     }
 
     config_musica(){
-        this.sound.stopAll();
+
+        this.sound.stopAll()
         this.ambient = (this.scene.key == Builder.ESCENA_NIVEL5_2) ? this.sound.add(Builder.SOUND_FINAL_BOSS, 
-            { volume: 0.3, loop: true }) : this.sound.add(Builder.MUSIC_FONDO, { volume: 0.3, loop: true })
+            { volume: 0.2, loop: true }) : this.sound.add(Builder.MUSIC_FONDO, { volume: 0.2, loop: true })
         this.ambient.play()
     }
 

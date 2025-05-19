@@ -69,7 +69,7 @@ export default class Options {
             baseVolume = this.#volumen_efectos_sonido;
         }
 
-        const finalVolume = Phaser.Math.Clamp(baseVolume * this.#volumen_general * volume,0,Options.MAX_VOLUMEN);
+        const finalVolume = Phaser.Math.Clamp(baseVolume * this.#volumen_general * volume, 0, Options.MAX_VOLUMEN);
 
         const sound = scene.sound.add(key, { loop });
         sound.setVolume(finalVolume);

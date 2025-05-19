@@ -15,4 +15,17 @@ export default class Tutorial extends BaseScene {
         super.create(map, tileset, Builder.ESCENA_NIVEL1)
     }
 
+    gameOver() {
+    
+        this.ambient = this.sound.add(Builder.SOUND_DEAD_PLAYER) 
+        this.ambient.setVolume(0.5)
+        this.ambient.play()
+        
+        this.cameras.main.fadeOut(500, 0, 0, 0);
+    
+        this.time.delayedCall(400, () => {
+            this.scene.restart()    
+        })
+    }
+
 }

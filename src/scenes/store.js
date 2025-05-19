@@ -197,9 +197,9 @@ export default class Store extends BaseScene {
     consultar_catalogo(){
 
         const message = []
-        message.push("Objeto -- Precio -- Descripcion")
-        message.push(`Vida   --   ${Store.PRECIO_VIDA}   -- Objeto para recuperar puntos de vida`)
-        message.push(`Escudo --   ${Store.PRECIO_ESCUDO}   -- Objeto para recuperar escudo`)
+        message.push("Objeto -- Comando -- Precio -- Descripcion")
+        message.push(`Vida   --   -v    -- ${Store.PRECIO_VIDA}   -- Objeto para recuperar puntos de vida`)
+        message.push(`Escudo --   -e    -- ${Store.PRECIO_ESCUDO}   -- Objeto para recuperar escudo`)
 
         message.forEach(m => {
             this.addTextToConsole(m)
@@ -223,6 +223,7 @@ export default class Store extends BaseScene {
                 if(Store.PRECIO_VIDA <= cantidad){
                     new Health(this._escenaNivel, this.pos.x, this.pos.y)
                     player.removeMoney(Store.PRECIO_VIDA)
+                    this._monedas -= Store.PRECIO_VIDA
                     this.addTextToConsole(`Has comprado una cura de 20 puntos de vida por ${Store.PRECIO_VIDA}$`)
                 }
                 else{
@@ -238,7 +239,8 @@ export default class Store extends BaseScene {
                 cantidad = player.getMoney()
                 if(Store.PRECIO_ESCUDO <= cantidad){
                     new Shield(this._escenaNivel, this.pos.x, this.pos.y)
-                    player.removeMoney(Store.PRECIO_VIDA)
+                    player.removeMoney(Store.PRECIO_ESCUDO)
+                    this._monedas -= Store.PRECIO_ESCUDO
                     this.addTextToConsole(`Has comprado un escudo de 20 puntos de escudo por ${Store.PRECIO_ESCUDO}$`)
                 }
                 else{

@@ -148,9 +148,11 @@ export default class VolumeSettings extends BaseScene {
 				case 'general':
 					options.cambiar_volumen_general(newValue);
 					break;
+
 				case 'musica':
 					options.cambiar_volumen_musica(newValue);
 					break;
+					
 				case 'efectos':
 					options.cambiar_volumen_efectos(newValue);
 					break;
