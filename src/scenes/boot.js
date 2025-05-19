@@ -217,7 +217,7 @@ export default class Boot extends BaseScene {
         
         // Background image
         this.add.image(this.game.config.width / 2, this.game.config.height / 2, Builder.IMG_FONDO_FRONT_PAGE).setOrigin(0.5);
-        this._nextScene = Builder.ESCENA_NIVEL5_1
+        this._nextScene = Builder.ESCENA_TUTORIAL
         this._previousScene = Builder.ESCENA_BOOT
         
         // Footer text
