@@ -12,10 +12,7 @@ export default class Tutorial extends BaseScene {
 
         var map = this.make.tilemap({ key: Builder.MAP_TUTORIAL, tileWidth: 111, tileHeight: 111 })
         var tileset = map.addTilesetImage('Tilemap2', Builder.TILES)
-        super.create(map, tileset, 'Level1')
-
+        super.create(map, tileset, Builder.ESCENA_NIVEL1)
     }
-
-    
 
 }

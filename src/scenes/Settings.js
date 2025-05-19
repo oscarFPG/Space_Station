@@ -1,16 +1,18 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
 import Options from '../managers/Options.js'
+import Builder from '../managers/Builder.js'
+
 
 export default class Settings extends BaseScene {
 
 	constructor(){
-		super('settings')
+		super(Builder.ESCENA_AJUSTES)
 	}
 
 	init(data){
 		this._previousScene = data.previousScene
-    }
+	}
 
     create() {
         super.create()
@@ -38,13 +40,23 @@ export default class Settings extends BaseScene {
     
         // Lista de botones con su etiqueta y callback
         const botones = [
-          { text: 'Ajustes de Volumen',   onClick: () => this.onVolumeSettings() },
-          { text: 'Ajustes de Controles', onClick: () => this.onControlSettings() },
-          { text: 'Reiniciar Nivel', onClick: () => {
-            this.scene.stop(this._previousScene)
-            this.scene.start(this._previousScene)
-            this.scene.stop() // cerrar ajustes
-          }}
+			{ text: 'Reanudar', onClick: () => 
+				{
+					// 1) Cerramos la escena de settings
+					this.scene.stop()
+
+					// 2) Reanudamos la escena del juego
+					this.scene.resume(this._previousScene)
+				}
+			},
+			{ text: 'Ajustes de Volumen',   onClick: () => this.onVolumeSettings() },
+			{ text: 'Reiniciar Nivel', onClick: () => 
+				{
+					this.scene.stop(this._previousScene)
+					this.scene.start(this._previousScene)
+					this.scene.stop() // cerrar ajustes
+				}
+			}
         ]
     
         // Espaciado vertical
@@ -52,7 +64,9 @@ export default class Settings extends BaseScene {
         const spacing =  50 //distancia entre cada opcion
     
         botones.forEach((btn, i) => { //hacemos el bucle para cada boton y para dibujarlo
+
 			const y = startY + i * spacing
+			
 			// fondo para cada boton
 			const bg = this.add.rectangle(width/2, y, panelW - 40,  45, 0x444444, 1)//el 40 
 			.setOrigin(0.5)
@@ -64,9 +78,10 @@ export default class Settings extends BaseScene {
 
 			// Texto
 			this.add.text(width/2, y, btn.text, {
-			fontSize: '24px',
-			color: '#7DF9FF'
-			}).setOrigin(0.5)
+				fontSize: '24px',
+				color: '#7DF9FF'
+			})
+			.setOrigin(0.5)
         })
     
         // Configuramos ESC para volver
@@ -74,14 +89,15 @@ export default class Settings extends BaseScene {
 	}
 
     update(time, delta){
-
     }
 
     config_eventos() {
+
 		// Reemplazamos el switch por stop+resume
 		this.input.keyboard.on(Options.TECLA_PAUSA, () => {
 			// 1) Cerramos la escena de settings
 			this.scene.stop()
+
 			// 2) Reanudamos la escena del juego
 			this.scene.resume(this._previousScene)
 		}, this)
@@ -89,7 +105,7 @@ export default class Settings extends BaseScene {
 
 	onVolumeSettings() {
 		this.scene.pause(); // Cerramos settings
-		this.scene.launch('volumeSettings', { previousScene: this._previousScene });
+		this.scene.launch(Builder.ESCENA_VOLUMEN, { previousScene: this._previousScene });
 	}
 
 }

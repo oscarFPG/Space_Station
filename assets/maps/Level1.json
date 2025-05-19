@@ -1084,7 +1084,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"We are dying..."
+                         "value":"WE need help, PLEASE! We are dying..."
                         }],
                  "rotation":0,
                  "type":"Note",
@@ -1193,7 +1193,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"AmmoBox",
@@ -1211,7 +1211,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"AmmoBox",
@@ -1247,7 +1247,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":1
                         }],
                  "rotation":0,
                  "type":"AmmoBox",
@@ -1283,7 +1283,7 @@
                         {
                          "name":"Name",
                          "type":"string",
-                         "value":"weapon1"
+                         "value":"weapon2"
                         }, 
                         {
                          "name":"ReserveAmmo",
@@ -1311,7 +1311,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"The station has been attacked, everything is gone"
+                         "value":"The station has been attacked, everything is gone!"
                         }],
                  "rotation":0,
                  "type":"Note",

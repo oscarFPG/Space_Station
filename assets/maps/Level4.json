@@ -795,7 +795,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"AmmoBox",
@@ -993,7 +993,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"The end is near, Vyls..."
+                         "value":"The end is near! Get ready, Vyls"
                         }],
                  "rotation":0,
                  "type":"Note",

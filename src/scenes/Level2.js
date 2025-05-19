@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
 import Builder from '../managers/Builder.js'
+import StoreObject from '../game-objects/objects/StoreObject.js'
 
 
 export default class Level2 extends BaseScene {
@@ -20,6 +21,8 @@ export default class Level2 extends BaseScene {
             callback: this.permutar_laseres,
             loop: true
         })
+
+        const terminal = new StoreObject(this, 2408, 232)
     }
 
     activar_todos_los_laseres(){

@@ -5,7 +5,7 @@ import SniperBullet from '../bullets/SniperBullet.js';
 
 export default class Sniper extends RangeWeapon {
     
-    static BASE_SNIPER_DAMAGE = 20;
+    static BASE_SNIPER_DAMAGE = 35;
 
     constructor(scene, x, y){
         super(scene, x, y, Builder.WEAPON_SNIPER, 0xEE5522);
@@ -13,7 +13,7 @@ export default class Sniper extends RangeWeapon {
         // Gun config
         this._specs.name = 'sniper V4'
         this._specs.damage = Sniper.BASE_SNIPER_DAMAGE;
-        this._specs.bulletSpeed = 1300;
+        this._specs.bulletSpeed = 1400;
         this._specs.muzzleOffset = 42;
         this._specs.canBounce = false;
         this._specs.canDrill = false;

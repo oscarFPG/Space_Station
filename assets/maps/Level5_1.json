@@ -237,7 +237,7 @@
                         {
                          "name":"title",
                          "type":"string",
-                         "value":"I almost dead Vyls, i hope you can fight against the ultimate ai model. I trust in you to save the world"
+                         "value":"I'm almost dead Vyls... I hope you can fight against the ultimate AI model. We trust you to save the world"
                         }],
                  "rotation":0,
                  "type":"Note",
@@ -273,7 +273,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"AmmoBox",
@@ -397,7 +397,7 @@
                         {
                          "name":"Name",
                          "type":"string",
-                         "value":"weapon1"
+                         "value":"weapon3"
                         }, 
                         {
                          "name":"ReserveAmmo",

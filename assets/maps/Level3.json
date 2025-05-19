@@ -1365,7 +1365,7 @@
                         {
                          "name":"ID",
                          "type":"int",
-                         "value":0
+                         "value":2
                         }],
                  "rotation":0,
                  "type":"AmmoBox",

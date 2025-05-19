@@ -5,6 +5,8 @@ import WeaponFactory from '../../factories/WeaponFactory.js';
 import WeaponObject from '../objects/WeaponObject.js'
 import Builder from '../../managers/Builder.js';
 import Options from '../../managers/Options.js';
+import StoreObject from '../objects/StoreObject.js';
+
 
 export default class Player extends BaseActor {
 
@@ -286,29 +288,6 @@ export default class Player extends BaseActor {
 		this._baterias = (this._baterias < 0) ? 0 : this._baterias
 	}
 
-	getCountAmmoType(weaponAmmo){
-		
-		switch(weaponAmmo){
-			case 'pistol':
-				return 0
-		
-			case 'machine gun':
-				return 0
-
-			case 'fusil':
-				return 0
-
-			case 'escopeta':
-				return 0
-
-			case 'sniper':
-				return 0
-				
-			default:
-				return -1
-			}
-    }
-
 	recogerArma(texturaArma, currentAmmo, reserveAmmo){
 		
 		this._secondaryWeapon = WeaponFactory.crearArma(texturaArma, this.scene, Player.WEAPON_OFFSET)
@@ -417,7 +396,9 @@ export default class Player extends BaseActor {
 		}
 
 		this.controles.reload.on('down', () => {	// Recargar
-			if (!this._atributos.activo) return;
+			if (!this._atributos.activo) 
+				return;
+			
 			this._armaEquipada.reload();
 			this.reloadText.setVisible(true);
 		})

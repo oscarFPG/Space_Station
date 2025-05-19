@@ -30,7 +30,7 @@ export default class WeaponFactory {
         const x = weaponOffset.x
         const y = weaponOffset.y
 
-        // Hacer esto con polimorfismo - TODO
+
         switch(weaponName){
 
             // PISTOLAS

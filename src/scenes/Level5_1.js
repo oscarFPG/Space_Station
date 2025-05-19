@@ -1,12 +1,16 @@
 import Phaser from 'phaser'
 import BaseScene from './BaseScene.js'
 import Builder from '../managers/Builder.js'
+import StoreObject from '../game-objects/objects/StoreObject.js'
+
 
 export default class Level5_1 extends BaseScene {
 
     constructor(){
         super(Builder.ESCENA_NIVEL5_1)
     }
+
+    
     create(){
 
         var map = this.make.tilemap({ key: Builder.MAP_LEVEL_5_1, tileWidth: 111, tileHeight: 111 })
@@ -19,6 +23,8 @@ export default class Level5_1 extends BaseScene {
             callback: this.permutar_laseres,
             loop: true
         })
+
+        const terminal = new StoreObject(this, 726, 450)
     }
 
     activar_todos_los_laseres(){

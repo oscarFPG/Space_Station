@@ -36,9 +36,7 @@ export default class BaseScene extends Phaser.Scene {
         super({ key: sceneKey })
     }
 
-    // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
-    // SIEMPRE esta funcion con super.create()
-
+    
     init(data) {
 
         if(data == null)
@@ -54,6 +52,8 @@ export default class BaseScene extends Phaser.Scene {
         this._isTransitioning = false;
     }
     
+    // IMPORTANTE - cualquier escena que herede de esta clase debe invocar 
+    // SIEMPRE esta funcion con super.create()
     create(map, tileset, nextScene){
 
         if(map == null || tileset == null)
@@ -522,7 +522,7 @@ export default class BaseScene extends Phaser.Scene {
             //  Pausar el juego
             this.scene.pause(this.scene.key)
             // Lanzar la escena de ajustes
-            this.scene.launch('settings', { previousScene: this.scene.key })
+            this.scene.launch(Builder.ESCENA_AJUSTES, { previousScene: this.scene.key })
         }, this)
     }
 
