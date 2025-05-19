@@ -2,9 +2,7 @@ import Phaser from 'phaser';
 import BaseScene from './BaseScene.js';
 import Builder from '../managers/Builder.js';
 
-
 export default class CreditsScene extends BaseScene {
-
   constructor() {
     super(Builder.ESCENA_CREDITOS);
   }
@@ -12,7 +10,7 @@ export default class CreditsScene extends BaseScene {
   create() {
     const { width, height } = this.scale;
 
-    this._nextScene = Builder.ESCENA_TUTORIAL
+    this._nextScene = 'tutorial'
 
     this.createBackground(width, height);
 
@@ -50,13 +48,7 @@ export default class CreditsScene extends BaseScene {
       { text: '',               style: styleName },
       { text: 'James Morocho',  style: styleName },
       { text: '',               style: styleName },
-      { text: 'Game Design',  style: styleHeader },
-      { text: '',               style: styleName },
-      { text: 'Óscar Fabian Pineda', style: styleName },
-      { text: '',               style: styleName },
-      { text: 'Daniel Lafuente',  style: styleName },
-      { text: '',               style: styleName },
-      { text: 'Art',  style: styleHeader },
+      { text: 'Art & Game Design',  style: styleHeader },
       { text: '',               style: styleName },
       { text: 'Ignacio Alejandro Lumbano', style: styleName },
       { text: '',               style: styleName },
@@ -104,7 +96,7 @@ export default class CreditsScene extends BaseScene {
       targets: container,
       y: - (lines.length * lineSpacing + 50),
       ease: 'Linear',
-      duration: 30000,
+      duration: 25000,
       onComplete: () => {
         // al terminar volvemos al menú (o a la escena anterior)
         const status = {
