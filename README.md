@@ -20,12 +20,12 @@
 10. [x] Trampas(como láseres y otros tipos)
 
 11. [] Sala con temporizador/eliminar enemigos para salir
-12. [] Elementos que cuenten la historia oculta
+12. [x] Elementos que cuenten la historia oculta
 13. [x] Bosses y mini-bosses
 14. [x] Tienda de armas/objetos estilo comandos Linux
 15. [] Elementos musicales que complementen el desarrollo de la historia/ambiente del juego(leitmotivs, banda sónora, etc...)
 
-# GDD: (nombre provisional) Escape Station
+# GDD: Escape Station
 
 ## 1. Equipo de desarrollo:
 ### 1.2 Programación: 
