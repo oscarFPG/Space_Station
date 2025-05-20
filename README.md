@@ -1,3 +1,6 @@
+# Para acceder al enlace del juego, utilizar los archivos del apartado <i> Release </i> o acceder mediante el enlace:
+[https://oscarfpg.github.io/Space_Station/](https://oscarfpg.github.io/Space_Station/)
+
 
 # Indice
 - [Features del juego](#features)
