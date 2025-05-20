@@ -1293,7 +1293,7 @@
                         {
                          "name":"currentAmmo",
                          "type":"int",
-                         "value":8
+                         "value":16
                         }],
                  "rotation":0,
                  "type":"Weapon",
